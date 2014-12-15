@@ -40,7 +40,9 @@ GeoNetwork.app = function() {
             Ext.ux.Lightbox.register('a[rel^=lightbox]');
         });
         var p = new Ext.Panel({
-            border : false,
+          	shadow: 'drop',
+            shadowOffset: 10,
+            border : true,
             bodyCssClass : 'md-view',
             items : latestView,
             renderTo : 'latest-metadata'
@@ -88,7 +90,9 @@ GeoNetwork.app = function() {
             Ext.ux.Lightbox.register('a[rel^=lightbox]');
         });
         var p = new Ext.Panel({
-            border : false,
+          	shadow: 'drop',
+            shadowOffset: 10,
+            border : true,
             bodyCssClass : 'md-view',
             items : latestView,
             renderTo : 'popular-metadata'
@@ -453,8 +457,8 @@ GeoNetwork.app = function() {
         });
 
         Ext.getCmp("metadata-panel").doLayout();
-        // Add to recent viewed
-        addToRecentViewed(record);
+        // Add to recent viewed removed for EEA IPG layout
+  //      addToRecentViewed(record);
 
     }
 
