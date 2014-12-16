@@ -145,6 +145,8 @@ function showSearch() {
     Ext.getCmp('resultsPanel').show();
     Ext.get('resultsPanel').show();
     show("main-aside");
+    var minimapOffset = (Ext.getBody().getViewSize().width - 984)/2 + 10;
+    Ext.get("mini-map").setRight(minimapOffset);
 
     app.breadcrumb.setDefaultPrevious(1);
     app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[1]);
@@ -205,9 +207,9 @@ function resizeResultsPanel() {
 //                - Ext.get("main-aside").getWidth());
 //    }
         
-    resultsPanel.setWidth(Ext.get("page-container").getWidth()-20);
+  //  resultsPanel.setWidth(Ext.get("page-container").getWidth()-20);
     
-    Ext.get("result-panel").setWidth(resultsPanel.getWidth());
+//    Ext.get("result-panel").setWidth(resultsPanel.getWidth());
     Ext.each(resultsPanel.dom.children, function(div) {
         div = Ext.get(div);
         Ext.each(div.dom.children, function(child) {
@@ -271,6 +273,7 @@ function showAdvancedSearch() {
     Ext.get("search-form-fieldset").dom.style.border = "1px solid #fff";
     show('advanced-search-options');
     if (Ext.getCmp('advanced-search-options-content-form')) {
+//    	var test = Ext.getCmp('advanced-search-options-content-form')
         Ext.getCmp('advanced-search-options-content-form').doLayout();
 
         // For reset and submit buttons:

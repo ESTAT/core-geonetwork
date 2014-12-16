@@ -256,7 +256,7 @@
 			                     <div id="bread-crumb-app"></div>
 			                  </ul>
 			               </div>
-			               <h1><span>INSPIRE@EC Portal</span></h1>
+			               <h1><span style="padding:15px">INSPIRE@EC Portal</span></h1>
 			               <div id="main">
 			               			        <div id="copy-clipboard-ie"></div>
 		                       <div id="share-capabilities" style="display:none">
@@ -268,7 +268,7 @@
 		                       </div>
 		                       <div id="permalink-div" style="display:none"></div>
 		                        <div id="bread-crumb-app"></div>
-		                        <div id="search-form" style="display:none;">
+		                        <div id="search-form" style="display:none; padding: 15px; border-bottom:2px solid #69c">
 		                            <fieldset id="search-form-fieldset">
 		                                <legend id="legend-search">
 		                                    <xsl:value-of select="/root/gui/strings/search" />
@@ -342,15 +342,12 @@
 									<div id="bread-crumb-div"></div>
 		
 									<aside id="main-aside" class="main-aside" style="display:none;">
-										<header><xsl:value-of select="/root/gui/strings/filter" /></header>
-										<div id="facets-panel-div"></div>
-									</aside>
-									<article>
-										<aside id="secondary-aside" class="secondary-aside" style="display:none;">
-<!-- 											<header><xsl:value-of select="/root/gui/strings/recentlyViewed" /></header> -->
-<!-- 		                  <div id="recent-viewed-div"></div> -->
-		            	      <div id="mini-map"></div>
+											<header><xsl:value-of select="/root/gui/strings/filter" /></header> 
+ 											<div id="facets-panel-div"></div>
+		  			         	 	      	<div id="mini-map"></div>
 										</aside>
+									<article>
+										
 										<header>
 										</header>
 										<section>
@@ -795,6 +792,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script>
+						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script>
 					</xsl:otherwise>
 				</xsl:choose>
 

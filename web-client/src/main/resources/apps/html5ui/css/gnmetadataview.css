@@ -102,12 +102,12 @@
 
 /* View mode */
 .md-view ul li.md-simple {
-	width: 98%;
+	width: 94%;
 	/* FIXME : Should be auto */
 }
 
 .md-view ul li.md-full {
-	width: 98%;
+	width: 94%;
 	/* FIXME : Should be auto */
 }
 
@@ -644,6 +644,8 @@ div.help ul li {
 	border: 1px solid #e5e5e5;
 	background: url(../images/default/bg_stripe.png) !important;
 }
+
+#search-container article{margin:10px 0 10px 10px;width:60%;}
 
 /* search result --- right sidebar */
 #search-container .secondary-aside header {
