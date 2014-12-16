@@ -96,7 +96,7 @@ GeoNetwork.loginApp = function() {
                 }
                 Ext.get("username").dom.value = ("");
                 Ext.get("password").dom.value = ("");
-                Ext.get("user-button").dom.href = "javascript:toggleLogin();";
+                Ext.get("user-button").dom.href = "../../login";
 
                 // Clean previous user data
                 catalogue.metadataStore.removeAll();

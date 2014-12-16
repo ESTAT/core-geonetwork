@@ -166,7 +166,7 @@
 									<a id="user-button">
 										<xsl:choose>
 											<xsl:when test="string(/root/gui/session/userId)=''">
-										  	<xsl:attribute name="href">javascript:toggleLogin();</xsl:attribute>
+										  	<xsl:attribute name="href"><xsl:value-of select="$baseUrl" />/login</xsl:attribute>
 										 	</xsl:when>
 											<xsl:otherwise>
 										  	<xsl:attribute name="href">javascript:app.loginApp.logout();</xsl:attribute>
@@ -381,7 +381,7 @@
 <!-- 						<a id="user-button"> -->
 <!-- 							<xsl:choose> -->
 <!-- 								<xsl:when test="string(/root/gui/session/userId)=''"> -->
-<!-- 							  	<xsl:attribute name="href">javascript:toggleLogin();</xsl:attribute> -->
+<!-- 							  	<xsl:attribute name="href"><xsl:value-of select="$baseUrl" />/login</xsl:attribute> -->
 <!-- 							 	</xsl:when> -->
 <!-- 								<xsl:otherwise> -->
 <!-- 							  	<xsl:attribute name="href">javascript:app.loginApp.logout();</xsl:attribute> -->
