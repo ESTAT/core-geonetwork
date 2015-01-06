@@ -134,6 +134,16 @@ function hideBigMap() {
     hide("big-map-container");
 }
 
+window.onresize = function(event) {
+	resizeDiv();
+}
+function resizeDiv() {
+	var minimapOffset = (Ext.getBody().getViewSize().width - 984)/2 + 10;
+	Ext.get("mini-map").setRight(minimapOffset);
+}
+	
+
+
 function showSearch() {
     hideBrowse();
     hideAbout();
@@ -147,6 +157,7 @@ function showSearch() {
     show("main-aside");
     var minimapOffset = (Ext.getBody().getViewSize().width - 984)/2 + 10;
     Ext.get("mini-map").setRight(minimapOffset);
+    
 
     app.breadcrumb.setDefaultPrevious(1);
     app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[1]);
