@@ -125,14 +125,14 @@
 				<constructor-arg value="/login.jsp?failure=true"></constructor-arg>
 			</bean>
 		</property>
-		<property name="authenticationSuccessHandler">
-			<bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-				<property name="defaultTargetUrl" value="/" />
-				<property name="targetUrlParameter" value="redirectUrl" />
-                <property name="useReferer" value="true"/>
-                <property name="requestCache" ref="requestCache"/>
-			</bean>
-		</property>
+<!-- 		<property name="authenticationSuccessHandler"> -->
+<!-- 			<bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"> -->
+<!-- 				<property name="defaultTargetUrl" value="/" /> -->
+<!-- 				<property name="targetUrlParameter" value="redirectUrl" /> -->
+<!--                 <property name="useReferer" value="true"/> -->
+<!--                 <property name="requestCache" ref="requestCache"/> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
 		<property name="sessionAuthenticationStrategy">
 			<bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
 		</property>
