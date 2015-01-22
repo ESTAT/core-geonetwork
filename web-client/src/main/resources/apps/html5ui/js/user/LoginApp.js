@@ -147,22 +147,26 @@ GeoNetwork.loginApp = function() {
             });
         },// FIXME Until catalog is adapted to spring security login, use this
         logout : function() {
-            Ext.Ajax.request({
-                url : catalogue.services.rootUrl + '../../j_spring_security_logout',
-                headers : {
-                    "Content-Type" : "application/x-www-form-urlencoded"
-                },
-                success : function() {
-                    catalogue.identifiedUser = undefined;
-                    catalogue.fireEvent('afterLogout', 
-                                catalogue, catalogue.identifiedUser);
-                },
-                failure : function() {
-                    catalogue.fireEvent('afterBadLogout', 
-                            catalogue, catalogue.identifiedUser);
-            },
-                scope : this
-            });
+        	// from geonetwork.js -- Logout - need to clear cookie from ext
+    		var GNCookie = Ext.state.Manager.getProvider();
+    		var cookie = GNCookie.clear('params');
+        	window.location = catalogue.services.rootUrl + '../../j_spring_security_logout'
+//            Ext.Ajax.request({
+//                url : catalogue.services.rootUrl + '../../j_spring_security_logout',
+//                headers : {
+//                    "Content-Type" : "application/x-www-form-urlencoded"
+//                },
+//                success : function() {
+//                    catalogue.identifiedUser = undefined;
+//                    catalogue.fireEvent('afterLogout', 
+//                                catalogue, catalogue.identifiedUser);
+//                },
+//                failure : function() {
+//                    catalogue.fireEvent('afterBadLogout', 
+//                            catalogue, catalogue.identifiedUser);
+//            },
+//                scope : this
+//            });
         },
         /**
          * api: method[isLoggedIn]

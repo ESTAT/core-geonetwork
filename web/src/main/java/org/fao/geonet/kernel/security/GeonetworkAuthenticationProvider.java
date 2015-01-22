@@ -43,15 +43,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import jeeves.server.ProfileManager;	// cas
+//import jeeves.server.ProfileManager;	// cas
 import jeeves.utils.SerialFactory;		// cas
 import org.fao.geonet.kernel.security.cas.CASUserUtils;	// cas
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+//import java.io.BufferedReader;
+//import java.io.DataOutputStream;
+//import java.io.InputStreamReader;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
 
 
 public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider 
@@ -75,11 +75,18 @@ public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthent
 		}
 	}
 
+	private static final String CAS_STATEFUL = "_cas_stateful_";
+
 	@Override
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)	throws AuthenticationException {
-		Log.info(Log.JEEVES, "Authentication retrieveUser :" + username);
+		//Log.info(Log.JEEVES, "Authentication retrieveUser :" + username);
 		Dbms dbms = null;
 		ResourceManager resourceManager = null;
+		if (CAS_STATEFUL.equalsIgnoreCase(username)) {
+			// cas failed
+			Log.error(Log.JEEVES, "_cas_stateful_ detected in retrieveUser");
+			return null;
+		}
 		try {
 			resourceManager = applicationContext.getBean(ResourceManager.class);
 			dbms = (Dbms) resourceManager.openDirect(Geonet.Res.MAIN_DB);
@@ -94,6 +101,7 @@ public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthent
 		        String profile = ProfileManager.GUEST;
 		        CASUserUtils.updateUser(dbms, serialFactory, username, surname, firstname, profile, group, true);
 		        selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
+		        userXml = selectRequest.getChild("record");
 			}
 			
 			if (userXml != null) {

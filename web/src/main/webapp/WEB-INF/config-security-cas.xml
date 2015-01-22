@@ -22,8 +22,11 @@
 				<ref bean="logoutFilter" />
 				<ref bean="singleLogoutFilter" />
 				<ref bean="casFilter" />
+<!--  			
+				Authentication is also handled in casFilter	
 				<ref bean="basicAuthenticationFilter" />
-				<ref bean="requestCacheFilter" />
+ -->
+ 				<ref bean="requestCacheFilter" />
 				<ref bean="anonymousFilter" />
 				<ref bean="sessionMgmtFilter" />
 				<ref bean="exceptionTranslationFilter" />
