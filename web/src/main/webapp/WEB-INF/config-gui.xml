@@ -15,7 +15,7 @@
   * stateId attribute is the identifier of the search form (if stateful) in the application. It is used to build quick links section in the administration.
  -->
  
- <client type="redirect" widget="false" url="main.home" />
+ <client type="redirect" widget="false" url="search" />
 
  <html5ui-footer>true</html5ui-footer>
  

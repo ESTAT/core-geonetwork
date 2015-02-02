@@ -46,21 +46,35 @@ function toggle(id) {
     }
 }
 
+function hideAll() 
+{
+	hide("search-form");
+	hideBrowse();
+	hideAbout();
+	hideLegal();
+	hideContact();
+	hideSearch();
+	hideBigMap();
+	hideMetadata();
+}
+
 function showBrowse() {
     // Reset search for tag cloud
     // catalogue.kvpSearch("fast=index&from=1&to=5&sortBy=changeDate", null, null, null, true);
 
+    hideAll();    
+	
     show("main");
-    hide("search-form");
-    hideAbout();
-    hideSearch();
-    hideBigMap();
-    hideMetadata();
+//    hide("search-form");
+//    hideAbout();
+//    hideSearch();
+//    hideBigMap();
+//    hideMetadata();
     show("browser");
     //show("latest-metadata");
     //show("popular-metadata");
 
-    app.breadcrumb.setPrevious([]);
+    app.breadcrumb.setPrevious(0);
     app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[0]);
 
 //    Ext.each(Ext.query('a', Ext.get("main-navigation").dom), function(a) {
@@ -78,16 +92,15 @@ function hideBrowse() {
 
 function showAbout() {
 
+    hideAll();    
     show("about");
-    hide("search-form");
 
-    hideBrowse();
-    hideSearch();
-    hideBigMap();
-    hideMetadata();
-
-    app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[2]);
-
+    app.breadcrumb.setDefaultPrevious(1);
+    app.breadcrumb.setCurrent({
+        text : OpenLayers.i18n(Ext.get("about-tab").dom.text),
+        func : "showAbout()"
+    });
+    
 //    Ext.each(Ext.query('a', Ext.get("main-navigation").dom), function(a) {
 //        Ext.get(a).removeClass("selected");
 //    });
@@ -99,23 +112,56 @@ function hideAbout() {
     hide("about");
 }
 
-function showBigMap() {
-    hideBrowse();
-    hideSearch();
-    hideAbout();
-    hideMetadata();
-    hide("search-form");
+function showLegal() {
 
+    hideAll();    
+    show("legal");
+
+    app.breadcrumb.setDefaultPrevious(1);
+    app.breadcrumb.setCurrent({
+        text : OpenLayers.i18n(Ext.get("legal-tab").dom.text),
+        func : "showLegal()"
+    });
+    
+    Ext.get("legal-tab").addClass("selected");
+}
+
+function hideLegal() {
+    hide("legal");
+}
+
+function showContact() {
+
+    hideAll();    
+    show("contact");
+
+    app.breadcrumb.setDefaultPrevious(1);
+    app.breadcrumb.setCurrent({
+        text : OpenLayers.i18n(Ext.get("contact-tab").dom.text),
+        func : "showContact()"
+    });
+
+    Ext.get("contact-tab").addClass("selected");
+}
+
+function hideContact() {
+    hide("contact");
+}
+
+function showBigMap() {
+    hideAll();    
     // show map
     show("big-map-container");
     // Resize the map, to cover all space available:
     resizeMap();
 
+    app.breadcrumb.setDefaultPrevious(1);
     app.breadcrumb.setCurrent({
-        text : OpenLayers.i18n("Map"),
+        text : OpenLayers.i18n(Ext.get("map-tab").dom.text),
         func : "showBigMap()"
     });
 
+    
     // Printpanel can be only initiazed once the map is rendered
     // Trigger the print panel init only when the big map is displayed
     // the first time. It will check if the print panel is already initiliazed
@@ -145,10 +191,11 @@ function resizeDiv() {
 
 
 function showSearch() {
-    hideBrowse();
-    hideAbout();
-    hideMetadata();
-    hideBigMap();
+//    hideBrowse();
+//    hideAbout();
+//    hideMetadata();
+//    hideBigMap();
+    hideAll();    
     show("search-form");
 
     show("secondary-aside");
@@ -160,7 +207,10 @@ function showSearch() {
     
 
     app.breadcrumb.setDefaultPrevious(1);
-    app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[1]);
+    app.breadcrumb.setCurrent({
+        text : OpenLayers.i18n(Ext.get("catalog-tab").dom.text),
+        func : "showSearch()"
+    });
 
     if (!app.searchApp.firstSearch) {
         app.searchApp.firstSearch = true;
@@ -182,12 +232,13 @@ function hideSearch() {
 
 function showMetadata() {
 
-    hide("search-form");
-    hideBrowse();
-    hideAbout();
-    hideSearch();
-    hideBigMap();
+//    hide("search-form");
+//    hideBrowse();
+//    hideAbout();
+//    hideSearch();
+//    hideBigMap();
 
+    hideAll();    
     show("metadata-info");
 
     app.breadcrumb.setDefaultPrevious(2);

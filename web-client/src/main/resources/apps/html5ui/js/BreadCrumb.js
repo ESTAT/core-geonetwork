@@ -29,10 +29,10 @@ GeoNetwork.BreadCrumb = function() {
     return {
         previous : [],
         current : '',
-        separator : "  >>  ",
+        separator : "  >  ",
         div : "bread-crumb-app",
         defaultSteps : [ {
-            text : OpenLayers.i18n("HOME"),
+            text : OpenLayers.i18n("INSPIRE@EC Portal"),
             func : "showBrowse()"
         }, {
             text : OpenLayers.i18n("SEARCH RESULTS"),
@@ -102,8 +102,10 @@ GeoNetwork.BreadCrumb = function() {
                 } else {
                     breadcrumb = '';
                 }
-                breadcrumb = breadcrumb + "<a href=\"javascript:" + elem.func
-                        + "\">" + elem.text + "</a>";
+                if (elem != 0){
+	                breadcrumb = breadcrumb + "<a href=\"javascript:" + elem.func
+	                        + "\">" + elem.text + "</a>";
+            	}
             });
 
             if (breadcrumb) {

@@ -137,30 +137,41 @@
 								select="$baseUrl" />/apps/html5ui/images/logo_en.gif</xsl:attribute>
 						  </img>
 						  </p>
-	          			  <p id="banner-title-text">European Commission<br/><span>Inspire@EC Geoportal</span></p><span id="banner-image-right"></span><span class="title-en" id="banner-image-title"></span><p class="off-screen">Service tools</p>
+ 	          			  <p id="banner-title-text" style="color:#0065A2">INSPIRE@EC Portal</p>
+			               <span id="banner-image-right"></span><span class="title-en" id="banner-image-title"></span><p class="off-screen">Service tools</p>
 							<ul class="reset-list" id="services">
 								<li>
 									<a id="browse-tab" class="selected" href="javascript:showBrowse();">
 										<xsl:value-of select="/root/gui/strings/home" />
 									</a>
 								</li>
-								<li>
-									<a id="catalog-tab" href="javascript:showSearch();">
-										<xsl:value-of select="/root/gui/strings/porCatInfoTab" />
-									</a>
-								</li>
-								<li>
-									<a id="map-tab" href="javascript:showBigMap();">
-										<xsl:value-of select="/root/gui/strings/map_label" />
-									</a>
-								</li>
+								<xsl:if test="string(/root/gui/session/userId)!=''">
+									<li>
+										<a id="catalog-tab" href="javascript:showSearch();">
+											<xsl:value-of select="/root/gui/strings/porCatInfoTab" />
+										</a>
+									</li>
+									<li>
+										<a id="map-tab" href="javascript:showBigMap();">
+											<xsl:value-of select="/root/gui/strings/map_label" />
+										</a>
+									</li>
+								</xsl:if>
 								<li>
 									<a id="about-tab" href="javascript:showAbout();">
 										<xsl:value-of select="/root/gui/strings/about" />
 									</a>
 								</li>
-				               <li><a id="legal-tab" href="javascript:showAbout();">Legal notice</a></li>
-				               <li><a id="contact-tab" href="javascript:showAbout();">Contact</a></li>
+				               <li>
+					               <a id="legal-tab" href="javascript:showLegal();">
+										<xsl:value-of select="/root/gui/strings/legal" />
+					               </a>
+				               </li>
+				               <li>
+					               <a id="contact-tab" href="javascript:showContact();">
+										<xsl:value-of select="/root/gui/strings/contact" />
+					               </a>
+				               </li>
 				               <li>
 					               <span id="login-stuff">
 									<a id="user-button">
@@ -199,13 +210,15 @@
 											<xsl:value-of select="concat('(',/root/gui/session/profile,') ')"/>	
 										</xsl:if>
 									</label>
-									<a href="javascript:catalogue.admin();" id="administration-button">
-										<xsl:if test="string(/root/gui/session/userId)=''">
-											<xsl:attribute name="style">display:none;</xsl:attribute>
-										</xsl:if>
-										<i class="fa fa-wrench"></i>
-										<xsl:value-of select="/root/gui/strings/admin"/>
-									</a>
+									<xsl:if test="string(/root/gui/session/profile)='Administrator'">
+										<a href="javascript:catalogue.admin();" id="administration-button">
+	 										<xsl:if test="string(/root/gui/session/userId)=''">
+	 											<xsl:attribute name="style">display:none;</xsl:attribute>
+											</xsl:if>
+											<i class="fa fa-wrench"></i>
+											<xsl:value-of select="/root/gui/strings/admin"/>
+										</a>
+									</xsl:if>
 									<script>function false_(){ return false; }</script>
 									<form id="login-form" style="display: none;" onsubmit="return false_();">
 										<div id="login_div">
@@ -224,10 +237,10 @@
 						             <p class="off-screen mob-title" id="language-selector-title">Language selector</p>
 
 
-						                       <a class="reset-list language-selector-title" href="javascript:toggle('lang-form');"><span id="current-lang">English</span>&#160;<i class="fa fa-angle-double-down"></i>
+<!-- 						                       <a class="reset-list language-selector-title" href="javascript:toggle('lang-form');"><span id="current-lang">English</span>&#160;<i class="fa fa-angle-double-down"></i>
 													<div id="lang-form" style="display:none;"> </div>
 												</a>
-
+ -->
 				
 					
 					
@@ -247,16 +260,16 @@
 			                  <li>
 			                     <div id="share-tool"><script type="text/javascript">if(typeof iBeginShare == "object"){iBeginShare.attachLink('share-tool');}</script></div>
 			                  </li>
-			                  <li><a id="rss-button" href="/geonetwork/srv/eng/rss.latest"><img alt="smaller font" id="rss" src="/geonetwork/apps/html5ui/images/buttonRSS.gif"></img></a></li>
-			               </ul>
+<!-- 			                  <li><a id="rss-button" href="/geonetwork/srv/eng/rss.latest"><img alt="smaller font" id="rss" src="/geonetwork/apps/html5ui/images/buttonRSS.gif"></img></a></li>
+ -->			               </ul>
 			               
 			               <div id="path">
 			                  <p class="off-screen">Navigation path</p>
-			                  <ul class="reset-list">
+			                  <ul class="reset-list"  style="margin-right:80px">
 			                     <div id="bread-crumb-app"></div>
 			                  </ul>
 			               </div>
-			               <h1><span style="padding:15px">INSPIRE@EC Portal</span></h1>
+<!-- 			               <h1><span style="padding:15px">INSPIRE@EC Portal</span></h1> -->
 			               <div id="main">
 			               			        <div id="copy-clipboard-ie"></div>
 		                       <div id="share-capabilities" style="display:none">
@@ -305,7 +318,11 @@
 			                    <div id="browser">
 			                     <div id="welcome-text">
 			                      	  <xsl:copy-of select="/root/gui/strings/welcome.text"/>
+			                      	  <xsl:if test="string(/root/gui/session/userId)!='' and string(/root/gui/session/profile)='Guest'">
+			                      	  	<xsl:copy-of select="/root/gui/strings/guestinformation.text"/>
+			                      	  </xsl:if>
 								</div>
+                    	  <xsl:if test="string(/root/gui/session/userId)!=''">
 		                        <aside class="tag-aside">
 <!-- 			                    	  <div id="welcome-text"> -->
 <!-- 			                      		  <xsl:copy-of select="/root/gui/strings/welcome.text"/> -->
@@ -328,11 +345,21 @@
 		                            </section>
 		                          </div>
 		                        </article>
+                      	  </xsl:if>
 		                      </div>
-		
 			                    <div id="about" style="display:none;">
 			                    	<div id="about-text">
 			                      	<xsl:copy-of select="/root/gui/strings/about.text"/>
+		                        </div>
+		                      </div>
+			                    <div id="legal" style="display:none;">
+			                    	<div id="legal-text">
+			                      	<xsl:copy-of select="/root/gui/strings/legal.text"/>
+		                        </div>
+		                      </div>
+			                    <div id="contact" style="display:none;">
+			                    	<div id="contact-text">
+			                      	<xsl:copy-of select="/root/gui/strings/contact.text"/>
 		                        </div>
 		                      </div>
 			                    
@@ -615,13 +642,26 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 20/11/2014</span></li>
+	                     <li class="modification-date"><span>Last update: 2/2/2015</span></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
-	                     <li><a id="catalog-tab" href="javascript:showSearch();">Catalog</a></li>
-	                     <li><a id="map-tab" href="javascript:showBigMap();">Map</a></li>
-	                     <li><a id="about-tab" href="javascript:showAbout();">About this site</a></li>
-	                     <li><a id="legal-tab" href="javascript:showAbout();">Legal notice</a></li>
-	                     <li><a id="contact-tab" href="javascript:showAbout();">Contact</a></li>
+						 <xsl:if test="string(/root/gui/session/userId)!=''">
+		                     <li><a id="catalog-tab" href="javascript:showSearch();"><xsl:value-of select="/root/gui/strings/porCatInfoTab" /></a></li>
+		                     <li><a id="map-tab" href="javascript:showBigMap();"><xsl:value-of select="/root/gui/strings/map_label" /></a></li>
+	                     </xsl:if>
+	                     <li>
+	                     	<a id="about-tab" href="javascript:showAbout();">
+								<xsl:value-of select="/root/gui/strings/about" />
+							</a>
+	                     </li>
+	                     <li>
+	                     	<a id="legal-tab" href="javascript:showLegal();">
+								<xsl:value-of select="/root/gui/strings/legal" />
+							</a>
+						</li>
+	                     <li><a id="contact-tab" href="javascript:showContact();">
+								<xsl:value-of select="/root/gui/strings/contact" />
+							</a>
+	                     </li>
 	                  </ul>
 	               </div>
 					
@@ -661,10 +701,9 @@
                      </xsl:otherwise>
                  </xsl:choose>
 
-				<xsl:choose>
+<!--  				<xsl:choose>
 					<xsl:when test="/root/request/debug">
-						
-						<script type="text/javascript">
+ -->						<script type="text/javascript">
 							<xsl:attribute name="src"><xsl:value-of
 								select="$baseUrl" />/apps/js/ext-ux/Rating/RatingItem.js</xsl:attribute>
 						</script>
@@ -789,13 +828,13 @@
                                 select="$baseUrl" />/apps/html5ui/js/App.js</xsl:attribute>
 						</script>
 						
-					</xsl:when>
+<!--  					</xsl:when>
 					<xsl:otherwise>
 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script>
 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script>
 					</xsl:otherwise>
 				</xsl:choose>
-
+  -->
 
 
 <!--             </div> -->

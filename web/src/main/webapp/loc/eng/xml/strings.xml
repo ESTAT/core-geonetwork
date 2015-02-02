@@ -1402,9 +1402,28 @@
 	<filter>Filter</filter>
 	<welcome.text>Welcome to the new INSPIRE@EC Portal giving you access to relevant INSPIRE SDI metadata. The new portal replaces the <a href="https://webgate.acceptance.ec.europa.eu/inspire/geoportal/" target="_blank">old INSPIRE@EC Portal</a>.<br/>
 	</welcome.text>
+	<guestinformation.text><br/>You are logged in as a guest. Please contact us to get your credentials upgraded.
+	</guestinformation.text>
 	<tag_label>Tags</tag_label>
 	<map_label>Map</map_label>
-  <about.text>About this site</about.text>
+  <about.text>INSPIRE@EC Portal is the IT component of the Spatial Data Infrastructure of the European Commission. It provides the recognised access point for geographical information in the Commission<br/><br/>
+<b>What are the objectives?</b><br/>
+Discover geographical information available in all Commission DGs, view and get access to it:
+Make available harmonised information, compliant with INSPIRE Implementing Rules
+Strong support to INSPIRE@EC users in describing and sharing their data and services<br/>
+<br/>
+<b>Who's responsible?</b><br/>
+INSPIRE@EC is developed by Eurostat and hosted by DG DIGIT.<br/>
+<br/>
+GISCO in ESTAT Unit E-4 as system owner administrates rights at top level. Access right to parts of<br/> 
+<br/> 
+INSPIRE@EC which are under the responsibility of a specific DG are managed at DG level according to the access rights policy of INSPIRE@EC.<br/>
+Beware that information published in INSPIRE@EC is under the responsibility of various publishers (units/services) of the Commission. So any remark or query regarding the content of a page/site should be addressed to the Publisher indicated in the metadata of the information or service.
+ </about.text>
+ <legal>Legal notice</legal>
+ <legal.text>Legal infomation ect.</legal.text>
+ <contact>Contact</contact>
+ <contact.text>Contact infomation ect.</contact.text>
   <signIn>Sign In</signIn>
   <signOut>Sign Out</signOut>
 	<rss-button>RSS</rss-button>

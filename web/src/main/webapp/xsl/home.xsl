@@ -16,7 +16,7 @@
           var search = window.location.search;
           var url = '<xsl:value-of select="/root/gui/config/client/@url"/>';
           if (url === '') {
-            url = 'main.home'
+            url = 'search'
           }
           var parameters = '<xsl:value-of select="/root/gui/config/client/@parameters"/>';
           
