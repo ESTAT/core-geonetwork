@@ -91,12 +91,15 @@
 		<property name="serviceProperties" ref="serviceProperties" />
 	</bean>
 
+    <bean class="org.fao.geonet.kernel.security.cas.CASAuthenticationProvider" id="CASAuthenticationProvider"/>
+
 	<bean id="casAuthenticationProvider"
 		class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
 		<property name="authenticationUserDetailsService">
 			<bean
 				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-				<constructor-arg ref="geonetworkAuthenticationProvider" />
+<!-- 				<constructor-arg ref="geonetworkAuthenticationProvider" />
+ -->				<constructor-arg ref="CASAuthenticationProvider" />
 			</bean>
 		</property>
 		<property name="serviceProperties" ref="serviceProperties" />

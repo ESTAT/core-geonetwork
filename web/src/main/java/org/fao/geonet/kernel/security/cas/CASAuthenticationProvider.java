@@ -20,7 +20,7 @@
 //===	Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
 //===	Rome - Italy. email: geonetwork@osgeo.org
 //==============================================================================
-package org.fao.geonet.kernel.security;
+package org.fao.geonet.kernel.security.cas;
 
 import jeeves.resources.dbms.Dbms;
 import jeeves.server.ProfileManager;
@@ -43,18 +43,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+
+
 //import jeeves.server.ProfileManager;	// cas
-//import jeeves.utils.SerialFactory;		// cas
+import jeeves.utils.SerialFactory;		// cas
+
+import org.fao.geonet.kernel.security.GeonetworkUser;
 //import org.fao.geonet.kernel.security.cas.CASUserUtils;	// cas
 
-//import java.io.BufferedReader;
-//import java.io.DataOutputStream;
-//import java.io.InputStreamReader;
-//import java.net.HttpURLConnection;
-//import java.net.URL;
 
 
-public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider 
+public class CASAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider 
 	implements ApplicationContextAware, UserDetailsService {
 
 	private ApplicationContext applicationContext;
@@ -75,67 +75,78 @@ public class GeonetworkAuthenticationProvider extends AbstractUserDetailsAuthent
 		}
 	}
 
-//	private static final String CAS_STATEFUL = "_cas_stateful_";
+	private static final String CAS_STATEFUL = "_cas_stateful_";
+	private static final String VIA_CAS = "Via CAS";
+	private static final String CAS_FLAG = "CAS";
 
 	@Override
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)	throws AuthenticationException {
 		//Log.info(Log.JEEVES, "Authentication retrieveUser :" + username);
-		
-		throw new BadCredentialsException("Authentication failed: General Geonetwork authentication is deprecated");
-		
-//		Dbms dbms = null;
-//		ResourceManager resourceManager = null;
-//		if (true)
-//			return null;
-//		
-//		if (CAS_STATEFUL.equalsIgnoreCase(username)) {
-//			// cas failed
-//			Log.error(Log.JEEVES, "_cas_stateful_ detected in retrieveUser");
-//			return null;
-//		}
-//		try {
-//			resourceManager = applicationContext.getBean(ResourceManager.class);
-//			dbms = (Dbms) resourceManager.openDirect(Geonet.Res.MAIN_DB);
-//			Element selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
-//			Element userXml = selectRequest.getChild("record");
-//			if (userXml == null) 	//  if user does not exists, add one as guest
-//			{
-//                SerialFactory serialFactory = applicationContext.getBean(SerialFactory.class);
-//                String surname = "";
-//				String firstname = username;
-//			    String group    = "";				
-//		        String profile = ProfileManager.GUEST;
-//		        CASUserUtils.updateUser(dbms, serialFactory, username, surname, firstname, profile, group, true);
-//		        selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
-//		        userXml = selectRequest.getChild("record");
-//			}
-//			
-//			if (userXml != null) {
-//				ProfileManager profileManager = applicationContext.getBean(ProfileManager.class);
-//				GeonetworkUser userDetails = new GeonetworkUser(profileManager, username, userXml);
-//				return userDetails;
-//			}
-//		} catch (Exception e) {
-//			try {
-//				resourceManager.abort(Geonet.Res.MAIN_DB, dbms);
-//				dbms = null;
-//			} catch (Exception e2) {
-//				e.printStackTrace();
-//				Log.error(Log.JEEVES, "Error closing dbms"+dbms, e2);
-//			}
-//			Log.error(Log.JEEVES, "Unexpected error while loading user", e);
-//			throw new AuthenticationServiceException("Unexpected error while loading user",e);
-//		} finally {
-//			if (dbms != null){
-//				try {
-//					resourceManager.close(Geonet.Res.MAIN_DB, dbms);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					Log.error(Log.JEEVES, "Error closing dbms"+dbms, e);
-//				}
-//			}
-//		}
-//		return null;
+		Dbms dbms = null;
+		ResourceManager resourceManager = null;
+		if (CAS_STATEFUL.equalsIgnoreCase(username)) {
+			// cas failed
+			Log.error(Log.JEEVES, "_cas_stateful_ detected in retrieveUser");
+			return null;
+		}
+		try {
+			resourceManager = applicationContext.getBean(ResourceManager.class);
+			dbms = (Dbms) resourceManager.openDirect(Geonet.Res.MAIN_DB);
+			// lookup the user in the database with cas login
+			Element selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
+			Element userXml = selectRequest.getChild("record");
+			if (userXml == null) 	//  if user does not exists, add one as guest
+			{
+				// the user did not exists in the database with cas login.
+                String surname = "";
+				String firstname = username;
+			    //String group    = "";				
+		        String profile = ProfileManager.GUEST;
+		        
+		        // update the user to cas login. If the user does not exists then insert one
+	            String query = "UPDATE Users SET name=?, surname=?, profile=?, password=?, authtype=? WHERE username=?";
+	            int usersUpdated = dbms.execute(query, firstname, surname, profile, VIA_CAS, CAS_FLAG, username);
+	            if (usersUpdated <= 0)
+	            {
+	            	// 
+	                SerialFactory serialFactory = applicationContext.getBean(SerialFactory.class);
+					int userId = serialFactory.getSerial(dbms, "Users");
+			        query = "INSERT INTO Users (id, username, name, surname, profile, password, authtype) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			        usersUpdated = dbms.execute(query, userId, username, firstname, surname, profile, VIA_CAS, CAS_FLAG);
+	            }
+		        dbms.commit();
+		        selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
+		        userXml = selectRequest.getChild("record");
+		        if (userXml == null)
+		        	Log.error(Log.JEEVES, "user not added to database in retrieveUser (CAS)");
+			}
+			
+			if (userXml != null) {
+				ProfileManager profileManager = applicationContext.getBean(ProfileManager.class);
+				GeonetworkUser userDetails = new GeonetworkUser(profileManager, username, userXml);
+				return userDetails;
+			}
+		} catch (Exception e) {
+			try {
+				resourceManager.abort(Geonet.Res.MAIN_DB, dbms);
+				dbms = null;
+			} catch (Exception e2) {
+				e.printStackTrace();
+				Log.error(Log.JEEVES, "Error closing dbms"+dbms, e2);
+			}
+			Log.error(Log.JEEVES, "Unexpected error while loading user", e);
+			throw new AuthenticationServiceException("Unexpected error while loading user",e);
+		} finally {
+			if (dbms != null){
+				try {
+					resourceManager.close(Geonet.Res.MAIN_DB, dbms);
+				} catch (Exception e) {
+					e.printStackTrace();
+					Log.error(Log.JEEVES, "Error closing dbms"+dbms, e);
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
