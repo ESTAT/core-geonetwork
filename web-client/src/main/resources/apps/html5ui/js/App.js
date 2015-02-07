@@ -377,6 +377,7 @@ GeoNetwork.app = function() {
         hide("share-capabilities");
         hide("permalink-div");
 
+        var test = Ext.getCmp("metadata-panel");
         // Adding social capabilities
         Ext.getCmp("metadata-panel").getTopToolbar().addButton({
             id : 'viewpanel-share',
@@ -635,12 +636,13 @@ GeoNetwork.app = function() {
             // HTML response
             // in case of bad startup
             exception = response.responseText.indexOf('Exception') !== -1;
-
-            if (response.status !== 200 || exception) {
-                delete cookie.state.user;
-            } else {
-                catalogue.identifiedUser = cookie.get('user');
-            }
+      //PRI: All user are logged in using ECAS and inherently Registered users - This is important to set to get menus etc working correctly
+            catalogue.identifiedUser = 'RegisteredUser';
+//            if (response.status !== 200 || exception) {
+//                delete cookie.state.user;
+//            } else {
+//                catalogue.identifiedUser = cookie.get('user');
+//            }
 
             // set a permalink provider which will be the main state provider.
             Ext.state.Manager
@@ -697,7 +699,7 @@ GeoNetwork.app = function() {
 
 Ext.onReady(function() {
 
-						resetAdvancedSearch();
+			resetAdvancedSearch();
             hideAdvancedSearch();
 
             var lang = /srv\/([a-z]{3})\/search/.exec(location.href);

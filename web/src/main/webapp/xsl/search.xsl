@@ -348,19 +348,19 @@
                       	  </xsl:if>
 		                      </div>
 			                    <div id="about" style="display:none;">
-			                    	<div id="about-text">
+			                    	<div id="about-text">			                    	
 			                      	<xsl:copy-of select="/root/gui/strings/about.text"/>
 		                        </div>
 		                      </div>
 			                    <div id="legal" style="display:none;">
 			                    	<div id="legal-text">
-			                      	<xsl:copy-of select="/root/gui/strings/legal.text"/>
-		                        </div>
-		                      </div>
+			                      		<xsl:copy-of select="/root/gui/strings/legal.text"/>
+		                        	</div>
+		                      	</div>
 			                    <div id="contact" style="display:none;">
 			                    	<div id="contact-text">
-			                      	<xsl:copy-of select="/root/gui/strings/contact.text"/>
-		                        </div>
+			                      		<xsl:copy-of select="/root/gui/strings/contact.text"/>
+		                        	</div>
 		                      </div>
 			                    
 								<div id="big-map-container" style="display:none;"/>
@@ -701,9 +701,9 @@
                      </xsl:otherwise>
                  </xsl:choose>
 
-<!--  				<xsl:choose>
+  				<xsl:choose>
 					<xsl:when test="/root/request/debug">
- -->						<script type="text/javascript">
+						<script type="text/javascript">
 							<xsl:attribute name="src"><xsl:value-of
 								select="$baseUrl" />/apps/js/ext-ux/Rating/RatingItem.js</xsl:attribute>
 						</script>
@@ -828,13 +828,13 @@
                                 select="$baseUrl" />/apps/html5ui/js/App.js</xsl:attribute>
 						</script>
 						
-<!--  					</xsl:when>
+ 					</xsl:when>
 					<xsl:otherwise>
 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script>
 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script>
 					</xsl:otherwise>
 				</xsl:choose>
-  -->
+
 
 
 <!--             </div> -->

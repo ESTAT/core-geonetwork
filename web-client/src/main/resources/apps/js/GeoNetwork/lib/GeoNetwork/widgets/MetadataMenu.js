@@ -180,6 +180,8 @@ GeoNetwork.MetadataMenu = Ext.extend(Ext.menu.Menu, {
             scope: this
         });
         
+        
+        
         this.zoomToAction = new Ext.Action({
             text: OpenLayers.i18n('zoomTo'),
             iconCls: 'zoomlayer',

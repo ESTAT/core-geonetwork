@@ -58,6 +58,7 @@ function hideAll()
 	hideMetadata();
 }
 
+
 function showBrowse() {
     // Reset search for tag cloud
     // catalogue.kvpSearch("fast=index&from=1&to=5&sortBy=changeDate", null, null, null, true);
@@ -149,19 +150,22 @@ function hideContact() {
 }
 
 function showBigMap() {
-    hideAll();    
+    hideBrowse();
+    hideSearch();
+    hideAbout();
+    hideMetadata();
+    hide("search-form");
+
     // show map
     show("big-map-container");
     // Resize the map, to cover all space available:
     resizeMap();
 
-    app.breadcrumb.setDefaultPrevious(1);
     app.breadcrumb.setCurrent({
-        text : OpenLayers.i18n(Ext.get("map-tab").dom.text),
+        text : OpenLayers.i18n("Map"),
         func : "showBigMap()"
     });
 
-    
     // Printpanel can be only initiazed once the map is rendered
     // Trigger the print panel init only when the big map is displayed
     // the first time. It will check if the print panel is already initiliazed
@@ -180,37 +184,20 @@ function hideBigMap() {
     hide("big-map-container");
 }
 
-window.onresize = function(event) {
-	resizeDiv();
-}
-function resizeDiv() {
-	var minimapOffset = (Ext.getBody().getViewSize().width - 984)/2 + 10;
-	Ext.get("mini-map").setRight(minimapOffset);
-}
-	
-
-
 function showSearch() {
-//    hideBrowse();
-//    hideAbout();
-//    hideMetadata();
-//    hideBigMap();
-    hideAll();    
+    hideBrowse();
+    hideAbout();
+    hideMetadata();
+    hideBigMap();
     show("search-form");
 
     show("secondary-aside");
     Ext.getCmp('resultsPanel').show();
     Ext.get('resultsPanel').show();
     show("main-aside");
-    var minimapOffset = (Ext.getBody().getViewSize().width - 984)/2 + 10;
-    Ext.get("mini-map").setRight(minimapOffset);
-    
 
     app.breadcrumb.setDefaultPrevious(1);
-    app.breadcrumb.setCurrent({
-        text : OpenLayers.i18n(Ext.get("catalog-tab").dom.text),
-        func : "showSearch()"
-    });
+    app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[1]);
 
     if (!app.searchApp.firstSearch) {
         app.searchApp.firstSearch = true;
@@ -232,13 +219,12 @@ function hideSearch() {
 
 function showMetadata() {
 
-//    hide("search-form");
-//    hideBrowse();
-//    hideAbout();
-//    hideSearch();
-//    hideBigMap();
+    hide("search-form");
+    hideBrowse();
+    hideAbout();
+    hideSearch();
+    hideBigMap();
 
-    hideAll();    
     show("metadata-info");
 
     app.breadcrumb.setDefaultPrevious(2);
@@ -269,8 +255,8 @@ function resizeResultsPanel() {
 //                - Ext.get("main-aside").getWidth());
 //    }
         
-  //  resultsPanel.setWidth(Ext.get("page-container").getWidth()-20);
-    
+//    resultsPanel.setWidth(Ext.get("page-container").getWidth()-20);
+//    
 //    Ext.get("result-panel").setWidth(resultsPanel.getWidth());
     Ext.each(resultsPanel.dom.children, function(div) {
         div = Ext.get(div);
@@ -335,7 +321,6 @@ function showAdvancedSearch() {
     Ext.get("search-form-fieldset").dom.style.border = "1px solid #fff";
     show('advanced-search-options');
     if (Ext.getCmp('advanced-search-options-content-form')) {
-//    	var test = Ext.getCmp('advanced-search-options-content-form')
         Ext.getCmp('advanced-search-options-content-form').doLayout();
 
         // For reset and submit buttons:
