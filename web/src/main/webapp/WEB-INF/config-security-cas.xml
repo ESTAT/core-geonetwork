@@ -42,17 +42,17 @@
 	</bean>
 	<!-- End overrides -->
 
-	<bean id="casServerPropertyUpdater" class="jeeves.config.springutil.ServerBeanPropertyUpdater">
-		<constructor-arg value="${geonetwork.https.url}" />
-		<constructor-arg>
-			<map>
-				<entry key-ref="serviceProperties" value="service" />
-				<entry key-ref="casTicketValidator" value="proxyCallbackUrl" />
-				<entry key-ref="casFilter" value="proxyReceptorUrl" />
-				<entry key-ref="logoutSuccessHandler" value="defaultTargetUrl" />
-			</map>
-		</constructor-arg>
-	</bean>
+<!-- 	<bean id="casServerPropertyUpdater" class="jeeves.config.springutil.ServerBeanPropertyUpdater"> -->
+<!-- 		<constructor-arg value="${geonetwork.https.url}" /> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<map> -->
+<!-- 				<entry key-ref="serviceProperties" value="service" /> -->
+<!-- 				<entry key-ref="casTicketValidator" value="proxyCallbackUrl" /> -->
+<!-- 				<entry key-ref="casFilter" value="proxyReceptorUrl" /> -->
+<!-- 				<entry key-ref="logoutSuccessHandler" value="defaultTargetUrl" /> -->
+<!-- 			</map> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
 	<bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
 		<property name="service" value="${geonetwork.https.url}/j_spring_cas_security_check" />
 		<property name="sendRenew" value="false" />
@@ -63,8 +63,8 @@
 	<bean id="casFilter"
 		class="org.springframework.security.cas.web.CasAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="proxyGrantingTicketStorage" ref="pgtStorage"/>
-		<property name="proxyReceptorUrl" value="${geonetwork.https.url}/j_spring_cas_security_proxyreceptor"/>
+<!-- 		<property name="proxyGrantingTicketStorage" ref="pgtStorage"/> -->
+<!-- 		<property name="proxyReceptorUrl" value="${geonetwork.https.url}/j_spring_cas_security_proxyreceptor"/> -->
 		<property name="serviceProperties" ref="serviceProperties"/> 
 		<property name="authenticationDetailsSource">
 			<bean class= "org.springframework.security.cas.web.authentication.ServiceAuthenticationDetailsSource"/>
@@ -80,9 +80,6 @@
        		</bean>
    		</property>
    		
-   		
-   		
-   		
 	</bean>
 
 	<bean id="casEntryPoint"
@@ -93,8 +90,10 @@
 
     <bean class="org.fao.geonet.kernel.security.cas.CASAuthenticationProvider" id="CASAuthenticationProvider"/>
 
+<!-- 	<bean id="casAuthenticationProvider" -->
+<!-- 		class="org.springframework.security.cas.authentication.CasAuthenticationProvider"> -->
 	<bean id="casAuthenticationProvider"
-		class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+		class="org.fao.geonet.kernel.security.cas.gnCasAuthenticationProvider">
 		<property name="authenticationUserDetailsService">
 			<bean
 				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
@@ -108,11 +107,12 @@
 		<property name="statelessTicketCache" ref="casStatelessTicketCache" />
 	</bean>
 	
-	<bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ProxyTicketValidator">
+<!-- 	<bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator"> -->
+ 	<bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ProxyTicketValidator"> 
 		<!-- Geonetwork class in start method will update the baseurl with the one in the settings table -->
 		<!-- If baseurlTag is not set then the proxyCallbackURL will not be updated -->
 		<constructor-arg index="0" value="${cas.ticket.validator.url}" />
-<!-- 		<property name="proxyCallbackUrl" value="${geonetwork.https.url}/cas_security_proxyreceptor" /> -->
+<!-- 		<property name="proxyCallbackUrl" value="${geonetwork.https.url}/j_spring_cas_security_proxyreceptor" /> -->
 <!-- 		<property name="proxyGrantingTicketStorage" ref="pgtStorage" /> -->
 <!-- 		<property name="acceptAnyProxy" value="true"/> -->
 	</bean>
