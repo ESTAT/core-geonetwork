@@ -219,9 +219,13 @@
 											<xsl:value-of select="/root/gui/strings/admin"/>
 										</a>
 									</xsl:if>
+									
+									
+									<!-- The following login section is not used but is references in LoginApp.js -->
+									<!-- Do not remove before changing LoginApp.js -->
 									<script>function false_(){ return false; }</script>
-									<form id="login-form" style="display: none;" onsubmit="return false_();">
-										<div id="login_div">
+									<form id="login-form" style="display:none;" onsubmit="return false_();">
+										<div id="login_div" style="display:none;" >
 											<label>User name:</label>
 											<input type="text" id="username" name="username"/><br/>
 											<label>Password: </label>
@@ -701,8 +705,8 @@
                      </xsl:otherwise>
                  </xsl:choose>
 
-  				<xsl:choose>
-					<xsl:when test="/root/request/debug">
+<!--   				<xsl:choose> -->
+<!-- 					<xsl:when test="/root/request/debug"> -->
 						<script type="text/javascript">
 							<xsl:attribute name="src"><xsl:value-of
 								select="$baseUrl" />/apps/js/ext-ux/Rating/RatingItem.js</xsl:attribute>
@@ -828,12 +832,12 @@
                                 select="$baseUrl" />/apps/html5ui/js/App.js</xsl:attribute>
 						</script>
 						
- 					</xsl:when>
-					<xsl:otherwise>
-						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script>
-						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script>
-					</xsl:otherwise>
-				</xsl:choose>
+<!--  					</xsl:when> -->
+<!-- 					<xsl:otherwise> -->
+<!-- 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script> -->
+<!-- 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script> -->
+<!-- 					</xsl:otherwise> -->
+<!-- 				</xsl:choose> -->
 
 
 

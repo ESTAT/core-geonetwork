@@ -388,40 +388,41 @@
 			<output sheet="home.xsl"/>
 		</service>
 
-		<service name="main.home">
-			<output sheet="main-page.xsl">
-				<call name="searchDefaults" class=".guiservices.search.GetDefaults" />
-				<call name="keywords" class=".guiservices.keywords.Get" />
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="categories" class=".services.category.List" />
-				<call name="status" class=".services.main.Info">
-					<param name="type" value="status" />
-				</call>
-				<call name="regions" class=".guiservices.regions.Get" />
-				<call name="sources" class=".guiservices.util.Sources" />
-				<call name="repositories" class=".services.main.Info">
-					<param name="type" value="z3950repositories" />
-				</call>
+<!-- 		<service name="main.home"> -->
+<!-- 			<output sheet="main-page.xsl"> -->
+<!-- 				<call name="searchDefaults" class=".guiservices.search.GetDefaults" /> -->
+<!-- 				<call name="keywords" class=".guiservices.keywords.Get" /> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="categories" class=".services.category.List" /> -->
+<!-- 				<call name="status" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="status" /> -->
+<!-- 				</call> -->
+<!-- 				<call name="regions" class=".guiservices.regions.Get" /> -->
+<!-- 				<call name="sources" class=".guiservices.util.Sources" /> -->
+<!-- 				<call name="repositories" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="z3950repositories" /> -->
+<!-- 				</call> -->
 
-				<call name="latestUpdated" class=".guiservices.metadata.GetLatestUpdated">
-					<param name="maxItems" value="10" />
-					<param name="timeBetweenUpdates" value="10" />
-				</call>
+<!-- 				<call name="latestUpdated" class=".guiservices.metadata.GetLatestUpdated"> -->
+<!-- 					<param name="maxItems" value="10" /> -->
+<!-- 					<param name="timeBetweenUpdates" value="10" /> -->
+<!-- 				</call> -->
 
-				<call name="featured" class=".guiservices.metadata.GetRandom">
-					<param name="maxItems" value="1" />
-					<param name="timeBetweenUpdates" value="10" />
-					<!-- Restrict to a geographic area. Default is global overlap -->
-					<param name="relation" value="overlaps" />
-					<param name="northBL" value="90" />
-					<param name="southBL" value="-90" />
-					<param name="eastBL" value="180" />
-					<param name="westBL" value="-180" />
-				</call>
+<!-- 				<call name="featured" class=".guiservices.metadata.GetRandom"> -->
+<!-- 					<param name="maxItems" value="1" /> -->
+<!-- 					<param name="timeBetweenUpdates" value="10" /> -->
+<!-- 					Restrict to a geographic area. Default is global overlap -->
+<!-- 					<param name="relation" value="overlaps" /> -->
+<!-- 					<param name="northBL" value="90" /> -->
+<!-- 					<param name="southBL" value="-90" /> -->
+<!-- 					<param name="eastBL" value="180" /> -->
+<!-- 					<param name="westBL" value="-180" /> -->
+<!-- 				</call> -->
 
-				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" />
-			</output>
-		</service>
+<!-- 				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
+
 		<service name="service-not-allowed">
 			<output sheet="service-not-allowed.xsl">
 				
@@ -446,145 +447,144 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="main.search">
-			<class name=".services.main.Search">
-				<param name="maxSummaryKeys" value="10" />
-				<param name="maxHitsInSummary" value="1000" />
-			</class>
+<!-- 		<service name="main.search"> -->
+<!-- 			<class name=".services.main.Search"> -->
+<!-- 				<param name="maxSummaryKeys" value="10" /> -->
+<!-- 				<param name="maxHitsInSummary" value="1000" /> -->
+<!-- 			</class> -->
 
-			<output forward="main.present" />
-		</service>
+<!-- 			<output forward="main.present" /> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- ETj: this service provides a page similar to main.search, made simpler to be embedded elsewhere-->
 
-		<service name="main.search.embedded">
-			<class name=".services.main.Search">
-				<param name="maxSummaryKeys" value="10" />
-				<param name="maxHitsInSummary" value="1000" />
-			</class>
+<!-- 		<service name="main.search.embedded"> -->
+<!-- 			<class name=".services.main.Search"> -->
+<!-- 				<param name="maxSummaryKeys" value="10" /> -->
+<!-- 				<param name="maxHitsInSummary" value="1000" /> -->
+<!-- 			</class> -->
 
-			<output forward="main.present.embedded" />
+<!-- 			<output forward="main.present.embedded" /> -->
 
-			<error id="unauthorized" sheet="xml-error.xsl" statusCode="403">
-				<xml name="error" file="xml/unauthorized.xml" />
-			</error>
-		</service>
+<!-- 			<error id="unauthorized" sheet="xml-error.xsl" statusCode="403"> -->
+<!-- 				<xml name="error" file="xml/unauthorized.xml" /> -->
+<!-- 			</error> -->
+<!-- 		</service> -->
 
-		<service name="main.search.suggest">
-			<class name=".services.main.SearchSuggestion">
-				<!-- Minimum frequency for a term value to be proposed in suggestion. -->
-				<param name="threshold" value="1" />
-				<!--
+<!-- 		<service name="main.search.suggest"> -->
+<!-- 			<class name=".services.main.SearchSuggestion"> -->
+<!-- 				Minimum frequency for a term value to be proposed in suggestion. -->
+<!-- 				<param name="threshold" value="1" /> -->
+					<!--								
 					Max number of term's values to look in the index. For large catalogue
 					this value should be increased in order to get better results. If this
 					value is too high, then looking for terms could take more times. The use
 					of good analyzer should allow to reduce the number of useless values like
 					(a, the, ...).
-				-->
-				<param name="max_number_of_terms" value="100000" />
-				<!-- Default field to search in. any is full-text search field. -->
-				<param name="default_search_field" value="any" />
-			</class>
+  				 -->
+<!-- 				<param name="max_number_of_terms" value="100000" /> -->
+<!-- 				Default field to search in. any is full-text search field. -->
+<!-- 				<param name="default_search_field" value="any" /> -->
+<!-- 			</class> -->
+<!-- 			<output sheet="search-suggestions.xsl" contentType="application/json; charset=UTF-8" /> -->
+<!-- 		</service> -->
 
-			<output sheet="search-suggestions.xsl" contentType="application/json; charset=UTF-8" />
-		</service>
-
-
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-		<service name="main.present.embedded">
-			<class name=".services.main.Result">
-				<param name="maxRecords" value="10" />
-				<param name="syntax" value="f" />
-			</class>
-
-			<output sheet="search-results-xhtml.xsl" contentType="text/xml; charset=UTF-8">
-				<call name="searchDefaults" class=".guiservices.search.GetDefaults" />
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="sources" class=".guiservices.util.Sources" />
-				<call name="config" class=".services.config.Get" />
-				<call name="repositories" class=".services.main.Info">
-					<param name="type" value="z3950repositories" />
-				</call>
-			</output>
-
-		</service>
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="main.searchform.advanced.embedded">
-			<output sheet="searchform_advanced.xsl">
-				<call name="searchDefaults" class=".guiservices.search.GetDefaults" />
-				<call name="keywords" class=".guiservices.keywords.Get" />
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="categories" class=".services.category.List" />
-				<call name="regions" class=".guiservices.regions.Get" />
-				<call name="sources" class=".guiservices.util.Sources" />
-				<call name="repositories" class=".services.main.Info">
-					<param name="type" value="z3950repositories" />
-				</call>
-				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" />
-			</output>
-		</service>
+<!-- 		<service name="main.present.embedded"> -->
+<!-- 			<class name=".services.main.Result"> -->
+<!-- 				<param name="maxRecords" value="10" /> -->
+<!-- 				<param name="syntax" value="f" /> -->
+<!-- 			</class> -->
+
+<!-- 			<output sheet="search-results-xhtml.xsl" contentType="text/xml; charset=UTF-8"> -->
+<!-- 				<call name="searchDefaults" class=".guiservices.search.GetDefaults" /> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="sources" class=".guiservices.util.Sources" /> -->
+<!-- 				<call name="config" class=".services.config.Get" /> -->
+<!-- 				<call name="repositories" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="z3950repositories" /> -->
+<!-- 				</call> -->
+<!-- 			</output> -->
+
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="main.searchform.remote.embedded">
-			<output sheet="searchform_advanced.xsl">
-				<call name="searchDefaults" class=".guiservices.search.GetDefaults" />
-				<call name="keywords" class=".guiservices.keywords.Get" />
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="categories" class=".services.category.List" />
-				<call name="regions" class=".guiservices.regions.Get" />
-				<call name="sources" class=".guiservices.util.Sources" />
-				<call name="repositories" class=".services.main.Info">
-					<param name="type" value="z3950repositories" />
-				</call>
-				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" />
-			</output>
-		</service>
+<!-- 		<service name="main.searchform.advanced.embedded"> -->
+<!-- 			<output sheet="searchform_advanced.xsl"> -->
+<!-- 				<call name="searchDefaults" class=".guiservices.search.GetDefaults" /> -->
+<!-- 				<call name="keywords" class=".guiservices.keywords.Get" /> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="categories" class=".services.category.List" /> -->
+<!-- 				<call name="regions" class=".guiservices.regions.Get" /> -->
+<!-- 				<call name="sources" class=".guiservices.util.Sources" /> -->
+<!-- 				<call name="repositories" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="z3950repositories" /> -->
+<!-- 				</call> -->
+<!-- 				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="main.searchform.simple.embedded">
-			<output sheet="searchform_simple.xsl">
-				<call name="searchDefaults" class=".guiservices.search.GetDefaults" />
-				<call name="keywords" class=".guiservices.keywords.Get" />
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="categories" class=".services.category.List" />
-				<call name="regions" class=".guiservices.regions.Get" />
-				<call name="sources" class=".guiservices.util.Sources" />
-				<call name="repositories" class=".services.main.Info">
-					<param name="type" value="z3950repositories" />
-				</call>
-				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" />
-			</output>
-		</service>
+<!-- 		<service name="main.searchform.remote.embedded"> -->
+<!-- 			<output sheet="searchform_advanced.xsl"> -->
+<!-- 				<call name="searchDefaults" class=".guiservices.search.GetDefaults" /> -->
+<!-- 				<call name="keywords" class=".guiservices.keywords.Get" /> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="categories" class=".services.category.List" /> -->
+<!-- 				<call name="regions" class=".guiservices.regions.Get" /> -->
+<!-- 				<call name="sources" class=".guiservices.util.Sources" /> -->
+<!-- 				<call name="repositories" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="z3950repositories" /> -->
+<!-- 				</call> -->
+<!-- 				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="rating.popup">
-			<output sheet="rating-popup.xsl" />
-		</service>
+<!-- 		<service name="main.searchform.simple.embedded"> -->
+<!-- 			<output sheet="searchform_simple.xsl"> -->
+<!-- 				<call name="searchDefaults" class=".guiservices.search.GetDefaults" /> -->
+<!-- 				<call name="keywords" class=".guiservices.keywords.Get" /> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="categories" class=".services.category.List" /> -->
+<!-- 				<call name="regions" class=".guiservices.regions.Get" /> -->
+<!-- 				<call name="sources" class=".guiservices.util.Sources" /> -->
+<!-- 				<call name="repositories" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="z3950repositories" /> -->
+<!-- 				</call> -->
+<!-- 				<xml name="searchProfiles" file="xml/search-profiles.xml" localized="false" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="main.present">
-			<class name=".services.main.Result">
-				<param name="maxRecords" value="10" />
-				<param name="syntax" value="f" />
-			</class>
+<!-- 		<service name="rating.popup"> -->
+<!-- 			<output sheet="rating-popup.xsl" /> -->
+<!-- 		</service> -->
 
-			<output sheet="search-results.xsl">
-				<call name="searchDefaults" class=".guiservices.search.GetDefaults" />
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="sources" class=".guiservices.util.Sources" />
-				<call name="repositories" class=".services.main.Info">
-					<param name="type" value="z3950repositories" />
-				</call>
-			</output>
-		</service>
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<!-- 		<service name="main.present"> -->
+<!-- 			<class name=".services.main.Result"> -->
+<!-- 				<param name="maxRecords" value="10" /> -->
+<!-- 				<param name="syntax" value="f" /> -->
+<!-- 			</class> -->
+
+<!-- 			<output sheet="search-results.xsl"> -->
+<!-- 				<call name="searchDefaults" class=".guiservices.search.GetDefaults" /> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="sources" class=".guiservices.util.Sources" /> -->
+<!-- 				<call name="repositories" class=".services.main.Info"> -->
+<!-- 					<param name="type" value="z3950repositories" /> -->
+<!-- 				</call> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -604,31 +604,31 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <!-- classic GUI -->
-        <service name="feedback">
-            <output sheet="feedback.xsl" />
-        </service>
+<!--         <service name="feedback"> -->
+<!--             <output sheet="feedback.xsl" /> -->
+<!--         </service> -->
 
         <!-- Ext GUIs -->
-        <service name="feedback.send">
-            <class name=".services.feedback.Receptor" />
-            <output sheet="extjs-feedback-response.xsl" contentType="application/json; charset=UTF-8" />
-        </service>
+<!--         <service name="feedback.send"> -->
+<!--             <class name=".services.feedback.Receptor" /> -->
+<!--             <output sheet="extjs-feedback-response.xsl" contentType="application/json; charset=UTF-8" /> -->
+<!--         </service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="links">
-			<output sheet="page.xsl">
-				<xml name="page" file="xml/links.xml" />
-			</output>
-		</service>
+<!-- 		<service name="links"> -->
+<!-- 			<output sheet="page.xsl"> -->
+<!-- 				<xml name="page" file="xml/links.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="about">
-			<output sheet="page.xsl">
-				<xml name="page" file="xml/about.xml" />
-			</output>
-		</service>
+<!-- 		<service name="about"> -->
+<!-- 			<output sheet="page.xsl"> -->
+<!-- 				<xml name="page" file="xml/about.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -698,13 +698,13 @@
 		<!-- Feedback services                                             -->
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="feedback.insert">
-			<class name=".services.feedback.Insert" />
+<!-- 		<service name="feedback.insert"> -->
+<!-- 			<class name=".services.feedback.Insert" /> -->
 
-			<output sheet="info.xsl">
-				<xml name="info" file="xml/feedback-sent.xml" />
-			</output>
-		</service>
+<!-- 			<output sheet="info.xsl"> -->
+<!-- 				<xml name="info" file="xml/feedback-sent.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- Utility services                                              -->
@@ -733,59 +733,59 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="password.forgotten.form">
-			<output sheet="password-forgotten.xsl"/>
-		</service>
+<!-- 		<service name="password.forgotten.form"> -->
+<!-- 			<output sheet="password-forgotten.xsl"/> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="password.forgotten.submit">
-			<class name=".services.password.SendLink" />
+<!-- 		<service name="password.forgotten.submit"> -->
+<!-- 			<class name=".services.password.SendLink" /> -->
 
-			<error id="user-not-found" sheet="error-modal.xsl">
-				<xml name="error" file="xml/user-not-found-error.xml" />
-			</error>
+<!-- 			<error id="user-not-found" sheet="error-modal.xsl"> -->
+<!-- 				<xml name="error" file="xml/user-not-found-error.xml" /> -->
+<!-- 			</error> -->
 
-			<error id="operation-not-allowed" sheet="error-modal.xsl">
-				<xml name="error" file="xml/registered-users-only.xml" />
-			</error>
+<!-- 			<error id="operation-not-allowed" sheet="error-modal.xsl"> -->
+<!-- 				<xml name="error" file="xml/registered-users-only.xml" /> -->
+<!-- 			</error> -->
 
-			<error sheet="error-modal.xsl"/>
+<!-- 			<error sheet="error-modal.xsl"/> -->
 
-			<output sheet="infomodal.xsl">
-				<xml name="info" file="xml/password-link-sent.xml" />
-			</output>
-		</service>
-
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-		<service name="password.change.form">
-			<output sheet="password-change.xsl"/>
-		</service>
+<!-- 			<output sheet="infomodal.xsl"> -->
+<!-- 				<xml name="info" file="xml/password-link-sent.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="password.change.submit">
-			<class name=".services.password.Change" />
-
-			<output sheet="info.xsl">
-				<xml name="info" file="xml/password-changed.xml" />
-			</output>
-		</service>
+<!-- 		<service name="password.change.form"> -->
+<!-- 			<output sheet="password-change.xsl"/> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="xml.password.emaillink">
-			<class name=".services.password.SendLink" />
-			<error sheet="error-xml.xsl"/>
-		</service>
+<!-- 		<service name="password.change.submit"> -->
+<!-- 			<class name=".services.password.Change" /> -->
+
+<!-- 			<output sheet="info.xsl"> -->
+<!-- 				<xml name="info" file="xml/password-changed.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="xml.password.change">
-			<class name=".services.password.Change" />
-			<error sheet="error-xml.xsl"/>
-		</service>
+<!-- 		<service name="xml.password.emaillink"> -->
+<!-- 			<class name=".services.password.SendLink" /> -->
+<!-- 			<error sheet="error-xml.xsl"/> -->
+<!-- 		</service> -->
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<!-- 		<service name="xml.password.change"> -->
+<!-- 			<class name=".services.password.Change" /> -->
+<!-- 			<error sheet="error-xml.xsl"/> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- User services                                                 -->
@@ -824,14 +824,14 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="user.resetpw">
-			<class name=".services.user.Get" />
+<!-- 		<service name="user.resetpw"> -->
+<!-- 			<class name=".services.user.Get" /> -->
 
-			<output sheet="user-resetpw.xsl">
-				<call name="groups" class=".guiservices.groups.GetMine" />
-				<call name="profiles" class="jeeves.guiservices.profiles.Get" />
-			</output>
-		</service>
+<!-- 			<output sheet="user-resetpw.xsl"> -->
+<!-- 				<call name="groups" class=".guiservices.groups.GetMine" /> -->
+<!-- 				<call name="profiles" class="jeeves.guiservices.profiles.Get" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -1006,15 +1006,15 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="shib.user.login">
-			<class name=".services.login.ShibLogin" />
+<!-- 		<service name="shib.user.login"> -->
+<!-- 			<class name=".services.login.ShibLogin" /> -->
 
-			<output forward="home" />
+<!-- 			<output forward="home" /> -->
 
-			<error id="user-login" sheet="error.xsl" statusCode="401">
-				<xml name="error" file="xml/login-error.xml" />
-			</error>
-		</service>
+<!-- 			<error id="user-login" sheet="error.xsl" statusCode="401"> -->
+<!-- 				<xml name="error" file="xml/login-error.xml" /> -->
+<!-- 			</error> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- Administration services                                       -->
@@ -1088,12 +1088,12 @@
 		<!-- Localization                                                  -->
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="localization">
-			<output sheet="localization/localization.xsl">
-				<call name="languages" class=".guiservices.languages.Get" />
-				<xml name="localiz" file="xml/localization.xml" />
-			</output>
-		</service>
+<!-- 		<service name="localization"> -->
+<!-- 			<output sheet="localization/localization.xsl"> -->
+<!-- 				<call name="languages" class=".guiservices.languages.Get" /> -->
+<!-- 				<xml name="localiz" file="xml/localization.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -1105,11 +1105,11 @@
 		<!-- Help services                                                 -->
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="help">
-			<output sheet="page.xsl">
-				<xml name="page" file="xml/help.xml" />
-			</output>
-		</service>
+<!-- 		<service name="help"> -->
+<!-- 			<output sheet="page.xsl"> -->
+<!-- 				<xml name="page" file="xml/help.xml" /> -->
+<!-- 			</output> -->
+<!-- 		</service> -->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 

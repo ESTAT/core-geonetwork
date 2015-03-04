@@ -405,13 +405,14 @@
 
                     <!-- user and group services -->
                     <xsl:variable name="persInfoServices">
-                        <xsl:call-template name="addrow">
-                            <xsl:with-param name="service" select="'user.pwedit'"/>
-                            <xsl:with-param name="args"
-                                            select="concat('id=',/root/gui/session/userId)"/>
-                            <xsl:with-param name="title" select="/root/gui/strings/userPw"/>
-                            <xsl:with-param name="desc" select="/root/gui/strings/userPwDes"/>
-                        </xsl:call-template>
+<!--                     cas users cannot change password in geonetwork -->
+<!--                         <xsl:call-template name="addrow"> -->
+<!--                             <xsl:with-param name="service" select="'user.pwedit'"/> -->
+<!--                             <xsl:with-param name="args" -->
+<!--                                             select="concat('id=',/root/gui/session/userId)"/> -->
+<!--                             <xsl:with-param name="title" select="/root/gui/strings/userPw"/> -->
+<!--                             <xsl:with-param name="desc" select="/root/gui/strings/userPwDes"/> -->
+<!--                         </xsl:call-template> -->
 
                         <xsl:call-template name="addrow">
                             <xsl:with-param name="service" select="'user.infoedit'"/>
@@ -520,27 +521,27 @@
                     </xsl:variable>
                     -->
 
-                    <xsl:variable name="i18n">
-                        <xsl:call-template name="addrow">
-                            <xsl:with-param name="service" select="'localization'"/>
-                            <xsl:with-param name="title" select="/root/gui/strings/localiz"/>
-                            <xsl:with-param name="desc" select="/root/gui/strings/localizDes"/>
-                        </xsl:call-template>
+<!--                     <xsl:variable name="i18n"> -->
+<!--                         <xsl:call-template name="addrow"> -->
+<!--                             <xsl:with-param name="service" select="'localization'"/> -->
+<!--                             <xsl:with-param name="title" select="/root/gui/strings/localiz"/> -->
+<!--                             <xsl:with-param name="desc" select="/root/gui/strings/localizDes"/> -->
+<!--                         </xsl:call-template> -->
 
-                        <xsl:call-template name="addrow">
-                            <xsl:with-param name="service" select="'test.i18n'"/>
-                            <xsl:with-param name="title" select="/root/gui/strings/i18n"/>
-                            <xsl:with-param name="desc" select="/root/gui/strings/i18nDesc"/>
-                        </xsl:call-template>
-                    </xsl:variable>
+<!--                         <xsl:call-template name="addrow"> -->
+<!--                             <xsl:with-param name="service" select="'test.i18n'"/> -->
+<!--                             <xsl:with-param name="title" select="/root/gui/strings/i18n"/> -->
+<!--                             <xsl:with-param name="desc" select="/root/gui/strings/i18nDesc"/> -->
+<!--                         </xsl:call-template> -->
+<!--                     </xsl:variable> -->
 
-                    <xsl:if test="not($readonly)">
-                        <xsl:call-template name="addTitle">
-                            <xsl:with-param name="icon">comment.png</xsl:with-param>
-                            <xsl:with-param name="title" select="/root/gui/strings/localiz"/>
-                            <xsl:with-param name="content" select="$i18n"/>
-                        </xsl:call-template>
-                    </xsl:if>
+<!--                     <xsl:if test="not($readonly)"> -->
+<!--                         <xsl:call-template name="addTitle"> -->
+<!--                             <xsl:with-param name="icon">comment.png</xsl:with-param> -->
+<!--                             <xsl:with-param name="title" select="/root/gui/strings/localiz"/> -->
+<!--                             <xsl:with-param name="content" select="$i18n"/> -->
+<!--                         </xsl:call-template> -->
+<!--                     </xsl:if> -->
 
                 </table>
                 <p/>
