@@ -54,7 +54,7 @@ import org.fao.geonet.kernel.security.GeonetworkUser;
 
 
 
-public class CASAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider 
+public class gnCasUserDetailAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider 
 	implements ApplicationContextAware, UserDetailsService {
 
 	private ApplicationContext applicationContext;
