@@ -647,6 +647,7 @@
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
 	                     <li class="modification-date"><span>Last update: 2/2/2015</span></li>
+	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">
 		                     <li><a id="catalog-tab" href="javascript:showSearch();"><xsl:value-of select="/root/gui/strings/porCatInfoTab" /></a></li>
