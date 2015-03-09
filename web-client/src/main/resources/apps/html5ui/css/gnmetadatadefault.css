@@ -42,7 +42,7 @@ div#tabs ul li ul li.active{background-image:url("../images/shadeactive.gif");bo
 #editForm table.gn{border-collapse:collapse;background-color:#fff;clear:both;margin-left:0;margin-right:0;width:100%;}
 .metadata * table.gn>tbody>tr>td,.metadata * table.gn>tbody>tr>th{padding:7px 0 7px 7px;vertical-align:top;text-align:left;}
 .metadata * table.gn>tbody>tr>td.col{padding:0;width:50%;}
-.metadata * table.gn>tbody>tr>td.main,.metadata * table.gn>tbody>tr>th.main{width:25%;}
+.metadata * table.gn>tbody>tr>td.main,.metadata * table.gn>tbody>tr>th.main{width:35%;}
 .metadata * table.gn p{margin-bottom:5px;}
 table.related{border-collapse:collapse;border-spacing:0;width:100%;}
 table.related>tbody>tr{height:30px;}

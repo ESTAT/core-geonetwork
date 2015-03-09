@@ -1415,7 +1415,7 @@
             </xsl:otherwise>
           </xsl:choose>
         </label>
-        <xsl:text>&#160;</xsl:text>
+<!--         <xsl:text>&#160;</xsl:text> -->
         
         <!-- srv:operatesOn is an element which contains xlink:href attribute 
           (due to INSPIRE usage added in r7710) and must be editable in any cases (#705). 

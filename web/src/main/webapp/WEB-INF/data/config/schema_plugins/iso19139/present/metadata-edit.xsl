@@ -1271,8 +1271,8 @@
         <xsl:with-param name="schema" select="$schema"/>
         <xsl:with-param name="edit"   select="$edit"/>
       </xsl:apply-templates>
-    </col>
-    <col>                    
+<!--     </col> -->
+<!--     <col>                     -->
       <xsl:apply-templates mode="elementEP" select="gmd:thesaurusName|geonet:child[string(@name)='thesaurusName']">
         <xsl:with-param name="schema" select="$schema"/>
         <xsl:with-param name="edit"   select="$edit"/>
@@ -2469,8 +2469,8 @@
                     <xsl:with-param name="schema" select="$schema"/>
                     <xsl:with-param name="edit"   select="$edit"/>
                   </xsl:apply-templates>
-        </col>
-        <col>
+<!--         </col> -->
+<!--         <col> -->
                   <xsl:apply-templates mode="elementEP" select="gmd:contactInfo|geonet:child[string(@name)='contactInfo']">
                     <xsl:with-param name="schema" select="$schema"/>
                     <xsl:with-param name="edit"   select="$edit"/>

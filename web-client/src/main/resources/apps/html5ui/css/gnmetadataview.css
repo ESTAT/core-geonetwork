@@ -967,14 +967,25 @@ div.showBigMapItemInactive:hover {
 	color: #333;
 	font-weight: bold;
 	padding: 10px 0px 10px 0px;
+/* 	width: 40%; */
+	width: 100%;
+}
+/* Icon float right: width of legend must be the same as */
+#metadata-info table.gn>tbody>tr>td.main,.metadata * table.gn>tbody>tr>th.main{width:40%;}
+#metadata-info table.gn>tbody>tr>td.main,table.gn>tbody>tr>th.main{background-color: transparent;}
+#metadata-info table.map {
+	background-color: transparent;
+	border: none;	
 }
 
 #metadata-info fieldset .gn { /*border-top: 1px solid #e5e5e5;*/
+/* 	background-color: rgba(187, 187, 187, 0.2); */
+	background-color: #fff;
 	clear: both;
 }
 
 #metadata-info .gn .main {
-	background-color: #fff;
+/* 	background-color: #fff; */
 	/* border-right: 1px solid #e5e5e5; */
 	color: #333;
 }
@@ -1063,21 +1074,36 @@ div.showBigMapItemInactive:hover {
 #metadata-info #editorPanel th {
 	border-bottom: 0;
 	border-top: 0;
-	padding: 3px;
+	padding: 3px 0px 3px 0px;
 }
 
 #metadata-info #editorPanel td {
 	border: 0;
-	background-color: white !important;
-	padding: 3px;
+/* 	background-color: white !important; */
+	padding: 3px 0px 3px 0px;
 }
+
+/* Icon float right */
+/* #metadata-info #editorPanel .buttons { */
+/* 	float: right; */
+/* } */
 
 #metadata-info #editorPanel .buttons a.del span {
 	background-image: url("../../images/default/cross.png");
+	background-repeat: no-repeat;
+	background-position: center; 
 }
 
 #metadata-info #editorPanel .buttons a.add span {
 	background-image: url("../../images/default/add.png");
+	background-repeat: no-repeat;
+	background-position: center; 
+}
+
+#metadata-info #editorPanel .buttons a.find span {
+	background-image: url("../../images/default/find.png");
+	background-repeat: no-repeat;
+	background-position: center; 
 }
 
 #metadata-info #editorPanel span.buttons a.small span {

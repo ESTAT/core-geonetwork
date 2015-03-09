@@ -62,14 +62,16 @@
           <xsl:when test="normalize-space($xlinkTokens[2])">
             <a id="addXlink_{$id}" class="small find"
               onclick="if (noDoubleClick()) {$xlinkTokens[1]}" style="display:none;">
-              <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--               <span>&#160;</span> -->
             </a>
           </xsl:when>
           <xsl:otherwise>
             <a id="addXlink_{$id}" class="small find" onclick="{$addXMLFragment}"
               style="cursor:pointer;" alt="{/root/gui/strings/addXMLFragment}"
               title="{/root/gui/strings/addXMLFragment}">
-              <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--               <span>&#160;</span> -->
             </a>
           </xsl:otherwise>
         </xsl:choose>
@@ -83,15 +85,20 @@
         <xsl:choose>
           <xsl:when test="normalize-space($xlinkTokens[2])">
             <a id="addXlink_{$id}" class="small find"
-              onclick="if (noDoubleClick()) {$xlinkTokens[1]}" style="display:none;">
-              <span>&#160;</span>
+              onclick="if (noDoubleClick()) {$xlinkTokens[1]}"
+              target="_blank" 
+              style="display:none;">
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--               <span>&#160;</span> -->
             </a>
           </xsl:when>
           <xsl:otherwise>
             <a id="addXlink_{$id}" class="small findsub" onclick="{$addXmlFragmentSubTemplate}"
               style="cursor:pointer;" alt="{/root/gui/strings/addXMLFragment}"
-              title="{/root/gui/strings/addXMLFragment}">
-              <span>&#160;</span>
+              title="{/root/gui/strings/addXMLFragment}"
+              target="_blank" >
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--               <span>&#160;</span> -->
             </a>
           </xsl:otherwise>
         </xsl:choose>
@@ -107,13 +114,15 @@
               <a id="add_{$id}" class="small add" onclick="if (noDoubleClick()) {$linkTokens[1]}"
                 target="_blank" alt="{/root/gui/strings/add[not(@js)]}" title="{/root/gui/strings/add[not(@js)]}"
                 style="display:none;">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:when>
             <xsl:otherwise>
               <a id="add_{$id}" class="small add" onclick="if (noDoubleClick()) {$addLink}"
                 target="_blank" alt="{/root/gui/strings/add[not(@js)]}" title="{/root/gui/strings/add[not(@js)]}">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:otherwise>
           </xsl:choose>
@@ -135,13 +144,15 @@
               <a id="remove_{$id}" class="small del" onclick="if (noDoubleClick()) {$linkTokens[1]}"
                 target="_blank" alt="{/root/gui/strings/del}" title="{/root/gui/strings/del}"
                 style="display:none;">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:when>
             <xsl:otherwise>
               <a id="remove_{$id}" class="small del" onclick="if (noDoubleClick()) {$removeLink}"
                 target="_blank" alt="{/root/gui/strings/del}" title="{/root/gui/strings/del}">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:otherwise>
           </xsl:choose>
@@ -161,13 +172,15 @@
               <a id="up_{$id}" class="small up" style="display:none"
                 onclick="if (noDoubleClick()) {$linkTokens[1]}" target="_blank"
                 alt="{/root/gui/strings/up}" title="{/root/gui/strings/up}">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:when>
             <xsl:otherwise>
               <a id="up_{$id}" class="small up" onclick="if (noDoubleClick()) {$upLink}"
                 target="_blank" alt="{/root/gui/strings/up}" title="{/root/gui/strings/up}">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:otherwise>
           </xsl:choose>
@@ -187,13 +200,15 @@
               <a id="down_{$id}" class="small down" style="display:none;"
                 onclick="if (noDoubleClick()) {$linkTokens[1]}" target="_blank"
                 alt="{/root/gui/strings/down}" title="{/root/gui/strings/down}">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:when>
             <xsl:otherwise>
               <a id="down_{$id}" class="small down" onclick="if (noDoubleClick()) {$downLink}"
                 target="_blank" alt="{/root/gui/strings/down}" title="{/root/gui/strings/down}">
-                <span>&#160;</span>
+				<span style="padding-left: 8px; padding-right: 8px;"></span>                
+<!--                 <span>&#160;</span> -->
               </a>
             </xsl:otherwise>
           </xsl:choose>
@@ -226,7 +241,7 @@
 
     <table width="100%">
       <tr>
-        <td>
+        <td style="padding: 0px;">
           <div class="cal" id="_{$ref}"/>
           <input type="hidden" id="_{$ref}_format" value="{$format}"/>
           <input type="hidden" id="_{$ref}_disabled" value="{$disabled}"/>
