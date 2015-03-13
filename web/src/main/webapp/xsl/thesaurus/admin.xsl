@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-							  xmlns:fo="http://www.w3.org/1999/XSL/Format">
+							  xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                exclude-result-prefixes="#all">
 
 
 	<xsl:include href="../header.xsl"/>
@@ -56,18 +58,18 @@
 				}
 			};
 			Ext.onReady(function(){
-				GeoNetwork.Util.setLang('<xsl:value-of select="/root/gui/language"/>');
+				GeoNetwork.Util.setLang('<xsl:value-of select="java:encodeForJavaScript(/root/gui/language)"/>');
 
 				catalogue = new GeoNetwork.Catalogue({
 					statusBarId : 'info',
 					hostUrl: '../..',
-					lang: '<xsl:value-of select="/root/gui/language"/>',
+					lang: '<xsl:value-of select="java:encodeForJavaScript(/root/gui/language)"/>',
 					mdOverlayedCmpId : 'resultsPanel'
 				});
 
 				var manager = new GeoNetwork.admin.ThesaurusManagerPanel({
 					catalogue: catalogue,
-					feed: '<xsl:value-of select="/root/gui/config/repository/thesaurus"/>',
+					feed: '<xsl:value-of select="java:encodeForJavaScript(/root/gui/config/repository/thesaurus)"/>',
 					renderTo: 'manager',
 					autoWidth : true,
 					layout : 'border',

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                exclude-result-prefixes="#all">
 
 
 	<xsl:include href="main.xsl"/>
@@ -13,7 +15,7 @@
 			{
 				if (document.categoryUpdateForm.name.value.length &lt; 1)
 				{
-					alert("<xsl:value-of select="/root/gui/strings/categoryNameMandatory"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/categoryNameMandatory)"/>");
 					return;
 				}
 				document.categoryUpdateForm.submit()

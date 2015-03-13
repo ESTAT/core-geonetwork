@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                exclude-result-prefixes="#all">
 	
 	<xsl:include href="../main.xsl"/>
 
@@ -25,7 +27,7 @@
            	Ext.Msg.prompt('MetadataID', 'Please the id or uuid param of the metadata to view:', function(btn, idParam){
            		lastIdParamValue = idParam;
 			    if (btn == 'ok'){
-			        window.open('metadata.formatter.'+type+'?'+idParam+debug+'&amp;xsl=<xsl:value-of select="/root/request/id"/>','_formatter_view_tab','');
+			        window.open('metadata.formatter.'+type+'?'+idParam+debug+'&amp;xsl=<xsl:value-of select="java:encodeForJavaScript(/root/request/id)"/>','_formatter_view_tab','');
 			    }
 			}, this, false, lastIdParamValue);
            }

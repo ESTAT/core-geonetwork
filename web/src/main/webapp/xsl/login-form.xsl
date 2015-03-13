@@ -15,7 +15,7 @@
 			</xsl:when>
 			<xsl:when test="string(/root/gui/session/userId)!=''">
 				<script type="text/javascript">
-					window.location = '<xsl:value-of select="/root/gui/url"/>';
+					window.location = '<xsl:value-of select="java:encodeForJavaScript(/root/gui/url)"/>';
 				</script>
 			</xsl:when>
 			<xsl:otherwise>

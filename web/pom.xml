@@ -397,7 +397,14 @@
 	    <version>0.2.2</version>
 	</dependency>
 
-		<dependency>
+    <!-- OWASP Enterprise Security API -->
+    <dependency>
+      <groupId>org.owasp.esapi</groupId>
+      <artifactId>esapi</artifactId>
+    </dependency>
+
+
+    <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>geonetwork-client</artifactId>
       <version>${project.version}</version>

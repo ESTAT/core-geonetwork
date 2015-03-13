@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                exclude-result-prefixes="#all">
 	
 
 	<xsl:include href="main.xsl"/>
@@ -30,7 +33,7 @@
 				var cswContactId = '<xsl:value-of select="/root/gui/env/csw/contactId"/>';
 				
 				if (id == cswContactId) {
-					if (!confirm("<xsl:value-of select="/root/gui/strings/delUserCsw"/>"))
+					if (!confirm("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/delUserCsw)"/>"))
 						return null;
 				}
 				doConfirm(service, message);

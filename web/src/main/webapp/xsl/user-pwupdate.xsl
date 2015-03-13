@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                exclude-result-prefixes="#all">
 
 	<xsl:include href="main.xsl"/>
 
@@ -18,7 +20,7 @@
 				// check for a value in the old password field.
 				if (pw0 == '')
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordOldRequired"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordOldRequired)"/>");
 					return;
 				}
 	
@@ -28,25 +30,25 @@
 				// check for a value in both fields.
 				if (pw1 == '' || pw2 == '')
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordEntry"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordEntry)"/>");
 					return;
 				}
 				// check for bad password confirmation
 				if (pw1 != pw2)
 				{
-					alert ("<xsl:value-of select="/root/gui/strings/passwordDoNotMatch"/>");
+					alert ("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordDoNotMatch)"/>");
 					return;
 				}
 				// check for minimum length of new password
 				if (pw1.length &lt; minLength)
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordLength"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordLength)"/>");
 					return;
 				}
 				// check for spaces
 				if (pw1.indexOf(invalid) &gt; -1)
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordSpace"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordSpace)"/>");
 					return;
 				}
 				// all ok, proceed

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:java="java:org.fao.geonet.util.XslUtil"
+                exclude-result-prefixes="#all">
 	
 	<xsl:include href="main.xsl"/>
 	<xsl:include href="user-update-utils.xsl"/>
@@ -17,7 +19,7 @@
 	
 				if (document.userupdateform.username.value.length == 0)
 				{
-					alert("<xsl:value-of select="/root/gui/strings/usernameMandatory"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/usernameMandatory)"/>");
 					return;
 				}
 
@@ -27,43 +29,43 @@
 				// check for a value in both fields.
 				if (pw1 == '' || pw2 == '')
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordEntry"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordEntry)"/>");
 					return;
 				}
 				// check for minimum length
 				if (document.userupdateform.password.value.length &lt; minLength)
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordLength"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordLength)"/>");
 					return;
 				}
 				// check for spaces
 				if (document.userupdateform.password.value.indexOf(invalid) &gt; -1)
 				{
-					alert("<xsl:value-of select="/root/gui/strings/passwordSpace"/>");
+					alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordSpace)"/>");
 					return;
 				}
 				// check for bad password confirmation
 				if (pw1 != pw2)
 				{
-					alert ("<xsl:value-of select="/root/gui/strings/passwordDoNotMatch"/>");
+					alert ("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/passwordDoNotMatch)"/>");
 					return;
 				}
 
 				// check surname specified
 				if (document.userupdateform.surname.value == '') {
-						alert("<xsl:value-of select="/root/gui/strings/surnameMandatory"/>");
+						alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/surnameMandatory)"/>");
 						return;
 				}
 
 				// check firstname specified
 				if (document.userupdateform.name.value == '') {
-						alert("<xsl:value-of select="/root/gui/strings/firstnameMandatory"/>");
+						alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/firstnameMandatory)"/>");
 						return;
 				}
 
 				// check email specified
 				if (document.userupdateform.email.value == '') {
-						alert("<xsl:value-of select="/root/gui/strings/emailMandatory"/>");
+						alert("<xsl:value-of select="java:encodeForJavaScript(/root/gui/strings/emailMandatory)"/>");
 						return;
 				}
 				

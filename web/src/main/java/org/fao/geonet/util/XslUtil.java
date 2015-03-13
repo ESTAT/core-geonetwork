@@ -13,6 +13,9 @@ import jeeves.utils.Log;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.search.LuceneSearcher;
 import org.fao.geonet.languages.IsoLanguagesMapper;
+import org.owasp.esapi.reference.DefaultEncoder;
+import org.owasp.esapi.errors.EncodingException;
+
 /**
  * These are all extension methods for calling from xsl docs.  Note:  All
  * params are objects because it is hard to determine what is passed in from XSLT.
@@ -289,4 +292,16 @@ public final class XslUtil
 		return src.toString().matches(pattern.toString());
 	}
 
+    public static String encodeForJavaScript(String str) {
+        return DefaultEncoder.getInstance().encodeForJavaScript(str);
+    }
+
+    public static String encodeForURL(String str) {
+        try {
+            return DefaultEncoder.getInstance().encodeForURL(str) ;
+        } catch (EncodingException ex) {
+            ex.printStackTrace();
+            return str;
+        }
+    }
 }
