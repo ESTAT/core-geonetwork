@@ -80,7 +80,7 @@
        - If this setting is false, html5ui uses the layers configured in /geonetwork/maps/mapviewer.wmc
        You can configure your custom WMS layers in that file.
   -->
-  <osm_map>true</osm_map>
+  <osm_map>false</osm_map>
  </map>
 
 

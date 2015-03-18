@@ -33,3 +33,6 @@ eclipse/
 web/src/main/webapp/WEB-INF/data/data
 web/src/main/webapp/WEB-INF/data/index
 web-itest/jcs_caching
+
+web/src/main/webapp/WEB-INF/classes/setup/sql/create/create-db-mysql-pri.sql
+web/src/main/webapp/ec-components-only.css
