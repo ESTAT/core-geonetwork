@@ -472,10 +472,10 @@
 <!-- 			</error> -->
 <!-- 		</service> -->
 
-<!-- 		<service name="main.search.suggest"> -->
-<!-- 			<class name=".services.main.SearchSuggestion"> -->
-<!-- 				Minimum frequency for a term value to be proposed in suggestion. -->
-<!-- 				<param name="threshold" value="1" /> -->
+		<service name="main.search.suggest">
+			<class name=".services.main.SearchSuggestion">
+				Minimum frequency for a term value to be proposed in suggestion.
+				<param name="threshold" value="1" />
 					<!--								
 					Max number of term's values to look in the index. For large catalogue
 					this value should be increased in order to get better results. If this
@@ -483,12 +483,12 @@
 					of good analyzer should allow to reduce the number of useless values like
 					(a, the, ...).
   				 -->
-<!-- 				<param name="max_number_of_terms" value="100000" /> -->
-<!-- 				Default field to search in. any is full-text search field. -->
-<!-- 				<param name="default_search_field" value="any" /> -->
-<!-- 			</class> -->
-<!-- 			<output sheet="search-suggestions.xsl" contentType="application/json; charset=UTF-8" /> -->
-<!-- 		</service> -->
+				<param name="max_number_of_terms" value="100000" />
+				Default field to search in. any is full-text search field.
+				<param name="default_search_field" value="any" />
+			</class>
+			<output sheet="search-suggestions.xsl" contentType="application/json; charset=UTF-8" />
+		</service>
 
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
