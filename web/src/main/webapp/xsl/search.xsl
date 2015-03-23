@@ -285,8 +285,9 @@
 		                       </div>
 		                       <div id="permalink-div" style="display:none"></div>
 		                        <div id="bread-crumb-app"></div>
-		                        <div id="search-form" style="display:none; padding: 15px; border-bottom:2px solid #69c">
+		                        <div id="search-form" style="display: none;">
 		                            <fieldset id="search-form-fieldset">
+		                            <div id="search-form-top">
 		                                <legend id="legend-search">
 		                                    <xsl:value-of select="/root/gui/strings/search" />
 		                                </legend>
@@ -297,24 +298,29 @@
 		                                    onmouseout="Ext.get(this).removeClass('hover');"
 		                                    id="search-submit" class="form-submit" value="&#xf002;">
 		                                </input>
+		                                <input type="button"
+		                                    onclick="Ext.getCmp('advanced-search-options-content-form').fireEvent('reset');"
+		                                    onmouseover="Ext.get(this).addClass('hover');"
+		                                    onmouseout="Ext.get(this).removeClass('hover');"
+		                                    id="reset-search-submit" class="form-submit" value="&#xf00d;">
+		                                </input>
 		                                <div class="form-dummy">
 		                                    <span><xsl:value-of select="/root/gui/strings/dummySearch" /></span>
 			                                <div id="ck1"/>
 			                                <div id="ck2"/>
 			                                <div id="ck3"/>
 		                                </div>
-
-		                                <div id="advanced-search-options" >
-		                                    <div id="advanced-search-options-content"></div>
-		                                </div>
-		                                		                     
 		                                <div id="show-advanced" onclick="showAdvancedSearch()">
 		                                    <span class="button"><xsl:value-of select="/root/gui/strings/advancedOptions.show" />&#160;<i class="fa fa-angle-double-down fa-2x show-advanced-icon"></i></span>
 		                                </div>
-		                    
 		                                <div id="hide-advanced" onclick="hideAdvancedSearch(true)" style="display: none;">
 		                                    <span class="button"><xsl:value-of select="/root/gui/strings/advancedOptions.hide" />&#160;<i class="fa fa-angle-double-up fa-2x hide-advanced-icon"></i></span>
 		                                </div>
+									</div>
+	                                <div id="advanced-search-options" >
+	                                    <div id="advanced-search-options-content"></div>
+	       		                        <div id="advanced-search-options-buttom-line" style="height: 10px; padding-left: 15px; padding-right: 15px; border-bottom:2px solid #69c"/>
+	                                </div>
 		                            </fieldset>
 		                        </div>
 							
