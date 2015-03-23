@@ -137,6 +137,11 @@ div#tabs .x-tab-strip-active .x-tab-right {
   color:#fff !important;
 }
 
+#reset-search-submit {
+  background-color: #0065A2 !important;
+  color:#fff !important;
+}
+
 #show-advanced,#hide-advanced {
 	color: white;
 	background-color: #0065A2;

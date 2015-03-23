@@ -318,15 +318,16 @@ function showAdvancedSearch() {
     hide('show-advanced');
     show('legend-search');
     show('hide-advanced');
-    Ext.get("search-form-fieldset").dom.style.border = "1px solid #fff";
+    // Ext.get("search-form-fieldset").dom.style.border = "1px solid #fff";
     show('advanced-search-options');
     if (Ext.getCmp('advanced-search-options-content-form')) {
         Ext.getCmp('advanced-search-options-content-form').doLayout();
 
         // For reset and submit buttons:
-
-        t = Ext.getCmp('advanced-search-options-content-form').toolbars[0];
-        document.getElementById(t.el.parent().id).style.width = "";
+//        t = Ext.getCmp('advanced-search-options-content-form').toolbars[0];
+//        if (t){
+//        	document.getElementById(t.el.parent().id).style.width = "";
+//        }
     }
     if (cookie && cookie.get('user')) {
         cookie.get('user').searchTemplate = 'FULL';
@@ -383,7 +384,7 @@ function hideAdvancedSearch(updateSearch) {
     hide('advanced-search-options');
     hide('legend-search');
     hide('hide-advanced');
-    Ext.get("search-form-fieldset").dom.style.border = "none";
+    // Ext.get("search-form-fieldset").dom.style.border = "none";
     show('show-advanced');
     if (updateSearch) {
         if (cookie && cookie.get('user')) {
@@ -398,6 +399,7 @@ function hideAdvancedSearch(updateSearch) {
         }
     }
 }
+
 
 /**
  * This function only works in IE. In IE8, the user has to confirm a security

@@ -24,7 +24,7 @@ html,body,button,input,select,textarea {
 
 #main {
 	padding: 3px;
-	padding-bottom: 150px; /* height of the footer */
+/* 	padding-bottom: 150px; height of the footer - the footer is outside the main div*/
 }
 
 #footer {
@@ -526,7 +526,7 @@ div#advanced-search-options-content-form {
 }
 
 div#advSearchTabs div.x-panel.x-form-label-left.x-box-item {
-	width: 32%;
+ 	width: 33%;
 }
 
 div#advSearchTabs ul {
@@ -624,6 +624,7 @@ nav li:last-child a {
 #search-form {
 	clear: both;
 	float: none;
+/* 	margin: 5px 0px 0px 0px; */
 	margin: 5px 20px 0px;
 }
 
@@ -646,7 +647,7 @@ nav li:last-child a {
   box-sizing: border-box;
 }
 
-#search-submit {
+#search-submit, #reset-search-submit {
 	font-size: 18px !important;
 	position: relative;
   height: 28px;
@@ -713,7 +714,7 @@ nav {
 .main article {
   float: left;
 	width: 78%;
-	margin: 9px;
+	margin: 10px;
 }
 
 .main article#map {
@@ -1713,8 +1714,9 @@ dl.xml * dd {
 	position: absolute;
 }
 
-#when_adv_search,#where_adv_search,#what-inspire{display:inline-block;width:32%;}
-#advanced-search-options{width:calc(100% - 200px);}
+#when_adv_search,#where_adv_search,#what-inspire{display:inline-block;width:33%;}
+#advanced-search-options{width:100%;}
+/* #advanced-search-options{width:calc(100% - 200px);} */
 #advanced-search-options form{display:block;}
 #advanced-search-options-content-form .x-panel-fbar{width:auto!important;}
 #advanced-search-options-content-form .x-panel-footer{width:auto!important;}

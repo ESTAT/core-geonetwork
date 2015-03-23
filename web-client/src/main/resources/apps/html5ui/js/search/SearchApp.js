@@ -233,7 +233,7 @@ GeoNetwork.searchApp = function() {
                 displayField : 'value',
                 valueDelimiter : ' or ',
                 // tpl: tpl,
-                fieldLabel : OpenLayers.i18n('org')
+                fieldLabel : OpenLayers.i18n('org'),
             });
 
         		var catalogueField = GeoNetwork.util.SearchFormTools.getCatalogueField(
@@ -296,7 +296,37 @@ GeoNetwork.searchApp = function() {
                 },
                 forceLayout : true,
                 items : [ any, onlineData, dataForDownload, noDirectDownload,
-                        sortByCombo, orderBy, advancedCriteria ]
+                        sortByCombo, orderBy, advancedCriteria ],
+                listeners: {
+                    afterrender: function(component) {
+                    	if(component.items){
+                    		component.items.each(function(item, index, length){
+                        		if (item){
+                        			item.on({
+                    				  	additem: function(item) {
+            				      			//console.log('additem');
+                    			      	    if (Ext.getCmp('advanced-search-options-content-form')) {
+                    			      	        Ext.getCmp('advanced-search-options-content-form').doLayout();
+                    			      	    }
+                    				  	},
+	                				  	removeitem: function(item) {
+            				      			//console.log('removeitem');
+	                			      	    if (Ext.getCmp('advanced-search-options-content-form')) {
+	                			      	        Ext.getCmp('advanced-search-options-content-form').doLayout();
+	                			      	    }
+	                				  	},
+	                				  	clear: function(item) {
+            				      			//console.log('clear');
+	                			      	    if (Ext.getCmp('advanced-search-options-content-form')) {
+	                			      	        Ext.getCmp('advanced-search-options-content-form').doLayout();
+	                			      	    }
+	                				  	},
+                        			});
+                        		}
+                    	    });
+                    	}
+                    }
+                }
             };
 
             var mapLayers = [];
@@ -316,6 +346,7 @@ GeoNetwork.searchApp = function() {
             var where = {
                 title : OpenLayers.i18n('Where'),
                 id : 'where_adv_search',
+                margins: '0 5 0 5',
                 // bodyStyle : 'padding:4px',
                 layout : 'form',
                 defaults : {
@@ -327,6 +358,7 @@ GeoNetwork.searchApp = function() {
             var when = {
                 title : OpenLayers.i18n('When'),
                 id : 'when_adv_search',
+                margins : '0 0 0 5',
                 bodyStyle : 'padding:4px',
                 forceLayout : true,
                 defaultType : 'datefield',
@@ -363,14 +395,15 @@ GeoNetwork.searchApp = function() {
                 id : 'advSearchTabs',
                 layout : {
                     type : 'hbox',
-                    defaultMargins : '0 5 0 5',
+//                    defaultMargins : '0 5 0 5',
                     pack : 'left',
                     align : 'top',
-                    width : '100%'
+//                    width : '100%'
                 },
                 border : false,
                 items : [ {
                     id : 'what-inspire',
+                    margins : '0 5 0 0',
                     layout : 'form',
                     defaults : {
                         anchor : '100%'
@@ -390,12 +423,11 @@ GeoNetwork.searchApp = function() {
                 width : '100%',
                 border : false,
                 searchCb : function() {
-
                     var any = Ext.get('E_any');
                     if (any) {
-                        if (any.getValue() === OpenLayers
-                                .i18n('fullTextSearch')) {
-                            any.setValue('');
+                        if (any.getValue() === OpenLayers.i18n('fullTextSearch')) {
+                        	any.dom.value = '';
+                            // any.setValue('');	// JS - 20150320 - Ext.Element does not have a setValue function
                         }
                     }
 
@@ -406,24 +438,35 @@ GeoNetwork.searchApp = function() {
                             catalogue.startRecord, true);
                     app.searchApp.firstSearch = true;
                     showSearch();
-										hideAdvancedSearch();
+					//hideAdvancedSearch();	// JS - 20150320 - Dont hide the advanced search 
                 },
-								resetCb: function() {
-            			Ext.getCmp('sortByToolBar').setValue("relevance");
-								},
+				resetCb: function() {
+        			Ext.getCmp('sortByToolBar').setValue("relevance");
+				},
                 listeners : {
                     onreset : function() {
+                        var any = Ext.get('E_any');	// clear the search text
+                        if (any) {
+                            any.dom.value = '';
+                        }
+                        
                         if (Ext.getCmp('facets-panel')) {
                             Ext.getCmp('facets-panel').reset();
                         }
+                        
                         this.fireEvent('search');
 
                         GeoNetwork.Util.updateHeadInfo({
                             title : catalogue.getInfo().name
                         });
+                        
+                        // resize advanced search view
+			      	    if (Ext.getCmp('advanced-search-options-content-form')) {
+			      	        Ext.getCmp('advanced-search-options-content-form').doLayout();
+			      	    }
                     }
                 },
-                padding : 2,
+//                padding : 2,
                 items : formItems
             });
         },

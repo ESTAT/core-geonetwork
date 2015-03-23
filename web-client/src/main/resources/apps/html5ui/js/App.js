@@ -849,5 +849,5 @@ Ext.fly(window).on('resize', function(e, w) {
         }
     };
 
-    doLayout_children(Ext.getCmp("advSearchTabs"));
+    //doLayout_children(Ext.getCmp("advSearchTabs"));
 });
