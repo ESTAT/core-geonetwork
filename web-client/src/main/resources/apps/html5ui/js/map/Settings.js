@@ -69,11 +69,8 @@ if (useOSMLayers) {
 
 } else {
 	 GeoNetwork.map.PROJECTION = "EPSG:3857";
-	    //GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000);
-	    GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34);
-	    GeoNetwork.map.BACKGROUND_LAYERS = [
-	        
-	 //       new OpenLayers.Layer.Google("Google Streets"),
+    GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508, -19971868, 20037508, 19971868);
+	GeoNetwork.map.BACKGROUND_LAYERS = [	        
 	        new OpenLayers.Layer.WMS(
 	                "Global Imagery",
 	                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/2014_Countries_NoLabels_GreyBackground_3857/MapServer/WMSServer?",
@@ -82,7 +79,7 @@ if (useOSMLayers) {
 	    ];
 }
 
-//GeoNetwork.map.RESOLUTIONS = [];
+
 
 
 GeoNetwork.map.CONTEXT_MAP_OPTIONS = {
@@ -101,6 +98,7 @@ GeoNetwork.map.MAP_OPTIONS = {
     restrictedExtent : GeoNetwork.map.EXTENT,
     resolutions: GeoNetwork.map.RESOLUTIONS,
     controls: [],
+    maxScale: 10000,
     theme:null
 };
 

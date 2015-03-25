@@ -16,6 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with GeoNetwork.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+Ext.override(Ext.Window, {
+    constrainHeader: true
+})
+
 Ext.namespace('GeoNetwork');
 
 /**
@@ -68,48 +73,147 @@ GeoNetwork.mapApp = function() {
                 map = parser.read(text, {map: options});
             }
         }
+        
+        
+        
+        
+        
+        
+        
         else {
             map = new OpenLayers.Map('ol_map', options);
-            fixedScales = scales;
-
+   //         fixedScales = scales;           
             Ext.each(GeoNetwork.map.BACKGROUND_LAYERS, function(layer) {
                 map.addLayer(layer.clone());
             });
+//            var initialPosition = new OpenLayers.LonLat(13.41,52.52).transform(OpenLayers.Projection("EPSG:4326"), OpenLayers.Projection(GeoNetwork.map.PROJECTION));
+//            map.setCenter(initialPosition,8);
         }
 
-        map.events.register("click", map, function(e) {
-            app.showBigMap();
-        });
+//        map.events.register("click", map, function(e) {
+//            app.showBigMap();
+//        });
 
         var showBigMapButton = new OpenLayers.Control.Button({
             trigger : showBigMap,
             title : OpenLayers.i18n('bigMap')
         });
-
-        OpenLayers.Util.extend(showBigMapButton, {
-            displayClass : 'showBigMap'
-        });
+        
+//        OpenLayers.Util.extend(showBigMapButton, {
+//            displayClass : 'showBigMap'
+//        });
 
         var panel = new OpenLayers.Control.Panel();
 
-        OpenLayers.Util.extend(panel, {
-            displayClass : 'showBigMapPanel'
-        });
+//        OpenLayers.Util.extend(panel, {
+//            displayClass : 'showBigMapPanel'
+//        });
 
         panel.addControls([ showBigMapButton ]);
-        map.addControl(panel);
 
-        new GeoExt.MapPanel({
-            id : 'minimap',
+    //    map.addControl(panel);
+
+        
+
+//        new GeoExt.MapPanel({
+//            id : 'minimap',
+//            renderTo : 'mini-map',
+//            height : 200,
+//            width : 200,
+//            map : map,
+//            title : OpenLayers.i18n('Preview'),
+//            stateId : 'minimap',
+//            prettyStateKeys : true
+//        });
+//        Ext.get("mini-map").setVisibilityMode(Ext.Element.DISPLAY);
+        
+        
+        
+        
+        var popupwindow = new Ext.Window({
+            title: "Search Results - Map View",
+            id: 'popupminiMap',
             renderTo : 'mini-map',
-            height : 200,
-            width : 200,
-            map : map,
-            title : OpenLayers.i18n('Preview'),
-            stateId : 'minimap',
-            prettyStateKeys : true
-        });
-        Ext.get("mini-map").setVisibilityMode(Ext.Element.DISPLAY);
+            closable: true,
+            closeAction: 'hide',
+            minimizable: true,
+            draggable:false,
+            height: 400,
+            width: 300,
+            layout: "fit",
+            items: [{
+                xtype: "gx_mappanel",
+                id : 'minimappanel',              
+                center: '10000000,2000000',
+                stateful: true,
+                map: map,
+                minimizable: true,
+//                prettyStateKeys : true,
+                zoom : 10,
+                bbar: new Ext.Toolbar()
+            }],
+            minimizable: true,
+            tools: [
+                {
+                    id: 'maximize',
+                    handler: function (evt, toolEl, owner, tool) {
+                        var window = owner;
+                        window.expand('', false);
+                        owner.isMinimized = false;
+                    }
+                },
+                {
+                    id: 'minimize',
+                    handler: function (evt, toolEl, owner, tool) {
+                        var window = owner;
+                        window.collapse();
+                        owner.winWidth = window.getWidth();
+                        window.setWidth(150);
+                    }
+                },
+                {
+                    id: 'plus',
+                    handler: function (evt, toolEl, owner, tool) {
+                    	app.showBigMap();
+                    }
+                }
+            ]
+           
+      
+        });       
+        
+
+//        var popupPanelMap = Ext.getCmp('minimap').map;
+//        var dragpan = new OpenLayers.Control.DragPan();
+//        popupPanelMap.map.addControl(dragpan);
+
+        var popupPanel = Ext.getCmp('minimappanel');
+        popupPanel.map = map;
+        
+        
+        var scaleLine = new OpenLayers.Control.ScaleLine();
+        map.addControl(scaleLine);
+        scaleLine.activate();
+        
+        var dragpan = new OpenLayers.Control.DragPan();
+        map.addControl(dragpan);
+        dragpan.activate();
+        
+        var zoom = new OpenLayers.Control.Zoom();
+        map.addControl(zoom);
+        zoom. activate();
+        
+      var initialPosition = new OpenLayers.LonLat(0,5000000);
+      map.setCenter(initialPosition,2);
+
+        popupwindow.show();
+
+
+
+        
+        
+        
+        
 
         var map2;
 
@@ -140,7 +244,7 @@ GeoNetwork.mapApp = function() {
         }
         else {
             map2 = new OpenLayers.Map({
-                maxExtent : GeoNetwork.map.MAP_OPTIONS.maxExtent.clone(),
+            	maxExtent : GeoNetwork.map.MAP_OPTIONS.maxExtent.clone(),
                 projection : GeoNetwork.map.MAP_OPTIONS.projection,
                 resolutions : GeoNetwork.map.MAP_OPTIONS.resolutions,
                 restrictedExtent : GeoNetwork.map.MAP_OPTIONS.restrictedExtent
@@ -255,7 +359,6 @@ GeoNetwork.mapApp = function() {
 
         panel2.on("render", function() {
             var scaleLine = new OpenLayers.Control.ScaleLine();
-
             map2.addControl(scaleLine);
             scaleLine.activate();
         }, this);
@@ -371,6 +474,8 @@ GeoNetwork.mapApp = function() {
         Ext.each(app.mapApp.maps, function(map) {
             map.addControl(new GeoNetwork.Control.ZoomWheel());
             map.addControl(new OpenLayers.Control.LoadingPanel());
+//            map.addControl(new OpenLayers.Control.ScaleBar());
+
         });
     };
 
@@ -589,6 +694,7 @@ GeoNetwork.mapApp = function() {
                 {
                     title : OpenLayers.i18n("mf.print.print"),
                     id: "printToPdfPanel",
+                    collapsed: true,
                     labelAlign : "top",
                     items : [
                             {
@@ -1415,7 +1521,8 @@ GeoNetwork.mapApp = function() {
             border : false,
             layout : 'accordion',
             deferredRender : false,
-            items : [ tree, legendPanel ]
+            items : [ tree ]
+        //, legendPanel ]
         // , printPanel ]
         });
 
@@ -1429,7 +1536,7 @@ GeoNetwork.mapApp = function() {
                 region : 'east',
                 xtype : 'panel',
                 collapsible : true,
-                collapsed : true,
+                collapsed : false,
                 collapseMode : "mini",
                 split : true,
                 border : false,
@@ -1864,7 +1971,7 @@ GeoNetwork.mapApp = function() {
         createWmsLayer : function(name, url, params, options) {
             Ext.each(app.mapApp.maps, function(map) {
                 map
-                        .adLayer(new OpenLayers.Layer.WMS(name, url, params,
+                        .addLayer(new OpenLayers.Layer.WMS(name, url, params,
                                 options));
             });
         },

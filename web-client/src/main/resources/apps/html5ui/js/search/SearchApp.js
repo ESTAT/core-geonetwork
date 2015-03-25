@@ -569,7 +569,7 @@ GeoNetwork.searchApp = function() {
 
             // Add results to map
             Ext.each(app.mapApp.maps, function(map) {
-                catalogue.resultsView.addMap(map, true);
+                catalogue.resultsView.addMap(map, false);
             });
 
             var tBar = new GeoNetwork.MetadataResultsToolbar({

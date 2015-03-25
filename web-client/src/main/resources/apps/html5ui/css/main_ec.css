@@ -8,5 +8,5 @@ div#advSearchTabs ul{padding:0;margin:0}div#advSearchTabs input{border:0}#inspir
 #where_adv_search{display:inline-block;width:calc(33% - 10px)}
 
 #advanced-search-options{width:100%}#advanced-search-options form{display:block}#advanced-search-options-content-form .x-panel-fbar{width:auto!important}#advanced-search-options-content-form .x-panel-footer{width:auto!important}#advSearchBtnBlank{display:none!important}#cookie-warning input{background-color:white;color:#c09853;border-color:#c09853}legend[id*="MD_Metadata"][id*="root"] span span div.alert{display:none}.olMapViewport div.x-mask-loading,.olMap div.x-mask-loading{display:none;wg}div.olControlZoom>a.olControlZoomOut{color:white!important;border-radius:0 0 4px 4px}div.olControlZoom>a.olControlZoomIn{color:white!important;border-radius:4px 4px 0 0}
-#mini-map{position:fixed;z-index:10000;right:255px;bottom:55px}
+#mini-map{position:fixed;z-index:10000;left:10px;top:200px}
 .x-form-trigger.x-form-date-trigger.x-form-trigger-click{float:right}@media(max-width:1200px){#main{margin-right:4%;margin-left:4%}}@media(max-width:1100px){#main{margin-right:3%;margin-left:3%}}@media(max-width:1000px){#main{margin-right:2%;margin-left:2%}}@media(max-width:900px){#main{margin-right:1%;margin-left:1%}}@media(max-width:800px){#main{margin-right:0;margin-left:0}}

@@ -293,7 +293,7 @@
 		                                </legend>
 		                                <span id='fullTextField'></span>
 		                                <input type="button"
-		                                    onclick="Ext.getCmp('advanced-search-options-content-form').fireEvent('search');"
+		                                    onclick="Ext.getCmp('advanced-search-options-content-form').fireEvent('search');Ext.getCmp('popupminiMap').show();"
 		                                    onmouseover="Ext.get(this).addClass('hover');"
 		                                    onmouseout="Ext.get(this).removeClass('hover');"
 		                                    id="search-submit" class="form-submit" value="&#xf002;">

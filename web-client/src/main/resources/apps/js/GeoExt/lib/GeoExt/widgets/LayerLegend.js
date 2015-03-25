@@ -99,7 +99,7 @@ GeoExt.LayerLegend = Ext.extend(Ext.Container, {
         var title = this.getLayerTitle(this.layerRecord);
         if (this.items.get(0).text !== title) {
             // we need to update the title
-            this.items.get(0).setText(title);
+           // this.items.get(0).setText(title);
         }
     },
     
