@@ -190,6 +190,7 @@ function showSearch() {
     hideMetadata();
     hideBigMap();
     show("search-form");
+    show('bread-crumb-div');
 
     show("secondary-aside");
     Ext.getCmp('resultsPanel').show();
@@ -212,6 +213,7 @@ function showSearch() {
 function hideSearch() {
     // Comment the following if you want a push-down and not a hiding
     // for the results
+    hide('bread-crumb-div');
     hide("secondary-aside");
     hide("resultsPanel");
     hide("main-aside");
@@ -239,7 +241,7 @@ function showMetadata() {
 function hideMetadata() {
     hide("metadata-info");
     hide("share-capabilities");
-
+    hide("permalink-div");
     // Destroy potential existing panel
     Ext.getCmp('metadata-panel') && Ext.getCmp('metadata-panel').destroy();
     Ext.getCmp('editorPanel') && Ext.getCmp('editorPanel').destroy();
@@ -384,6 +386,7 @@ function hideAdvancedSearch(updateSearch) {
     hide('advanced-search-options');
     hide('legend-search');
     hide('hide-advanced');
+    
     // Ext.get("search-form-fieldset").dom.style.border = "none";
     show('show-advanced');
     if (updateSearch) {
