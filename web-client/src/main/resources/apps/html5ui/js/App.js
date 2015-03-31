@@ -308,7 +308,7 @@ GeoNetwork.app = function() {
             resultsView : catalogue.resultsView,
             layout : 'fit',
             // autoHeight:true,
-            padding : '5px 25px',
+            //padding : '5px 25px',
             currTab : GeoNetwork.defaultViewMode || 'simple',
             printDefaultForTabs : GeoNetwork.printDefaultForTabs || false,
             printUrl : '../../apps/html5ui/print.html',

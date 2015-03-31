@@ -521,13 +521,13 @@ div.help ul li {
 	color: #333;
 }
 /* bread crumbs */
-#bread-crumb-app {
-	margin-left: 20px;
-}
+/* #bread-crumb-app { */
+/* 	margin: 2px 80px 2px 13px; */
+/* } */
 /* welcome in left sidebar */
-#welcome-text {
-	margin: 20px 20px 10px 10px;
-}
+/* #welcome-text { */
+/* 	margin: 20px 20px 10px 20px; */
+/* } */
 /* cloud tag */
 #cloud-tag ul {
 	padding-left: 15px
@@ -599,7 +599,7 @@ div.help ul li {
 
 /* first thumbnial container */
 #latest-metadata {
-	margin-top: 20px;
+/* 	margin-top: 20px; */
 	padding-top: 10px;
 }
 
@@ -648,7 +648,7 @@ div.help ul li {
 }
 
 #search-container article{ 
-	width: calc( 80% - 30px);	
+	width: calc( 80% - 15px);	
 	margin:10px 0 10px 10px;
 }
 
@@ -668,11 +668,11 @@ div.help ul li {
 
 #search-container .main-aside {
 	width: calc( 20% - 30px);
-	margin: 10px 10px 10px 20px;
+	margin: 10px 10px 10px 13px;
 }
 
 #search-container #bread-crumb-div {
-	margin: 5px 0px 5px 17px;	/* there is a 3 pix space in front of the breadcrum */
+	margin: 5px 0px 5px 10px;	/* there is a 3 pix space in front of the breadcrum */
 }
 
 #search-container .main-aside a {
@@ -884,9 +884,9 @@ div.showBigMapItemInactive:hover {
 		no-repeat;
 }
 
-#big-map-container {
-	margin: 30px 20px 20px 20px;
-}
+/* #big-map-container { */
+/* 	margin: 30px 20px 20px 20px; */
+/* } */
 
 #big-map-container .x-border-layout-ct {
 	background-color: #fff;
@@ -914,9 +914,9 @@ div.showBigMapItemInactive:hover {
 }
 
 /* metadata */
-#metadata-info {
-	margin: 30px 20px 20px 20px;
-}
+/* #metadata-info { */
+/* 	margin: 30px 20px 20px 20px; */
+/* } */
 
 #metadata-info a {
 	color: #0076A1;

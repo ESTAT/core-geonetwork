@@ -283,7 +283,7 @@
 		                            <div id="fb-button">
 		                           </div>
 		                       </div>
-		                       <div id="permalink-div" style="display:none"></div>
+<!-- 		                       <div id="permalink-div" style="display:none"></div> -->
 		                        <div id="bread-crumb-app"></div>
 		                        <div id="search-form" style="display: none;">
 		                            <fieldset id="search-form-fieldset">
@@ -342,7 +342,7 @@
 		                            <div id="cloud-tag"></div>
 		                          </div>
 		                        </aside>
-		                        <article>
+		                        <article class="main-article">
 		                          <div>
 		                            <section>
 		                              <div id="latest-metadata">
@@ -374,6 +374,7 @@
 		                      </div>
 			                    
 								<div id="big-map-container" style="display:none;"/>
+		                       <div id="permalink-div" style="display:none"/>
 		                       <div id="metadata-info" style="display:none;"/>
 								<div id="search-container" class="main wrapper clearfix">
 									<div id="bread-crumb-div"></div>
@@ -652,7 +653,7 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 2/2/2015</span></li>
+	                     <li class="modification-date"><span>Last update: 26/3/2015</span></li>
 	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">

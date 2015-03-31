@@ -969,7 +969,7 @@ GeoNetwork.editor.EditorPanel = Ext.extend(Ext.Panel, {
         var currTab = document.mainForm.currTab.value;
         if (currTab === 'xml') {
             var area = Ext.DomQuery.selectNode('textarea.xml', this.body.dom);
-            Ext.get(area).setStyle('min-height', this.editorMainPanel.ownerCt.getInnerHeight() - 5 + 'px');
+            Ext.get(area).setStyle('min-height', this.editorMainPanel.ownerCt.getInnerHeight() - 30 + 'px');
         }
         
         
