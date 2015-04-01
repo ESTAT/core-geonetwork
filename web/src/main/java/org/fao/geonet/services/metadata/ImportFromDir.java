@@ -335,6 +335,13 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		
 		File files[] = new File(dir).listFiles(mdFilter);
 
+		if (files == null){
+			// try relative to appPath
+			String path    = context.getAppPath();
+			dir = path + dir;
+			files = new File(dir).listFiles(mdFilter);
+		}
+
 		if (files == null)
 			throw new Exception("Directory not found: " + dir);
 
