@@ -41,7 +41,7 @@ layouts:
     mainPage:
       rotation: true
       pageSize: A4
-      backgroundPdf: '${configDir}/template.pdf'      
+#      backgroundPdf: '${configDir}/template.pdf'      
       header:
         height: 50
         items:

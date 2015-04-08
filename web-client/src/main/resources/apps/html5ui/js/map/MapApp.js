@@ -144,7 +144,7 @@ GeoNetwork.mapApp = function() {
             items: [{
                 xtype: "gx_mappanel",
                 id : 'minimappanel',              
-                center: '10000000,2000000',
+  //              center: '10000000,2000000',
                 stateful: true,
                 map: map,
                 minimizable: true,
@@ -247,14 +247,16 @@ GeoNetwork.mapApp = function() {
             	maxExtent : GeoNetwork.map.MAP_OPTIONS.maxExtent.clone(),
                 projection : GeoNetwork.map.MAP_OPTIONS.projection,
                 resolutions : GeoNetwork.map.MAP_OPTIONS.resolutions,
-                restrictedExtent : GeoNetwork.map.MAP_OPTIONS.restrictedExtent
-                    .clone(),
+                restrictedExtent : GeoNetwork.map.MAP_OPTIONS.restrictedExtent.clone(),
+                center: GeoNetwork.map.MAP_OPTIONS.restrictedExtent.center,
                 controls : []
             });
 
             Ext.each(GeoNetwork.map.BACKGROUND_LAYERS, function(layer) {
                 map2.addLayer(layer.clone());
             });
+            
+
 
         }
 
@@ -405,6 +407,9 @@ GeoNetwork.mapApp = function() {
                     return false;
                 }
             });
+            
+            var initialPosition = new OpenLayers.LonLat(1000000,8000000);
+            map2.setCenter(initialPosition,3);
 
             Ext.each(app.mapApp.maps, function(m) {
                 var alreadyHas = false;

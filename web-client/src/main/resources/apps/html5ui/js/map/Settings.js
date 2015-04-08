@@ -72,10 +72,26 @@ if (useOSMLayers) {
     GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508, -19971868, 20037508, 19971868);
 	GeoNetwork.map.BACKGROUND_LAYERS = [	        
 	        new OpenLayers.Layer.WMS(
-	                "Global Imagery",
+	                "Countries Grey",
 	                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/2014_Countries_NoLabels_GreyBackground_3857/MapServer/WMSServer?",
 	                {layers: "0,1,2,3,4,5,6,7,8,9,10,11,12,13"}
-	            )
+	            ),
+	         new OpenLayers.Layer.WMS(
+		                "Hypsometric",
+		                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Hypsometric_3857/MapServer/WMSServer?",
+		                {layers: "0"}
+		        ),  
+		    new OpenLayers.Layer.WMS(
+		                "Natural Earth",
+		                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Natural_Earth_3857/MapServer/WMSServer?",
+		                {layers: "0"}
+		        ),  
+		    new OpenLayers.Layer.WMS(
+		                "Blue marble",
+		                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Blue_marble_3857/MapServer/WMSServer?",
+		                {layers: "0"}
+		        )
+	  
 	    ];
 }
 
@@ -107,6 +123,7 @@ GeoNetwork.map.MAIN_MAP_OPTIONS = {
     maxExtent: GeoNetwork.map.EXTENT,
     restrictedExtent : GeoNetwork.map.EXTENT,
     resolutions: GeoNetwork.map.RESOLUTIONS,
+    center: new OpenLayers.LonLat(0,8000000),
     controls: [],
     theme:null
 };
