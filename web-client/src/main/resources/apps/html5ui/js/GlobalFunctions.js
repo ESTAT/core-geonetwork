@@ -331,11 +331,13 @@ function showAdvancedSearch() {
 //        	document.getElementById(t.el.parent().id).style.width = "";
 //        }
     }
-    if (cookie && cookie.get('user')) {
-        cookie.get('user').searchTemplate = 'FULL';
-    } else if (cookie) {
-        cookie.set('user', {});
-        cookie.get('user').searchTemplate = 'FULL';
+    if (cookie && cookie.get('accept_cookies')){
+	    if (cookie && cookie.get('user')) {
+	        cookie.get('user').searchTemplate = 'FULL';
+	    } else if (cookie) {
+	        cookie.set('user', {});
+	        cookie.get('user').searchTemplate = 'FULL';
+	    }
     }
     if (catalogue && catalogue.resultsView && catalogue.resultsView.autoSelectTemplate) {
         catalogue.resultsView.autoSelectTemplate();
@@ -390,11 +392,13 @@ function hideAdvancedSearch(updateSearch) {
     // Ext.get("search-form-fieldset").dom.style.border = "none";
     show('show-advanced');
     if (updateSearch) {
-        if (cookie && cookie.get('user')) {
-            cookie.get('user').searchTemplate = 'THUMBNAIL';
-        } else if (cookie) {
-            cookie.set('user', {});
-            cookie.get('user').searchTemplate = 'THUMBNAIL';
+        if (cookie && cookie.get('accept_cookies')){
+	        if (cookie && cookie.get('user')) {
+	            cookie.get('user').searchTemplate = 'THUMBNAIL';
+	        } else if (cookie) {
+	            cookie.set('user', {});
+	            cookie.get('user').searchTemplate = 'THUMBNAIL';
+	        }
         }
         if (catalogue && catalogue.resultsView 
                 && catalogue.resultsView.autoSelectTemplate) {
@@ -509,3 +513,21 @@ function validateWMSWFS(capsURL, el, type) {
     });
 }
 
+
+function acceptCookies(){
+    if (cookie) {
+        cookie.set('accept_cookies', true);
+        show("login-stuff");
+    }
+    	
+    hide("cookie-warning");
+}
+
+
+function refuseCookies(){
+//    if (cookie) {
+////    	clear all cookies
+//    	clearListCookies();
+//    }	
+    hide("cookie-warning");
+}

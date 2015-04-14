@@ -129,6 +129,19 @@
 
 			</head>
 			<body class="euShortContent">
+				<div class="layout" id="cookie-warning" style="display: none;" >
+					<div id="cookie-container">
+						<p id="cookie-warning-caption">Cookies</p>
+						<p id="cookie-warning-message">This site uses cookies to offer you a better browsing experience.</p>
+						
+		                <div id="accept-cookies" onclick="acceptCookies()">
+		                    <span class="button">I accept cookies</span>
+		                </div>
+		                <div id="refuse-cookies" onclick="refuseCookies()">
+		                    <span class="button">I refuse cookies</span>
+		                </div>
+	                </div>
+				</div>
 				<div class="layout" id="layout">
 					<div class="lang-en" id="header">
 						  <p class="banner-flag">
@@ -173,7 +186,7 @@
 					               </a>
 				               </li>
 				               <li>
-					               <span id="login-stuff">
+					               <span id="login-stuff" style="display:none;">
 									<a id="user-button">
 										<xsl:choose>
 											<xsl:when test="string(/root/gui/session/userId)=''">
@@ -653,7 +666,7 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 26/3/2015</span></li>
+	                     <li class="modification-date"><span>Last update: 14/4/2015</span></li>
 	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">

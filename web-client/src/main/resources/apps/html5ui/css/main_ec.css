@@ -67,3 +67,29 @@ div#advSearchTabs ul{padding:0;margin:0}div#advSearchTabs input{border:0}#inspir
 #advanced-search-options{width:100%}#advanced-search-options form{display:block}#advanced-search-options-content-form .x-panel-fbar{width:auto!important}#advanced-search-options-content-form .x-panel-footer{width:auto!important}#advSearchBtnBlank{display:none!important}#cookie-warning input{background-color:white;color:#c09853;border-color:#c09853}legend[id*="MD_Metadata"][id*="root"] span span div.alert{display:none}.olMapViewport div.x-mask-loading,.olMap div.x-mask-loading{display:none;wg}div.olControlZoom>a.olControlZoomOut{color:white!important;border-radius:0 0 4px 4px}div.olControlZoom>a.olControlZoomIn{color:white!important;border-radius:4px 4px 0 0}
 #mini-map{position:fixed;z-index:10000;left:10px;top:200px}
 .x-form-trigger.x-form-date-trigger.x-form-trigger-click{float:right}@media(max-width:1200px){#main{margin-right:4%;margin-left:4%}}@media(max-width:1100px){#main{margin-right:3%;margin-left:3%}}@media(max-width:1000px){#main{margin-right:2%;margin-left:2%}}@media(max-width:900px){#main{margin-right:1%;margin-left:1%}}@media(max-width:800px){#main{margin-right:0;margin-left:0}}
+
+#cookie-warning{
+  	position: relative;
+	width: 100%;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+
+#cookie-container{
+	margin: 10px 16px 10px 16px;
+}
+#cookie-warning-caption{
+	color:#0065A2;
+	font-size:26px;
+}
+#cookie-warning-message{
+}
+#accept-cookies,#refuse-cookies{
+	cursor: pointer;
+	margin: 10px 20px 10px 0px;
+	padding: 6px 20px 6px 20px;
+	display: inline-block;
+	background-color: #0065A2;
+	color: white;
+}

@@ -625,6 +625,27 @@ GeoNetwork.app = function() {
                         metadataShowFn : show
                     });
 
+            if (cookie){
+	            if (cookie.get("accept_cookies")){
+	            	var c = Ext.get("login-stuff")
+	            	if (c) {
+	            		c.setVisibilityMode(Ext.Element.DISPLAY);
+	            		c.show();
+	            	}
+	        	} 
+	            else {
+	            	// if not accepted, then show the cookie warning. There are no where to store 'I refuse...'
+	            	var c = Ext.get("cookie-warning")
+	            	if (c) {
+	            		c.setVisibilityMode(Ext.Element.DISPLAY);
+	            		c.show();
+	            	}
+            	}
+            }
+            
+            
+            // the request will throw an exception if we are not logged in. 
+            
             // Make sure we are still logged in:
             var response = OpenLayers.Request.GET({
                 url : geonetworkUrl + '/srv/' + lang + '/admin',
@@ -654,9 +675,15 @@ GeoNetwork.app = function() {
             createPopularUpdate();
             createMainTagCloud();
 
+            {	// if we are logged in, show the login stuff regardless of cookie acceptance 
+            	var c = Ext.get("login-stuff")
+            	if (c) {
+            		c.setVisibilityMode(Ext.Element.DISPLAY);
+            		c.show();
+            	}
+            }
             this.breadcrumb = GeoNetwork.BreadCrumb();
             this.breadcrumb.setCurrent(this.breadcrumb.defaultSteps[0]);
-
         },
         /**
          * Function to initialize the App. Should only call utilities and their
@@ -801,22 +828,7 @@ Ext.onReady(function() {
 								});
 							}
             });
-
-            if (!cookie.get("alreadyShowMessage")) {
-              GeoNetwork.Message().msg({
-                title : OpenLayers.i18n('cookies'),
-                msg : OpenLayers.i18n('cookies.warning')
-                	+ "<p><input type='button' value='"
-                  + OpenLayers.i18n('disclaimer.buttonClose')
-                  + "' onclick=\"Ext.get('cookie-warning').remove();\"/></p>",
-                status : 'information',
-                target : document.body,
-                id : 'cookie-warning',
-                pause : 40
-              });
-              cookie.set('alreadyShowMessage', true);
-            }
-
+            
             Ext.getCmp("fullTextField").keyNav.enter = function(e) {
                 Ext.getCmp('advanced-search-options-content-form').fireEvent(
                         'search');
