@@ -905,6 +905,7 @@ INSERT INTO Settings VALUES (52,50,'host',NULL);
 INSERT INTO Settings VALUES (53,50,'port',NULL);
 INSERT INTO Settings VALUES (54,50,'username',NULL);
 INSERT INTO Settings VALUES (55,50,'password',NULL);
+INSERT INTO Settings VALUES (56,50,'ignorehostlist',NULL);
 INSERT INTO Settings VALUES (60,1,'feedback',NULL);
 INSERT INTO Settings VALUES (61,60,'email',NULL);
 INSERT INTO Settings VALUES (62,60,'mailServer',NULL);

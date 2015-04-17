@@ -124,8 +124,9 @@
 	<proxy>Proxy</proxy>
 	<use>Kullan</use>
 	<username>Kullanıcı adı</username>
+  <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
-	<feedback>Geribildirim</feedback>
+  <feedback>Geribildirim</feedback>
 	<email>EMail</email>
 	<smtpHost>SMTP Ana sistem (Host) </smtpHost>
 	<smtpPort>SMTP Bağlantı noktası (Port)</smtpPort>
@@ -150,6 +151,7 @@
 	<usersDN>Kullanıcılar</usersDN>
 	<userAttribs>Kullanıcı özelikleri</userAttribs>
 	<password>Şifre</password>
+
 	<profile>Profil</profile>
 
 	<shib>Shibboleth***</shib>

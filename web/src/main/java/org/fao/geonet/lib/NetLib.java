@@ -32,6 +32,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.setting.SettingManager;
@@ -42,6 +43,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.PatternSyntaxException;
 
 //=============================================================================
 
@@ -52,8 +54,9 @@ public class NetLib
 	public static final String PORT     = "system/proxy/port";
 	public static final String USERNAME = "system/proxy/username";
 	public static final String PASSWORD = "system/proxy/password";
+    public static final String IGNOREHOSTLIST = "system/proxy/ignorehostlist";
 
-	//---------------------------------------------------------------------------
+    //---------------------------------------------------------------------------
 	//---
 	//--- API methods
 	//---
@@ -78,20 +81,26 @@ public class NetLib
 		String  port    = sm.getValue(PORT);
 		String  username= sm.getValue(USERNAME);
 		String  password= sm.getValue(PASSWORD);
+        String ignoreHostList = sm.getValue(IGNOREHOSTLIST);
 
-		if (!enabled) {
+        if (!enabled) {
 			req.setUseProxy(false);
 		} else {
 			if (!Lib.type.isInteger(port))
 				Log.error(Geonet.GEONETWORK, "Proxy port is not an integer : "+ port);
 			else
 			{
-				req.setUseProxy(true);
-				req.setProxyHost(host);
-				req.setProxyPort(Integer.parseInt(port));
-				if (username.trim().length()!=0) {
-					req.setProxyCredentials(username, password);
-				} 
+                if (!isProxyHostException(req.getHost(), ignoreHostList)) {
+                    req.setUseProxy(true);
+                    req.setProxyHost(host);
+                    req.setProxyPort(Integer.parseInt(port));
+                    if (username.trim().length() != 0) {
+                        req.setProxyCredentials(username, password);
+                    }
+                } else {
+                    Log.info(Geonet.GEONETWORK, "Proxy configuration ignored, host: " + req.getHost() + " is in proxy ignore list");
+                    req.setUseProxy(false);
+                }
 			}
 		}
 	}
@@ -117,27 +126,34 @@ public class NetLib
 		String  port    = sm.getValue(PORT);
 		String  username= sm.getValue(USERNAME);
 		String  password= sm.getValue(PASSWORD);
+        String ignoreHostList = sm.getValue(IGNOREHOSTLIST);
 
-		if (enabled) {
+        if (enabled) {
 			if (!Lib.type.isInteger(port)) {
 				Log.error(Geonet.GEONETWORK, "Proxy port is not an integer : "+ port);
 			} else {
 				HostConfiguration config = client.getHostConfiguration();
 				if (config == null) config = new HostConfiguration();
-				config.setProxy(host,Integer.parseInt(port));
-				client.setHostConfiguration(config);
 
-				if (username.trim().length()!=0) {
-					Credentials cred = new UsernamePasswordCredentials(username, password);
-					AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
+                if (!isProxyHostException(client.getHostConfiguration().getHost(), ignoreHostList)) {
+                    config.setProxy(host,Integer.parseInt(port));
+                    client.setHostConfiguration(config);
 
-					client.getState().setProxyCredentials(scope, cred);
-				}
-				List authPrefs = new ArrayList(2);
-				authPrefs.add(AuthPolicy.DIGEST);
-				authPrefs.add(AuthPolicy.BASIC);
-				// This will exclude the NTLM authentication scheme
-				client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+                    if (username.trim().length()!=0) {
+                        Credentials cred = new UsernamePasswordCredentials(username, password);
+                        AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
+
+                        client.getState().setProxyCredentials(scope, cred);
+                    }
+                    List authPrefs = new ArrayList(2);
+                    authPrefs.add(AuthPolicy.DIGEST);
+                    authPrefs.add(AuthPolicy.BASIC);
+                    // This will exclude the NTLM authentication scheme
+                    client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+                } else {
+                    Log.info(Geonet.GEONETWORK, "Proxy configuration ignored, host: " + client.getHostConfiguration().getHost() + " is in proxy ignore list");
+                    config.setProxyHost(null);
+                }
 			}
 		}
 	}
@@ -160,16 +176,23 @@ public class NetLib
 		String  port    = sm.getValue(PORT);
 		String  username= sm.getValue(USERNAME);
 		String  password= sm.getValue(PASSWORD);
-		if (enabled) {
+        String ignoreHostList = sm.getValue(IGNOREHOSTLIST);
+
+        if (enabled) {
 			if (!Lib.type.isInteger(port)) {
 				Log.error(Geonet.GEONETWORK, "Proxy port is not an integer : "+ port);
 			} else {
-				t.setUseProxy(enabled);
-				t.setProxyHost(host);
-				t.setProxyPort(Integer.parseInt(port));
-				if (username.trim().length() != 0) {
-					t.setProxyCredentials(username, password);	
-				}
+                if (!isProxyHostException(t.getHost(), ignoreHostList)) {
+                    t.setUseProxy(enabled);
+                    t.setProxyHost(host);
+                    t.setProxyPort(Integer.parseInt(port));
+                    if (username.trim().length() != 0) {
+                        t.setProxyCredentials(username, password);
+                    }
+                } else {
+                    Log.info(Geonet.GEONETWORK, "Proxy configuration ignored, host: " + t.getHost() + " is in proxy ignore list");
+                    t.setUseProxy(false);
+                }
 			}
 		}
 	}
@@ -195,11 +218,14 @@ public class NetLib
 		String  port    = sm.getValue(PORT);
 		String  username= sm.getValue(USERNAME);
 		String  password= sm.getValue(PASSWORD);
+        String ignoreHostList = sm.getValue(IGNOREHOSTLIST);
 
-		Properties props = System.getProperties();
+        Properties props = System.getProperties();
 		props.put("http.proxyHost", host);
 		props.put("http.proxyPort", port);
-		if (username.trim().length() > 0) {
+        props.put("http.nonProxyHosts", ignoreHostList);
+
+        if (username.trim().length() > 0) {
 			Log.error(Geonet.GEONETWORK, "Proxy credentials cannot be used");
 		}
 
@@ -216,6 +242,30 @@ public class NetLib
 			return false;
 		}
 	}
+
+    //---------------------------------------------------------------------------
+
+    /**
+     * Checks if a host matches a ignore host list.
+     *
+     * Ignore host list format should be: string with host names or ip's separated by | that allows wildcards.
+     *
+     * @param requestHost
+     * @param ignoreHostList
+     * @return
+     */
+    public boolean isProxyHostException(String requestHost, String ignoreHostList) {
+        if (StringUtils.isEmpty(requestHost)) return false;
+        if (StringUtils.isEmpty(ignoreHostList)) return false;
+
+        try {
+            return (requestHost.matches(ignoreHostList));
+        } catch (PatternSyntaxException ex) {
+            Log.error(Geonet.GEONETWORK + ".httpproxy", "Proxy ignore host list expression is not valid: " + ex.getMessage());
+        }
+
+        return false;
+    }
 }
 
 //=============================================================================

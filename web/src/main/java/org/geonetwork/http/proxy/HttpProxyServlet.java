@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import jeeves.utils.Log;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.auth.AuthPolicy;
+import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
@@ -26,6 +27,9 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.kernel.setting.SettingManager;
+import org.fao.geonet.lib.Lib;
+import org.fao.geonet.lib.NetLib;
 import org.geonetwork.http.proxy.util.RequestUtil;
 import org.geonetwork.http.proxy.util.ServletConfigUtil;
 
@@ -57,6 +61,47 @@ public class HttpProxyServlet extends HttpServlet {
     // List of valid content types for request
     private String[] validContentTypes;
 
+    private static String proxyHost;
+    private static String proxyPort;
+    private static String proxyUsername;
+    private static String proxyPassword;
+    private static String proxyIgnoreHost;
+
+    public static synchronized void setProxy(Map<String, Object> values) {
+        boolean enabled = new Boolean((String) values.get(NetLib.ENABLED));
+
+        if (enabled) {
+            proxyHost = (String) values.get(NetLib.HOST);
+            proxyPort = (String) values.get(NetLib.PORT);
+            proxyUsername = (String) values.get(NetLib.USERNAME);
+            proxyPassword = (String) values.get(NetLib.PASSWORD);
+            proxyIgnoreHost = (String) values.get(NetLib.IGNOREHOSTLIST);
+        } else {
+            proxyHost = "";
+            proxyPort = "";
+            proxyUsername = "";
+            proxyPassword = "";
+            proxyIgnoreHost = "";
+        }
+    }
+
+    public static synchronized void setProxy(SettingManager sm) {
+        boolean enabled = sm.getValueAsBool(NetLib.ENABLED, false);
+
+        if (enabled) {
+            proxyHost = sm.getValue(NetLib.HOST);
+            proxyPort = sm.getValue(NetLib.PORT);
+            proxyUsername = sm.getValue(NetLib.USERNAME);
+            proxyPassword = sm.getValue(NetLib.PASSWORD);
+            proxyIgnoreHost = sm.getValue(NetLib.IGNOREHOSTLIST);
+        } else {
+            proxyHost = "";
+            proxyPort = "";
+            proxyUsername = "";
+            proxyPassword = "";
+            proxyIgnoreHost = "";
+        }
+    }
 
     /**
      * Initializes servlet Content Types allowed and the host to use in the proxy
@@ -106,11 +151,6 @@ public class HttpProxyServlet extends HttpServlet {
             String url = RequestUtil.getParameter(request, PARAM_URL, defaultProxyUrl);
             String host = url.split("/")[2];
 
-            // Get the proxy parameters
-            //TODO: Add dependency injection to set proxy config from GeoNetwork settings, using also the credentials configured
-            String proxyHost = System.getProperty("http.proxyHost");
-            String proxyPort = System.getProperty("http.proxyPort");
-
             // Get rest of parameters to pass to proxied url
             HttpMethodParams urlParams = new HttpMethodParams();
 
@@ -133,13 +173,29 @@ public class HttpProxyServlet extends HttpServlet {
             if (url.startsWith("http://") || url.startsWith("https://")) {
                 HttpClient client = new HttpClient();
 
-                // Added support for proxy
-                if (proxyHost != null && proxyPort != null) {
-                    client.getHostConfiguration().setProxy(proxyHost, Integer.valueOf(proxyPort));
-                }
-
                 httpGet = new GetMethod(url);
                 httpGet.setParams(urlParams);
+
+                if (!Lib.net.isProxyHostException(httpGet.getURI().getHost(), proxyIgnoreHost)) {
+                    // Added support for proxy
+                    if (StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort)) {
+                        client.getHostConfiguration().setProxy(proxyHost, Integer.valueOf(proxyPort));
+                    }
+
+                    if (proxyUsername.trim().length()!=0) {
+                        Credentials cred = new UsernamePasswordCredentials(proxyUsername, proxyPassword);
+                        AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
+
+                        client.getState().setProxyCredentials(scope, cred);
+                    }
+                    List authPrefs = new ArrayList(2);
+                    authPrefs.add(AuthPolicy.DIGEST);
+                    authPrefs.add(AuthPolicy.BASIC);
+                    // This will exclude the NTLM authentication scheme
+                    client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+                }
+
+
                 client.executeMethod(httpGet);
 
                 if (httpGet.getStatusCode() == HttpStatus.SC_OK) {
@@ -191,11 +247,6 @@ public class HttpProxyServlet extends HttpServlet {
             String url = RequestUtil.getParameter(request, PARAM_URL, defaultProxyUrl);
             String host = url.split("/")[2];
 
-            // Get the proxy parameters
-            //TODO: Add dependency injection to set proxy config from GeoNetwork settings, using also the credentials configured
-            String proxyHost = System.getProperty("http.proxyHost");
-            String proxyPort = System.getProperty("http.proxyPort");
-
             // Get rest of parameters to pass to proxied url
             HttpMethodParams urlParams = new HttpMethodParams();
 
@@ -225,9 +276,23 @@ public class HttpProxyServlet extends HttpServlet {
 
                 HttpClient client = new HttpClient();
 
-                // Added support for proxy
-                if (proxyHost != null && proxyPort != null){
-                    client.getHostConfiguration().setProxy(proxyHost, Integer.valueOf(proxyPort));
+                if (!Lib.net.isProxyHostException(httpPost.getURI().getHost(), proxyIgnoreHost)) {
+                    // Added support for proxy
+                    if (StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort)) {
+                        client.getHostConfiguration().setProxy(proxyHost, Integer.valueOf(proxyPort));
+                    }
+
+                    if (proxyUsername.trim().length()!=0) {
+                        Credentials cred = new UsernamePasswordCredentials(proxyUsername, proxyPassword);
+                        AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
+
+                        client.getState().setProxyCredentials(scope, cred);
+                    }
+                    List authPrefs = new ArrayList(2);
+                    authPrefs.add(AuthPolicy.DIGEST);
+                    authPrefs.add(AuthPolicy.BASIC);
+                    // This will exclude the NTLM authentication scheme
+                    client.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
                 }
 
                 RequestEntity entity = new StringRequestEntity(body, request.getContentType(), request.getCharacterEncoding());

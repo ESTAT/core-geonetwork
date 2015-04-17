@@ -52,6 +52,7 @@ function ConfigView(strLoader)
 		{ id:'proxy.port',     type:'integer',  minValue:21, maxValue:65535, empty:true },
 		{ id:'proxy.username', type:'length',  minSize :0,  maxSize :200 },
 		{ id:'proxy.password', type:'length',  minSize :0,  maxSize :200 },
+    { id:'proxy.ignorehostlist', type:'length',  minSize :0,  maxSize :200 },
 
 		{ id:'removedMd.dir', type:'length', minSize :0,  maxSize :200 },
 		
@@ -244,8 +245,9 @@ ConfigView.prototype.setData = function(data)
 	$('proxy.port').value     = data['PROXY_PORT'];
 	$('proxy.username').value = data['PROXY_USER'];
 	$('proxy.password').value = data['PROXY_PASS'];
-	
-	$('feedback.email')    .value = data['FEEDBACK_EMAIL'];
+  $('proxy.ignorehostlist').value = data['PROXY_IGNOREHOSTLIST'];
+
+  $('feedback.email')    .value = data['FEEDBACK_EMAIL'];
 	$('feedback.mail.host').value = data['FEEDBACK_MAIL_HOST'];
 	$('feedback.mail.port').value = data['FEEDBACK_MAIL_PORT'];
 	
@@ -359,8 +361,9 @@ ConfigView.prototype.getData = function()
 		PROXY_PORT : $('proxy.port').value,
 		PROXY_USER : $('proxy.username').value,
 		PROXY_PASS : $('proxy.password').value,
-		
-		FEEDBACK_EMAIL     : $('feedback.email')    .value,
+    PROXY_IGNOREHOSTLIST: $('proxy.ignorehostlist').value,
+
+    FEEDBACK_EMAIL     : $('feedback.email')    .value,
 		FEEDBACK_MAIL_HOST : $('feedback.mail.host').value,
 		FEEDBACK_MAIL_PORT : $('feedback.mail.port').value,		
 

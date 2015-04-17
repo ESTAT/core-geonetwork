@@ -124,8 +124,9 @@
 	<proxy>Proxy</proxy>
 	<use>Käytä</use>
 	<username>Käyttäjätunnus</username>
+  <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
-	<feedback>Palaute</feedback>
+  <feedback>Palaute</feedback>
 	<email>Sähköpostiosoite</email>
 	<smtpHost>Sähköpostipalvelin (SMTP)</smtpHost>
 	<smtpPort>Sähköpostipalvelimen portti (SMTP)</smtpPort>

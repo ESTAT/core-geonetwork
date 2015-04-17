@@ -635,6 +635,11 @@
 								<td class="padded"><xsl:value-of select="/root/gui/config/password"/></td>
 								<td class="padded"><input id="proxy.password" class="content" type="password" value="" size="20"/></td>
 							</tr>
+
+              <tr>
+                <td class="padded"><xsl:value-of select="/root/gui/config/ignorehostlist"/></td>
+                <td class="padded"><input id="proxy.ignorehostlist" class="content" type="text" value="" size="20"/></td>
+              </tr>
 						</table>
 					</td>
 				</tr>			

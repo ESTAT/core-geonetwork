@@ -41,6 +41,7 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.setting.SettingInfo;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.lib.Lib;
+import org.geonetwork.http.proxy.HttpProxyServlet;
 import org.jdom.Element;
 
 //=============================================================================
@@ -100,7 +101,9 @@ public class Set implements Service
         
         SettingInfo info = new SettingInfo(context);
 		ServerBeanPropertyUpdater.updateURL(info.getSiteUrl(true)+context.getBaseUrl(), context.getServlet().getServletContext());
-		
+
+        HttpProxyServlet.setProxy(values);
+
 		return new Element(Jeeves.Elem.RESPONSE).setText("ok");
 	}
 
@@ -196,8 +199,9 @@ public class Set implements Service
 		new ConfigEntry(ConfigEntry.Type.INT,    false, "proxy/port",               "system/proxy/port"),
 		new ConfigEntry(ConfigEntry.Type.STRING, false, "proxy/username",           "system/proxy/username"),
 		new ConfigEntry(ConfigEntry.Type.STRING, false, "proxy/password",           "system/proxy/password"),
+		new ConfigEntry(ConfigEntry.Type.STRING, false, "proxy/ignorehostlist",     "system/proxy/ignorehostlist"),
 
-		new ConfigEntry(ConfigEntry.Type.STRING, false, "feedback/email",           "system/feedback/email"),
+            new ConfigEntry(ConfigEntry.Type.STRING, false, "feedback/email",           "system/feedback/email"),
 		new ConfigEntry(ConfigEntry.Type.STRING, false, "feedback/mailServer/host", "system/feedback/mailServer/host"),
 		new ConfigEntry(ConfigEntry.Type.INT,    false, "feedback/mailServer/port", "system/feedback/mailServer/port"),
 

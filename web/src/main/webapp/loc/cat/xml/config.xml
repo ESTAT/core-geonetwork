@@ -124,8 +124,9 @@
 	<proxy>Proxy</proxy>
 	<use>Ús</use>
 	<username>Nom d'usuari</username>
+  <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
-	<feedback>Retroacció</feedback>
+  <feedback>Retroacció</feedback>
 	<email>Correu</email>
 	<smtpHost>Servidor SMTP</smtpHost>
 	<smtpPort>Port SMTP</smtpPort>

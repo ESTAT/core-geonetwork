@@ -90,6 +90,7 @@ import org.fao.geonet.services.util.z3950.Repositories;
 import org.fao.geonet.services.util.z3950.Server;
 import org.fao.geonet.util.ThreadPool;
 import org.fao.geonet.util.ThreadUtils;
+import org.geonetwork.http.proxy.HttpProxyServlet;
 import org.geotools.data.DataStore;
 import org.geotools.data.shapefile.indexed.IndexType;
 import org.geotools.data.shapefile.indexed.IndexedShapefileDataStore;
@@ -404,10 +405,11 @@ public class Geonetwork implements ApplicationHandler {
 
         logger.info("  - Metadata notifier ...");
 
-        
-        //------------------------------------------------------------------------
-        //--- initialize metadata notifier subsystem
-        logger.info("  - Metadata notifier ...");
+
+        logger.info("  - Setting proxy server configuration in ajax proxy ...");
+
+        HttpProxyServlet.setProxy(settingMan);
+
         
 		//------------------------------------------------------------------------
 		//--- return application context

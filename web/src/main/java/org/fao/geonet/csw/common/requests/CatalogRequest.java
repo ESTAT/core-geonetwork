@@ -93,8 +93,9 @@ public abstract class CatalogRequest
 		this.host    = host;
 		this.port    = port;
         this.protocol= protocol;
+        this.context = context;
 
-		setMethod(Method.POST);
+        setMethod(Method.POST);
         Cookie cookie = new Cookie();
         HttpState state = new HttpState();
         state.addCookie(cookie);
@@ -458,8 +459,9 @@ public abstract class CatalogRequest
 	private Element doExecute(HttpMethodBase httpMethod) throws IOException, JDOMException
 	{
 		client.getHostConfiguration().setHost(host, port, protocol);
+        if (this.context != null) Lib.net.setupProxy(this.context, client);
 
-		byte[] data = null;
+        byte[] data = null;
 
 		try
 		{
@@ -656,6 +658,8 @@ public abstract class CatalogRequest
 	private String sentData;
 	private String receivedData;
 	private String postData;
+
+    private ServiceContext context;
 }
 
 //=============================================================================

@@ -123,8 +123,9 @@
 	<proxy>Прокси</proxy>
 	<use>Использовать</use>
 	<username>Пользователь</username>
+  <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
-	<feedback>Обратная связь</feedback>
+  <feedback>Обратная связь</feedback>
 	<email>Электронная почта</email>
 	<smtpHost>SMTP-хост</smtpHost>
 	<smtpPort>SMTP-порт</smtpPort>
