@@ -124,6 +124,7 @@
 	<proxy>Proxy</proxy>
 	<use>Käytä</use>
 	<username>Käyttäjätunnus</username>
+  <password>Password</password>
   <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
   <feedback>Palaute</feedback>

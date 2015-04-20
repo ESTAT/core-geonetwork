@@ -124,6 +124,7 @@
 	<proxy>Proxy</proxy>
 	<use>Kullan</use>
 	<username>Kullanıcı adı</username>
+  <password>Password</password>
   <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
   <feedback>Geribildirim</feedback>

@@ -123,6 +123,7 @@
 	<proxy>Прокси</proxy>
 	<use>Использовать</use>
 	<username>Пользователь</username>
+  <password>Password</password>
   <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
   <feedback>Обратная связь</feedback>

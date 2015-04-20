@@ -124,6 +124,7 @@
 	<proxy>Proxy</proxy>
 		<use>Usa</use>
 		<username>Nome Utente</username>
+  <password>Password</password>
   <ignorehostlist>Ignore host list (| separate)</ignorehostlist>
 
   <feedback>Feedback</feedback>
