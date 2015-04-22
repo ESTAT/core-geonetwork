@@ -68,7 +68,7 @@ public class HttpProxyServlet extends HttpServlet {
     private static String proxyIgnoreHost;
 
     public static synchronized void setProxy(Map<String, Object> values) {
-        boolean enabled = new Boolean((String) values.get(NetLib.ENABLED));
+        boolean enabled = Boolean.parseBoolean((String) values.get(NetLib.ENABLED));
 
         if (enabled) {
             proxyHost = (String) values.get(NetLib.HOST);
