@@ -223,7 +223,7 @@
 											<xsl:value-of select="concat('(',/root/gui/session/profile,') ')"/>	
 										</xsl:if>
 									</label>
-									<xsl:if test="string(/root/gui/session/profile)='Administrator'">
+<!-- 									<xsl:if test="string(/root/gui/session/profile)='Administrator'"> -->
 										<a href="javascript:catalogue.admin();" id="administration-button">
 	 										<xsl:if test="string(/root/gui/session/userId)=''">
 	 											<xsl:attribute name="style">display:none;</xsl:attribute>
@@ -231,7 +231,7 @@
 											<i class="fa fa-wrench"></i>
 											<xsl:value-of select="/root/gui/strings/admin"/>
 										</a>
-									</xsl:if>
+<!-- 									</xsl:if> -->
 									
 									
 									<!-- The following login section is not used but is references in LoginApp.js -->
@@ -358,12 +358,20 @@
 		                        <article class="main-article">
 		                          <div>
 		                            <section>
-		                              <div id="latest-metadata">
-		                                <header><h1><span><xsl:value-of select="/root/gui/strings/latestDatasets" /></span></h1></header>
+		                              <div id="featured-metadata">
+		                                <header><h1><span><xsl:value-of select="/root/gui/strings/featuredDatasets" /></span></h1></header>
+		                              </div>
+		                              <br/>
+		                              <div id="my-metadata">
+		                                <header><h1><span><xsl:value-of select="/root/gui/strings/myDatasets" /></span></h1></header>
 		                              </div>
 		                              <br/>
 		                              <div id="popular-metadata">
 		                                <header><h1><span><xsl:value-of select="/root/gui/strings/popularDatasets" /></span></h1></header>
+		                              </div>
+		                              <br/>
+		                              <div id="latest-metadata">
+		                                <header><h1><span><xsl:value-of select="/root/gui/strings/latestDatasets" /></span></h1></header>
 		                              </div>
 		                            </section>
 		                          </div>
@@ -666,7 +674,7 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 14/4/2015</span></li>
+	                     <li class="modification-date"><span>Last update: 21/4/2015</span></li>
 	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">

@@ -49,7 +49,7 @@ GeoNetwork.app = function() {
         });
         latestView.tpl = GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER;
         catalogue.kvpSearch(
-                "fast=index&from=1&to=4&sortBy=changeDate",
+                "fast=index&from=1&to=3&sortBy=changeDate",
                 function(e) {
                     Ext.each(Ext.DomQuery.select('.md-action-menu'), function(
                             el) {
@@ -99,7 +99,7 @@ GeoNetwork.app = function() {
         });
         latestView.tpl = GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER;
         catalogue.kvpSearch(
-                "fast=index&from=1&to=4&sortBy=popularity",
+                "fast=index&from=1&to=3&sortBy=popularity",
                 function(e) {
                     Ext.each(Ext.DomQuery.select('.md-action-menu'), function(
                             el) {
@@ -108,6 +108,69 @@ GeoNetwork.app = function() {
                 }, null, null, true, latestView.getStore());
     };
 
+//  Featured dataset
+    var createFeaturedUpdate = function() {
+        var latestView = new GeoNetwork.MetadataResultsView({
+            catalogue : catalogue,
+            autoScroll : true,
+            tpl : GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER
+        });
+        var latestStore = new GeoNetwork.Settings.mdStore();
+        latestView.setStore(latestStore);
+        latestStore.on('load', function() {
+            Ext.ux.Lightbox.register('a[rel^=lightbox]');
+        });
+        var p = new Ext.Panel({
+          	shadow: 'drop',
+            shadowOffset: 10,
+            border : true,
+            bodyCssClass : 'md-view',
+            items : latestView,
+            renderTo : 'featured-metadata'
+        });
+        latestView.tpl = GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER;
+        catalogue.kvpSearch(
+                "fast=index&from=1&to=3&featured=true&sortBy=changeDate",
+                function(e) {
+                    Ext.each(Ext.DomQuery.select('.md-action-menu'), function(
+                            el) {
+                        hide(el);
+                    });
+                }, null, null, true, latestView.getStore());
+    };
+    
+//  My dataset
+    var createMyUpdate = function() {
+        var latestView = new GeoNetwork.MetadataResultsView({
+            catalogue : catalogue,
+            autoScroll : true,
+            tpl : GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER
+        });
+        var latestStore = new GeoNetwork.Settings.mdStore();
+        latestView.setStore(latestStore);
+        latestStore.on('load', function() {
+            Ext.ux.Lightbox.register('a[rel^=lightbox]');
+        });
+        var p = new Ext.Panel({
+          	shadow: 'drop',
+            shadowOffset: 10,
+            border : true,
+            bodyCssClass : 'md-view',
+            items : latestView,
+            renderTo : 'my-metadata'
+        });
+        latestView.tpl = GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER;
+        
+        var ownerid = catalogue.identifiedUser.id;
+        catalogue.kvpSearch(
+                "fast=index&from=1&to=3&_owner=" + ownerid + "&sortBy=changeDate",
+                function(e) {
+                    Ext.each(Ext.DomQuery.select('.md-action-menu'), function(
+                            el) {
+                        hide(el);
+                    });
+                }, null, null, true, latestView.getStore());
+    };
     /**
      * 
      * Given a metadata, load a map on the metadata associated map and creates
@@ -658,7 +721,13 @@ GeoNetwork.app = function() {
             // in case of bad startup
             exception = response.responseText.indexOf('Exception') !== -1;
       //PRI: All user are logged in using ECAS and inherently Registered users - This is important to set to get menus etc working correctly
-            catalogue.identifiedUser = 'RegisteredUser';
+            //catalogue.identifiedUser = 'RegisteredUser';
+            if (response.status !== 200 || exception) {
+          	  delete cookie.state.user;
+	  	      } else {
+	  	    	  // fill catalogue.identifiedUser
+	  				catalogue.isLoggedIn();  // will get the user information and trigger after login event
+	  	      }
 //            if (response.status !== 200 || exception) {
 //                delete cookie.state.user;
 //            } else {
@@ -673,6 +742,8 @@ GeoNetwork.app = function() {
 
             createLatestUpdate();
             createPopularUpdate();
+            createMyUpdate();
+            createFeaturedUpdate();
             createMainTagCloud();
 
             {	// if we are logged in, show the login stuff regardless of cookie acceptance 
@@ -788,6 +859,8 @@ Ext.onReady(function() {
 							// if after login then refresh metadata record in view and
 							// action menu
 							if (e === 'afterLogin') {
+//								catalogue.isLoggedIn();  // will get the user information and trigger after login event
+
               	catalogue.on(e, function() {
 									var metadataPanel = Ext.getCmp('metadata-panel');
 									if (metadataPanel && metadataPanel.isVisible()) {

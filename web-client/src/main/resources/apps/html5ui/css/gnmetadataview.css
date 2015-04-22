@@ -576,7 +576,10 @@ div.help ul li {
 }
 
 /* thumbnails */
-#latest-metadata .md-view * div.thumbnail img,#popular-metadata .md-view * div.thumbnail img
+#latest-metadata .md-view * div.thumbnail img
+,#popular-metadata .md-view * div.thumbnail img
+,#featured-metadata .md-view * div.thumbnail img
+,#my-metadata .md-view * div.thumbnail img
 	{
 	border: 1px solid #e5e5e5;
 	background: #fff;
@@ -588,7 +591,11 @@ div.help ul li {
 	vertical-align: bottom;
 }
 
-#latest-metadata header h1,#popular-metadata header h1,#tags header h1 {
+#latest-metadata header h1
+,#popular-metadata header h1
+,#tags header h1
+,#featured-metadata header h1
+,#my-metadata header h1{
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 1.2em;
@@ -598,51 +605,43 @@ div.help ul li {
 }
 
 /* first thumbnial container */
-#latest-metadata {
-/* 	margin-top: 20px; */
+#featured-metadata {
 	padding-top: 10px;
 }
 
-#latest-metadata ul {
-	padding-top: 0px;
-}
-
-#latest-metadata .md-thumbnail {
+/* the other thumbnial containers */
+#latest-metadata .md-thumbnail
+,#popular-metadata .md-thumbnail
+,#featured-metadata .md-thumbnail
+,#my-metadata .md-thumbnail
+ {
 	margin: 0px 10px 10px 0px;
 	padding: 5px;
 	border: 1px solid #fff;
 }
 
-#latest-metadata .md-thumbnail h1 {
+#latest-metadata .md-thumbnail h1 
+,#popular-metadata .md-thumbnail h1 
+,#featured-metadata .md-thumbnail h1 
+,#my-metadata .md-thumbnail h1 
+{
 	margin: 0;
 	height: 70px;
 }
 
-#latest-metadata .md-thumbnail h1 a {
+#latest-metadata .md-thumbnail h1 a 
+,#popular-metadata .md-thumbnail h1 a 
+,#featured-metadata .md-thumbnail h1 a 
+,#my-metadata .md-thumbnail h1 a 
+{
 	font-size: 13px;
 }
 
-#latest-metadata .md-thumbnail.md-over {
-	border: 1px solid #e5e5e5;
-	background: url(../images/default/bg_stripe.png) !important;
-}
-/* second thumbnial container */
-#popular-metadata .md-thumbnail {
-	margin: 0px 10px 10px 0px;
-	padding: 5px;
-	border: 1px solid #fff;
-}
-
-#popular-metadata .md-thumbnail h1 {
-	margin: 0;
-	height: 70px;
-}
-
-#popular-metadata .md-thumbnail h1 a {
-	font-size: 13px;
-}
-
-#popular-metadata .md-thumbnail.md-over {
+#latest-metadata .md-thumbnail.md-over 
+,#popular-metadata .md-thumbnail.md-over 
+,#featured-metadata .md-thumbnail.md-over 
+,#my-metadata .md-thumbnail.md-over 
+{
 	border: 1px solid #e5e5e5;
 	background: url(../images/default/bg_stripe.png) !important;
 }

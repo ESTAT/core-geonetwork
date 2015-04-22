@@ -306,7 +306,11 @@ div#tabs .x-tab-strip span.x-tab-strip-text {
 	color: #376690;	
 }
 
-#latest-metadata header h1,#popular-metadata header h1,#tags header h1 {
+#latest-metadata header h1
+,#popular-metadata header h1,#tags header h1 
+,#featured-metadata header h1,#tags header h1 
+,#my-metadata header h1,#tags header h1 
+{
 	color: #3B6688;
 }
 
