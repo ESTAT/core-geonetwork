@@ -229,10 +229,6 @@ public class HttpProxyServlet extends HttpServlet {
                 //throw new ServletException("only HTTP(S) protocol supported");
                 returnExceptionMessage(response, "only HTTP(S) protocol supported");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            //throw new ServletException("Some unexpected error occurred. Error text was: " + e.getMessage());
-            returnExceptionMessage(response, "Some unexpected error occurred. Error text was: " + e.getMessage());
         } finally {
             if (httpGet != null) httpGet.releaseConnection();
         }
@@ -329,10 +325,6 @@ public class HttpProxyServlet extends HttpServlet {
                 //throw new ServletException("only HTTP(S) protocol supported");
                 returnExceptionMessage(response, "only HTTP(S) protocol supported");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            //throw new ServletException("Some unexpected error occurred. Error text was: " + e.getMessage());
-            returnExceptionMessage(response, "Some unexpected error occurred. Error text was: " + e.getMessage());
         } finally {
             if (httpPost != null) httpPost.releaseConnection();
         }
