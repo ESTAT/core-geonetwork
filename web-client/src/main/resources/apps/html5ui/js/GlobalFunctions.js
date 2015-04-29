@@ -196,6 +196,7 @@ function showSearch() {
     Ext.getCmp('resultsPanel').show();
     Ext.get('resultsPanel').show();
     show("main-aside");
+    Ext.getCmp('popupminiMap').show();
 
     app.breadcrumb.setDefaultPrevious(1);
     app.breadcrumb.setCurrent(app.breadcrumb.defaultSteps[1]);
@@ -207,7 +208,6 @@ function showSearch() {
     }
 
     Ext.get("catalog-tab").addClass("selected");
-    
 }
 
 function hideSearch() {
@@ -217,6 +217,8 @@ function hideSearch() {
     hide("secondary-aside");
     hide("resultsPanel");
     hide("main-aside");
+    Ext.getCmp('popupminiMap').hide();
+    
 }
 
 function showMetadata() {

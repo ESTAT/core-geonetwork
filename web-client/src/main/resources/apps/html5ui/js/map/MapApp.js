@@ -17,9 +17,9 @@
  * along with GeoNetwork.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Ext.override(Ext.Window, {
-    constrainHeader: true
-})
+//Ext.override(Ext.Window, {
+//    constrainHeader: true
+//})
 
 Ext.namespace('GeoNetwork');
 
@@ -133,11 +133,11 @@ GeoNetwork.mapApp = function() {
         var popupwindow = new Ext.Window({
             title: "Search Results - Map View",
             id: 'popupminiMap',
-            renderTo : 'mini-map',
-            closable: true,
+//            renderTo : 'mini-map',
+            closable: false,
             closeAction: 'hide',
             minimizable: true,
-            draggable:false,
+//            constrain: true,
             height: 400,
             width: 300,
             layout: "fit",
@@ -149,7 +149,7 @@ GeoNetwork.mapApp = function() {
                 map: map,
                 minimizable: true,
 //                prettyStateKeys : true,
-                zoom : 10,
+                zoom : 4,//10,
                 bbar: new Ext.Toolbar()
             }],
             minimizable: true,
@@ -158,18 +158,39 @@ GeoNetwork.mapApp = function() {
                     id: 'maximize',
                     handler: function (evt, toolEl, owner, tool) {
                         var window = owner;
-                        window.expand('', false);
-                        owner.isMinimized = false;
+                        if (window._minimized){
+//                    		console.log('maximize ' + popupwindow._posX + ', ' + popupwindow._posY);
+	                        window.expand('', false);
+	                        //owner.isMinimized = false;
+	                        window.setWidth(window._width);
+	                        updatePopupwindowPosition();
+	                        window._minimized = false;
+	                        window.constrain = true;
+	                        //window.draggable = true;	unfortunately not that easy
+                    	}
                     }
                 },
                 {
                     id: 'minimize',
                     handler: function (evt, toolEl, owner, tool) {
                         var window = owner;
-                        window.collapse();
-                        owner.winWidth = window.getWidth();
-                        window.setWidth(150);
+                        if (!window._minimized){
+//                    		console.log('minimize ' + popupwindow._posX + ', ' + popupwindow._posY);
+	                        window._minimized = true;
+	                        window.constrain = false;
+	                        //window.draggable = false;	unfortunately not that easy
+	                        savePopupwindowPosition();
+	                        updateMinimizedMapPosition();
+	                		
+	//                        window.collapse();
+//	                        owner.winWidth = window.getWidth();
+	                        //window.setWidth(150);
+                        }
+                        else {
+                        	updateMinimizedMapPosition();
+                        }
                     }
+                
                 },
                 {
                     id: 'plus',
@@ -178,11 +199,134 @@ GeoNetwork.mapApp = function() {
                     }
                 }
             ]
-           
-      
         });       
         
+        popupwindow._scrolloffsetY = 0;
+        popupwindow._minimized = false;
+        popupwindow._posX = 20;
+        popupwindow._posY = 20;
+        popupwindow._width = 300;
+        popupwindow._height = 400;
+        if (cookie && cookie.get('accept_cookies') && cookie.get('popupwindow')){
+        	try {
+                popupwindow._posX = cookie.get('popupwindow').x;
+                popupwindow._posY = cookie.get('popupwindow').y;
+//        		console.log('cookie load ' + popupwindow._posX + ', ' + popupwindow._posY);
+                
+                // Cookie width and height does not work. Setting the width and height at this point 
+                // triggers a constrain check that results in a browser wide popupwindow
+//                popupwindow._width = cookie.get('popupwindow').width;
+//                popupwindow._height = cookie.get('popupwindow').height;
+        	}
+        	catch (e) {}
+        }        
+//		console.log('Initial setPosition ' + popupwindow._posX + ', ' + popupwindow._posY);
+       	popupwindow.setPosition(popupwindow._posX, popupwindow._posY + popupwindow._scrolloffsetY);
+//       	popupwindow.setWidth(popupwindow._width);
+//       	popupwindow.setHeight(popupwindow._height);
 
+        
+        function getScrollTop(){
+            if(typeof pageYOffset!= 'undefined'){
+                //most browsers except IE before #9
+                return pageYOffset;
+            }
+            else{
+                var B= document.body; //IE 'quirks'
+                var D= document.documentElement; //IE with doctype
+                D= (D.clientHeight)? D: B;
+                return D.scrollTop;
+            }
+        }
+        
+
+        function updateMinimizedMapPosition(){
+//    		console.log('updateMinimizedMapPosition popup pos: ' + popupwindow._posX + ', ' + popupwindow._posY);
+    		
+            var mm = Ext.get('mini-map');
+        	var pos = mm.getXY();
+        	var width = mm.getWidth();
+        	
+        	var scrolloffsetY = getScrollTop();
+        	pos[1] = Math.max(scrolloffsetY, pos[1]);
+        	
+        	popupwindow.setPosition(pos[0], pos[1]);
+        	popupwindow.setWidth(width)
+        }
+
+        function updatePopupwindowPosition(){
+//    		console.log('updatePopupwindowPosition ' + popupwindow._posX + ', ' + popupwindow._posY);
+        	popupwindow._scrolloffsetY = getScrollTop();
+           	popupwindow.setPosition(popupwindow._posX, popupwindow._posY + popupwindow._scrolloffsetY);
+        }
+        
+        function savePopupwindowPosition(){
+        	if (popupwindow.getWidth() != 'undefined' && popupwindow.getHeight() != 'undefined'){
+        		
+	        	popupwindow._scrolloffsetY = getScrollTop();
+	        	var pos = popupwindow.getPosition();
+	        	popupwindow._posX = pos[0];
+	        	popupwindow._posY = pos[1]-popupwindow._scrolloffsetY;
+
+	        	popupwindow._width = popupwindow.getWidth();
+	        	popupwindow._height = popupwindow.getHeight();
+	        	
+
+//        		console.log('savePopupwindowPosition ' + popupwindow._posX + ', ' + popupwindow._posY);
+	        	
+	            if (cookie && cookie.get('accept_cookies')){
+		        	cookie.set('popupwindow', {x:popupwindow._posX, y:popupwindow._posY, width:popupwindow._width, height:popupwindow._height});
+	            }
+        	}
+        }
+        
+        function refreshWindowPosition(){
+        	if (!popupwindow.hidden){
+//        		console.log('refreshWindowPosition');
+	        	if (popupwindow._minimized){
+	        		updateMinimizedMapPosition();
+	        	} 
+	        	else {
+	        		updatePopupwindowPosition();
+	        	}
+        	}
+        }
+        
+        Ext.fly(window).on("scroll", function(){
+        	if (!popupwindow.hidden){
+//        		console.log('window scroll');
+        		refreshWindowPosition();
+        	}
+        });        
+
+        Ext.fly(window).on("resize", function(){
+        	if (!popupwindow.hidden){
+//        		console.log('window resize');
+	        	if (popupwindow._minimized){
+	        		updateMinimizedMapPosition();
+	        	} 
+        	}
+        });        
+        
+        popupwindow.on("move", function(){
+        	if (!popupwindow.hidden && !popupwindow._minimized){
+//        		console.log('popupwindow move');
+        		savePopupwindowPosition();
+        	}
+        });
+        popupwindow.on("resize", function(){
+        	if (!popupwindow.hidden && !popupwindow._minimized){
+//        		console.log('popupwindow resize');
+        		savePopupwindowPosition();
+        	}
+        });
+
+//        popupwindow.on("show", function(){
+////     		console.log('window show');
+//    		refreshWindowPosition();
+//        });
+        
+        
 //        var popupPanelMap = Ext.getCmp('minimap').map;
 //        var dragpan = new OpenLayers.Control.DragPan();
 //        popupPanelMap.map.addControl(dragpan);
@@ -206,7 +350,7 @@ GeoNetwork.mapApp = function() {
       var initialPosition = new OpenLayers.LonLat(0,5000000);
       map.setCenter(initialPosition,2);
 
-        popupwindow.show();
+        //popupwindow.show();
 
 
 
@@ -470,7 +614,10 @@ GeoNetwork.mapApp = function() {
         createViewport(panel2);
         registerWindows(map2, map);
     };
-
+   
+//    var refreshMapWindowPos = function() {
+//    	console.log('refreshMapWindowPos');
+//    };
     /**
      * Configure the map controls
      * 
@@ -1995,6 +2142,9 @@ GeoNetwork.mapApp = function() {
         initPrint : function() {
             createPrintPanel(app.mapApp.getMap());
         },
+//        refreshMapWindowPosition : function(){
+//        	app.mapApp.refreshMapWindowPos();
+//        },
         /**
          * Used by other functions that need to create and initialize a map
          * 
