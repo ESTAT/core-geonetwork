@@ -403,7 +403,7 @@
 									<aside id="main-aside" class="main-aside" style="display:none;">
 											<header><xsl:value-of select="/root/gui/strings/filter" /></header> 
  											<div id="facets-panel-div"></div>
-		  			         	 	      	<div id="mini-map"></div>
+		  			         	 	      	<div id="mini-map" style="width: 100%; "></div>
 										</aside>
 									<article>
 										
@@ -674,7 +674,7 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 21/4/2015</span></li>
+	                     <li class="modification-date"><span>Last update: 23/4/2015</span></li>
 	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">
