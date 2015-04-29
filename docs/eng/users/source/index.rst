@@ -7,20 +7,28 @@ Welcome to the GeoNetwork User Manual v\ |release|. The manual is a guide descri
 
 Other documents:
 
-`GeoNetwork Developer Manual <../developer/index.html>`_
-
 `GeoNetwork User Manual (PDF) <GeoNetworkUserManual.pdf>`_
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    preface.rst
     quickstartguide/index.rst
-    admin/index.rst
-    managing_metadata/index.rst
-    features/index.rst
+    
+.. toctree::
+    :maxdepth: 1
+    
+    managing_metadata/templates/index.rst
+    managing_metadata/ownership/index.rst
+    managing_metadata/import/index.rst
+    managing_metadata/export/index.rst
+    managing_metadata/status/index.rst
+    managing_metadata/versioning/index.rst
+    managing_metadata/harvesting/index.rst
+
+.. toctree::
+    :maxdepth: 1
+    
     appendix/glossary_of_metadata/index.rst
     appendix/iso_topic_categories/index.rst
-    appendix/foss4g/index.rst
     faq.rst
     glossary.rst   
