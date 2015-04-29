@@ -44,7 +44,7 @@
 						select="$baseUrl" />/apps/html5ui/images/logo_en.gif</xsl:attribute>
 				  </img>
 				  </p>
-          			  <p id="banner-title-text" style="color:#0065A2">INSPIRE@EC Portal</p>
+          			  <p id="banner-title-text" style="color:#0065A2">Geoportal of the European Commission</p>
 	               <span id="banner-image-right"></span><span class="title-en" id="banner-image-title"></span><p class="off-screen">Service tools</p>
 					<ul class="reset-list" id="services">
 						<li>
@@ -152,7 +152,7 @@
 <!-- 				<p class="banner-flag"> -->
 <!-- 					<img alt="European Commission logo" id="banner-flag" src="{/root/gui/url}/images/logos/logo_en.gif"></img> -->
 <!-- 				</p> -->
-<!--    			    <p id="banner-title-text" style="color:#0065A2">INSPIRE@EC Portal</p> -->
+<!--    			    <p id="banner-title-text" style="color:#0065A2">Geoportal of the European Commission</p> -->
 <!-- 					<span>Title of the site</span> -->
 <!-- 				</p> -->
 <!-- 				<span id="banner-image-right"></span><span class="title-en" id="banner-image-title"></span> -->

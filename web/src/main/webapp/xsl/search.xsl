@@ -150,7 +150,7 @@
 								select="$baseUrl" />/apps/html5ui/images/logo_en.gif</xsl:attribute>
 						  </img>
 						  </p>
- 	          			  <p id="banner-title-text" style="color:#0065A2">INSPIRE@EC Portal</p>
+ 	          			  <p id="banner-title-text" style="color:#0065A2">Geoportal of the European Commission</p>
 			               <span id="banner-image-right"></span><span class="title-en" id="banner-image-title"></span><p class="off-screen">Service tools</p>
 							<ul class="reset-list" id="services">
 								<li>
@@ -286,7 +286,7 @@
 			                     <div id="bread-crumb-app"></div>
 			                  </ul>
 			               </div>
-<!-- 			               <h1><span style="padding:15px">INSPIRE@EC Portal</span></h1> -->
+<!-- 			               <h1><span style="padding:15px">Geoportal of the European Commission</span></h1> -->
 			               <div id="main">
 			               			        <div id="copy-clipboard-ie"></div>
 		                       <div id="share-capabilities" style="display:none">

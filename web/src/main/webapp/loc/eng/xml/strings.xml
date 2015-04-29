@@ -1402,28 +1402,77 @@
 	<featuredDatasets>Featured Data</featuredDatasets>
 	<myDatasets>My Data</myDatasets>
 	<filter>Filter</filter>
-	<welcome.text>Welcome to the new INSPIRE@EC Portal giving you access to relevant INSPIRE SDI metadata. The new portal replaces the <a href="https://webgate.acceptance.ec.europa.eu/inspire/geoportal/" target="_blank">old INSPIRE@EC Portal</a>.<br/>
-	</welcome.text>
+	<welcome.text></welcome.text>
 	<guestinformation.text><br/>You are logged in as a guest. Please contact us to get your credentials upgraded.
 	</guestinformation.text>
 	<tag_label>Tags</tag_label>
 	<map_label>Map</map_label>
-  <about.text>INSPIRE@EC Portal is the IT component of the Spatial Data Infrastructure of the European Commission. It provides the recognised access point for geographical information in the Commission<br/><br/>
-<b>What are the objectives?</b><br/>
-Discover geographical information available in all Commission DGs, view and get access to it:
-Make available harmonised information, compliant with INSPIRE Implementing Rules
-Strong support to INSPIRE@EC users in describing and sharing their data and services<br/>
-<br/>
-<b>Who's responsible?</b><br/>
-INSPIRE@EC is developed by Eurostat and hosted by DG DIGIT.<br/>
-<br/>
-GISCO in ESTAT Unit E-4 as system owner administrates rights at top level. Access right to parts of<br/> 
+  <about.text>The Geoportal of the European Commission is part of the Spatial Data Infrastructure of the European Commission. It provides the recognised access point for geographical information in the Commission.<br/><br/>
+It can be used to i) discover geographical information available in all Commission DGs and Agencies via their Metadata records, ii) view available datasets via the embedded map viewer, iii) access the data via their respective download links, and IV) manage spatially referenced resources. The GeoPortal makes available harmonised information – increasingly more compliant with the INSPIRE Implementing Rules. It improves access to the integrated use of spatial data and information for decision making. Additionally, it enhances understanding of the benefits of geographic information and describes possible restrictions on who can access or what may be done with the data, and ensure that all data can be properly attributed and cited.<br/><br/> 
+The European Commission Geoportal has been deployed by Eurostat and is hosted in a failover environment by DG DIGIT. The GISCO-team in DG ESTAT E.4 is the system owner and administrates rights at the top level. Access rights to the European Commission Geoportal are under the responsibility of each DG and managed at DG level according to the access rights policy.<br/><br/> 
+Information published in the European Commission Geoportal is under the responsibility of various publishers (units/services) of the European Institutions. Therefore, any remark or query regarding the content of a page/site should be addressed to the appropriate Publisher as indicated in the metadata of the information or service.
+</about.text>
+<legal>Legal notice</legal>
+<legal.text><p><b>The information on this site is subject to a <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#disclaimer" target="_blank" title="disclaimer">disclaimer</a>, a <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#copyright" target="_blank" title="copyright notice">copyright notice</a> and rules related to <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#personaldata" target="_blank" title="personal data protection">personal data protection</a>.</b></p>
 <br/> 
-INSPIRE@EC which are under the responsibility of a specific DG are managed at DG level according to the access rights policy of INSPIRE@EC.<br/>
-Beware that information published in INSPIRE@EC is under the responsibility of various publishers (units/services) of the Commission. So any remark or query regarding the content of a page/site should be addressed to the Publisher indicated in the metadata of the information or service.
- </about.text>
- <legal>Legal notice</legal>
- <legal.text>Legal infomation ect.</legal.text>
+<h3>Disclaimer</h3>
+<p>The European Commission maintains this website to enhance public access to information about its initiatives and European Union policies in general. Our goal is to keep this information timely and accurate. If errors are brought to our attention, we will try to correct them.</p> 
+<p>However the Commission accepts no responsibility or liability whatsoever with regard to the information on this site.</p>
+<p>This information is:</p>
+<ul>
+<li>•	of a general nature only and is not intended to address the specific circumstances of any particular individual or entity;</li> 
+<li>•	not necessarily comprehensive, complete, accurate or up to date; </li>
+<li>•	sometimes linked to external sites over which the Commission services have no control and for which the Commission assumes no responsibility;</li> 
+<li>•	not professional or legal advice (if you need specific advice, you should always consult a suitably qualified professional). </li>
+</ul>
+<p>Please note that it cannot be guaranteed that a document available on-line exactly reproduces an officially adopted text. Only the Official Journal of the European Union (its printed edition, or since 1 July 2013 its electronic edition made available on the EUR-Lex website), is authentic and produces legal effects.</p>
+<p>It is our goal to minimize disruption caused by technical errors. However some data or information on our site may have been created or structured in files or formats that are not error-free and we cannot guarantee that our service will not be interrupted or otherwise affected by such problems. The Commission accepts no responsibility with regard to such problems incurred as a result of using this site or any linked external sites.</p>
+<p>This disclaimer is not intended to limit the liability of the Commission in contravention of any requirements laid down in applicable national law nor to exclude its liability for matters which may not be excluded under that law.</p>
+<br/>
+<h3>Copyright notice</h3>
+<p>© European Union, 1995-2015</p>
+<p>Reuse is authorised, provided the source is acknowledged. The reuse policy of the European Commission is implemented by a <a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2011:330:0039:0042:EN:PDF" target="_blank" title="Decision of 12 December 2011">Decision of 12 December 2011</a> <img border="0" src="../../images/pdficon_small.png" alt="pdf download"/> [728KB] .</p>
+<br/> 
+<p>The general principle of reuse can be subject to conditions which may be specified in individual copyright notices. Therefore users are advised to refer to the copyright notices of the individual websites maintained under Europa and of the individual documents. Reuse is not applicable to documents subject to intellectual property rights of third parties.</p>
+<br/>  
+<h1>Personal Data Protection</h1>
+<p>The European Union is committed to user privacy.</p> 
+<p>The policy on "protection of individuals with regard to the processing of personal data by the Community institutions" is based on <a
+href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2001:008:0001:0022:EN:PDF" target="_blank" title="Regulation (EC) N° 45/2001">Regulation (EC) N° 45/2001</a> <img border="0" src="../../images/pdficon_small.png" alt="pdf download"/> [234 KB] of the European Parliament and of the Council of 18 December 2000.</p> 
+<p>This general policy covers the European Union's family of institutional Web Sites, within the eu domain. </p>
+<p>Although you can browse through most of these Web Sites without giving any information about yourself, in some cases, personal information is required in order to provide the <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#eservice" target="_blank" title="e-services">e-services</a> you request.</p> 
+<p>Web Sites that require such information treat it according to the policy described in the Regulation mentioned above and provide <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#information" target="_blank" title="information about the use of your data">information about the use of your data</a> in their specific privacy policy statements.</p>
+<p>In this respect:</p>
+<ul>
+<li>•	For each specific e-service, a controller determines the purposes and means of the processing of personal data and ensures conformity of the specific e-service with the privacy policy;</li> 
+<li>•	Within each Institution, a Data Protection Officer ensures that the provisions of the Regulation are applied and advises controllers on fulfilling their obligations (see art. 24 of the Regulation);</li> 
+<li>•	For all the Institutions, the <a href="http://eur-lex.europa.eu/LexUriServ/site/en/oj/2002/l_183/l_18320020712en00010002.pdf" target="_blank" title="European Data Protection Supervisor">European Data Protection Supervisor</a> <img border="0" src="../../images/pdficon_small.png" alt="pdf download"/> [98 KB] will act as an independent supervisory authority (see art. 41 to 45 of the Regulation).</li>
+</ul> 
+<p>The European Union's family of institutional Web Sites, within the eu domain, provides links to third party sites. Since we do not control them, we encourage you to review their privacy policies.</p>
+<br/>
+<p>What is an e-service?</p> 
+<p>An e-service on EUROPA is a service or resource made available on the Internet in order to improve the communication between citizens and businesses on the one hand and the European Institutions on the other hand.</p>
+<p>Three types of e-services are or will be offered by EUROPA:</p>
+<ul>
+<li>1.	Information services that provide citizens, media, business, administrations and other decision makers with easy and effective access to information, thus increasing transparency and understanding of the policies and activities of the EU;</li> 
+<li>2.	Interactive communication services that allow better contacts with citizens, business, civil society and public actors thus facilitating policy consultations, and feedback mechanisms, in order to contribute to the shaping of policies, the activities and the services of the EU;</li> 
+<li>3.	Transaction services that allow access to all basic forms of transactions with the EU, e.g. procurement, financial operations, recruitment, event enrolment, acquisition or purchase of documents etc.</li>
+</ul> 
+<p>Information contained in a specific privacy statement.</p>
+<p>A specific privacy policy statement will contain the following information about the use of your data:</p>
+<ul>
+<li>•	What information is collected, for what purpose and through which technical means the EU collects personal information exclusively to the extent necessary to fulfil a specific purpose. The information will not be re-used for an incompatible purpose;</li> 
+<li>•	To whom your information is disclosed. The EU will only disclose information to third parties if that is necessary for the fulfilment of the purpose(s) identified above and to the mentioned (categories of) recipients. The EU will not divulge your personal data for direct marketing purposes;</li> 
+<li>•	How you can access your information, verify its accuracy and, if necessary, correct it. As a data subject you also have the right to object to the processing of your personal data on legitimate compelling grounds except when it is collected in order to comply with a legal obligation, or is necessary for the performance of a contract to which you are a party, or is to be used for a purpose for which you have given your unambiguous consent;</li> 
+<li>•	How long your data is kept. The EU only keeps the data for the time necessary to fulfil the purpose of collection or further processing;</li> 
+<li>•	What are the security measures taken to safeguard your information against possible misuse or unauthorised access;</li> 
+<li>•	Whom to contact if you have queries or complaints.</li> 
+</ul> 
+<p>How do we treat e-mails you send us?</p>
+<p>Many web pages on Europa have a "Contact" button, which activates your e-mail software and invites you to send your comments to a specific functional mailbox.</p> 
+<p>When you send such a message, your personal data is collected only to the extent necessary to reply. If the management team of the mailbox is unable to answer your question, it will forward your e-mail to another service. You will be informed, via e-mail, about which service your question has been forwarded to.</p> 
+<p>If you have any questions about the processing of your e-mail and related personal data, do not hesitate to include them in your message.</p>
+</legal.text>
  <contact>Contact</contact>
  <contact.text>Contact infomation ect.</contact.text>
   <signIn>Sign In</signIn>

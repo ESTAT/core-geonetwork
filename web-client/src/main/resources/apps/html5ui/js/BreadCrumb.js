@@ -32,7 +32,7 @@ GeoNetwork.BreadCrumb = function() {
         separator : "  >  ",
         div : "bread-crumb-app",
         defaultSteps : [ {
-            text : OpenLayers.i18n("INSPIRE@EC Portal"),
+            text : OpenLayers.i18n("Geoportal of the European Commission"),
             func : "showBrowse()"
         }, {
             text : OpenLayers.i18n("SEARCH RESULTS"),
