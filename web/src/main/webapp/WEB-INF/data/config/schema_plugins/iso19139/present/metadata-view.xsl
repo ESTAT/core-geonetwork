@@ -583,6 +583,33 @@
                               '{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}', 
                               '{gmd:CI_OnlineResource/gmd:name/gco:CharacterString}', '{generate-id()}']]);">&#160;</a>
                   </xsl:if>
+                  
+                  <xsl:if test="contains(current-grouping-key(), 'DOWNLOAD') or contains(current-grouping-key(), 'WFS') or contains(current-grouping-key(), 'WCS')">
+                    <a href="{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}">
+                      <!-- Name contains layer, feature type, coverage ... -->
+                    <xsl:choose>
+                    <!-- We need to use the name for the download hack -->
+                      <!-- <xsl:when test="normalize-space($desc)!=''">
+                        <xsl:value-of select="$desc"/>
+                        <xsl:if test="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type">
+                          (<xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type"/>)
+                        </xsl:if>
+                      </xsl:when> -->
+                      <xsl:when
+                        test="normalize-space(gmd:CI_OnlineResource/gmd:name/gco:CharacterString)!=''">
+                        <xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gco:CharacterString"/>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:value-of select="gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                    </a>
+                    <span class="desc">
+                            <!-- https://eos.geocat.net/redmine/issues/3418 -->
+                            <xsl:value-of select="/root/gui/strings/urlForApp"/>
+                        </span>
+                  </xsl:if>
+                  
                 </li>
               </xsl:for-each>
             </ul>
