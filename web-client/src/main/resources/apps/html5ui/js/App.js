@@ -98,6 +98,7 @@ GeoNetwork.app = function() {
             renderTo : 'popular-metadata'
         });
         latestView.tpl = GeoNetwork.HTML5UI.Templates.THUMBNAIL_SIMPLER;
+        
         catalogue.kvpSearch(
                 "fast=index&from=1&to=3&sortBy=popularity",
                 function(e) {
@@ -165,6 +166,17 @@ GeoNetwork.app = function() {
         catalogue.kvpSearch(
                 "fast=index&from=1&to=3&_owner=" + ownerid + "&sortBy=changeDate",
                 function(e) {
+                	// show my data if it contains any data
+                    var getRecordsFormat = new OpenLayers.Format.GeoNetworkRecords();
+                    var records = getRecordsFormat.read(e.responseText);
+                    if (records.records.length > 0) {
+                    	var container = Ext.get('my-metadata'); 
+                        if (container) {
+                        	container.setVisibilityMode(Ext.Element.DISPLAY);
+                        	container.show();
+                        }
+                    }
+
                     Ext.each(Ext.DomQuery.select('.md-action-menu'), function(
                             el) {
                         hide(el);

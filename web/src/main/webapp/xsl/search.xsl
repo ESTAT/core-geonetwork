@@ -361,15 +361,12 @@
 		                              <div id="featured-metadata">
 		                                <header><h1><span><xsl:value-of select="/root/gui/strings/featuredDatasets" /></span></h1></header>
 		                              </div>
-		                              <br/>
-		                              <div id="my-metadata">
+		                              <div id="my-metadata" style="display:none">
 		                                <header><h1><span><xsl:value-of select="/root/gui/strings/myDatasets" /></span></h1></header>
 		                              </div>
-		                              <br/>
 		                              <div id="popular-metadata">
 		                                <header><h1><span><xsl:value-of select="/root/gui/strings/popularDatasets" /></span></h1></header>
 		                              </div>
-		                              <br/>
 		                              <div id="latest-metadata">
 		                                <header><h1><span><xsl:value-of select="/root/gui/strings/latestDatasets" /></span></h1></header>
 		                              </div>
@@ -674,7 +671,7 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 23/4/2015</span></li>
+	                     <li class="modification-date"><span>Last update: 29/4/2015</span></li>
 	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">

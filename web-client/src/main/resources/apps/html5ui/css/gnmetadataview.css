@@ -604,11 +604,6 @@ div.help ul li {
 	margin-bottom: 0.2em;
 }
 
-/* first thumbnial container */
-#featured-metadata {
-	padding-top: 10px;
-}
-
 /* the other thumbnial containers */
 #latest-metadata .md-thumbnail
 ,#popular-metadata .md-thumbnail
