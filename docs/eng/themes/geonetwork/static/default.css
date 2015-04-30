@@ -131,29 +131,38 @@ padding: 0;
 Structural Elements
 -----------------------*/
 #header {
-background: #fff url(./chrome/header-bg.png) 0 100% repeat-x;
+background: #fff url(./chrome/title_en-inspire.png) 0 100% repeat-x;
+  width: 990px;
+  border-left: 1px solid #0065a2;
+  border-right: 1px solid #0065a2;
+  margin: 0 auto;
 }
 
 #main {
-background: #fff url(./chrome/main-bg.png) repeat-x;
+/*background: #fff url(./chrome/main-bg.png) repeat-x;*/
+  width: 990px;
+  border-left: 1px solid #0065a2;
+  border-right: 1px solid #0065a2;
+  margin: 0 auto;
 }
 
 #content {
-width: 740px; /*790px total*/
+width: 779px; /*790px total*/
 float: left;
-padding: 18px 28px 0 22px;
-background: #fff url(./chrome/content-bg.png) repeat-x;
+padding: 0px;
+/*background: #fff url(./chrome/content-bg.png) repeat-x;*/
 color: #262523;
 font-size: 1.2em;
-	margin: 0 0 0 -3px;
+	margin: 0;
 }
 
 #sidebar {
 float: left;
 width: 191px;
-margin: 0 0 0 10px;
-padding: 143px 0 0;
+margin: 0;
+padding: 7px 10px;
 color: #0076a1;
+  border-top: 24px solid #074A8B;
 }
 
 * html #sidebar {
@@ -161,11 +170,14 @@ margin: 0 -5px 0 5px;
 }
 
 #footer {
-background: #0076a1 url(./chrome/footer-bg.png) repeat-x;
-color: #d9d9d9;
-padding: 55px 0 75px;
+background: #0065a2;
+color: #ececec;
+padding: 10px 0;
 text-align: center;
 font-size: 0.84em;
+  width: 992px;
+  margin: 0 auto;
+
 }
 
 /*-----------------------
@@ -173,19 +185,19 @@ Header
 -----------------------*/
 #header .wrap {
 position: relative;
-height: 112px;
+height: 145px;
 padding: 1px 0 0;
 overflow: hidden;
 }
 
 #logo a {
-margin: 15px 0 0 15px;
+margin: 15px 0 0 40px;
 float: left;
 width: 433px;
 overflow: hidden;
 text-indent: -9999em;
-background: url(./chrome/geonetwork-logo.png) no-repeat;
-	height: 95px;
+background: url(./chrome/logo_en.gif) no-repeat;
+	height: 119px;
 	z-index: auto;
 }
 
@@ -237,21 +249,21 @@ border-left: 0;
 }
 
 #top-nav li a {
-color: #0076a1;
-font-weight: bold;
+color: #ececec;
 font-size: 1.2em;
 text-decoration: none;
 font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
 }
 
 #top-nav li a:hover {
-color: #959532;
+color: #fff;
+  text-decoration: underline;
 }
 
 #quick-search {
 position: absolute;
 top: 10px;
-right: 0;
+right: 10px;
 background: transparent url(./chrome/search-box.png) top left no-repeat;
 height: 28px;
 width: 190px;
@@ -290,10 +302,12 @@ Content
 -----------------------*/
 #content #breadcrumbs {
 font-size: 0.85em;
-color: #cccd45;
-border-bottom: 1px solid #c6e09b;
-margin: 0 0 1em;
-padding: 0 0 0.5em;
+color: #ffffff;
+margin: 0;
+padding: 3px;
+  background-color: #074A8B;
+  height: 18px;
+  overflow: hidden;
 }
 
 #content #breadcrumbs li {
@@ -302,12 +316,13 @@ display: inline;
 }
 
 #content #breadcrumbs a {
-color: #959532;
+color: #fff;
 text-decoration: none;
 }
 
 #content #breadcrumbs a:hover {
-color: #26b2dd;
+color: #fff;
+  text-decoration: underline;
 }
 
 #content h1 {
@@ -324,7 +339,7 @@ padding: 0 4px;
 
 #content #relatedlinks {
 margin: 0;
-padding: 0;
+padding: 10px;
 }
 
 #content #relatedlinks li {
@@ -342,6 +357,7 @@ padding: 0 0 0 0.5em;
 
 #content .section {
 overflow: hidden;
+  padding: 10px;
 }
 
 #content h1 {
@@ -738,7 +754,7 @@ margin: 0 0 0 -1em;
 }
 
 #sidebar #toc {
-margin: -130px 0 20px;
+margin: 6px 0 20px;
 padding: 0;
 border-bottom: 0 none transparent;
 }
@@ -897,7 +913,8 @@ color: #fff;
 
 .pagination-nav {
 margin: 1em 0 0;
-border-top: 2px solid #e4f1d0;
+border-top: 1px solid #ececec;
+  padding: 10px
 }
 
 div.acklogo {
