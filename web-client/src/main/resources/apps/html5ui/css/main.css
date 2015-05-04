@@ -1206,6 +1206,17 @@ li.x-menu-list-item img.md-mn-pdf {
   height: 24px !important;
 }
 
+button.WFSDownloadIcon {
+	min-width: 24px;
+}
+
+button.WFSDownloadIcon:before {
+  background-image: url(../../html5ui/img/icon_service.png);
+  padding: 12px;
+  content: "\00a0";
+  background-position: center;
+}
+
 .mn-user-location {
 	background-image: url(../images/default/user_location.png) !important;
 }
