@@ -1403,6 +1403,7 @@
 	<myDatasets>My Data</myDatasets>
 	<filter>Filter</filter>
 	<welcome.text></welcome.text>
+	<anonymousformation.text>Welcome to Geoportal of the European Commission. Please sign in.</anonymousformation.text>
 	<guestinformation.text><br/>You are logged in as a guest. Please contact us to get your credentials upgraded.
 	</guestinformation.text>
 	<tag_label>Tags</tag_label>
@@ -1412,6 +1413,9 @@ It can be used to i) discover geographical information available in all Commissi
 The European Commission Geoportal has been deployed by Eurostat and is hosted in a failover environment by DG DIGIT. The GISCO-team in DG ESTAT E.4 is the system owner and administrates rights at the top level. Access rights to the European Commission Geoportal are under the responsibility of each DG and managed at DG level according to the access rights policy.<br/><br/> 
 Information published in the European Commission Geoportal is under the responsibility of various publishers (units/services) of the European Institutions. Therefore, any remark or query regarding the content of a page/site should be addressed to the appropriate Publisher as indicated in the metadata of the information or service.
 </about.text>
+<about.build>Current Build: </about.build>
+<about.siteid>SiteID: </about.siteid>
+
 <legal>Legal notice</legal>
 <legal.text><p><b>The information on this site is subject to a <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#disclaimer" target="_blank" title="disclaimer">disclaimer</a>, a <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#copyright" target="_blank" title="copyright notice">copyright notice</a> and rules related to <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm#personaldata" target="_blank" title="personal data protection">personal data protection</a>.</b></p>
 <br/> 
@@ -1473,8 +1477,11 @@ href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2001:008:0001:0
 <p>When you send such a message, your personal data is collected only to the extent necessary to reply. If the management team of the mailbox is unable to answer your question, it will forward your e-mail to another service. You will be informed, via e-mail, about which service your question has been forwarded to.</p> 
 <p>If you have any questions about the processing of your e-mail and related personal data, do not hesitate to include them in your message.</p>
 </legal.text>
- <contact>Contact</contact>
- <contact.text>Contact infomation ect.</contact.text>
+<contact>Contact</contact>
+<contact.text><h3>We welcome your Feedback!</h3>
+<br/>
+<p>The European Commission Geoportal depends on your feedback to help us make it better. If you have any questions or comments about this site, please take the time to <a href="mailto:ESTAT-INSPIRE-AT-EC@ec.europa.eu?subject=Geoportal%20of%20the%20European%20Commission%20feedback" target="_top" title="ESTAT-INSPIRE-AT-EC@ec.europa.eu">email</a> us with them.</p>  
+</contact.text>
   <signIn>Sign In</signIn>
   <signOut>Sign Out</signOut>
 	<rss-button>RSS</rss-button>

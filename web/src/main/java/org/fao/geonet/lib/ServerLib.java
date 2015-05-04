@@ -93,6 +93,8 @@ public class ServerLib
 	public String getAppPath()    { return appPath; }
 	public String getVersion()    { return serverProps.getProperty("version",    "???"); }
 	public String getSubVersion() { return serverProps.getProperty("subVersion", "???"); }
+	public String getGitRevision() { return serverProps.getProperty("git_revision", "???"); }
+	public String getBuildDate() { return serverProps.getProperty("day", "???"); }
 
 	//---------------------------------------------------------------------------
 	//---

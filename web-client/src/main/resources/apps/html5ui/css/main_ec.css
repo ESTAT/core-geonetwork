@@ -7,7 +7,7 @@ fieldset{border:0;margin:0;padding:0}textarea{resize:vertical}.chromeframe{margi
 .tag-aside{margin:10px;padding-left:3px;float:left;width:18%;min-height:400px}
 .main-article{margin-right:13px;float:right;width:75%}
 #welcome-text{margin:13px;color:#393939;font-size:1.1em;line-height:1.4}
-#about-text{margin:13px;color:#393939;font-size:1.1em;line-height:1.4}
+#about-text,#about-build,#about-siteid{margin:13px;color:#393939;font-size:1.1em;line-height:1.4}
 #legal-text{margin:13px;color:#393939;font-size:1.1em;line-height:1.4}
 #contact-text{margin:13px;color:#393939;font-size:1.1em;line-height:1.4}
 #big-map-container{margin:13px}

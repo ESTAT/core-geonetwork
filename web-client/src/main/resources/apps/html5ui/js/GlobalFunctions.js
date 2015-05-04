@@ -217,8 +217,10 @@ function hideSearch() {
     hide("secondary-aside");
     hide("resultsPanel");
     hide("main-aside");
-    Ext.getCmp('popupminiMap').hide();
     
+    if (Ext.getCmp('popupminiMap')){
+        Ext.getCmp('popupminiMap').hide();
+    }
 }
 
 function showMetadata() {

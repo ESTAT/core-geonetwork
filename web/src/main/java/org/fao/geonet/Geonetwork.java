@@ -223,6 +223,12 @@ public class Geonetwork implements ApplicationHandler {
 
 
 		//------------------------------------------------------------------------
+		//--- Update values in settingManager with values from server.prob
+		settingMan.setValue(dbms, "system/site/git_revision", sl.getGitRevision());
+		settingMan.setValue(dbms, "system/site/build_date", sl.getBuildDate());
+		
+		
+		//------------------------------------------------------------------------
 		//--- initialize Z39.50
 
 		logger.info("  - Z39.50...");

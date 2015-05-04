@@ -341,6 +341,9 @@
 			                    <div id="browser">
 			                     <div id="welcome-text">
 			                      	  <xsl:copy-of select="/root/gui/strings/welcome.text"/>
+			                      	  <xsl:if test="string(/root/gui/session/userId)=''">
+			                      	  	<xsl:copy-of select="/root/gui/strings/anonymousformation.text"/>
+			                      	  </xsl:if>
 			                      	  <xsl:if test="string(/root/gui/session/userId)!='' and string(/root/gui/session/profile)='Guest'">
 			                      	  	<xsl:copy-of select="/root/gui/strings/guestinformation.text"/>
 			                      	  </xsl:if>
@@ -377,9 +380,23 @@
 		                      </div>
 			                    <div id="about" style="display:none;">
 			                    	<div id="about-text">			                    	
-			                      	<xsl:copy-of select="/root/gui/strings/about.text"/>
-		                        </div>
-		                      </div>
+				                      	<xsl:copy-of select="/root/gui/strings/about.text"/>
+			                        </div>
+			                        <br/>
+			                        <div id="about-build">
+				                      	<xsl:copy-of select="/root/gui/strings/about.build"/>
+										<xsl:value-of select="/root/gui/env/platform/version"/>
+										-
+										<xsl:value-of select="/root/gui/env/site/git_revision"/>
+			                        </div>
+			                        <div id="about-siteid">
+				                      	<xsl:copy-of select="/root/gui/strings/about.siteid"/>
+										<xsl:value-of select="/root/gui/env/site/siteId"/>
+			                        </div>
+<!-- 			                        <div> -->
+<!-- 				                      	<xsl:value-of select="/root/gui/env/platform/version"/> -->
+<!-- 			                        </div> -->
+			                      </div>
 			                    <div id="legal" style="display:none;">
 			                    	<div id="legal-text">
 			                      		<xsl:copy-of select="/root/gui/strings/legal.text"/>
@@ -671,7 +688,7 @@
 					
 					<div class="layout-footer" id="EC-footer">
 	                  <ul class="footer-items">
-	                     <li class="modification-date"><span>Last update: 29/4/2015</span></li>
+	                     <li class="modification-date"><span>Last update: <xsl:value-of select="/root/gui/env/site/build_date"/></span></li>
 	                     <li><a href="#">Top</a></li>
 	                     <li><a id="browse-tab" class="selected" href="javascript:showBrowse();">Home</a></li>
 						 <xsl:if test="string(/root/gui/session/userId)!=''">
