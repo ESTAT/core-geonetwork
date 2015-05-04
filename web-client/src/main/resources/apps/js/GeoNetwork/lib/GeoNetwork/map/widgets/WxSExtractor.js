@@ -472,6 +472,14 @@ GeoNetwork.WxSExtractor = Ext.extend(Ext.form.FormPanel, {
                     this.map.removeLayer(this.boxLayer);
                 });
             }
+            
+            setTimeout(function(map){
+              map.zoomToExtent( 
+                  new OpenLayers.Bounds(436188.4882815, 
+                                        -1604566.0703125,
+                                        6222585.4921875, 
+                                        12803087.957031))}, 
+              null, this.map);
         }
     }
 });
