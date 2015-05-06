@@ -9,5 +9,8 @@
 		<update linePattern="release=geonetwork.version">release=${geonetwork.version}</update>
 		<update linePattern="javaVersion=java.version">javaVersion=${geonetwork.version}</update>
 		<update linePattern="OS=os">OS=${os.name} ${os.version} ${os.arch}</update>
+		<update linePattern="git_url=git.remote.origin.url">git_url=${git.remote.origin.url}</update>		
+		<update linePattern="day=git.build.time">day=${git.build.time}</update>		
+		<update linePattern="git_revision=git.commit.id">git_revision=${git.commit.id}</update>		
 	</textFile>
 </overrides>
