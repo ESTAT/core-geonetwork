@@ -110,11 +110,11 @@
 				</tr>
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/password"/> (*)</th>
-					<td class="padded"><input class="content" type="password" name="password" value=""/></td>
+					<td class="padded"><input class="content" type="password" name="password" value="" autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/confirmPassword"/> (*)</th>
-					<td class="padded"><input class="content" type="password" name="password2" value=""/></td>
+					<td class="padded"><input class="content" type="password" name="password2" value="" autocomplete="off"/></td>
 				</tr>
 				<xsl:call-template name="userinfofields"/>
 			</table>

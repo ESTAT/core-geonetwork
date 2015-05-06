@@ -61,7 +61,7 @@
 							<h1><xsl:value-of select="/root/gui/strings/password" /></h1>
 							</td><td>
 							<input class="banner" type="password" id="password" name="password"
-								size="10" onkeypress="return entSub('login')" />
+								size="10" onkeypress="return entSub('login')" autocomplete="off" />
 						</td>
 					</tr>
 				</table>

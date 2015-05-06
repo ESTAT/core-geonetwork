@@ -86,15 +86,15 @@
 			<table>
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/password"/></th>
-					<td class="padded"><input class="content" type="password" name="password"/></td>
+					<td class="padded"><input class="content" type="password" name="password" autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/newPassword"/></th>
-					<td class="padded"><input class="content" type="password" name="newPassword"/></td>
+					<td class="padded"><input class="content" type="password" name="newPassword" autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<th class="padded"><xsl:value-of select="/root/gui/strings/confirmNewPassword"/></th>
-					<td class="padded"><input class="content" type="password" name="newPassword2"/></td>
+					<td class="padded"><input class="content" type="password" name="newPassword2" autocomplete="off"/></td>
 				</tr>
 			</table>
 		</form>

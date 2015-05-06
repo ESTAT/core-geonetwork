@@ -179,7 +179,7 @@
 					
 					<tr>
 						<td class="padded"><label for="{$type}.password"><xsl:value-of select="/root/gui/harvesting/password"/></label></td>
-						<td class="padded"><input id="{$type}.password" class="content" type="password" value="" size="20"/></td>
+						<td class="padded"><input id="{$type}.password" class="content" type="password" value="" size="20" autocomplete="off"/></td>
 					</tr>
 				</table>
 			</td>

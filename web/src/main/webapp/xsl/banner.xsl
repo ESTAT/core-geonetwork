@@ -136,7 +136,7 @@
 									<label>User name:</label>
 									<input type="text" id="username" name="username"/><br/>
 									<label>Password: </label>
-									<input type="password" id="password" name="password"/><br/>
+									<input type="password" id="password" name="password" autocomplete="off"/><br/>
 									<input type="submit" id="login_button" value="Login"/>
 						  		</div>
 							</form>

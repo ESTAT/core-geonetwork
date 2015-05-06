@@ -633,7 +633,7 @@
 
 							<tr>
 								<td class="padded"><xsl:value-of select="/root/gui/config/password"/></td>
-								<td class="padded"><input id="proxy.password" class="content" type="password" value="" size="20"/></td>
+								<td class="padded"><input id="proxy.password" class="content" type="password" value="" size="20" autocomplete="off"/></td>
 							</tr>
 
               <tr>

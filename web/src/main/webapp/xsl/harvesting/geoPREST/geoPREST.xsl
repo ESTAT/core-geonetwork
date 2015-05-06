@@ -79,7 +79,7 @@
 		
 						<tr>
 							<td class="padded"><xsl:value-of select="/root/gui/harvesting/password"/></td>
-							<td class="padded"><input id="geoPREST.password" class="content" type="password" value="" size="20"/></td>
+							<td class="padded"><input id="geoPREST.password" class="content" type="password" value="" size="20" autocomplete="off"/></td>
 						</tr>
 					</table>
 				</td>

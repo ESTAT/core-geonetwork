@@ -87,11 +87,11 @@
 				</tr>
 				<tr>
 			  	<th class="padded"><xsl:value-of select="/root/gui/strings/password"/></th>
-					<td class="padded"><input class="content" type="password" name="password"/></td>
+					<td class="padded"><input class="content" type="password" name="password" autocomplete="off"/></td>
 				</tr>
 				<tr>
 				  <th class="padded"><xsl:value-of select="/root/gui/strings/confirmPassword"/></th>
-					<td class="padded"><input class="content" type="password" name="password2"/></td>
+					<td class="padded"><input class="content" type="password" name="password2" autocomplete="off"/></td>
 				</tr>
 
 				<!-- Add groups -->				

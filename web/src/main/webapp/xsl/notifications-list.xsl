@@ -178,7 +178,7 @@
 										<input class="content" type="text" id="{id}-username" name="username-{id}" value="{username}" size="30"/>
 									</td>
 							        <td style="margin:5px;padding:5px;">
-										<input class="content" type="password" id="{id}-password" name="password-{id}" value="{password}" size="30"/>
+										<input class="content" type="password" id="{id}-password" name="password-{id}" value="{password}" size="30" autocomplete="off"/>
 									</td>
 									<td style="margin:5px;padding:5px;">
 										<input class="content" type="text" id="{id}-url" name="url-{id}" value="{url}" size="60"/>
@@ -195,7 +195,7 @@
 										<input class="content" type="text" id="{id}-username" name="username-{id}" value="{username}" size="30" readonly="readonly"/>
 									</td>
 									<td style="margin:5px;padding:5px;">
-										<input class="content" type="password" id="{id}-password" name="password-{id}" value="{password}" size="30" readonly="readonly"/>
+										<input class="content" type="password" id="{id}-password" name="password-{id}" value="{password}" size="30" readonly="readonly" autocomplete="off"/>
 									</td>
 									<td style="margin:5px;padding:5px;">
 										<input class="content" type="text" id="{id}-url" name="url-{id}" value="{url}" size="60" readonly="readonly"/>
