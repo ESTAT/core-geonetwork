@@ -330,9 +330,13 @@ GeoNetwork.searchApp = function() {
             };
 
             var mapLayers = [];
-            for ( var i = 0; i < GeoNetwork.map.BACKGROUND_LAYERS.length; i++) {
-                mapLayers.push(GeoNetwork.map.BACKGROUND_LAYERS[i].clone());
-            }
+//            for ( var i = 0; i < GeoNetwork.map.BACKGROUND_LAYERS.length; i++) {
+//                mapLayers.push(GeoNetwork.map.BACKGROUND_LAYERS[i].clone());
+//            }
+            
+            var m = app.mapApp.getMap();
+            mapLayers.push(m.baseLayer.clone());
+            
             var geomWithMapField = {
                 xtype : 'gn_geometrymapfield',
                 id : 'geometryMap',
@@ -340,9 +344,11 @@ GeoNetwork.searchApp = function() {
                 width : '100%',
                 height : '212',
                 mapOptions : GeoNetwork.map.MAP_OPTIONS,
+                zoom : 4,
+                center: '0,5000000',
                 activated : false
-            // restrictToMapExtent: true
             };
+            
             var where = {
                 title : OpenLayers.i18n('Where'),
                 id : 'where_adv_search',
