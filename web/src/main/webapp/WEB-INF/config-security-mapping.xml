@@ -241,8 +241,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/subtemplate.types!?.*" access="hasRole('Editor')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/subtemplate.admin!?.*" access="hasRole('Editor')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/admin!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>
-                <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.pwedit!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>
-                <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.pwupdate!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>
+                <!-- ESTAT users are taken from ECAS, a user can't change his password in Geonetwork -->
+                <!--<sec:intercept-url pattern="/srv/[a-z]{2,3}/user.pwedit!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>
+                <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.pwupdate!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>-->
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.infoedit!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.infoupdate!?.*" access="hasRole('RegisteredUser')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/home!?.*" access="permitAll"></sec:intercept-url>

@@ -19,7 +19,8 @@
 			<xsl:with-param name="buttons">
 				<button class="content" onclick="load('{/root/gui/locService}/admin')"><xsl:value-of select="/root/gui/strings/back"/></button>
 				&#160;
-				<button class="content" onclick="load('{/root/gui/locService}/user.get')"><xsl:value-of select="/root/gui/strings/newUser"/></button>
+				<!-- ESTAT users come from ECAS, can't be created -->
+				<!--<button class="content" onclick="load('{/root/gui/locService}/user.get')"><xsl:value-of select="/root/gui/strings/newUser"/></button>-->
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>

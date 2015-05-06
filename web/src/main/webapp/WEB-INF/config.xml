@@ -849,21 +849,22 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="user.pwedit">
+		<!-- ESTAT users are taken from ECAS, a user can't change his password in Geonetwork -->
+		<!--<service name="user.pwedit">
 			<class name=".services.user.Get" />
 
 			<output sheet="user-pwupdate.xsl" />
-		</service>
+		</service>-->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<service name="user.pwupdate">
+		<!--<service name="user.pwupdate">
 			<class name=".services.user.PwUpdate" />
 
 			<output sheet="info.xsl">
 				<xml name="info" file="xml/password-changed.xml" />
 			</output>
-		</service>
+		</service>-->
 
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
