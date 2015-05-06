@@ -67,7 +67,7 @@
 				<input id="username" type="text" value="admin"/>
 				<br/>
 				<label for="password">password:</label>
-				<input id="password" type="text" value="admin"/>
+				<input id="password" type="password" value="admin"/>
 				<br/>
 			</form>
 		</div>
