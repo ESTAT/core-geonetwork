@@ -236,16 +236,16 @@
 									
 									<!-- The following login section is not used but is references in LoginApp.js -->
 									<!-- Do not remove before changing LoginApp.js -->
-									<script>function false_(){ return false; }</script>
-									<form id="login-form" style="display:none;" onsubmit="return false_();">
-										<div id="login_div" style="display:none;" >
-											<label>User name:</label>
-											<input type="text" id="username" name="username"/><br/>
-											<label>Password: </label>
-											<input type="password" id="password" name="password" autocomplete="off"/><br/>
-											<input type="submit" id="login_button" value="Login"/>
-								  		</div>
-									</form>
+<!-- 									<script>function false_(){ return false; }</script> -->
+<!-- 									<form id="login-form" style="display:none;" onsubmit="return false_();"> -->
+<!-- 										<div id="login_div" style="display:none;" > -->
+<!-- 											<label>User name:</label> -->
+<!-- 											<input type="text" id="username" name="username"/><br/> -->
+<!-- 											<label>Password: </label> -->
+<!-- 											<input type="password" id="password" name="password" autocomplete="off"/><br/> -->
+<!-- 											<input type="submit" id="login_button" value="Login"/> -->
+<!-- 								  		</div> -->
+<!-- 									</form> -->
 					 			 </span>
 					 			</li>
 				            </ul>

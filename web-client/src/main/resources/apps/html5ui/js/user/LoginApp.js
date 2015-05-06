@@ -25,12 +25,12 @@ Ext.namespace('GeoNetwork');
 GeoNetwork.loginApp = function() {
     return {
         init : function() {
-            Ext.get("login_button").on(
-                    'click',
-                    function(e) {
-                        app.loginApp.login(Ext.get("username").getValue(),
-                                Ext.get("password").getValue());
-                    });
+//            Ext.get("login_button").on(
+//                    'click',
+//                    function(e) {
+//                        app.loginApp.login(Ext.get("username").getValue(),
+//                                Ext.get("password").getValue());
+//                    });
 
             catalogue.on('afterBadLogin', this.loginAlert, this);
 
@@ -41,12 +41,12 @@ GeoNetwork.loginApp = function() {
                             'afterLogin',
                             function(e) {
                                 cookie.set('user', catalogue.identifiedUser);
-                                hide("login-form");
+//                                hide("login-form");
                                 Ext.getCmp('md-selection-info').show();
 
                                 var user = catalogue.identifiedUser;
-                                Ext.get("username").dom.value = ("");
-                                Ext.get("password").dom.value = ("");
+//                                Ext.get("username").dom.value = ("");
+//                                Ext.get("password").dom.value = ("");
                                 if (Ext.isIE) {
                                     Ext.get("user-button_label").dom.innerText = OpenLayers
                                             .i18n("logout");
@@ -94,8 +94,8 @@ GeoNetwork.loginApp = function() {
                     Ext.get("name_label").update("");
                     Ext.get("profile_label").update("");
                 }
-                Ext.get("username").dom.value = ("");
-                Ext.get("password").dom.value = ("");
+//                Ext.get("username").dom.value = ("");
+//                Ext.get("password").dom.value = ("");
                 Ext.get("user-button").dom.href = "../../login";
 
                 // Clean previous user data
