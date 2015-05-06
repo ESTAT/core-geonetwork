@@ -267,7 +267,8 @@
 
 	<xsl:template name="authentication">
 		<h1 align="left"><xsl:value-of select="/root/gui/config/authentication"/></h1>
-		<div align="left" style="{$style}">
+		<!-- ESTAT user self-registration is disabled, hide this section -->
+		<div align="left" style="{$style}; display:none">
 			<table>
 				<tr>
 					<td class="padded" width="{$width}"><label for="userSelfRegistration.enable"><xsl:value-of select="concat(/root/gui/config/enable,' ',/root/gui/config/userSelfRegistration)"/></label></td>

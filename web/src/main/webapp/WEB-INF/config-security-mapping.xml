@@ -360,8 +360,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/crs.get!?.*" access="permitAll"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/portal.sru!?.*" access="permitAll"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/test.csw!?.*" access="permitAll"></sec:intercept-url>
-                <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.register.get!?.*" access="permitAll"></sec:intercept-url>
-                <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.register.submit!?.*" access="permitAll"></sec:intercept-url>
+                <!-- User registration not used in ESTAT -->
+                <!--<sec:intercept-url pattern="/srv/[a-z]{2,3}/user.register.get!?.*" access="permitAll"></sec:intercept-url>
+                <sec:intercept-url pattern="/srv/[a-z]{2,3}/user.register.submit!?.*" access="permitAll"></sec:intercept-url>-->
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/xml.password.emaillink!?.*" access="permitAll"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/xml.password.change!?.*" access="permitAll"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/password.forgotten.form!?.*" access="permitAll"></sec:intercept-url>
