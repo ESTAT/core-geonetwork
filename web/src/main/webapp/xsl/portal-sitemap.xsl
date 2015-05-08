@@ -3,8 +3,23 @@
     xmlns:geonet="http://www.fao.org/geonetwork" exclude-result-prefixes="#all">
   
   <xsl:variable name="format" select="/root/request/format"/>
-  
-  
+
+
+  <xsl:variable name="port">
+    <xsl:choose>
+      <xsl:when test="/root/gui/env/server/protocol = 'https'">
+        <xsl:value-of select="/root/gui/env/server/securePort"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="/root/gui/env/server/port"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <xsl:variable name="urlPrefix" select="concat(/root/gui/env/server/protocol, '://',
+    /root/gui/env/server/host,
+    if ($port='80') then '' else concat(':', $port))"/>
+
   <xsl:template match="/root">
       
       <xsl:choose>
@@ -18,6 +33,7 @@
   </xsl:template>
   
   <xsl:template name="xml">
+
     <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:geo="http://www.google.com/geo/schemas/sitemap/1.0"
@@ -38,11 +54,11 @@
                     <xsl:with-param name="uuid" select="$uuid"/>
                   </xsl:call-template>
                 </xsl:variable>
-                <xsl:value-of select="/root/gui/env/server/protocol"/>://<xsl:value-of select="/root/gui/env/server/host"/>:<xsl:value-of select="/root/gui/env/server/port"/><xsl:value-of select="/root/gui/locService"/>/<xsl:value-of select="$metadataUrlValue"/>
+                <xsl:value-of select="$urlPrefix"/><xsl:value-of select="/root/gui/locService"/>/<xsl:value-of select="$metadataUrlValue"/>
               </xsl:when>
               
               <xsl:otherwise>
-                <xsl:value-of select="/root/gui/env/server/protocol"/>://<xsl:value-of select="/root/gui/env/server/host"/>:<xsl:value-of select="/root/gui/env/server/port"/><xsl:value-of select="/root/gui/url"/>/?uuid=<xsl:value-of select="$uuid"/>
+                <xsl:value-of select="$urlPrefix"/><xsl:value-of select="/root/gui/url"/>/?uuid=<xsl:value-of select="$uuid"/>
               </xsl:otherwise>
             </xsl:choose>
           </loc>
@@ -61,7 +77,7 @@
       <sc:dataset>
         <sc:datasetLabel><xsl:value-of select="/root/gui/env/site/name"/> content catalogue for Linked Data spiders (RDF)</sc:datasetLabel>
         <xsl:for-each select="response/record">
-          <sc:dataDumpLocation><xsl:value-of select="/root/gui/env/server/protocol"/>://<xsl:value-of select="/root/gui/env/server/host"/>:<xsl:value-of select="/root/gui/env/server/port"/><xsl:value-of select="/root/gui/url"/>/srv/eng/rdf.metadata.get?uuid=<xsl:value-of select="uuid"/></sc:dataDumpLocation>
+          <sc:dataDumpLocation><xsl:value-of select="$urlPrefix"/><xsl:value-of select="/root/gui/url"/>/srv/eng/rdf.metadata.get?uuid=<xsl:value-of select="uuid"/></sc:dataDumpLocation>
         </xsl:for-each>
         <!--For 5 latests update:
         <sc:sampleURI>http://<server_host>:<server_port>/<catalogue>/metadata/<uuid>.rdf</sc:sampleURI>
