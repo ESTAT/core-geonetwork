@@ -296,7 +296,9 @@
 		                            <div id="fb-button">
 		                           </div>
 		                       </div>
-<!-- 		                       <div id="permalink-div" style="display:none"></div> -->
+                       <div id="metadata-info" class="display:none"></div>
+
+											 <!-- 		                       <div id="permalink-div" style="display:none"></div> -->
 		                        <div id="bread-crumb-app"></div>
 		                        <div id="search-form" style="display: none;">
 		                            <fieldset id="search-form-fieldset">
@@ -410,7 +412,6 @@
 			                    
 								<div id="big-map-container" style="display:none;"/>
 		                       <div id="permalink-div" style="display:none"/>
-		                       <div id="metadata-info" style="display:none;"/>
 								<div id="search-container" class="main wrapper clearfix">
 									<div id="bread-crumb-div"></div>
 		
