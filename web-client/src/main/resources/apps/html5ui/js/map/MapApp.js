@@ -248,7 +248,7 @@ GeoNetwork.mapApp = function() {
         	var width = mm.getWidth();
         	
         	var scrolloffsetY = getScrollTop();
-        	pos[1] = Math.max(scrolloffsetY, pos[1]);
+        	pos[1] = Math.max(scrolloffsetY, pos[1]+15);
         	
         	popupwindow.setPosition(pos[0], pos[1]);
         	popupwindow.setWidth(width)
