@@ -202,7 +202,7 @@ GeoNetwork.mapApp = function() {
         });       
         
         popupwindow._scrolloffsetY = 0;
-        popupwindow._minimized = false;
+        popupwindow._minimized = true;
         popupwindow._posX = 20;
         popupwindow._posY = 20;
         popupwindow._width = 300;
@@ -220,8 +220,19 @@ GeoNetwork.mapApp = function() {
         	}
         	catch (e) {}
         }        
+        
+        
+        if (popupwindow._minimized){
+        	popupwindow.constrain = false;
+        	//updateMinimizedMapPosition();
+           	popupwindow.setPosition(popupwindow._posX, popupwindow._posY - 10000);
+        }
+        else {
+        	popupwindow.constrain = true;
+           	popupwindow.setPosition(popupwindow._posX, popupwindow._posY + popupwindow._scrolloffsetY);
+        }
 //		console.log('Initial setPosition ' + popupwindow._posX + ', ' + popupwindow._posY);
-       	popupwindow.setPosition(popupwindow._posX, popupwindow._posY + popupwindow._scrolloffsetY);
+//       	popupwindow.setPosition(popupwindow._posX, popupwindow._posY + popupwindow._scrolloffsetY);
 //       	popupwindow.setWidth(popupwindow._width);
 //       	popupwindow.setHeight(popupwindow._height);
 
@@ -251,7 +262,13 @@ GeoNetwork.mapApp = function() {
         	pos[1] = Math.max(scrolloffsetY, pos[1]+15);
         	
         	popupwindow.setPosition(pos[0], pos[1]);
-        	popupwindow.setWidth(width)
+        	if (width>0){
+            	popupwindow.setWidth(width)
+        	}
+        	
+        	if (popupwindow.height<20){
+            	popupwindow.setHeight(popupwindow._height);
+        	}
         }
 
         function updatePopupwindowPosition(){
@@ -323,8 +340,11 @@ GeoNetwork.mapApp = function() {
 
 //        popupwindow.on("show", function(){
 ////     		console.log('window show');
-//    		refreshWindowPosition();
+//        	if (popupwindow.y<0){
+//        		refreshWindowPosition();
+//        	}
 //        });
+
         
         
 //        var popupPanelMap = Ext.getCmp('minimap').map;
