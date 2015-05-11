@@ -164,7 +164,7 @@ GeoNetwork.app = function() {
         
         var ownerid = catalogue.identifiedUser.id;
         catalogue.kvpSearch(
-                "fast=index&from=1&to=3&_owner=" + ownerid + "&sortBy=changeDate",
+                "fast=index&from=1&to=3&_isHarvested=n&_owner=" + ownerid + "&sortBy=changeDate",
                 function(e) {
                 	// show my data if it contains any data
                     var getRecordsFormat = new OpenLayers.Format.GeoNetworkRecords();
