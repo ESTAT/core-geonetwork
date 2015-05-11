@@ -344,8 +344,8 @@ GeoNetwork.searchApp = function() {
                 width : '100%',
                 height : '212',
                 mapOptions : GeoNetwork.map.MAP_OPTIONS,
-                zoom : 4,
-                center: '0,5000000',
+                zoom : 2,
+                center: '1000000,7000000',
                 activated : false
             };
             

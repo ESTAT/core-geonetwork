@@ -149,7 +149,7 @@ GeoNetwork.mapApp = function() {
                 map: map,
                 minimizable: true,
 //                prettyStateKeys : true,
-                zoom : 4,//10,
+                zoom : 3,//10,
                 bbar: new Ext.Toolbar()
             }],
             minimizable: true,
@@ -347,7 +347,7 @@ GeoNetwork.mapApp = function() {
         map.addControl(zoom);
         zoom. activate();
         
-      var initialPosition = new OpenLayers.LonLat(0,5000000);
+      var initialPosition = new OpenLayers.LonLat(1000000,7000000);
       map.setCenter(initialPosition,2);
 
         //popupwindow.show();
@@ -552,7 +552,7 @@ GeoNetwork.mapApp = function() {
                 }
             });
             
-            var initialPosition = new OpenLayers.LonLat(1000000,8000000);
+            var initialPosition = new OpenLayers.LonLat(1000000,7000000);
             map2.setCenter(initialPosition,3);
 
             Ext.each(app.mapApp.maps, function(m) {

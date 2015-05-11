@@ -193,9 +193,17 @@ GeoNetwork.form.GeometryMapField = Ext.extend(GeoExt.MapPanel, {
                     if (pressed) {
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(function(position) {
-                                o.map.panTo(new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude));
-                                o.geometryField.setValue('POINT(' + position.coords.latitude + ' ' + 
-                                                                    position.coords.longitude + ')');
+                                // position is in the wrong projection. Transform to map projection
+                            	var source = new Proj4js.Proj('EPSG:4326');
+                            	var dest = new Proj4js.Proj(GeoNetwork.map.PROJECTION);
+                            	var p = new Proj4js.Point(position.coords.longitude, position.coords.latitude);
+                            	var pos = Proj4js.transform(source, dest, p);
+                                o.map.panTo(new OpenLayers.LonLat(pos.x, pos.y));
+                                o.geometryField.setValue('POINT(' + pos.x + ' ' + pos.y + ')');
+                                // OpenLayers transform does not work. Use Proj4js instead
+                            	//var pos1 = new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude).transform(OpenLayers.Projection("EPSG:4326"), OpenLayers.Projection(GeoNetwork.map.PROJECTION));
+                                //o.map.panTo(new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude));
+                                //o.geometryField.setValue('POINT(' + position.coords.latitude + ' ' + position.coords.longitude + ')');
                             }); //, function(error){console.log(error);});
                         }
                     } else {
