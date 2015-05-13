@@ -153,6 +153,8 @@ function showBigMap() {
     hideBrowse();
     hideSearch();
     hideAbout();
+	hideLegal();
+	hideContact();
     hideMetadata();
     hide("search-form");
 
@@ -186,7 +188,9 @@ function hideBigMap() {
 
 function showSearch() {
     hideBrowse();
-    hideAbout();
+	hideAbout();
+	hideLegal();
+	hideContact();
     hideMetadata();
     hideBigMap();
     show("search-form");
@@ -227,7 +231,9 @@ function showMetadata() {
 
     hide("search-form");
     hideBrowse();
-    hideAbout();
+	hideAbout();
+	hideLegal();
+	hideContact();
     hideSearch();
     hideBigMap();
 
