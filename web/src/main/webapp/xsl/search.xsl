@@ -180,6 +180,13 @@
 										<xsl:value-of select="/root/gui/strings/legal" />
 					               </a>
 				               </li>
+				                  <li>
+					               <a id="help-tab" href="/docs/eng/users/index.html" target="_blank">
+										<xsl:value-of select="/root/gui/strings/help" />
+					               </a>
+				               </li>
+	
+				               
 				               <li>
 					               <a id="contact-tab" href="javascript:showContact();">
 										<xsl:value-of select="/root/gui/strings/contact" />
@@ -409,6 +416,7 @@
 			                      		<xsl:copy-of select="/root/gui/strings/contact.text"/>
 		                        	</div>
 		                      </div>
+
 			                    
 								<div id="big-map-container" style="display:none;"/>
 		                       <div id="permalink-div" style="display:none"/>
