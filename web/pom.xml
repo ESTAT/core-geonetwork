@@ -965,7 +965,7 @@
             <!-- Remove comment tag to include documentation in the build. 
             Python and Latex are required to build the documentation. -->
             
-            <!--
+            
             <resource>
               <directory>../docs/eng/users/build/html</directory>
               <targetPath>docs/eng/users</targetPath>
@@ -996,7 +996,11 @@
                 <includes>
                   <include>GeoNetworkDeveloperManual.pdf</include>
                 </includes>
-            </resource>-->
+            </resource>
+            
+            
+            
+            
           </webResources>
           <overlays>
             <overlay>

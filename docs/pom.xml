@@ -89,7 +89,8 @@
                  <arguments>
                    <argument>all-pdf</argument>
                  </arguments>
-               <workingDirectory>${basedir}/eng/users/build/latex</workingDirectory>
+<!--                <workingDirectory>${basedir}/eng/users/build/latex</workingDirectory> -->
+               <workingDirectory>${basedir}/eng/users</workingDirectory>
              </configuration>
            </execution>
 
@@ -139,20 +140,20 @@
              </configuration>
            </execution>
 
-            <execution>
-             <id>developer-docs-build-all-pdf</id>
-             <phase>prepare-package</phase>
-             <goals>
-               <goal>exec</goal>
-             </goals>
-             <configuration>
-               <executable>make</executable>
-                 <arguments>
-                   <argument>all-pdf</argument>
-                 </arguments>
-               <workingDirectory>${basedir}/eng/developer/build/latex</workingDirectory>
-             </configuration>
-           </execution>
+<!--             <execution> -->
+<!--              <id>developer-docs-build-all-pdf</id> -->
+<!--              <phase>prepare-package</phase> -->
+<!--              <goals> -->
+<!--                <goal>exec</goal> -->
+<!--              </goals> -->
+<!--              <configuration> -->
+<!--                <executable>make</executable> -->
+<!--                  <arguments> -->
+<!--                    <argument>all-pdf</argument> -->
+<!--                  </arguments> -->
+<!--                <workingDirectory>${basedir}/eng/developer/build/latex</workingDirectory> -->
+<!--              </configuration> -->
+<!--            </execution> -->
             
 			<!-- English documentation guide docs -->
             <execution>
@@ -200,51 +201,51 @@
              </configuration>
            </execution>
 
-            <execution>
-             <id>docguide-docs-build-all-pdf</id>
-             <phase>prepare-package</phase>
-             <goals>
-               <goal>exec</goal>
-             </goals>
-             <configuration>
-               <executable>make</executable>
-                 <arguments>
-                   <argument>all-pdf</argument>
-                 </arguments>
-               <workingDirectory>${basedir}/eng/docguide/build/latex</workingDirectory>
-             </configuration>
-           </execution>
+<!--             <execution> -->
+<!--              <id>docguide-docs-build-all-pdf</id> -->
+<!--              <phase>prepare-package</phase> -->
+<!--              <goals> -->
+<!--                <goal>exec</goal> -->
+<!--              </goals> -->
+<!--              <configuration> -->
+<!--                <executable>make</executable> -->
+<!--                  <arguments> -->
+<!--                    <argument>all-pdf</argument> -->
+<!--                  </arguments> -->
+<!--                <workingDirectory>${basedir}/eng/docguide/build/latex</workingDirectory> -->
+<!--              </configuration> -->
+<!--            </execution> -->
       
 
-            <execution>
-              <id>user-docs-clean-fra</id>
-              <phase>prepare-package</phase>
-              <goals>
-                <goal>exec</goal>
-              </goals>
-              <configuration>
-                <executable>make</executable>
-                  <arguments>
-                    <argument>clean</argument>
-                  </arguments>
-                <workingDirectory>${basedir}/fra/users</workingDirectory>
-              </configuration>
-            </execution>
+<!--             <execution> -->
+<!--               <id>user-docs-clean-fra</id> -->
+<!--               <phase>prepare-package</phase> -->
+<!--               <goals> -->
+<!--                 <goal>exec</goal> -->
+<!--               </goals> -->
+<!--               <configuration> -->
+<!--                 <executable>make</executable> -->
+<!--                   <arguments> -->
+<!--                     <argument>clean</argument> -->
+<!--                   </arguments> -->
+<!--                 <workingDirectory>${basedir}/fra/users</workingDirectory> -->
+<!--               </configuration> -->
+<!--             </execution> -->
 
-            <execution>
-             <id>user-docs-build-html-fra</id>
-             <phase>prepare-package</phase>
-             <goals>
-               <goal>exec</goal>
-             </goals>
-             <configuration>
-               <executable>make</executable>
-                 <arguments>
-                   <argument>html</argument>
-                 </arguments>
-               <workingDirectory>${basedir}/fra/users</workingDirectory>
-             </configuration>
-           </execution>
+<!--             <execution> -->
+<!--              <id>user-docs-build-html-fra</id> -->
+<!--              <phase>prepare-package</phase> -->
+<!--              <goals> -->
+<!--                <goal>exec</goal> -->
+<!--              </goals> -->
+<!--              <configuration> -->
+<!--                <executable>make</executable> -->
+<!--                  <arguments> -->
+<!--                    <argument>html</argument> -->
+<!--                  </arguments> -->
+<!--                <workingDirectory>${basedir}/fra/users</workingDirectory> -->
+<!--              </configuration> -->
+<!--            </execution> -->
             
 
           <execution>
@@ -259,19 +260,21 @@
               <workingDirectory>${basedir}/widgets</workingDirectory>
             </configuration>
           </execution>
-          <execution>
-            <id>ant-widgets</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>ant</executable>
+<!--           <execution> -->
+<!--             <id>ant-widgets</id> -->
+<!--             <phase>prepare-package</phase> -->
+<!--             <goals> -->
+<!--               <goal>exec</goal> -->
+<!--             </goals> -->
+<!--             <configuration> -->
+<!--               <executable>ant</executable> -->
               
-              <workingDirectory>${basedir}/widgets</workingDirectory>
-            </configuration>
-          </execution>
-        </executions>      
+<!--               <workingDirectory>${basedir}/widgets</workingDirectory> -->
+<!--             </configuration> -->
+<!--           </execution> -->
+        </executions>  
+        
+            
       </plugin>
     </plugins>
   </build>
