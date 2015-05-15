@@ -181,7 +181,7 @@
 					               </a>
 				               </li>
 				                  <li>
-					               <a id="help-tab" href="/docs/eng/users/index.html" target="_blank">
+					               <a id="help-tab" href="{/root/gui/url}/docs/eng/users/index.html" target="_blank">
 										<xsl:value-of select="/root/gui/strings/help" />
 					               </a>
 				               </li>
