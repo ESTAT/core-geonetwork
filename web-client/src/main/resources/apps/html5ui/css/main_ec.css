@@ -101,3 +101,12 @@ div#advSearchTabs ul{padding:0;margin:0}div#advSearchTabs input{border:0}#inspir
 	background-color: #0065A2;
 	color: white;
 }
+
+.WWWDOWNLOAD, .WFSDownloadIcon, .OGCWMC, .OGCKML, .OGCGML, .related li.Atom {
+    background-image: url(../img/icon_download_dataset.png)!important;
+
+}
+
+.WFSDownloadIcon {
+    padding-left: 24px !important;
+}

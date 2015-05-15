@@ -583,18 +583,19 @@
                               '{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}', 
                               '{gmd:CI_OnlineResource/gmd:name/gco:CharacterString}', '{generate-id()}']]);">&#160;</a>
                   </xsl:if>
-                  
-                  <xsl:if test="contains(current-grouping-key(), 'DOWNLOAD') or contains(current-grouping-key(), 'WFS') or contains(current-grouping-key(), 'WCS')">
+
+                  <!-- This section was duplicating the link for DOWNLOAD, WFS and WCS (already added in first <a> in the <li> element -->
+                  <!--<xsl:if test="contains(current-grouping-key(), 'DOWNLOAD') or contains(current-grouping-key(), 'WFS') or contains(current-grouping-key(), 'WCS')">
                     <a href="{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}">
-                      <!-- Name contains layer, feature type, coverage ... -->
+                      &lt;!&ndash; Name contains layer, feature type, coverage ... &ndash;&gt;
                     <xsl:choose>
-                    <!-- We need to use the name for the download hack -->
-                      <!-- <xsl:when test="normalize-space($desc)!=''">
+                    &lt;!&ndash; We need to use the name for the download hack &ndash;&gt;
+                      &lt;!&ndash; <xsl:when test="normalize-space($desc)!=''">
                         <xsl:value-of select="$desc"/>
                         <xsl:if test="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type">
                           (<xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type"/>)
                         </xsl:if>
-                      </xsl:when> -->
+                      </xsl:when> &ndash;&gt;
                       <xsl:when
                         test="normalize-space(gmd:CI_OnlineResource/gmd:name/gco:CharacterString)!=''">
                         <xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gco:CharacterString"/>
@@ -605,10 +606,10 @@
                     </xsl:choose>
                     </a>
                     <span class="desc">
-                            <!-- https://eos.geocat.net/redmine/issues/3418 -->
+                            &lt;!&ndash; https://eos.geocat.net/redmine/issues/3418 &ndash;&gt;
                             <xsl:value-of select="/root/gui/strings/urlForApp"/>
                         </span>
-                  </xsl:if>
+                  </xsl:if>-->
                   
                 </li>
               </xsl:for-each>
