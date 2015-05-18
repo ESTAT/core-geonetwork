@@ -89,8 +89,7 @@
                  <arguments>
                    <argument>all-pdf</argument>
                  </arguments>
-<!--                <workingDirectory>${basedir}/eng/users/build/latex</workingDirectory> -->
-               <workingDirectory>${basedir}/eng/users</workingDirectory>
+                <workingDirectory>${basedir}/eng/users/build/latex</workingDirectory>
              </configuration>
            </execution>
 
