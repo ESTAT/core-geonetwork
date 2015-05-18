@@ -131,7 +131,7 @@ padding: 0;
 Structural Elements
 -----------------------*/
 #header {
-background: #fff url(./chrome/title_en-inspire.png) 0 100% repeat-x;
+background: #fff url(./chrome/title_en.gif) 0 100% repeat-x;
   width: 990px;
   border-left: 1px solid #0065a2;
   border-right: 1px solid #0065a2;
@@ -921,4 +921,14 @@ div.acklogo {
 	padding-top: 8px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #e4f1d0;
+}
+
+#header #banner-title-text {
+  margin: 0;
+  border: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  padding-left: 240px;
+  position: absolute;
+  top: 65px;
 }
