@@ -757,8 +757,8 @@
                      </xsl:otherwise>
                  </xsl:choose>
 
-<!--   				<xsl:choose> -->
-<!-- 					<xsl:when test="/root/request/debug"> -->
+   				<xsl:choose>
+					<xsl:when test="/root/request/debug">
 						<script type="text/javascript">
 							<xsl:attribute name="src"><xsl:value-of
 								select="$baseUrl" />/apps/js/ext-ux/Rating/RatingItem.js</xsl:attribute>
@@ -884,16 +884,13 @@
                                 select="$baseUrl" />/apps/html5ui/js/App.js</xsl:attribute>
 						</script>
 						
-<!--  					</xsl:when> -->
-<!-- 					<xsl:otherwise> -->
-<!-- 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script> -->
-<!-- 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script> -->
-<!-- 					</xsl:otherwise> -->
-<!-- 				</xsl:choose> -->
+  					</xsl:when> 
+ 					<xsl:otherwise>
+ 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/App-mini.js')}"></script> 
+ 						<script type="text/javascript" src="{concat($baseUrl, '/apps/html5ui/js/GlobalFunctions.js')}"></script> 
+ 					</xsl:otherwise> 
+ 	  		</xsl:choose> 
 
-
-
-<!--             </div> -->
 	
 	
 	
