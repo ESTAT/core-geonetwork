@@ -523,9 +523,14 @@
         
 					
         <xsl:for-each-group select="gmd:distributionInfo/descendant::gmd:onLine[gmd:CI_OnlineResource/gmd:linkage/gmd:URL!='']" group-by="gmd:CI_OnlineResource/gmd:protocol">
+        <th>
+            <td class="title" colspan="2">
+                <xsl:value-of select="/root/gui/schemas/iso19139/labels/element[@name = 'gmd:protocol']/helper/option[@value=normalize-space(current-grouping-key())]"/>
+           </td>
+        </th>
         <tr>
           <td class="main">
-            <span class="{translate(substring-before(current-grouping-key(), '-'), ':', '')} icon">
+             <span class="{translate(substring-before(current-grouping-key(), '-'), ':', '')} icon">
                 <xsl:value-of select="/root/gui/schemas/iso19139/labels/element[@name = 'gmd:protocol']/helper/option[@value=normalize-space(current-grouping-key())]"/>
             </span>
           </td>
