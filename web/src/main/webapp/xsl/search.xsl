@@ -278,9 +278,18 @@
 					 <div id="page-container">
             			<div id="container"><a class="off-screen" id="content" name="content"></a><p class="off-screen">Additional tools</p>
 							<ul class="reset-list" id="additional-tools">
-			                  <li><a href="javascript:window.print();" id="printer-button"><img alt="Print version" src="/geonetwork/apps/html5ui/images/print.gif"></img></a></li>
-			                  <li><a href="javascript:tools.fonts.decrease();" title="Decrease text"><img alt="smaller font" id="small font" src="/geonetwork/apps/html5ui/images/font-decrease.gif"></img></a></li>
-			                  <li><a href="javascript:tools.fonts.increase();" title="Increase text"><img alt="smaller font" id="small font" src="/geonetwork/apps/html5ui/images/font-increase.gif"></img></a></li>
+			                  <li><a href="javascript:window.print();" id="printer-button">
+				                  <img alt="Print version">
+				                     <xsl:attribute name="src"><xsl:value-of select="$baseUrl" />/apps/html5ui/images/print.gif</xsl:attribute>
+				                  </img></a></li>
+			                  <li><a href="javascript:tools.fonts.decrease();" title="Decrease text">
+			                      <img alt="smaller font" id="small font">
+                                     <xsl:attribute name="src"><xsl:value-of select="$baseUrl" />/apps/html5ui/images/font-decrease.gif</xsl:attribute>
+                                  </img></a></li>
+			                  <li><a href="javascript:tools.fonts.increase();" title="Increase text">
+			                      <img alt="smaller font" id="small font">
+                                     <xsl:attribute name="src"><xsl:value-of select="$baseUrl" />/apps/html5ui/images/font-increase.gif</xsl:attribute>
+                                  </img></a></li>
 			                  <li>
 			                     <div id="share-tool"><script type="text/javascript">if(typeof iBeginShare == "object"){iBeginShare.attachLink('share-tool');}</script></div>
 			                  </li>
