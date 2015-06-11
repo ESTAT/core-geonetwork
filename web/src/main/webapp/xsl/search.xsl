@@ -181,7 +181,17 @@
 					               </a>
 				               </li>
 				                  <li>
-					               <a id="help-tab" href="{/root/gui/url}/docs/eng/users/index.html" target="_blank">
+					               <a href="{/root/gui/url}/docs/eng/users/index.html" onclick="window.open(this.href,'targetWindow',
+									                                   'toolbar=no,
+									                                    location=no,
+									                                    status=no,
+									                                    menubar=no,
+									                                    scrollbars=yes,
+									                                    resizable=yes,
+									                                    width=500px,
+									                                    height=500px');
+																		 return false;">		               
+					               
 										<xsl:value-of select="/root/gui/strings/help" />
 					               </a>
 				               </li>
