@@ -30,7 +30,16 @@ Proj4js.defs["EPSG:2154"] = "+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 
 
 Proj4js.defs["EPSG:3857"] = "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
 Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-GeoNetwork.map.printCapabilities = "../../pdf";
+GeoNetwork.map.printCapabilities = window.location.href;
+GeoNetwork.map.printCapabilities = 
+  GeoNetwork.map.printCapabilities.substring(0,
+          GeoNetwork.map.printCapabilities.lastIndexOf("/"));
+GeoNetwork.map.printCapabilities = 
+  GeoNetwork.map.printCapabilities.substring(0,
+          GeoNetwork.map.printCapabilities.lastIndexOf("/"));
+GeoNetwork.map.printCapabilities = 
+  GeoNetwork.map.printCapabilities.substring(0,
+          GeoNetwork.map.printCapabilities.lastIndexOf("/")) + "/pdf";
 
 // Config for WGS84 based maps
 GeoNetwork.map.PROJECTION = "EPSG:3857";
