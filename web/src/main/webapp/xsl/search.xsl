@@ -181,7 +181,17 @@
 					               </a>
 				               </li>
 				                  <li>
-					               <a id="help-tab" href="{/root/gui/url}/docs/eng/users/index.html" target="_blank">
+					               <a href="{/root/gui/url}/docs/eng/users/index.html" onclick="window.open(this.href,'targetWindow',
+									                                   'toolbar=no,
+									                                    location=no,
+									                                    status=no,
+									                                    menubar=no,
+									                                    scrollbars=yes,
+									                                    resizable=yes,
+									                                    width=500px,
+									                                    height=500px');
+																		 return false;">		               
+					               
 										<xsl:value-of select="/root/gui/strings/help" />
 					               </a>
 				               </li>
@@ -278,18 +288,22 @@
 					 <div id="page-container">
             			<div id="container"><a class="off-screen" id="content" name="content"></a><p class="off-screen">Additional tools</p>
 							<ul class="reset-list" id="additional-tools">
-			                  <li><a href="javascript:window.print();" id="printer-button">
-				                  <img alt="Print version">
-				                     <xsl:attribute name="src"><xsl:value-of select="$baseUrl" />/apps/html5ui/images/print.gif</xsl:attribute>
-				                  </img></a></li>
-			                  <li><a href="javascript:tools.fonts.decrease();" title="Decrease text">
-			                      <img alt="smaller font" id="small font">
-                                     <xsl:attribute name="src"><xsl:value-of select="$baseUrl" />/apps/html5ui/images/font-decrease.gif</xsl:attribute>
-                                  </img></a></li>
-			                  <li><a href="javascript:tools.fonts.increase();" title="Increase text">
-			                      <img alt="smaller font" id="small font">
-                                     <xsl:attribute name="src"><xsl:value-of select="$baseUrl" />/apps/html5ui/images/font-increase.gif</xsl:attribute>
-                                  </img></a></li>
+			                  <li>
+			                  	<a href="javascript:window.print();" id="printer-button">
+			                  		<img src="../../apps/html5ui/images/print.gif" alt="Print version"/>
+				              	</a>
+				              </li>
+				              <li>
+			                  	<a href="javascript:tools.fonts.decrease();" id="Decrease text">
+			                  		<img src="../../apps/html5ui/images/font-decrease.gif" alt="smaller font"/>
+				              	</a>
+				              </li>
+				              <li>
+			                  	<a href="javascript:tools.fonts.increase();" id="Increase text">
+			                  		<img border="0" src="../../apps/html5ui/images/font-increase.gif" alt="Larger font"/>
+				              	</a>
+				              </li>
+			                 
 			                  <li>
 			                     <div id="share-tool"><script type="text/javascript">if(typeof iBeginShare == "object"){iBeginShare.attachLink('share-tool');}</script></div>
 			                  </li>
