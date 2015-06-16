@@ -66,7 +66,8 @@
 		<xsl:call-template name="proxy"/>
 		<xsl:call-template name="feedback"/>
 		<xsl:call-template name="removedMetadata"/>
-		<xsl:call-template name="authentication"/>
+        <xsl:call-template name="authentication"/>
+        <xsl:call-template name="statistics"/>
 	</xsl:template>
 
 	<!-- ============================================================================================= -->
@@ -262,32 +263,48 @@
 			</table>
 		</div>
 	</xsl:template>
-	
-	<!-- ============================================================================================= -->
+    
+    <!-- ============================================================================================= -->
 
-	<xsl:template name="authentication">
-		<h1 align="left"><xsl:value-of select="/root/gui/config/authentication"/></h1>
-		<!-- ESTAT user self-registration is disabled, hide this section -->
-		<div align="left" style="{$style}; display:none">
-			<table>
-				<tr>
-					<td class="padded" width="{$width}"><label for="userSelfRegistration.enable"><xsl:value-of select="concat(/root/gui/config/enable,' ',/root/gui/config/userSelfRegistration)"/></label></td>
-					<td><input id="userSelfRegistration.enable" class="content" type="checkbox"/></td>
-				</tr>
-			</table>
-		</div>
-		
-		<div align="left" style="{$style}">
-			<b><xsl:value-of select="concat(/root/gui/config/otherlogins,': ')"/></b>
-			<div align="left" style="{$style}">
-				<input align="left" type="checkbox" id="shib.use" name="authentication" value="shib"/>
-				<label for="shib.use">
-					<xsl:value-of select="/root/gui/config/shib"/> 
-				</label>
-				<xsl:call-template name="shib"/>
-			</div>
-		</div>
-	</xsl:template>
+    <xsl:template name="authentication">
+        <h1 align="left"><xsl:value-of select="/root/gui/config/authentication"/></h1>
+        <!-- ESTAT user self-registration is disabled, hide this section -->
+        <div align="left" style="{$style}; display:none">
+            <table>
+                <tr>
+                    <td class="padded" width="{$width}"><label for="userSelfRegistration.enable"><xsl:value-of select="concat(/root/gui/config/enable,' ',/root/gui/config/userSelfRegistration)"/></label></td>
+                    <td><input id="userSelfRegistration.enable" class="content" type="checkbox"/></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div align="left" style="{$style}">
+            <b><xsl:value-of select="concat(/root/gui/config/otherlogins,': ')"/></b>
+            <div align="left" style="{$style}">
+                <input align="left" type="checkbox" id="shib.use" name="authentication" value="shib"/>
+                <label for="shib.use">
+                    <xsl:value-of select="/root/gui/config/shib"/> 
+                </label>
+                <xsl:call-template name="shib"/>
+            </div>
+        </div>
+    </xsl:template>
+     
+    <!-- ============================================================================================= -->
+
+    <xsl:template name="statistics">
+        <h1 align="left"><xsl:value-of select="/root/gui/config/statistics"/></h1>
+        <div align="left" style="{$style}">
+            <table>
+                <tr>
+                    <td class="padded" width="{$width}">
+                    <label for="statistics">
+                    <xsl:value-of select="/root/gui/config/statisticsLabel"/></label></td>
+                    <td><textarea id="statistics" class="content" /></td>
+                </tr>
+            </table>
+        </div>
+    </xsl:template>
 
 	<!-- ============================================================================================= -->
 

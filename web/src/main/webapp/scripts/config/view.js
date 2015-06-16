@@ -60,7 +60,7 @@ function ConfigView(strLoader)
 		{ id:'shib.attrib.username',   type:'length',   minSize :0, maxSize :150 },
 		{ id:'shib.attrib.surname',    type:'length',   minSize :0, maxSize :150 },
 		{ id:'shib.attrib.firstname',  type:'length',   minSize :0, maxSize :150 },
-		{ id:'shib.attrib.profile',    type:'length',   minSize :0, maxSize :150 }
+    { id:'shib.attrib.profile',    type:'length',   minSize :0, maxSize :150 }
 	]);
 	
 	this.z3950Shower = new Shower('z3950.enable', 'z3950.subpanel');	
@@ -262,8 +262,10 @@ ConfigView.prototype.setData = function(data)
     $('shib.attrib.group')    .value = data['SHIB_ATTRIB_GROUP'];
     $('shib.defGroup')  .value = data['SHIB_DEF_GROUP'];
 
-	$('userSelfRegistration.enable').checked = data['USERSELFREGISTRATION_ENABLE'] == 'true';
+    $('userSelfRegistration.enable').checked = data['USERSELFREGISTRATION_ENABLE'] == 'true';
+    $('statistics').value = data['STATISTICS_SNIPPET'];
 
+    
 	this.z3950Shower.update();
 	this.indexOptimizerShower.update();
 	this.proxyShower.update();
@@ -378,7 +380,8 @@ ConfigView.prototype.getData = function()
         SHIB_ATTRIB_GROUP     : $('shib.attrib.group').value,
         SHIB_DEF_GROUP    : $F('shib.defGroup'),
 
-		USERSELFREGISTRATION_ENABLE : $('userSelfRegistration.enable').checked
+		USERSELFREGISTRATION_ENABLE : $('userSelfRegistration.enable').checked,
+    STATISTICS_SNIPPET     : $('statistics').value
 
 	}
 	

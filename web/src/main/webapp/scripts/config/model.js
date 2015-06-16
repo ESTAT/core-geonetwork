@@ -109,7 +109,8 @@ ConfigModel.prototype.getConfig_OK = function(node)
             SHIB_ATTRIB_GROUP     : xml.evalXPath(node, 'shib/attrib/group'),
             SHIB_DEF_GROUP        : xml.evalXPath(node, 'shib/defaultGroup'),
 
-			USERSELFREGISTRATION_ENABLE : xml.evalXPath(node, 'userSelfRegistration/enable')
+            USERSELFREGISTRATION_ENABLE : xml.evalXPath(node, 'userSelfRegistration/enable'),
+      STATISTICS_SNIPPET : xml.evalXPath(node, 'statistics/snippet')
 		}
 		
 		this.getConfigCB(data);
@@ -270,6 +271,7 @@ ConfigModel.updateTemp =
 ' <userSelfRegistration>'+
 '		<enable>{USERSELFREGISTRATION_ENABLE}</enable>'+
 ' </userSelfRegistration>'+
+' <statistics><snippet>{STATISTICS_SNIPPET}</snippet></statistics>'+
 '</config>';
 
 //=====================================================================================

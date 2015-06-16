@@ -222,7 +222,8 @@ public class Set implements Service
 		new ConfigEntry(ConfigEntry.Type.STRING, false, "shib/attrib/firstname",        "system/shib/attrib/firstname"),
 		new ConfigEntry(ConfigEntry.Type.STRING, false, "shib/attrib/profile",          "system/shib/attrib/profile"),
         new ConfigEntry(ConfigEntry.Type.STRING, false, "shib/attrib/group",            "system/shib/attrib/group"),
-        new ConfigEntry(ConfigEntry.Type.STRING, false, "shib/defaultGroup",            "system/shib/defaultGroup")
+        new ConfigEntry(ConfigEntry.Type.STRING, false, "shib/defaultGroup",            "system/shib/defaultGroup"),
+		new ConfigEntry(ConfigEntry.Type.STRING, false, "statistics/snippet",            "system/statistics/snippet")
 
 	};
 }

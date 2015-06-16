@@ -141,11 +141,14 @@
 
 	<otherlogins>Allow other users to login from</otherlogins>
 
-	<shib>Shibboleth</shib>
-	<path>Path</path>
-	<attributes>Shibboleth attribute mapping</attributes>
-	<surname>Surname</surname>
-	<firstname>Firstname</firstname>
+    <shib>Shibboleth</shib>
+    <path>Path</path>
+    <attributes>Shibboleth attribute mapping</attributes>
+    <surname>Surname</surname>
+    <firstname>Firstname</firstname>
+    
+    <statistics>Statistics</statistics>
+    <statisticsLabel>Snippet</statisticsLabel>
 
 	<metadataEnableInspireSearch>Enable search panel</metadataEnableInspireSearch>
 
