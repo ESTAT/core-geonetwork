@@ -641,7 +641,7 @@ public class Geonetwork implements ApplicationHandler {
 		}
 		
 		if (from == to
-				//&& subVersion.equals(dbSubVersion) Check only on version number
+				&& subVersion.equals(dbSubVersion)
 		) {
 			logger.info("      Webapp version = Database version, no migration task to apply.");
 		} else if (to > from) {
@@ -665,6 +665,7 @@ public class Geonetwork implements ApplicationHandler {
 	        List<Element> versions = dbConfiguration.getChild("migrate").getChildren();
             for(Element version : versions) {
                 int versionNumber = Integer.valueOf(version.getAttributeValue("id"));
+                System.out.println(versionNumber);
                 if (versionNumber > from && versionNumber <= to) {
                     logger.info("       - running tasks for " + versionNumber + "...");
                     @SuppressWarnings(value = "unchecked")

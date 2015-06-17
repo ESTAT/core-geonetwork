@@ -84,5 +84,8 @@
       <file path="WEB-INF/classes/setup/sql/migrate/v2100" filePrefix="migrate-db-"/>
       <file path="WEB-INF/classes/setup/sql/migrate/v2100" filePrefix="migrate-"/>
     </version>
+    <version id="21031">
+      <file path="WEB-INF/classes/setup/sql/migrate/v21031" filePrefix="migrate-db-"/>
+    </version>
   </migrate>
 </db>
