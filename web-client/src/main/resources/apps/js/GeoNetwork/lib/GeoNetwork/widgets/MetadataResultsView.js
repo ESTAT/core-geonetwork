@@ -515,7 +515,7 @@ GeoNetwork.MetadataResultsView = Ext.extend(Ext.DataView, {
         if (this.colormap.length > 1) {
             this.featurecolorCSS = this.featurecolorCSS || "border-left-width: 3px;border-left-style: solid; border-left-color: ${featurecolor}";
         } else {
-            this.featurecolorCSS = undefined;
+            this.featurecolorCSS =  "border-left-width: 3px;border-left-style: solid; border-left-color: ${featurecolor}";
         }
     },
     /** private: method[destroyMetadataBbox]
@@ -617,7 +617,7 @@ GeoNetwork.MetadataResultsView = Ext.extend(Ext.DataView, {
         this.features = [];
         Ext.each(records, function(r, idx){
             
-            var featurecolor = this.colormap && this.colormap[idx % this.colormap.length]; // is used below to set the color property of the record and the corresponding feature
+            var featurecolor = this.colormap && this.colormap[idx % this.colormap.length] || this.featurecolor; // is used below to set the color property of the record and the corresponding feature
             r.set('featurecolor', featurecolor); // could be used in the Templates to set CSS properties
             r.set('featurecolorCSS', this.featurecolorCSS ? OpenLayers.String.format(
                 this.featurecolorCSS, { 
