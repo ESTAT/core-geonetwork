@@ -8,6 +8,7 @@
     <version>2.10.3-SNAPSHOT</version>
   </parent>
 
+  <version>2.10.3.2</version>
 
   <!-- =========================================================== -->
   <!--     Module Description                                      -->
@@ -1176,5 +1177,4 @@
     <maven.build.timestamp.format>yyyy-MM-dd'T'HH'\:'mm'\:'ssZ</maven.build.timestamp.format>
     <build.timestamp>${maven.build.timestamp}</build.timestamp>
   </properties>
-  <version>2.10.3.1</version>
 </project>

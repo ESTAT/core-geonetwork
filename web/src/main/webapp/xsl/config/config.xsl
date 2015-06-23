@@ -147,10 +147,15 @@
 		<h1 align="left"><xsl:value-of select="/root/gui/config/xlinkResolver"/></h1>
 		<div align="left" style="{$style}">
 			<table>
-				<tr>
-					<td class="padded" width="{$width}"><label for="xlinkResolver.enable"><xsl:value-of select="/root/gui/config/enable"/></label></td>
-					<td class="padded"><input id="xlinkResolver.enable" class="content" type="checkbox"/></td>
-				</tr>
+                <tr>
+                    <td class="padded" width="{$width}"><label for="xlinkResolver.enable"><xsl:value-of select="/root/gui/config/enable"/></label></td>
+                    <td class="padded"><input id="xlinkResolver.enable" class="content" type="checkbox"/></td>
+                </tr>
+                <tr>
+                    <td class="padded" width="{$width}"><label for="xlinkResolver.ignore">
+                        <xsl:value-of select="/root/gui/config/xlinkIgnore"/></label></td>
+                    <td class="padded"><input id="xlinkResolver.ignore" class="content" type="text"/></td>
+                </tr>
 			</table>
 		</div>
 	</xsl:template>

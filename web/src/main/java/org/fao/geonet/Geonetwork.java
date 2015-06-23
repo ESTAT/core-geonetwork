@@ -648,13 +648,13 @@ public class Geonetwork implements ApplicationHandler {
 			boolean anyMigrationAction = false;
 			boolean anyMigrationError = false;
 			
-            try {
-            	new UpdateHarvesterIdsTask().update(settingMan,dbms);
-            } catch (Exception e) {
-                logger.info("          Errors occurs during SQL migration file: " + e.getMessage());
-                e.printStackTrace();
-                anyMigrationError = true;
-            }
+//            try {
+//            	new UpdateHarvesterIdsTask().update(settingMan,dbms);
+//            } catch (Exception e) {
+//                logger.info("          Errors occurs during SQL migration file: " + e.getMessage());
+//                e.printStackTrace();
+//                anyMigrationError = true;
+//            }
 
 			// Migrating from 2.0 to 2.5 could be done 2.0 -> 2.3 -> 2.4 -> 2.5
 			String dbType = DatabaseType.lookup(dbms).toString();
@@ -665,7 +665,6 @@ public class Geonetwork implements ApplicationHandler {
 	        List<Element> versions = dbConfiguration.getChild("migrate").getChildren();
             for(Element version : versions) {
                 int versionNumber = Integer.valueOf(version.getAttributeValue("id"));
-                System.out.println(versionNumber);
                 if (versionNumber > from && versionNumber <= to) {
                     logger.info("       - running tasks for " + versionNumber + "...");
                     @SuppressWarnings(value = "unchecked")

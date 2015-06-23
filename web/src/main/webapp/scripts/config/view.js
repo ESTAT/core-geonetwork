@@ -195,8 +195,9 @@ ConfigView.prototype.setData = function(data)
 	$('oai.mdmode').value = data['OAI_MDMODE'];
 	$('oai.cachesize').value   = data['OAI_CACHESIZE'];
 	$('oai.tokentimeout').value   = data['OAI_TOKENTIMEOUT'];
-	
-	$('xlinkResolver.enable').checked = data['XLINKRESOLVER_ENABLE'] == 'true';
+
+  $('xlinkResolver.enable').checked = data['XLINKRESOLVER_ENABLE'] == 'true';
+  $('xlinkResolver.ignore').value = data['XLINKRESOLVER_IGNORE'];
 	$('hidewithheldelements.enable').checked = data['HIDEWITHHELDELEMENTS_ENABLE'] == 'true';
 	$('hidewithheldelements.keepMarkedElement').checked = data['HIDEWITHHELDELEMENTS_keepMarkedElement'] == 'true';
 
@@ -314,7 +315,8 @@ ConfigView.prototype.getData = function()
 		OAI_TOKENTIMEOUT	: $('oai.tokentimeout')  .value,
 		OAI_CACHESIZE			: $('oai.cachesize')  .value,
 
-		XLINKRESOLVER_ENABLE : $('xlinkResolver.enable').checked,
+    XLINKRESOLVER_IGNORE : $('xlinkResolver.ignore').value,
+    XLINKRESOLVER_ENABLE : $('xlinkResolver.enable').checked,
 		HIDEWITHHELDELEMENTS_ENABLE : $('hidewithheldelements.enable').checked,
 		HIDEWITHHELDELEMENTS_keepMarkedElement : $('hidewithheldelements.keepMarkedElement').checked,
 
@@ -353,7 +355,7 @@ ConfigView.prototype.getData = function()
         METADATA_INSPIRE_VIEW : $('metadata.enableInspireView').checked,
         METADATA_XML_VIEW : $('metadata.enableXmlView').checked,
         METADATA_DEFAULT_VIEW: $('metadata.defaultView').value,
-
+        
         METADATA_PRIVS_USERGROUPONLY : $('metadata.usergrouponly').checked,
         
         HARVESTER : $('harvester.enableEditing').checked,

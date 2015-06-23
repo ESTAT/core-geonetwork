@@ -12,12 +12,15 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import jeeves.JeevesJCS;
+import jeeves.resources.dbms.Dbms;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.local.LocalServiceRequest;
+import jeeves.server.resources.ResourceProvider;
 import jeeves.server.sources.ServiceRequest.InputMethod;
 import jeeves.utils.Log;
 import jeeves.utils.Xml;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.jcs.access.exception.CacheException;
 import org.jdom.Attribute;
 import org.jdom.Element;
@@ -381,11 +384,30 @@ public final class Processor {
 		Element element = xlink.getParent();
 
         // Don't process XLink for operatesOn
-        List<String> excludedXlinkElements = new ArrayList<String>();
-        excludedXlinkElements.add("operatesOn");
-        excludedXlinkElements.add("featureCatalogueCitation");
-        excludedXlinkElements.add("Anchor");
-        // TODO: Add configuration file
+		List<String> excludedXlinkElements = new ArrayList<String>();
+        try {
+            Dbms dbms = (Dbms) srvContext.getResourceManager().open("main-db");
+            String query = "SELECT value FROM Settings WHERE id = 232";
+            
+            @SuppressWarnings("unchecked")
+            Iterator<Element> itr = (dbms.select(query).getChildren()).iterator();
+            while(itr.hasNext()) {
+              Element oneLevelDeep = itr.next();
+              String ignore = oneLevelDeep.getChildText("value");
+              String[] ignores = ignore.split(",");
+              for(String ig : ignores) {
+                  for(String i : ig.split(" ")) {
+                      if(!StringUtils.isEmpty(i)) {
+                          excludedXlinkElements.add(i.trim());
+                      }
+                  }
+              }
+            }
+            dbms.commit();
+            dbms.disconnect();
+        } catch (Exception e1) {
+            Log.error(e1.getMessage(), e1);
+        }
         
         if (excludedXlinkElements.contains(element.getName())) {
            return;

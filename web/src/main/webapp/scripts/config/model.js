@@ -57,7 +57,8 @@ ConfigModel.prototype.getConfig_OK = function(node)
 			OAI_CACHESIZE     : xml.evalXPath(node, 'oai/cachesize'),
 			OAI_TOKENTIMEOUT  : xml.evalXPath(node, 'oai/tokentimeout'),
 
-			XLINKRESOLVER_ENABLE      : xml.evalXPath(node, 'xlinkResolver/enable'),
+      XLINKRESOLVER_ENABLE      : xml.evalXPath(node, 'xlinkResolver/enable'),
+      XLINKRESOLVER_IGNORE      : xml.evalXPath(node, 'xlinkResolver/ignore'),
 			HIDEWITHHELDELEMENTS_ENABLE      : xml.evalXPath(node, 'hidewithheldelements/enable'),
 			HIDEWITHHELDELEMENTS_keepMarkedElement      : xml.evalXPath(node, 'hidewithheldelements/keepMarkedElement'),
 
@@ -191,7 +192,8 @@ ConfigModel.updateTemp =
 '		<cachesize>{OAI_CACHESIZE}</cachesize>'+
 '	</oai>'+
 '	<xlinkResolver>'+
-'		<enable>{XLINKRESOLVER_ENABLE}</enable>'+
+'   <enable>{XLINKRESOLVER_ENABLE}</enable>'+
+'   <ignore>{XLINKRESOLVER_IGNORE}</ignore>'+
 '	</xlinkResolver>'+
 '	<hidewithheldelements>'+
 '		<enable>{HIDEWITHHELDELEMENTS_ENABLE}</enable>'+

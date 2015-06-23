@@ -46,7 +46,8 @@
 	<tokentimeout>ResumptionToken Timeout </tokentimeout>
 	<cachesize>Cachesize</cachesize>
 
-	<xlinkResolver>XLink Resolver</xlinkResolver>
+    <xlinkResolver>XLink Resolver</xlinkResolver>
+    <xlinkIgnore>Ignore tags list</xlinkIgnore>
 
 	<inspire>INSPIRE</inspire>
 
