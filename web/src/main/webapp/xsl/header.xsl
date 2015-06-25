@@ -2,7 +2,22 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:include href="geo/utils.xsl"/>
+   <xsl:variable name="port">
+     <xsl:choose>
+      <xsl:when test="/root/gui/env/server/protocol = 'https'">
+        <xsl:value-of select="/root/gui/env/server/securePort"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="/root/gui/env/server/port"/>
+      </xsl:otherwise>
+     </xsl:choose>
+    </xsl:variable>
 
+    <xsl:variable 
+       name="hostUrl" 
+       select="concat(/root/gui/env/server/protocol, '://',
+        /root/gui/env/server/host,
+        if ($port='80') then '' else concat(':', $port))"/>
 	<!--
 	main html header
 	-->
@@ -28,7 +43,7 @@
 		<script language="JavaScript" type="text/javascript">
 			var Env = new Object();
 
-			Env.host = "<xsl:value-of select="/root/gui/env/server/protocol"/>://<xsl:value-of select="/root/gui/env/server/host"/>:<xsl:value-of select="/root/gui/env/server/port"/>";
+			Env.host = "<xsl:value-of select="$hostUrl"/>";
 			Env.locService= "<xsl:value-of select="/root/gui/locService"/>";
 			Env.locUrl    = "<xsl:value-of select="/root/gui/locUrl"/>";
 			Env.url       = "<xsl:value-of select="/root/gui/url"/>";

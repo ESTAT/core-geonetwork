@@ -4,8 +4,25 @@
   
   <xsl:include href="utils.xsl"/>
   
+     <xsl:variable name="port">
+     <xsl:choose>
+      <xsl:when test="/root/gui/env/server/protocol = 'https'">
+        <xsl:value-of select="/root/gui/env/server/securePort"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="/root/gui/env/server/port"/>
+      </xsl:otherwise>
+     </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable 
+       name="hostUrl" 
+       select="concat(/root/gui/env/server/protocol, '://',
+        /root/gui/env/server/host,
+        if ($port='80') then '' else concat(':', $port))"/>
+  
   <xsl:variable name="siteURL"
-    select="concat(/root/gui/env/server/protocol,'://',/root/gui/env/server/host,':',/root/gui/env/server/port, /root/gui/locService)"/>
+    select="concat($hostUrl,/root/gui/locService)"/>
   
   <xsl:template match="/">
     ["<xsl:value-of select="/root/request/q"/>"
