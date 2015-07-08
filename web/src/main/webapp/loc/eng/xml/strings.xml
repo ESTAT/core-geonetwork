@@ -1403,7 +1403,7 @@
 	<myDatasets>My Data</myDatasets>
 	<filter>Filter</filter>
 	<welcome.text></welcome.text>
-	<anonymousformation.text>Welcome to Geoportal of the European Commission. Please sign in.</anonymousformation.text>
+	<anonymousformation.text>Welcome to Geoportal of the European Commission. Please <a href="https://webgate.ec.europa.eu/inspire-sdi/login" target="_blank" title="login">sign in</a>.</anonymousformation.text>
 	<guestinformation.text><br/>You are logged in as a guest. Please contact us to get your credentials upgraded.
 	</guestinformation.text>
 	<tag_label>Tags</tag_label>
