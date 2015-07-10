@@ -1695,7 +1695,7 @@ dl.xml * dd {
 /** What if we dont have thumbnail **/
 .emptyThumbnail {
 	min-height: 128px;
-	background: url('../images/no_thumbnail.png');
+	background: url('../images/no_thumbnail_light.png');
 	background-repeat: no-repeat;
 	background-position: center;
 }
