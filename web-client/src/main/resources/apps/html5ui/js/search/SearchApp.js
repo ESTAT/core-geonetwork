@@ -232,7 +232,7 @@ GeoNetwork.searchApp = function() {
                 valueField : 'value',
                 displayField : 'value',
                 valueDelimiter : ' or ',
-                // tpl: tpl,
+                tpl: '<tpl for="."><div class="x-combo-list-item" title="{value}">{value}</div></tpl>',
                 fieldLabel : OpenLayers.i18n('org'),
             });
 
