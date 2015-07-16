@@ -1996,6 +1996,20 @@ GeoNetwork.mapApp = function() {
                 'request' : 'GetCapabilities',
                 'version' : '1.1.1'
             };
+            
+            var currentParams = 
+              onlineResource.substring(onlineResource.indexOf("?") + 1);
+            currentParams = Ext.urlDecode(currentParams);
+            
+            for (var attrname in currentParams) { 
+              params[attrname] = currentParams[attrname]; 
+            }
+            
+            if(onlineResource.indexOf('?') > -1) {
+              onlineResource = onlineResource.substring(0, 
+                                  onlineResource.indexOf('?'));
+            }
+            
             var paramString = OpenLayers.Util.getParameterString(params);
             var separator = (onlineResource.indexOf('?') > -1) ? '&' : '?';
             onlineResource += separator + paramString;
