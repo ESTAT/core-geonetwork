@@ -289,7 +289,7 @@ Ext
                     getPrettyLink : function(base) {
                         var link = this.getLink(base);
                         if (link.indexOf("?") >= 0) {
-                            link = link.substring(0, link.indexOf("?"));
+                            link = link.substring(link.indexOf("?"));
                         }
 
                         link = link.substring(link.indexOf("|") + 1);
