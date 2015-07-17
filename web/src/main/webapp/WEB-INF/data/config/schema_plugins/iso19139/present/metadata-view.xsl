@@ -582,47 +582,106 @@
                   
                   <xsl:if test="contains(current-grouping-key(), 'WMS')">
                   &#160;
+                  <xsl:variable name="title"  select="/root/gui/strings/viewInGE"/> 
                   <a href="#" class="md-mn addLayer"
                     onclick="app.switchMode('1', true);app.getIMap().addWMSLayer([[
                               '{gmd:CI_OnlineResource/gmd:description/gco:CharacterString}', 
                               '{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}', 
                               '{gmd:CI_OnlineResource/gmd:name/gco:CharacterString}', '{generate-id()}']]);">&#160;</a>
-                  </xsl:if>
-
-                  <!-- This section was duplicating the link for DOWNLOAD, WFS and WCS (already added in first <a> in the <li> element -->
-                  <!--<xsl:if test="contains(current-grouping-key(), 'DOWNLOAD') or contains(current-grouping-key(), 'WFS') or contains(current-grouping-key(), 'WCS')">
-                    <a href="{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}">
-                      &lt;!&ndash; Name contains layer, feature type, coverage ... &ndash;&gt;
-                    <xsl:choose>
-                    &lt;!&ndash; We need to use the name for the download hack &ndash;&gt;
-                      &lt;!&ndash; <xsl:when test="normalize-space($desc)!=''">
-                        <xsl:value-of select="$desc"/>
-                        <xsl:if test="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type">
-                          (<xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type"/>)
-                        </xsl:if>
-                      </xsl:when> &ndash;&gt;
-                      <xsl:when
-                        test="normalize-space(gmd:CI_OnlineResource/gmd:name/gco:CharacterString)!=''">
-                        <xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gco:CharacterString"/>
-                      </xsl:when>
-                      <xsl:otherwise>
-                        <xsl:value-of select="gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
-                      </xsl:otherwise>
-                    </xsl:choose>
-                    </a>
-                    <span class="desc">
-                            &lt;!&ndash; https://eos.geocat.net/redmine/issues/3418 &ndash;&gt;
-                            <xsl:value-of select="/root/gui/strings/urlForApp"/>
-                        </span>
-                  </xsl:if>-->
                   
+
+                  
+                  
+                  </xsl:if>                  
                 </li>
               </xsl:for-each>
             </ul>
           </td>
         </tr>
       </xsl:for-each-group>
-						
+			
+      <!-- For KML files -->	
+        <xsl:for-each-group select="gmd:distributionInfo/descendant::gmd:onLine[gmd:CI_OnlineResource/gmd:linkage/gmd:URL!='']" group-by="gmd:CI_OnlineResource/gmd:protocol">
+        <xsl:if test="contains(current-grouping-key(), 'WMS')">
+        <th>
+            <td class="title" colspan="2">
+                <xsl:value-of select="/root/gui/schemas/iso19139/labels/element[@name = 'gmd:protocol']/helper/option[@value=normalize-space('OGC:KML')]"/>
+           </td>
+        </th>
+        <tr>
+          <td class="main">
+             <span class="{translate(substring-before('OGC:KML', '-'), ':', '')} icon">
+                <xsl:value-of select="/root/gui/schemas/iso19139/labels/element[@name = 'gmd:protocol']/helper/option[@value=normalize-space('OGC:KML')]"/>
+            </span>
+          </td>
+          <td>
+            <ul>
+              <xsl:for-each select="current-group()">
+                <xsl:variable name="desc">
+                  <xsl:apply-templates mode="localised"
+                    select="gmd:CI_OnlineResource/gmd:description">
+                    <xsl:with-param name="langId" select="$langId"/>
+                  </xsl:apply-templates>
+                </xsl:variable>
+                <li>
+                  <a href="{gmd:CI_OnlineResource/gmd:linkage/gmd:URL}">
+                    <xsl:choose>
+                      <xsl:when test="contains(current-grouping-key(), 'OGC') or contains(current-grouping-key(), 'DOWNLOAD')">
+                        <xsl:choose>
+                          <xsl:when test="normalize-space($desc)!=''">
+                            <xsl:value-of select="$desc"/>
+                            <xsl:if test="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type">
+                              (<xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gmx:MimeFileType/@type"/>)
+                            </xsl:if>
+                          </xsl:when>
+                          <xsl:when
+                            test="normalize-space(gmd:CI_OnlineResource/gmd:name/gco:CharacterString)!=''">
+                            <xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gco:CharacterString"/>
+                          </xsl:when>
+                          <xsl:otherwise>
+                            <xsl:value-of select="gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
+                          </xsl:otherwise>
+                        </xsl:choose>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:if test="normalize-space($desc)!=''">
+                          <xsl:attribute name="title"><xsl:value-of select="$desc"/></xsl:attribute>
+                        </xsl:if>
+                        <xsl:choose>
+                          <xsl:when
+                            test="normalize-space(gmd:CI_OnlineResource/gmd:name/gco:CharacterString)!=''">
+                            <xsl:value-of select="gmd:CI_OnlineResource/gmd:name/gco:CharacterString"/>
+                          </xsl:when>
+                          <xsl:otherwise>
+                            <xsl:value-of select="gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
+                          </xsl:otherwise>
+                        </xsl:choose>
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </a>
+                  
+                  <xsl:if test="contains(current-grouping-key(), 'WMS')">
+                  &#160;
+                  <xsl:variable name="title"  select="/root/gui/strings/viewInGE"/> 
+                  <br></br>                   
+                  <a href="{/root/gui/locService}/google.kml?uuid={/root/*[name(.)='gmd:MD_Metadata' or @gco:isoType='gmd:MD_Metadata']/geonet:info/uuid}&amp;layers={gmd:CI_OnlineResource/gmd:name/gco:CharacterString}" 
+                        title="{/root/strings/interactiveMap}"
+                        style="min-width:40px;">
+                        &#160;
+                        <img src="{/root/gui/url}/images/google_earth_link.gif" 
+                        height="16px" width="16px" alt="{/root/gui/strings/viewInGE}" 
+                        title="{/root/gui/strings/viewInGE}" style="border: 0px solid;padding-top:4px"/>
+                    </a>
+                </xsl:if>
+                  
+                </li>
+              </xsl:for-each>
+            </ul>
+          </td>
+        </tr>
+        </xsl:if>
+      </xsl:for-each-group>
+ 
       </tbody>
     </table>
   </xsl:template>
