@@ -1445,7 +1445,14 @@ div.facets * .facet-more-bt,div.facets * .facet-less-bt {
 Share social
 */
 #share-capabilities {
-	float: right;
+  float: right;
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  width: 100px;
+  z-index: 30;
+  background-color: white;
+  border: 1px solid black;
 }
 
 #permalink-div {

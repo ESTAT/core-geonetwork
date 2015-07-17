@@ -454,20 +454,20 @@ GeoNetwork.app = function() {
 
         var test = Ext.getCmp("metadata-panel");
         // Adding social capabilities
-        Ext.getCmp("metadata-panel").getTopToolbar().addButton({
-            id : 'viewpanel-share',
-            width : button_width,
-            height : button_height,
-            handler : function() {
-                toggle("share-capabilities");
-            },
-            text : '',
-            tooltip : 'Share this',
-            type : 'submit',
-            tooltip : OpenLayers.i18n('Social Share'),
-            enableToggle : true,
-						iconCls: GeoNetwork.Settings.viewPanelButtonCSS('viewpanel-share')
-        });
+//        Ext.getCmp("metadata-panel").getTopToolbar().addButton({
+//            id : 'viewpanel-share',
+//            width : button_width,
+//            height : button_height,
+//            handler : function() {
+//                toggle("share-capabilities");
+//            },
+//            text : '',
+//            tooltip : 'Share this',
+//            type : 'submit',
+//            tooltip : OpenLayers.i18n('Social Share'),
+//            enableToggle : true,
+//						iconCls: GeoNetwork.Settings.viewPanelButtonCSS('viewpanel-share')
+//        });
 
         GeoNetwork.Util.removeMetaTags({
             'og:title' : true,

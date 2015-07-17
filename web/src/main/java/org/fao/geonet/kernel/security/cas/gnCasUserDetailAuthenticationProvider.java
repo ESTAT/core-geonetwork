@@ -95,13 +95,15 @@ public class gnCasUserDetailAuthenticationProvider extends AbstractUserDetailsAu
 			// lookup the user in the database with cas login
 			Element selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
 			Element userXml = selectRequest.getChild("record");
-			if (userXml == null) 	//  if user does not exists, add one as guest
+			if (userXml == null) 	//  if user does not exists, add one as guest -> default changed to registered user
 			{
 				// the user did not exists in the database with cas login.
                 String surname = "";
 				String firstname = username;
 			    //String group    = "";				
-		        String profile = ProfileManager.GUEST;
+		        //String profile = ProfileManager.GUEST;
+		        String profile = "RegisteredUser";
+		        
 		        
 		        // update the user to cas login. If the user does not exists then insert one
 	            String query = "UPDATE Users SET name=?, surname=?, profile=?, password=?, authtype=? WHERE username=?";

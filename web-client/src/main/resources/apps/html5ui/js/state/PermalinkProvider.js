@@ -289,10 +289,13 @@ Ext
                     getPrettyLink : function(base) {
                         var link = this.getLink(base);
                         if (link.indexOf("?") >= 0) {
-                            link = link.substring(0, link.indexOf("?"));
+                            link = link.substring(link.indexOf("?"));
                         }
 
                         link = link.substring(link.indexOf("|") + 1);
+                        if(link.indexOf("&") >= 0) {
+                          link = link.substring(0, link.indexOf("&"));
+                        }
 
                         // Get base url and language
                         var urlParts = window.location.href.match(/(http.*\/.*)\/srv\/(.*)\/.*/, '');
