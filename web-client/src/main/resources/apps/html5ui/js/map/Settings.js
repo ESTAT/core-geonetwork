@@ -42,7 +42,7 @@ GeoNetwork.map.printCapabilities =
           GeoNetwork.map.printCapabilities.lastIndexOf("/")) + "/pdf";
 
 // Config for WGS84 based maps
-GeoNetwork.map.PROJECTION = "EPSG:4326";
+GeoNetwork.map.PROJECTION = "EPSG:3857";
 GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000);
 //GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-5.1,41,9.7,51);
 
@@ -61,7 +61,7 @@ GeoNetwork.map.BACKGROUND_LAYERS = [
 //	http://data.geus.dk/gis/arcgis/services/GtW/S014_Jordartskort_200000/MapServer/WMSServer?
 // Config for OSM based maps
 if (useOSMLayers) {
-    GeoNetwork.map.PROJECTION = "EPSG:4326";
+    GeoNetwork.map.PROJECTION = "EPSG:3857";
     //GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000);
     GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34);
     GeoNetwork.map.BACKGROUND_LAYERS = [
@@ -77,7 +77,7 @@ if (useOSMLayers) {
     
 
 } else {
-	 GeoNetwork.map.PROJECTION = "EPSG:4326";
+	 GeoNetwork.map.PROJECTION = "EPSG:3857";
     GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508, -19971868, 20037508, 19971868);
 	GeoNetwork.map.BACKGROUND_LAYERS = [	        
 	        new OpenLayers.Layer.WMS(
