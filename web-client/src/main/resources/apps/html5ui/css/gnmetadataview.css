@@ -503,6 +503,7 @@ div.help ul li {
 
 #metadata-info .title {
 	color: #069;
+	float: none;
 }
 
 /* cookie message */
