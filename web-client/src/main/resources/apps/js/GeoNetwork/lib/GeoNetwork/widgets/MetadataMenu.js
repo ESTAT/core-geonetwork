@@ -352,6 +352,8 @@ GeoNetwork.MetadataMenu = Ext.extend(Ext.menu.Menu, {
             if ((isHarvested && harvesterType !== 'geonetwork') || isReadOnly) {
                 /* TODO : add tooltip message to explain why */
                 this.ratingWidget.disable();
+                //ESTAT
+                this.ratingWidget.hide();
             } else {
                 this.ratingWidget.enable();
             }
