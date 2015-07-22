@@ -1486,4 +1486,5 @@ href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2001:008:0001:0
   <signOut>Sign Out</signOut>
 	<rss-button>RSS</rss-button>
 	<print-button>Print</print-button>
+	<urlForApp>Url to be used in your gis application</urlForApp>
 </strings>

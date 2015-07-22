@@ -110,3 +110,7 @@ div#advSearchTabs ul{padding:0;margin:0}div#advSearchTabs input{border:0}#inspir
 .WFSDownloadIcon {
     padding-left: 24px !important;
 }
+
+.OGCWMS, .OGCWMTS, .OGCWCS {
+	background-image: url(../img/icon_show_map.png)!important;
+}

@@ -1969,6 +1969,7 @@
 			<option show="y" value="WWW:LINK-1.0-http--opendap">OPeNDAP URL</option>
 			<option show="y" value="RBNB:DATATURBINE">Data Turbine</option>
 			<option show="-" value="UKST">Unknown Service Type</option>
+			<option show="-" value="download">Download</option>
 
 		</helper>
 	</element>

@@ -1042,7 +1042,7 @@ div.showBigMapItemInactive:hover {
 	border-right: 0;
 	width: 1px;
 	padding: 0;
-	text-align: center;
+	/*text-align: center;*/
 	line-height: 10px;
 }
 
@@ -1074,6 +1074,23 @@ div.showBigMapItemInactive:hover {
 #metadata-info .related li a:hover {
 	color: #333;
 }
+
+#metadata-info .related li.relatedResource a {
+	margin-left: 22px;
+	background-color: #FEEDDD;
+	padding: 1px;
+}
+
+#metadata-info .related .relatedResource .link {
+	clear: both;
+	width: 100%;
+	background-color: white;
+	font-size: smaller;
+	font-color: grey;
+	font-style: italic;
+	margin-left: 22px;
+}
+
 /* --- medtadata edit */
 #metadata-info #editorPanel th {
 	border-bottom: 0;
