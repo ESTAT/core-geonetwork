@@ -81,6 +81,7 @@ GeoNetwork.mapApp = function() {
         
         
         else {
+            options.theme = null;
             map = new OpenLayers.Map('ol_map', options);
    //         fixedScales = scales;           
             Ext.each(GeoNetwork.map.BACKGROUND_LAYERS, function(layer) {
@@ -408,6 +409,7 @@ GeoNetwork.mapApp = function() {
         }
         else {
             map2 = new OpenLayers.Map({
+              theme: null,
             	maxExtent : GeoNetwork.map.MAP_OPTIONS.maxExtent.clone(),
                 projection : GeoNetwork.map.MAP_OPTIONS.projection,
                 resolutions : GeoNetwork.map.MAP_OPTIONS.resolutions,
@@ -2189,6 +2191,7 @@ GeoNetwork.mapApp = function() {
         generateAuxiliaryMap : function(id) {
 
             var map = new OpenLayers.Map({
+                theme: null,
                 maxExtent : GeoNetwork.map.MAP_OPTIONS.maxExtent.clone(),
                 projection : GeoNetwork.map.MAP_OPTIONS.projection,
                 resolutions : GeoNetwork.map.MAP_OPTIONS.resolutions,

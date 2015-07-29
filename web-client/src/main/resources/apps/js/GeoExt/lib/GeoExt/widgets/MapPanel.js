@@ -116,7 +116,7 @@ GeoExt.MapPanel = Ext.extend(Ext.Panel, {
     initComponent: function(){
         if(!(this.map instanceof OpenLayers.Map)) {
             this.map = new OpenLayers.Map(
-                Ext.applyIf(this.map || {}, {allOverlays: true})
+                Ext.applyIf(this.map || {}, {allOverlays: true, theme: null})
             );
         }
         var layers = this.layers;
