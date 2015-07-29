@@ -88,7 +88,11 @@
 		<property name="serviceProperties" ref="serviceProperties" />
 	</bean>
 
-    <bean class="org.fao.geonet.kernel.security.cas.gnCasUserDetailAuthenticationProvider" id="gnCasUserDetailAuthenticationProvider"/>
+    <bean class="org.fao.geonet.kernel.security.cas.gnCasUserDetailAuthenticationProvider" 
+        id="gnCasUserDetailAuthenticationProvider">
+        <property name="defaultGroup" value="default"/>
+        <property name="profile" value="RegisteredUser"/>
+    </bean>
 
 <!-- 	<bean id="casAuthenticationProvider" -->
 <!-- 		class="org.springframework.security.cas.authentication.CasAuthenticationProvider"> -->

@@ -51,6 +51,7 @@ import jeeves.utils.SerialFactory;		// cas
 
 import org.fao.geonet.kernel.security.GeonetworkUser;
 //import org.fao.geonet.kernel.security.cas.CASUserUtils;	// cas
+import org.fao.geonet.lib.Lib;
 
 
 
@@ -59,6 +60,9 @@ public class gnCasUserDetailAuthenticationProvider extends AbstractUserDetailsAu
 
 	private ApplicationContext applicationContext;
 	private PasswordEncoder encoder;
+	
+	private String defaultGroup;
+    private String profile;
 	
 	
 
@@ -102,7 +106,6 @@ public class gnCasUserDetailAuthenticationProvider extends AbstractUserDetailsAu
 				String firstname = username;
 			    //String group    = "";				
 		        //String profile = ProfileManager.GUEST;
-		        String profile = "RegisteredUser";
 		        
 		        
 		        // update the user to cas login. If the user does not exists then insert one
@@ -115,7 +118,33 @@ public class gnCasUserDetailAuthenticationProvider extends AbstractUserDetailsAu
 					int userId = serialFactory.getSerial(dbms, "Users");
 			        query = "INSERT INTO Users (id, username, name, surname, profile, password, authtype) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			        usersUpdated = dbms.execute(query, userId, username, firstname, surname, profile, VIA_CAS, CAS_FLAG);
-	            }
+			        dbms.commit();
+	                
+			        //Assign as $profile to $defaultGroup
+			        Element groupIdRequest = dbms.select("SELECT id FROM Groups where name = ?", defaultGroup);
+			        Element groupRecord = groupIdRequest.getChild("record");
+	                String groupId = null;
+	                
+	                if (groupRecord == null) {
+	                    if (Log.isDebugEnabled(Geonet.LDAP)){
+	                        Log.debug(Geonet.LDAP, "  - Add non existing group '" + defaultGroup + "' in local database.");
+	                    }
+	                    
+	                    // If LDAP group does not exist in local database, create it
+	                    groupId = serialFactory.getSerial(dbms, "Groups") + "";
+	                    query = "INSERT INTO Groups(id, name) VALUES(?,?)";
+	                    dbms.execute(query, Integer.valueOf(groupId), defaultGroup);
+	                    Lib.local.insert(dbms, "Groups", Integer.valueOf(groupId), defaultGroup);	                    
+	                }else if (groupRecord != null) {
+	                    groupId = groupRecord.getChildText("id");
+	                }
+	                dbms.commit();
+	                    
+	                query = "INSERT INTO UserGroups(userId, groupId, profile) "
+	                        + "VALUES(?,?, ?)";
+                    dbms.execute(query, Integer.valueOf(userId), 
+                            Integer.valueOf(groupId), profile);
+                }
 		        dbms.commit();
 		        selectRequest = dbms.select("SELECT * FROM Users WHERE username=? AND authtype = 'CAS'", username);
 		        userXml = selectRequest.getChild("record");
@@ -161,5 +190,21 @@ public class gnCasUserDetailAuthenticationProvider extends AbstractUserDetailsAu
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return retrieveUser(username, null);
 	}
+
+    public String getDefaultGroup() {
+        return defaultGroup;
+    }
+
+    public void setDefaultGroup(String defaultGroup) {
+        this.defaultGroup = defaultGroup;
+    }
+    
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
 
 }
