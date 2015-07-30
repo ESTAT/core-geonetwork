@@ -129,7 +129,7 @@ GeoNetwork.util.LinkTools = {
                              if (currentType === 'application/vnd.ogc.wms_xml' || (currentType.indexOf('OGC:WMS') > -1)) {
                                  if (allowDynamic) {
                                      linkButton.push({
-                                         text: record.get('title') || record.get('name'),
+                                         text: record.get('title') || record.get('name') || record.get('type'),
                                          handler: function (b, e) {
                                              // FIXME : ref to app
                                              app.switchMode('1', true);
@@ -140,7 +140,7 @@ GeoNetwork.util.LinkTools = {
                                  }
                              } else if (currentType === 'application/vnd.ogc.wmc') {
                                  linkButton.push({
-                                     text: record.get('title') || record.get('name'),
+                                     text: record.get('title') || record.get('name') || record.get('type'),
                                      handler: function (b, e) {
                                          // FIXME : ref to app
                                          app.switchMode('1', true);
@@ -161,7 +161,7 @@ GeoNetwork.util.LinkTools = {
                                  }
                                  if (displayLink) {
                                      linkButton.push({
-                                         text: (record.get('title') || record.get('name')),
+                                         text: (record.get('title') || record.get('name') || record.get('type')),
                                          href: record.get('href')
                                      });
                                  }
