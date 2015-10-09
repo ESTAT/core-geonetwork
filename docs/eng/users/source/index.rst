@@ -6,7 +6,7 @@ User Manual v\ |release|
 Welcome to the GeoNetwork User Manual v\ |release|. The manual is a guide describing how to use the metadata catalog.
 
 
-..figure:: splash.jpg
+..figure:: splashscreen.png
 
 
 Beginners Guide to Geonetwork
