@@ -716,6 +716,38 @@ GeoNetwork.app = function() {
 	            		c.show();
 	            	}
             	}
+	            
+	            if(!cookie.get("splashscreen")) {
+	                var splash = new Ext.Window({
+  	                    applyTo:'splashscreen',
+  	                    layout:'fit',
+  	                    width:"40%",
+  	                    monitorResize: true,
+  	                    closeAction:'hide',
+  	                    html: '<img style="width:100%" src="' + geonetworkUrl + 
+  	                      '/apps/images/default/splashpage.png" />',
+  	                    buttons: [{
+  	                      xtype: 'checkbox',
+  	                      boxLabel: 'Do not show this screen again',
+  	                      id: "doNotRepeatSplash"
+  	                      }, {
+  	                        text: 'Close',
+  	                        handler: function(){
+  	                            splash.hide();
+  	                            if(Ext.getCmp("doNotRepeatSplash").getValue()) {
+  	                              cookie.set("splashscreen", true);
+  	                            }
+  	                        }
+  	                    }],
+  	                    listeners: {
+  	                        show: function() {
+  	                            this.el.setStyle('top', '10%');
+  	                        }
+  	                    }
+  	                });
+  	            
+	                splash.show(this);
+	            }
             }
             
             
