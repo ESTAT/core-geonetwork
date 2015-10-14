@@ -4,6 +4,7 @@ web/src/main/webapp/WEB-INF/data/config/schemaplugin-uri-catalog.xml
 web/src/main/webapp/WEB-INF/classes/JZKitConfig.xml
 web/src/main/webapp/scripts/lib/*
 web/src/main/webapp/images/logos/*
+web/src/main/webResources/WEB-INF/git.properties
 web/logs/
 web/jcs_caching/
 geonetwork*.db
