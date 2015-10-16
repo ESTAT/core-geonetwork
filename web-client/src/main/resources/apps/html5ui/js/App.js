@@ -717,7 +717,7 @@ GeoNetwork.app = function() {
 	            	}
             	}
 	            
-	            if(!cookie.get("splashscreen")) {
+	            if(!cookie.get("splashscreen") && catalogue.isLoggedIn()) {
 	                var splash = new Ext.Window({
   	                    applyTo:'splashscreen',
   	                    layout:'fit',
