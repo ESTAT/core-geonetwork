@@ -280,12 +280,12 @@
   <dependencyManagement>
     <dependencies>
 <!-- exclude servlet-api -overlap with tomcat -->
-     <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>2.5</version>
-        <scope>provided</scope>
-      </dependency>
+<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>servlet-api</artifactId>
+<version>2.5</version>
+<scope>provided</scope>
+</dependency>
        <dependency>
         <groupId>net.sf.ehcache</groupId>
         <artifactId>ehcache-core</artifactId>
