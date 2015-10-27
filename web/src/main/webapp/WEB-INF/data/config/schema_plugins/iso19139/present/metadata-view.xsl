@@ -520,6 +520,10 @@
     match="*">
     <table class="related">
       <tbody>
+        <tr>
+          <td class="linksAuto" colspan="2"><div class="md-links" id="md-links-{//geonet:info/id}"></div></td>
+        </tr>
+
         <tr style="display:none;"><!-- FIXME needed by JS to append other type of relation from xml.relation service -->
           <td class="main title"></td><td></td>
         </tr>
