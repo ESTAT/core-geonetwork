@@ -216,12 +216,27 @@ Ext
 
                             var el = all[prop];
 
+                            // Special management for download filter field name
+                            if (prop == 'download') prop = prop + "_";
+
                             if (!el) {
                                 el = Ext.getCmp(prop);
                             }
+
                             if (!el) {
-                                Ext.get(prop);
+                                el = Ext.get(prop);
                             }
+
+                            if (!el) {
+                                el = Ext.DomQuery
+                                  .select("*[name='" + "E_" + prop + "']")[0];
+                            }
+
+                            if (!el) {
+                                el = Ext.DomQuery
+                                  .select("*[name='" + "O_" + prop + "']")[0];
+                            }
+
                             if (el) {
                                 if (el.map) {
                                     this.restoreMap(obj, el.map);
@@ -240,22 +255,129 @@ Ext
                                 } else if (obj.collapsed && el.collapse) {
                                     el.collapse();
                                 } else {
-                                    for (key in obj) {
-                                        var el_ = Ext.DomQuery
-                                                .select("*[name='" + key + "']");
 
-                                        if (el_ && el_.length && el_.length > 0) {
-                                            el_ = el_[0];
+                                    // param parser creates array of strings if the string contains comma char, join the values
+                                    if (obj instanceof Array) {
+                                        obj = obj.join(",");
+                                    }
+
+                                    // String value
+                                    if (typeof obj === 'string') {
+
+                                        var el_ = Ext.DomQuery
+                                          .select("*[name='" + "E_" + prop + "']");
+
+                                        if (!(el_ && el_.length && el_.length > 0)) {
+                                            el_ = Ext.DomQuery
+                                              .select("*[name='" + "O_" + prop + "']");
                                         }
 
+                                        // Process the controls
                                         if (el_) {
-                                            el_ = Ext.get(el_);
-                                            if (el_.setValue) {
-                                                el_.setValue(obj[key]);
-                                            } else if (el_.dom) {
-                                                el_.dom.value = obj[key];
+                                            for(var j = 0; j < el_.length; j++) {
+                                                var el1_ = Ext.get(el_[0]);
+                                                // Checkbox control
+                                                if (el1_.dom.type == 'checkbox') {
+                                                    if (obj == '') {
+                                                        Ext.getCmp(el1_.dom.id).setValue(false);
+                                                    } else {
+                                                        Ext.getCmp(el1_.dom.id).setValue(true);
+                                                    }
+
+                                                // Search bbox
+                                                } else if (prop == 'geometry') {
+
+                                                    var bounds = OpenLayers.Geometry.fromWKT(obj).getBounds();
+                                                    var mapProj = Ext.getCmp("geometryMap").map.getProjectionObject();
+                                                    var wgs84 = new OpenLayers.Projection("WGS84");
+
+                                                    var minxy = new OpenLayers.LonLat(bounds.left, bounds.bottom).transform(wgs84, mapProj);
+                                                    var maxxy = new OpenLayers.LonLat(bounds.right, bounds.top).transform(wgs84, mapProj);
+
+
+                                                    Ext.getCmp("geometryMap").extentBox.clear();
+                                                    Ext.getCmp("geometryMap").extentBox.getOrCreateLayer();
+                                                    Ext.getCmp("geometryMap").extentBox.updateFields(new OpenLayers.Bounds(minxy.lon, minxy.lat, maxxy.lon, maxxy.lat));
+
+                                                // Other controls
+                                                } else {
+
+                                                    if (Ext.getCmp(el1_.dom.id).getStore) {
+                                                        // Has a store and data comes from Ajax, load the store data,
+                                                        // before setting the value
+                                                        if (!(Ext.getCmp(el1_.dom.id).getStore() instanceof Ext.data.ArrayStore)) {
+                                                            var value = obj;
+                                                            Ext.getCmp(el1_.dom.id).getStore().load({
+                                                                  scope: {value : value, ctrl: el1_.dom.id},
+                                                                  callback : function() {
+                                                                      Ext.getCmp(this.ctrl).setValue(this.value);
+                                                                  }
+                                                              }
+                                                            );
+                                                        // Set value for ArrayStore
+                                                        } else {
+                                                            Ext.getCmp(el1_.dom.id).setValue(obj);
+                                                        }
+
+                                                        // Set value
+                                                    } else {
+                                                        Ext.getCmp(el1_.dom.id).setValue(obj);
+                                                    }
+                                                }
+
+                                            }
+
+                                        }
+
+                                    // Object value
+                                    } else {
+                                        for (key in obj) {
+                                            var el_ = Ext.DomQuery
+                                              .select("*[name='" + key + "']");
+
+                                            if (!(el_ && el_.length && el_.length > 0)) {
+                                                el_ = Ext.DomQuery
+                                                  .select("*[name='" + "E_" + prop + "']");
+                                            }
+
+                                            if (!(el_ && el_.length && el_.length > 0)) {
+                                                el_ = Ext.DomQuery
+                                                  .select("*[name='" + "O_" + prop + "_']");
+                                            }
+
+                                            // Special management for "any" search field to fill the hidden field used
+                                            if (prop == 'any') {
+                                                var el2_ = Ext.DomQuery
+                                                  .select("*[name='" + "E_any_OR_geokeyword" + "']");
+
+                                                if (el2_ && el2_.length && el2_.length > 0) {
+                                                    el2_ = el2_[0];
+                                                }
+
+                                                if (el2_) {
+                                                    el2_ = Ext.get(el2_);
+                                                    if (el2_.setValue) {
+                                                        el2_.setValue(obj[key]);
+                                                    } else if (el2_.dom) {
+                                                        el2_.dom.value = obj[key];
+                                                    }
+                                                }
+                                            }
+
+                                            if (el_ && el_.length && el_.length > 0) {
+                                                el_ = el_[0];
+                                            }
+
+                                            if (el_) {
+                                                el_ = Ext.get(el_);
+                                                if (el_.setValue) {
+                                                    el_.setValue(obj[key]);
+                                                } else if (el_.dom) {
+                                                    el_.dom.value = obj[key];
+                                                }
                                             }
                                         }
+
                                     }
 
                                 }
@@ -265,13 +387,25 @@ Ext
                     readURL : function(url) {
                         this.state = {};
 
-                        var params = OpenLayers.Util.getParameters(url
-                                .substring(url.indexOf("?")));
+                        // Use also the params from #, search params are set there
+                        var urlToProcess = "";
+
+                        if (url.indexOf("?") > -1) {
+                            if (url.indexOf("#") > -1) {
+                                urlToProcess = url.substring(url.indexOf("?")).replace("#", "&");
+                            }
+                        } else {
+                            urlToProcess = url.substring(url.indexOf("#")).replace("#", "&");
+                        }
+
+
+                        var params = OpenLayers.Util.getParameters(urlToProcess);
+
                         var k, split, stateId;
                         for (k in params) {
                             if (params.hasOwnProperty(k)) {
                                 split = k.split("_");
-                                if (split.length > 1) {
+                                if ((split.length > 1) && (k.indexOf("_") != 0)) {
                                     stateId = split[0];
                                     this.state[stateId] = this.state[stateId]
                                             || {};
@@ -279,6 +413,13 @@ Ext
                                             .join("_")] = this.encodeType ? this
                                             .decodeValue(params[k])
                                             : params[k];
+                                } else {
+                                    stateId = k;
+                                    this.state[stateId] = this.state[stateId]
+                                      || {};
+                                    this.state[stateId] = this.encodeType ? this
+                                      .decodeValue(params[k])
+                                      : params[k];
                                 }
                             }
                         }
