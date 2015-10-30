@@ -395,9 +395,8 @@ Ext
                                 urlToProcess = url.substring(url.indexOf("?")).replace("#", "&");
                             }
                         } else {
-                            urlToProcess = url.substring(url.indexOf("#")).replace("#", "&");
+                            urlToProcess = url.substring(url.indexOf("#")).replace("#", "?");
                         }
-
 
                         var params = OpenLayers.Util.getParameters(urlToProcess);
 
