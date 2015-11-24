@@ -1982,6 +1982,10 @@ GeoNetwork.mapApp = function() {
             layerLoadingMask.show();
             var map = this.maps[0];
             var onlineResource = layerList[0][1];
+            // Add ? if doesn't exists in the url, otherwise the parsing of parameters later in the code
+            // produces invalid values, using the full url as a parameter name
+            if (onlineResource.indexOf('?') == -1) onlineResource = onlineResource + "?";
+
             /* if null layer name, open the WMS Browser panel */
             if (layerList[0][2] === '') {
                 GeoNetwork.WindowManager.showWindow("addwms");
