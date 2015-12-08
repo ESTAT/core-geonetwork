@@ -49,27 +49,23 @@ GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000
 
 
 GeoNetwork.map.BACKGROUND_LAYERS = [
-    //new OpenLayers.Layer.WMS("Background layer", "/geoserver/wms", {layers: 'gn:world,gn:ne_50m_boundary_da,gn:ne_50m_boundary_lines_land,gn:ne_50m_coastline', format: 'image/jpeg'}, {isBaseLayer: true}),
-   // new OpenLayers.Layer.WMS("Background layer", "http://www2.demis.nl/mapserver/wms.asp?", {layers: 'Countries', format: 'image/jpeg'}, {isBaseLayer: true})
     new OpenLayers.Layer.WMS(
             "Global Imagery",
-            "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/2014_Countries_NoLabels_GreyBackground_4326/MapServer/WMSServer?",
+            "https://webgate.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/2014_Countries_NoLabels_GreyBackground_4326/MapServer/WMSServer?",
             {layers: "0,1,2,3,4,5,6,7,8,9,10,11,12,13"}
         ),
 ];
-//https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/rest/services/Basemaps/Blue_marble_4326/MapServer/WMSServer?
-//	http://data.geus.dk/gis/arcgis/services/GtW/S014_Jordartskort_200000/MapServer/WMSServer?
 // Config for OSM based maps
 if (useOSMLayers) {
-    GeoNetwork.map.PROJECTION = "EPSG:3857";
+    GeoNetwork.map.PROJECTION = "EPSG:4326";
     //GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-550000, 5000000, 1200000, 7000000);
-    GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34);
+    GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-24,34,45,72);
     GeoNetwork.map.BACKGROUND_LAYERS = [
         
  //       new OpenLayers.Layer.Google("Google Streets"),
         new OpenLayers.Layer.WMS(
                 "Global Imagery",
-                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/2014_Countries_NoLabels_GreyBackground_4326/MapServer/WMSServer?",
+                "https://webgate.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/2014_Countries_NoLabels_GreyBackground_4326/MapServer/WMSServer?",
                 {layers: "0,1,2,3,4,5,6,7,8,9,10,11,12,13"}
             ),
        new OpenLayers.Layer.OSM()
@@ -77,8 +73,8 @@ if (useOSMLayers) {
     
 
 } else {
-	 GeoNetwork.map.PROJECTION = "EPSG:3857";
-    GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-20037508, -19971868, 20037508, 19971868);
+	 GeoNetwork.map.PROJECTION = "EPSG:4326";
+    GeoNetwork.map.EXTENT = new OpenLayers.Bounds(-24,34,45,72);
 	GeoNetwork.map.BACKGROUND_LAYERS = [	        
 	        new OpenLayers.Layer.WMS(
 	                "Countries Grey",
@@ -87,18 +83,18 @@ if (useOSMLayers) {
 	            ),
 	         new OpenLayers.Layer.WMS(
 		                "Hypsometric",
-		                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Hypsometric_4326/MapServer/WMSServer?",
-		                {layers: "0"}
+		                "https://webgate.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Hypsometric_4326/MapServer/WMSServer?",
+		                {layers: "0,1,2,3,4,5"}
 		        ),  
 		    new OpenLayers.Layer.WMS(
 		                "Natural Earth",
-		                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Natural_Earth_4326/MapServer/WMSServer?",
-		                {layers: "0"}
+		                "https://webgate.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Natural_Earth_4326/MapServer/WMSServer?",
+		                {layers: "0,1,2,3,4,5"}
 		        ),  
 		    new OpenLayers.Layer.WMS(
 		                "Blue marble",
-		                "https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Blue_marble_4326/MapServer/WMSServer?",
-		                {layers: "0"}
+		                "https://webgate.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Blue_marble_4326/MapServer/WMSServer?",
+		                {layers: "0,1,2,3,4,5,6,7"}
 		        )
 	  
 	    ];
