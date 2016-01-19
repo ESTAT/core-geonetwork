@@ -1,6 +1,8 @@
 package org.fao.geonet.kernel;
 
 import com.google.common.collect.Lists;
+import junit.framework.Assert;
+
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.domain.Pair;
 import org.fao.geonet.kernel.schema.MetadataSchema;
@@ -575,6 +577,35 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
         assertEquals(2, numUpdates);
 
         assertEqualsText(text, metadataElement, charStringXpath, GMD, GCO);
+        Assert.assertEquals(att, Xml.selectString(metadataElement, attXPath, Arrays.asList(GMD, GCO)));
+    }
+    
+    /*
+     * BUG: This test exposes a bug in the EditLib. If the xpath points to an existing element,
+     * adding an attribute to the existing element does not work.
+     */
+    @Test
+    @Ignore
+    public void testAddAttributeExistingElement() throws JDOMException {
+        SchemaManager manager = _schemaManager;
+        MetadataSchema schema = manager.getSchema("iso19139");
+        final Element metadataElement = new Element("MD_Metadata", GMD);
+        LinkedHashMap<String, AddElemValue> updates = new LinkedHashMap<String, AddElemValue>();
+        final String text = "text";
+        final String att = "att";
+        final String charStringXpath = "gmd:fileIdentifier/gco:CharacterString";
+        final String attXPath = "gmd:fileIdentifier/@att";
+        updates.put(attXPath, new AddElemValue(att));
+        updates.put(charStringXpath, new AddElemValue(text));
+
+        EditLib el = new EditLib(_schemaManager);
+        boolean a1 = el.addElementOrFragmentFromXpath(metadataElement, schema, charStringXpath, new AddElemValue(text), true);
+        boolean a2 = el.addElementOrFragmentFromXpath(metadataElement, schema, attXPath, new AddElemValue(att), true);
+        
+        assertEquals(2, a1 && a2);
+
+        assertEqualsText(text, metadataElement, charStringXpath, GMD, GCO);
+>>>>>>> 95f2d5420a... Update to Spring security 3.2 for compatibility with Spring 4.
         assertEquals(att, Xml.selectString(metadataElement, attXPath, Arrays.asList(GMD, GCO)));
     }
 
