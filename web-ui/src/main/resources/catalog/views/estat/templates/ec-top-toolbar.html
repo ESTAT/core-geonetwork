@@ -1,4 +1,18 @@
 <div class="container-fluid">
+<!-- 
+class="banner-flag"
+ --><!--  		<p >
+			<img alt="European Commission logo" id="banner-flag" src="../../catalog/views/estat/images/logo/logo_en.gif">
+		</p> -->
+<!-- 		<p id="banner-title-text">European Commission<br>
+			<span>Title of the site</span>
+		</p>
+ -->
+<!--  		<span id="banner-image-right"></span>
+ --> 		
+<!--   <span class="title-en" id="banner-image-title"></span>
+ -->
+	
   <div class="navbar-header">
     <button type="button"
             class="navbar-toggle collapsed"
@@ -12,16 +26,17 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <li>
+  <div id="navbar" class="navbar-collapse collapse" >
+    <ul class="nav navbar-nav navbar-right">
+<!--       <li>
         <a data-gn-active-tb-item="catalog.search#/home">
           <img class="gn-logo"
                data-ng-src="../../images/logos/logo_en.gif?{{info.site.lastUpdate}}"/>
           <span class="visible-lg">{{info.site.name}}</span>
         </a>
       </li>
-      <li>
+ -->
+       <li>
         <a data-gn-active-tb-item="catalog.search#/search"
            title="{{'search' | translate}}">
           <i class="fa fa-search"></i>
@@ -73,17 +88,7 @@
           <span class="visible-lg" data-translate="">adminConsole</span>
         </a>
       </li>
-    </ul>
-
-
-    <form class="navbar-form navbar-right" role="language">
-      <div class="form-group pull-right"
-           data-gn-language-switcher="lang"
-           data-langs="langs"
-           data-lang-labels="langLabels"/>
-    </form>
-
-    <ul class="nav navbar-nav navbar-right">
+      
       <li data-ng-show="authenticated">
         <a href="admin.console#/organization/users?userOrGroup={{user.username}}"
            title="{{'userDetails' | translate}}"
@@ -117,5 +122,53 @@
         </a>
       </li>
     </ul>
-  </div>
+
+
+<!--     <form class="navbar-form navbar-right" role="language">
+      <div class="form-group pull-right"
+           data-gn-language-switcher="lang"
+           data-langs="langs"
+           data-lang-labels="langLabels"/>
+    </form>
+ -->
+<!--     <ul class="nav navbar-nav navbar-right">
+      <li data-ng-show="authenticated">
+        <a href="admin.console#/organization/users?userOrGroup={{user.username}}"
+           title="{{'userDetails' | translate}}"
+           data-ng-disabled="!user.isUserAdminOrMore()"
+           class="hidden-xs btn btn-link">
+          <img class="img-circle"
+               data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/>
+          {{user.name}} {{user.surname}} ({{user.profile | translate}})
+          <span class="alert alert-danger ng-hide"
+                data-ng-show="session.remainingTime > 0 &&
+                    session.remainingTime < session.alertInTitleWhen"
+                data-translate=""
+                data-translate-values="{remainingTime: '{{session.remainingTime}}'}">
+            sessionWillExpireIn
+          </span>
+        </a>
+      </li>
+      <li data-ng-show="authenticated">
+        <a href="../../j_spring_security_logout"
+           title="{{'signout' | translate}}">
+          <i class="fa fa-sign-out"></i>&nbsp;
+          {{'signout' | translate}}
+        </a>
+      </li>
+      <li data-ng-show="!authenticated && service !== 'catalog.signin'">
+        <a href="{{pages.signin}}?casLogin"
+           title="{{'signIn'|translate}}"
+           data-ng-keypress="$event">
+           <i class="fa fa-sign-in"/>&nbsp;
+           {{'signIn' | translate}}
+        </a>
+      </li>
+    </ul>
+ -->  </div>
+	<!--   logo banner   -->
+ 	<div >
+			<img alt="European Commission logo" src="../../catalog/views/estat/images/logo/logo_en.gif">
+			<span class="title-blank"></span>			
+	</div>
 </div>
