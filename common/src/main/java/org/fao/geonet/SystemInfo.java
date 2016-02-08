@@ -20,13 +20,14 @@ public class SystemInfo {
     private String buildOsInfo;
     private String buildJavaVersion;
     private String buildJavaVendor;
+    private String gitCommitID;
 
     public static SystemInfo createForTesting(String stagingProfile) {
-        return new SystemInfo(stagingProfile, "testing", "3.0.0", "SNAPSHOT", "testing", "testing", "testing");
+        return new SystemInfo(stagingProfile, "testing", "3.0.0", "SNAPSHOT", "testing", "testing", "testing", "testing");
     }
 
     public SystemInfo(String stagingProfile, String buildDate, String version, String subVersion,
-                      String buildOsInfo, String buildJavaVersion, String buildJavaVendor) {
+                      String buildOsInfo, String buildJavaVersion, String buildJavaVendor, String gitCommitID) {
         this.stagingProfile = stagingProfile;
         this.buildDate = buildDate;
         this.version = version;
@@ -34,6 +35,7 @@ public class SystemInfo {
         this.buildOsInfo = buildOsInfo;
         this.buildJavaVersion = buildJavaVersion;
         this.buildJavaVendor = buildJavaVendor;
+        this.gitCommitID = gitCommitID;
     }
 
     /**
@@ -88,6 +90,14 @@ public class SystemInfo {
     }
 
     /**
+     * Return the Git commit ID used to build the web app.
+     */
+    public String getGitCommitID() {
+        return this.gitCommitID;
+    }
+
+    
+    /**
      * Return true if the current stagingProfile is {@link #STAGE_DEVELOPMENT}
      */
     public boolean isDevMode() {
@@ -100,7 +110,8 @@ public class SystemInfo {
                 new Element("buildOsInfo").setText(this.buildOsInfo),
                 new Element("buildJavaVendor").setText(this.buildJavaVendor),
                 new Element("buildJavaVersion").setText(this.buildJavaVersion),
-                new Element("buildDate").setText(this.buildDate)
+                new Element("buildDate").setText(this.buildDate),
+                new Element("gitCommitID").setText(this.gitCommitID)
         ));
     }
 

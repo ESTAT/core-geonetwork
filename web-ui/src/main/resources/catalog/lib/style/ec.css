@@ -7,7 +7,9 @@
 	input{margin:0;font-style:inherit;font-family:inherit;}
 	table{font-size:1em;}
 	caption,th,td{text-align:left;font-weight:normal;}
-	body{color:#000;background-color:#fff;font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;font-size:62.5%;line-height:1.5;}
+	/* JS - font-size:62.5%; removed. This font size is also applied by bootstrap */
+	body{color:#000;background-color:#fff;font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;line-height:1.5;}
+	/* body{color:#000;background-color:#fff;font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;font-size:62.5%;line-height:1.5;} */
 	select{font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;}
 	p{padding:5px 0;}
 	h1,h2,h3,h4,h5,h6{color:#284F75;padding:4px 0;margin:4px 0;font-weight:normal;}
@@ -58,7 +60,7 @@
 }
 @media screen /* LAYOUT */
 {
-	.layout{min-width:200px;max-width:984px;margin:0 auto;font-size:120%;border:1px solid #666666;background-color:#fff;position:relative;}
+	.layout{min-width:200px;max-width:984px;margin:0 auto;/* font-size:120%; */border:1px solid #666666;background-color:#fff;position:relative;}
 	.layout-body{float:left;width:100%;clear:both;position:relative;}
 	.layout-wrapper{float:left;width:100%;margin-right:-200px;}
 	.layout-wrapper-reset{margin-right:200px;}
@@ -568,7 +570,7 @@
 
 /* LAYOUT */
 
-	.layout{font-size:120%;padding:1%;margin:0;width:98%;}
+	.layout{/* font-size:120%; */padding:1%;margin:0;width:98%;}
 	.layout-wrapper,
 	.layout-wrapper-reset,
 	.layout-content{margin:0 !important;width:auto !important;clear:both !important;padding:0 !important;}

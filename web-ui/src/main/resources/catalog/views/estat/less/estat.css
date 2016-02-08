@@ -1,0 +1,74 @@
+/* BANNER */
+
+/* LINK */
+	a{text-decoration:none;}
+
+/* SERVICES */
+	#services a,
+	#services a:visited{
+		background:url("../catalog/views/estat/images/services-separator.gif") transparent left center no-repeat;
+		padding: 0 4px 3px 5px;
+		}
+	.js #services{padding-right:5px;}
+
+/* NAVIGATION PATH (CRUMBTRAILS) */
+
+	#path{
+	    display: inline-block;
+	    width: 80%;
+	}
+	#path li{background:url("../catalog/views/estat/images/breadcrumb.gif") transparent left center no-repeat;}
+
+
+/* ADDTIONNAL TOOLS */
+	#additional-tools{position:initial;right:0;top:5px;padding:0;margin:0;display:none;overflow:hidden;}
+	#additional-tools li{display:inline;float:right;margin:0 4px 0 0;}
+	#additional-tools span.s{background:url("../catalog/views/estat/images/tools-sprite.png") transparent -999px -999px no-repeat;}
+
+/* FOOTER SECTION */
+	.layout-footer li{display:inline;padding-left:5px;background:url("../catalog/views/estat/images/services-separator.gif") transparent left center no-repeat;}
+
+
+.path-tools-div{
+    background-color:#074A8B;
+}
+
+.additional-tools-div{
+    display: inline-block;
+    float: right;
+}
+
+/* .ec-font-size-1{font-size:100%;}
+.ec-font-size-2{font-size:110%;}
+.ec-font-size-3{font-size:120%;}
+ */
+.ec-font-size-1{font-size:10px;}
+.ec-font-size-2{font-size:12px;}
+.ec-font-size-3{font-size:14px;}
+
+
+.title-banner {
+	background-image:url("../catalog/views/estat/images/title_blank.gif");
+	background-repeat: inherit !important;
+	top:1px !important;
+}
+
+/* override banner background */
+.navbar-default {
+    background-color: inherit; 
+    border-color: transparent; 
+}
+
+.gn-top-bar{
+	padding:0;
+	border:0
+}
+
+.ec-top-bar{
+	padding:0;
+}
+
+/* .container-fluid {
+	padding:0;
+} 
+*/

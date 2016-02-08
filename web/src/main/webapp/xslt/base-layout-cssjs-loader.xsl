@@ -35,6 +35,11 @@
   <xsl:template name="javascript-load">
 
     <script>var geonet = {provide:function(s){},require:function(s){}};</script>
+
+	<!-- JS - include ec scripts. Only needed when ec.css is used. -->
+    <script src="{$uiResourcesPath}lib/ec.js"></script>
+    <script src="{$uiResourcesPath}lib/ec-components.js"></script>
+
     <xsl:choose>
       <xsl:when test="$isDebugMode">
 

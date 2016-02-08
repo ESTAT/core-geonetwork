@@ -151,9 +151,31 @@ win.tools = { // Some widget tools for the accessibility
 		fontSet			:[1,2,3,4],
 		init			:function(){var t=doc.getElementById("additional-tools");if(t){tools.fonts.getFontSize();}},
 		getFontSize		:function(){cfz=_$.getCook("fontSize");if(!cfz || cfz > 4 || cfz < 0 || isNaN(cfz)){cfz=1;}else{tools.fonts.applyFontSize(cfz);}},
-		applyFontSize	:function(cfz){var n=tools.fonts.fontSet[cfz];if(n){var b=doc.body,c=b.className.replace(/ font-size-(1|2|3|4|5)/ig,"");b.className=c+" font-size-"+(Math.round(cfz));_$.setCook("fontSize",cfz);}},
-		increase		:function(){var l=this.fontSet.length;cfz++;if( cfz > l-1 ){cfz = l-1;}tools.fonts.applyFontSize(cfz);},
-		decrease		:function(){cfz--;if( cfz <= 0 ){cfz = 1;}tools.fonts.applyFontSize(cfz);}
+		applyFontSize	:function(cfz){
+			var n=tools.fonts.fontSet[cfz];
+			if(n){
+				var b=doc.body,c=b.className.replace(/ ec-font-size-(1|2|3|4|5)/ig,"");
+				b.className=c+" ec-font-size-"+(Math.round(cfz));
+				_$.setCook("fontSize",cfz);
+			}
+		},
+		increase		:function(){
+			if (typeof cfz === 'undefined') {
+				tools.fonts.getFontSize();
+			}			
+			if (typeof cfz !== 'undefined') {
+				var l=this.fontSet.length;cfz++;if( cfz > l-1 ){cfz = l-1;}tools.fonts.applyFontSize(cfz);
+			}
+		},
+		decrease		:function(){
+			if (typeof cfz === 'undefined') {
+				tools.fonts.getFontSize();
+			}			
+			if (typeof cfz !== 'undefined') {
+				cfz--;
+				if( cfz <= 0 ){cfz = 1;}tools.fonts.applyFontSize(cfz);
+			}
+		}
 	}
 };
 win.webservice={ // Retrieve any translations of any documents and showing inside a popup.

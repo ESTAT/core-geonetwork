@@ -13,7 +13,7 @@
   <url>http://geonetwork-opensource.org</url>
   <scm>
     <connection>
-      scm:git:https://github.com/geonetwork/core-geonetwork
+      scm:git:https://github.com/geonetwork/core-geonetworkver
     </connection>
     <url>https://github.com/geonetwork/core-geonetwork</url>
   </scm>
@@ -193,6 +193,7 @@
     </pluginManagement>
 
     <plugins>
+    
 <!--      <plugin>
           <groupId>org.codehaus.groovy.maven</groupId>
           <artifactId>gmaven-plugin</artifactId>
@@ -1201,7 +1202,8 @@
     <spring.version>3.2.5.RELEASE</spring.version>
     <spring.security.version>3.1.4.RELEASE</spring.security.version>
     <metrics.version>2.1.1</metrics.version>
-    <maven.build.timestamp.format>yyyy-MM-dd'T'HH'\:'mm'\:'ssZ</maven.build.timestamp.format>
+    <!-- <maven.build.timestamp.format>yyyy-MM-dd'T'HH'\:'mm'\:'ssZ</maven.build.timestamp.format> -->
+    <maven.build.timestamp.format>yyyyMMdd'T'HH':'mm':'ssZ</maven.build.timestamp.format>
     <build.timestamp>${maven.build.timestamp}</build.timestamp>
     <rootProjectDir>..</rootProjectDir>
     <wro.version>1.7.7</wro.version>

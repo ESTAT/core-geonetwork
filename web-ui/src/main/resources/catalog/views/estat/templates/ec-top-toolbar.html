@@ -1,17 +1,5 @@
-<div class="container-fluid">
-<!-- 
-class="banner-flag"
- --><!--  		<p >
-			<img alt="European Commission logo" id="banner-flag" src="../../catalog/views/estat/images/logo/logo_en.gif">
-		</p> -->
-<!-- 		<p id="banner-title-text">European Commission<br>
-			<span>Title of the site</span>
-		</p>
- -->
-<!--  		<span id="banner-image-right"></span>
- --> 		
-<!--   <span class="title-en" id="banner-image-title"></span>
- -->
+<div class="container-fluid ec-top-bar">
+	<div class="lang-en" id="header">
 	
   <div class="navbar-header">
     <button type="button"
@@ -27,36 +15,28 @@ class="banner-flag"
     </button>
   </div>
   <div id="navbar" class="navbar-collapse collapse" >
-    <ul class="nav navbar-nav navbar-right">
-<!--       <li>
-        <a data-gn-active-tb-item="catalog.search#/home">
-          <img class="gn-logo"
-               data-ng-src="../../images/logos/logo_en.gif?{{info.site.lastUpdate}}"/>
-          <span class="visible-lg">{{info.site.name}}</span>
-        </a>
-      </li>
- -->
+    <ul class="nav navbar-nav-right reset-list" id="services">
        <li>
-        <a data-gn-active-tb-item="catalog.search#/search"
-           title="{{'search' | translate}}">
-          <i class="fa fa-search"></i>
-          <span class="visible-lg" data-translate="">search</span>
-        </a>
+        <a class="first" data-gn-active-tb-item="catalog.search#/search" title="{{'search' | translate}}">
+			<i class="fa fa-search"></i>
+			<!-- <span class="visible-lg" data-translate="">search</span> -->
+ 			{{'search' | translate}}
+         </a>
       </li>
       <li data-ng-if="isMapViewerEnabled">
-        <a data-gn-active-tb-item="catalog.search#/map"
-           title="{{'map' | translate}}">
+        <a data-gn-active-tb-item="catalog.search#/map" title="{{'map' | translate}}">
           <i class="fa fa-globe"></i>
-          <span class="visible-lg" data-translate="">makeYourMap</span>
-
-          <span data-gnv-layer-indicator=""/>
+          <!-- <span class="visible-lg" data-translate="">makeYourMap</span> -->
+			{{'map' | translate}}
+          <!-- <span data-gnv-layer-indicator=""/> -->
         </a>
       </li>
       <li data-ng-show="authenticated && user.isEditorOrMore()">
         <a data-gn-active-tb-item="catalog.edit"
            title="{{'editorBoard' | translate}}">
           <i class="fa fa-plus"></i>
-          <span class="visible-lg" data-translate="">contribute</span>
+          <!-- <span class="visible-lg" data-translate="">contribute</span> -->
+          {{'editorBoard' | translate}}
         </a>
       </li>
       <li class="dropdown" data-ng-show="authenticated && user.isEditorOrMore()">
@@ -89,13 +69,22 @@ class="banner-flag"
         </a>
       </li>
       
+	<li>
+        <a data-gn-active-tb-item="catalog.search#/about" title="{{'about' | translate}}">
+ 			{{'about' | translate}}
+         </a>
+	</li>
+	<li>
+        <a data-gn-active-tb-item="catalog.search#/legal" title="{{'legal' | translate}}">
+ 			{{'legal' | translate}}
+         </a>
+	</li>    
+      
       <li data-ng-show="authenticated">
         <a href="admin.console#/organization/users?userOrGroup={{user.username}}"
            title="{{'userDetails' | translate}}"
-           data-ng-disabled="!user.isUserAdminOrMore()"
-           class="hidden-xs btn btn-link">
-          <img class="img-circle"
-               data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/>
+           data-ng-disabled="!user.isUserAdminOrMore()" >
+          <img class="img-circle" data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/>
           {{user.name}} {{user.surname}} ({{user.profile | translate}})
           <span class="alert alert-danger ng-hide"
                 data-ng-show="session.remainingTime > 0 &&
@@ -122,8 +111,7 @@ class="banner-flag"
         </a>
       </li>
     </ul>
-
-
+    
 <!--     <form class="navbar-form navbar-right" role="language">
       <div class="form-group pull-right"
            data-gn-language-switcher="lang"
@@ -131,44 +119,47 @@ class="banner-flag"
            data-lang-labels="langLabels"/>
     </form>
  -->
-<!--     <ul class="nav navbar-nav navbar-right">
-      <li data-ng-show="authenticated">
-        <a href="admin.console#/organization/users?userOrGroup={{user.username}}"
-           title="{{'userDetails' | translate}}"
-           data-ng-disabled="!user.isUserAdminOrMore()"
-           class="hidden-xs btn btn-link">
-          <img class="img-circle"
-               data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/>
-          {{user.name}} {{user.surname}} ({{user.profile | translate}})
-          <span class="alert alert-danger ng-hide"
-                data-ng-show="session.remainingTime > 0 &&
-                    session.remainingTime < session.alertInTitleWhen"
-                data-translate=""
-                data-translate-values="{remainingTime: '{{session.remainingTime}}'}">
-            sessionWillExpireIn
-          </span>
-        </a>
-      </li>
-      <li data-ng-show="authenticated">
-        <a href="../../j_spring_security_logout"
-           title="{{'signout' | translate}}">
-          <i class="fa fa-sign-out"></i>&nbsp;
-          {{'signout' | translate}}
-        </a>
-      </li>
-      <li data-ng-show="!authenticated && service !== 'catalog.signin'">
-        <a href="{{pages.signin}}?casLogin"
-           title="{{'signIn'|translate}}"
-           data-ng-keypress="$event">
-           <i class="fa fa-sign-in"/>&nbsp;
-           {{'signIn' | translate}}
-        </a>
-      </li>
-    </ul>
- -->  </div>
-	<!--   logo banner   -->
- 	<div >
-			<img alt="European Commission logo" src="../../catalog/views/estat/images/logo/logo_en.gif">
-			<span class="title-blank"></span>			
+  	</div>
+		<p class="banner-flag">
+			<img alt="European Commission logo" id="banner-flag" src="../../catalog/views/estat/images/logo/logo_en.gif">
+		</p> 	
+		<p id="banner-title-text" style="color:#0065A2">{{info.site.name}}</p>
+			<span id="banner-image-title" class="title-banner"></span>
+		</span>
 	</div>
+	<div class="path-tools-div">
+		<div id="path">
+			<p class="off-screen">Navigation path</p>
+			<ul class="reset-list">
+                <li class="first">
+                    <a href="/index_en.htm">European Commission</a>
+                </li>
+                <li>
+               		<a data-gn-active-tb-item="catalog.search#/home">{{info.site.name}}</a>
+                </li>
+                <li>
+                    <a href="/site/subsite-2/index_en.htm">Title of the subsite 2</a>
+                </li>
+                <li>Title of the subsite 2 1</li>
+			</ul>
+		</div>		
+		<div class="additional-tools-div">
+			<ul class="reset-list" id="additional-tools">
+                <li>
+                    <a href="javascript:print();" title="Print version"><img alt="Print version" src="../../catalog/views/estat/images/print.gif"></a>
+                </li>
+                <li>
+                    <a href="javascript:tools.fonts.decrease();" title="Decrease text"><img alt="Decrease text" src="../../catalog/views/estat/images/font-decrease.gif"></a>
+                </li>
+                <li>
+                    <a href="javascript:tools.fonts.increase();" title="Increase text"><img alt="Increase text" src="../../catalog/views/estat/images/font-increase.gif"></a>
+                </li>
+<!--                 <li>
+                    <div id="share-tool">
+                        <script type="text/javascript">if(typeof iBeginShare == "object"){iBeginShare.attachLink('share-tool');}</script>
+                    <div id="share_button_container" class="share_button share_style_button_16 share_size_16"><a href="javascript:void(0)" id="share_button_link">Share</a></div></div>
+                </li>
+ -->            </ul>
+    		</div>
+    	</div>
 </div>

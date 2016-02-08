@@ -1,4 +1,6 @@
-<div class="navbar navbar-default gn-top-bar" role="navigation"
+<a id="top-page" name="top-page"></a>
+<div id="layout" class="layout">
+ <div class="navbar navbar-default gn-top-bar" role="navigation"
      data-ng-include="'../../catalog/views/estat/templates/ec-top-toolbar.html'"
      xmlns="http://www.w3.org/1999/html">
 </div>
@@ -21,29 +23,58 @@
          data-ng-show="activeTab == '/map'"/>
     <div data-ng-include="'../../catalog/views/default/templates/recordView.html'"
          data-ng-show="activeTab == '/metadata'"/>
+    <div data-ng-include="'../../catalog/views/default/templates/about.html'"
+         data-ng-show="activeTab == '/about'"/>
+    <div data-ng-include="'../../catalog/views/default/templates/legal.html'"
+         data-ng-show="activeTab == '/legal'"/>
   </div>
 </div>
 
 
-<div class="navbar navbar-default gn-bottom-bar">
-  <ul class="nav navbar-nav">
-    <li><a href="http://geonetwork-opensource.org/">
-      <i class="fa fa-fw"></i>
-      <span data-translate="">about</span>
-    </a></li>
-    <li class="hidden-sm"><a href="https://github.com/geonetwork/core-geonetwork">
-      <i class="fa fa-github"></i>
-      <span data-translate="">github</span></a></li>
-    <li>
-      <a data-translate=""
-         data-translate-values="{platform: '{{info.site.platform.name}}', version: '{{info.site.platform.version}}', subversion: '{{info.site.platform.subVersion}}'}">
-        versionDetails</a>
-    </li>
-    <li>
-      <a href="rss.search?sortBy=changeDate&georss=simplepoint"
-              title="{{'lastRecords' | translate}}">
-        <i class="fa fa-rss"/>
-      </a>
-    </li>
-  </ul>
+<div class="layout-footer">
+	<ul class="footer-items">
+	    <li class="modification-date">
+	        <!-- <span>Last update: DD/MM/YYYY</span> -->
+	        <span>Last update: </span>
+	        <span ng-bind="info.systemInfo.buildDate | date:'dd/MM/yyyy'"></span>
+	    </li>
+         <li>
+      		<a data-gn-active-tb-item="catalog.search#/home">
+				<span data-translate="">home</span>
+			</a>
+         </li>
+	    
+       <li>
+        <a data-gn-active-tb-item="catalog.search#/search" title="{{'search' | translate}}">
+			<!-- <i class="fa fa-search"></i> -->
+			<span data-translate="">search</span>
+         </a>
+      </li>
+      <li data-ng-if="isMapViewerEnabled">
+        <a data-gn-active-tb-item="catalog.search#/map" title="{{'map' | translate}}">
+          <!-- <i class="fa fa-globe"></i> -->
+			<span data-translate="">map</span>
+          <!-- <span data-gnv-layer-indicator=""/> -->
+        </a>
+      </li>
+		<li>
+	        <a data-gn-active-tb-item="catalog.search#/about" title="{{'about' | translate}}">
+				<span data-translate="">about</span>
+	         </a>
+		</li>
+		<li>
+	        <a data-gn-active-tb-item="catalog.search#/legal" title="{{'legal' | translate}}">
+				<span data-translate="">legal</span>
+	         </a>
+		</li>    
+	    <li class="top-link">
+	        <!-- <a ng-click="{$location.hash('top-page');$anchorScroll();}"> -->
+				<span data-translate="">top</span>
+	        <!-- </a> -->
+	    </li>
+	</ul>
 </div>
+</div>
+<!-- 
+<div class="share_box share_display_none" id="share_box"><div title="Close" id="share_close" class="share_button_close"><a title="Close" id="share_close_link" href="javascript:void(0);" tabindex="210"> </a></div><div class="share_content"><div class="share_header"><span id="share_tab_bookmarks">Share</span></div><div class="share_loading share_display_block">Loading</div><div id="share_content_inner"></div></div></div> 
+-->
