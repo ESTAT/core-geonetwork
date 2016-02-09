@@ -14,7 +14,7 @@
        data-ng-controller="gnsDefault">
     <gn-extend-mainctrl></gn-extend-mainctrl>
 
-    <div data-ng-include="'../../catalog/views/default/templates/home.html'"
+    <div data-ng-include="'../../catalog/views/estat/templates/home.html'"
          data-ng-show="activeTab == '/home'"/>
     <div data-ng-include="'../../catalog/views/default/templates/results.html'"
          data-ng-show="activeTab == '/search'"/>
@@ -27,6 +27,8 @@
          data-ng-show="activeTab == '/about'"/>
     <div data-ng-include="'../../catalog/views/default/templates/legal.html'"
          data-ng-show="activeTab == '/legal'"/>
+    <div data-ng-include="'../../catalog/views/default/templates/contact.html'"
+         data-ng-show="activeTab == '/contact'"/>
   </div>
 </div>
 
@@ -67,10 +69,13 @@
 				<span data-translate="">legal</span>
 	         </a>
 		</li>    
+		<li>
+	        <a data-gn-active-tb-item="catalog.search#/contact" title="{{'contact' | translate}}">
+				<span data-translate="">contact</span>
+	         </a>
+		</li>    
 	    <li class="top-link">
-	        <!-- <a ng-click="{$location.hash('top-page');$anchorScroll();}"> -->
-				<span data-translate="">top</span>
-	        <!-- </a> -->
+	        <a scroll-to-item scroll-to="#top-page">Top</a>
 	    </li>
 	</ul>
 </div>
