@@ -9,7 +9,7 @@
       </div>
     </div>
     <div data-ng-show="!authenticated" class="col-sm-8 col-sm-pull-4">
-    <p>Welcome to Geoportal of the European Commission. Please <a href="https://webgate.ec.europa.eu/inspire-sdi/login" target="_blank" title="login">sign in</a>.</p>
+    <p>Welcome to {{info.site.name}}. Please <a href="https://webgate.ec.europa.eu/inspire-sdi/login" target="_blank" title="login">sign in</a>.</p>
     </div>
     
     <div data-ng-show="authenticated && !user.isRegisteredUser()" class="col-sm-8 col-sm-pull-4">

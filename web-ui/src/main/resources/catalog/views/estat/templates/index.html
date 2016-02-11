@@ -13,21 +13,34 @@
   <div class=""
        data-ng-controller="gnsDefault">
     <gn-extend-mainctrl></gn-extend-mainctrl>
-
-    <div data-ng-include="'../../catalog/views/estat/templates/home.html'"
-         data-ng-show="activeTab == '/home'"/>
-    <div data-ng-include="'../../catalog/views/default/templates/results.html'"
-         data-ng-show="activeTab == '/search'"/>
-    <div data-ng-if="isMapViewerEnabled" 
-         data-ng-include="'../../catalog/views/default/templates/map.html'"
-         data-ng-show="activeTab == '/map'"/>
-    <div data-ng-include="'../../catalog/views/default/templates/recordView.html'"
-         data-ng-show="activeTab == '/metadata'"/>
-    <div data-ng-include="'../../catalog/views/default/templates/about.html'"
+	<div data-ng-if="authenticated">
+	    <div data-ng-include="'../../catalog/views/default/templates/home.html'"
+	         data-ng-show="activeTab == '/home'"/>
+	    <div data-ng-include="'../../catalog/views/default/templates/results.html'"
+	         data-ng-show="activeTab == '/search'"/>
+	    <div data-ng-if="isMapViewerEnabled" 
+	         data-ng-include="'../../catalog/views/default/templates/map.html'"
+	         data-ng-show="activeTab == '/map'"/>
+	    <div data-ng-include="'../../catalog/views/default/templates/recordView.html'"
+	         data-ng-show="activeTab == '/metadata'"/>
+    </div>
+	<div data-ng-if="!authenticated">
+	    <div data-ng-include="'../../catalog/views/estat/templates/guest.html'"
+	         data-ng-show="activeTab == '/home'"/>
+	    <div data-ng-include="'../../catalog/views/estat/templates/guest.html'"
+	         data-ng-show="activeTab == '/search'"/>
+	    <div data-ng-if="isMapViewerEnabled" 
+	         data-ng-include="'../../catalog/views/estat/templates/guest.html'"
+	         data-ng-show="activeTab == '/map'"/>
+	    <div data-ng-include="'../../catalog/views/estat/templates/guest.html'"
+	         data-ng-show="activeTab == '/metadata'"/>
+    </div>
+         
+    <div data-ng-include="'../../catalog/views/estat/templates/about.html'"
          data-ng-show="activeTab == '/about'"/>
-    <div data-ng-include="'../../catalog/views/default/templates/legal.html'"
+    <div data-ng-include="'../../catalog/views/estat/templates/legal.html'"
          data-ng-show="activeTab == '/legal'"/>
-    <div data-ng-include="'../../catalog/views/default/templates/contact.html'"
+    <div data-ng-include="'../../catalog/views/estat/templates/contact.html'"
          data-ng-show="activeTab == '/contact'"/>
   </div>
 </div>
@@ -42,7 +55,7 @@
 	    </li>
          <li>
       		<a data-gn-active-tb-item="catalog.search#/home">
-				<span data-translate="">home</span>
+				<span data-translate="">Home</span>
 			</a>
          </li>
 	    
@@ -75,7 +88,9 @@
 	         </a>
 		</li>    
 	    <li class="top-link">
-	        <a scroll-to-item scroll-to="#top-page">Top</a>
+	        <a scroll-to-item scroll-to="#top-page">
+				<span data-translate="">top</span>
+			</a>
 	    </li>
 	</ul>
 </div>

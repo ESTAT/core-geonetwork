@@ -307,5 +307,7 @@
   "wpsDescribeProcessFailed": "DescribeProcess failed",
   "wpsExecute": "Execute",
   "wpsExecuteFailed": "Execute failed",
-  "wpsErrorCodeReturned": "The serveur returned status code"
+  "wpsErrorCodeReturned": "The server returned status code",
+  "legal":"Legal notice",
+  "top":"Top"
 }

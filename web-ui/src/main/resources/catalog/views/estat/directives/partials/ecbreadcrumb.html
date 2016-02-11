@@ -1,0 +1,16 @@
+<div id="path">
+	<p class="off-screen">Navigation path</p>
+	<ul class="reset-list">
+        <li class="first">
+       		<a data-gn-active-tb-item="catalog.search#/home">{{info.site.name}}</a>
+        </li>
+		<li ng-repeat=" tab in ecbreadcrumb">
+			<span ng-if="$last">
+				{{tab | translate}}
+			</span>
+	        <a ng-if="!$last" data-gn-active-tb-item="catalog.search#/{{tab}}" title="{{tab | translate}}">
+	 			{{tab | translate}}
+	         </a>
+		</li>
+ 	</ul>
+</div>		

@@ -144,5 +144,33 @@
 	        }                                                                                    
 	    }
 	  }
-     ])       
+     ]);
+     
+     module.directive('ecBreadcrumb', ['$location',
+       function(location) {
+       return {
+           restrict: 'A',
+           replace: true,
+           templateUrl: '../../catalog/views/estat/directives/partials/ecbreadcrumb.html',
+           link: function linkFn(scope, element, attr) {
+        	   updateBreadcrumb = function(path){
+	            	 if (path == "/home"){
+	            		 scope.ecbreadcrumb = [];
+	            	 }
+	            	 else {
+	            		 scope.ecbreadcrumb = path.split('/');
+	            	 }
+        	   }
+        	   updateBreadcrumb(location.path());
+        	   scope.$on('$locationChangeSuccess', function(next, current) {
+            	   updateBreadcrumb(location.path());
+             });
+           }
+  	    }
+  	  }
+     ]);
+//      $scope.$on('$locationChangeSuccess', function(next, current) {
+//        $scope.activeTab = $location.path().
+//            match(/^(\/[a-zA-Z0-9]*)($|\/.*)/)[1];
+     
 })();
