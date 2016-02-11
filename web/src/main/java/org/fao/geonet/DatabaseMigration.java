@@ -5,13 +5,16 @@ import com.vividsolutions.jts.util.Assert;
 import jeeves.server.sources.http.ServletPathFinder;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Pair;
+import org.fao.geonet.domain.Setting;
 import org.fao.geonet.lib.DatabaseType;
 import org.fao.geonet.lib.Lib;
+import org.fao.geonet.repository.SettingRepository;
 import org.fao.geonet.utils.Log;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -51,19 +54,24 @@ public class DatabaseMigration implements BeanPostProcessor {
     private Callable<LinkedHashMap<String, List<String>>> _migration;
 
     private String initAfter;
+    private String initAfterId;
 
     private Logger _logger = Log.createLogger(Geonet.GEONETWORK + ".databasemigration");
     private boolean foundErrors;
 
     @Override
     public final Object postProcessBeforeInitialization(final Object bean, final String beanName) {
+
         return bean;  // Do nothing
     }
 
     @Override
     public final Object postProcessAfterInitialization(final Object bean, final String beanName) {
-        try {
-            if (Class.forName(initAfter).isInstance(bean)) {
+        try {     
+            
+            
+            if (Class.forName(initAfter).isInstance(bean) &&
+                    (getInitAfterId() == null || getInitAfterId().equals(beanName))) {
                 _logger.debug(String.format("DB Migration / Running '%s' after initialization of '%s'.", bean.getClass(), initAfter));
                 try {
                     String version;
@@ -312,7 +320,7 @@ public class DatabaseMigration implements BeanPostProcessor {
     private String newLookup(Statement statement, String key) throws SQLException {
         ResultSet results = null;
         try {
-            final String newGetVersion = "SELECT value FROM Settings WHERE name = '" + key + "'";
+            final String newGetVersion = "SELECT value FROM settings WHERE name = '" + key + "'";
             results = statement.executeQuery(newGetVersion);
             if (results.next()) {
                 return results.getString(1);
@@ -328,7 +336,7 @@ public class DatabaseMigration implements BeanPostProcessor {
     private String oldLookup(Statement statement, int key) throws SQLException {
         ResultSet results = null;
         try {
-            final String newGetVersion = "SELECT value FROM Settings WHERE id = " + key;
+            final String newGetVersion = "SELECT value FROM settings WHERE id = " + key;
             results = statement.executeQuery(newGetVersion);
             if (results.next()) {
                 return results.getString(1);
@@ -398,6 +406,14 @@ public class DatabaseMigration implements BeanPostProcessor {
 
     public void setInitAfter(String initAfter) {
         this.initAfter = initAfter;
+    }
+    
+    public String getInitAfterId() {
+        return initAfterId;
+    }
+
+    public void setInitAfterId(String initAfterId) {
+        this.initAfterId = initAfterId;
     }
 
     public static class Version implements Comparable<Version> {

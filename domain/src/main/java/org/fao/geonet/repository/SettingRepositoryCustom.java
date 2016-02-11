@@ -18,4 +18,19 @@ public interface SettingRepositoryCustom {
      * @param private if true then  find the private
      */
     List<Setting> findAllByInternal(boolean internal);
+
+    /**
+     * Get the value by key
+     * @param key
+     * @return
+     */
+    Setting findByKey(String key);
+    
+    /**
+     * Get the value by id
+     * @param id
+     * @return
+     */
+    @Deprecated
+    String oldGet(Integer id);
 }

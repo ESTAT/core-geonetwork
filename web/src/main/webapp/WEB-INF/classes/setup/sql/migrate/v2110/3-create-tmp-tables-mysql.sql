@@ -13,7 +13,7 @@ CREATE TABLE USERGROUPS_TMP
 
 CREATE TABLE USERS_TMP
   (
-    id            int         ,
+    id            int         AUTO_INCREMENT,
     username      varchar(256),
     password      varchar(120),
     surname       varchar(32),
@@ -45,7 +45,7 @@ CREATE TABLE MetadataNotifications_Tmp
 
 CREATE TABLE Params_TEMP
   (
-    id          int           not null,
+    id          int           not null ,
     requestId   int,
     queryType   int,
     termField   varchar(128),

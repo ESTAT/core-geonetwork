@@ -64,19 +64,17 @@
 		<constructor-arg>
 			<list>
 				<ref bean="securityContextPersistenceFilter" />
-<ref bean="exceptionTranslationFilter" />
-<ref bean="requestCacheFilter" />
 				<ref bean="logoutFilter" />
 				<!-- A filter that check if an external service already authenticated user
 					 (default implementation does nothing but can be overridden) -->
 				<ref bean="multiNodeAuthenticationFilter" />
 				<ref bean="preAuthenticationFilter" />
-<!-- 				<ref bean="basicAuthenticationFilter" /> -->
-<!-- 				<ref bean="formLoginFilter" /> -->
-<!-- 				<ref bean="requestCacheFilter" /> -->
+				<ref bean="basicAuthenticationFilter" />
+				<ref bean="formLoginFilter" />
+				<ref bean="requestCacheFilter" />
 				<ref bean="anonymousFilter" />
 				<ref bean="sessionMgmtFilter" />
-<!-- 				<ref bean="exceptionTranslationFilter" /> -->
+				<ref bean="exceptionTranslationFilter" />
 				<ref bean="filterSecurityInterceptor" />
 			</list>
 		</constructor-arg>
@@ -96,10 +94,8 @@
 		<property name="providers">
 			<list>
 				<!-- Check if the preAuthenticationFilter has already authenticated user -->
-<!-- 				<ref bean="preFilterAuthenticationProvider" /> -->
-				<!-- ECAS -->
-				<ref bean="casAuthenticationProvider" />				
-<!-- 				<ref bean="geonetworkAuthenticationProvider" /> -->
+				<ref bean="preFilterAuthenticationProvider" />
+				<ref bean="geonetworkAuthenticationProvider" />
 			</list>
 		</property>
 	</bean>

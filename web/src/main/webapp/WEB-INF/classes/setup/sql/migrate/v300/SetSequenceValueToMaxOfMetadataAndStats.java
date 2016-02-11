@@ -1,23 +1,31 @@
 //package v300;
 
-import org.fao.geonet.DatabaseMigrationTask;
-import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.utils.Log;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+
+import org.fao.geonet.DatabaseMigrationTask;
+import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.utils.Log;
 
 public class SetSequenceValueToMaxOfMetadataAndStats implements DatabaseMigrationTask {
     @Override
     public void update(Connection connection) throws SQLException {
         Log.debug(Geonet.DB, "SetSequenceValueToMaxOfMetadataAndStats");
+        
+        //If this is mysql, just skip it!
+        if(connection.getMetaData().getDatabaseProductName().equalsIgnoreCase("MySQL")) {
+            return;
+        }
+        
+        
 
         try (Statement statement = connection.createStatement()) {
-            final String numberOfMetadataSQL = "SELECT max(id) as NB FROM Metadata";
-            final String numberOfParamsSQL = "SELECT max(id) as NB FROM Params";
-            final String numberOfRequestsSQL = "SELECT max(id) as NB FROM Requests";
+            final String numberOfMetadataSQL = "SELECT max(id) as NB FROM metadata";
+            final String numberOfParamsSQL = "SELECT max(id) as NB FROM params";
+            final String numberOfRequestsSQL = "SELECT max(id) as NB FROM requests";
 
             ResultSet metadataResultSet = statement.executeQuery(numberOfMetadataSQL);
             int numberOfMetadata = 0;

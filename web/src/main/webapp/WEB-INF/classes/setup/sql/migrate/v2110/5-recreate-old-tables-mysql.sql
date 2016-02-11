@@ -2,7 +2,7 @@
 
 -- Update UserGroups profiles to be one of the enumerated profiles
 
-DROP TABLE USERGROUPS;
+DROP TABLE usergroups;
 CREATE TABLE USERGROUPS
   (
     userId   int          not null,
@@ -11,8 +11,8 @@ CREATE TABLE USERGROUPS
 
     primary key(userId,groupId,profile),
 
-    foreign key(userId) references Users(id),
-    foreign key(groupId) references Groups(id)
+--    foreign key(userId) references users(id),
+    foreign key(groupId) references groups(id)
   );
 -- Update UserGroups profiles to be one of the enumerated profiles
 
@@ -22,8 +22,12 @@ DROP TABLE USERGROUPS_TMP;
 
 -- Convert Profile column to the profile enumeration ordinal
 
-DROP TABLE Users;
-CREATE TABLE Users
+ALTER TABLE groups DROP FOREIGN KEY `groups_ibfk_1`;
+ALTER TABLE metadata DROP FOREIGN KEY `metadata_ibfk_1`;
+ALTER TABLE metadatastatus DROP FOREIGN KEY `metadatastatus_ibfk_3`;
+
+DROP TABLE users;
+CREATE TABLE users
   (
     id            int           not null,
     username      varchar(256)  not null,
@@ -38,15 +42,22 @@ CREATE TABLE Users
     primary key(id),
     unique(username)
   );
-
 -- Convert Profile column to the profile enumeration ordinal
 
-INSERT INTO USERS SELECT * FROM USERS_TMP;
+INSERT INTO users SELECT * FROM USERS_TMP;
 DROP TABLE USERS_TMP;
+  
+ALTER TABLE USERGROUPS ADD CONSTRAINT foreign key(userId) references users(id);
+ALTER TABLE groups ADD CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`referrer`) REFERENCES `users` (`id`);
+ALTER TABLE metadata ADD CONSTRAINT `metadata_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`id`);
+ALTER TABLE metadatastatus ADD CONSTRAINT `metadatastatus_ibfk_3` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
+ALTER TABLE UserAddress ADD CONSTRAINT foreign key(userId) references users(id);
+ALTER TABLE Email ADD CONSTRAINT foreign key(user_id) references users(id);
+
 
 -- ----  Change notifier actions column to map to the MetadataNotificationAction enumeration
 
-DROP TABLE MetadataNotifications;
+DROP TABLE metadatanotifications;
 CREATE TABLE MetadataNotifications
   (
     metadataId         int            not null,
@@ -65,7 +76,7 @@ DROP TABLE MetadataNotifications_Tmp;
 
 -- ----  Change params querytype column to map to the LuceneQueryParamType enumeration
 
-DROP TABLE Params;
+DROP TABLE params;
 
 CREATE TABLE Params
   (
@@ -79,7 +90,7 @@ CREATE TABLE Params
     upperText   varchar(128),
     inclusive   char(1),
     primary key(id),
-    foreign key(requestId) references Requests(id)
+    foreign key(requestId) references requests(id)
   );
 
 -- ----  Change params querytype column to map to the LuceneQueryParamType enumeration

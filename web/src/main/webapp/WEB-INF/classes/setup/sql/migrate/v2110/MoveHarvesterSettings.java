@@ -14,13 +14,13 @@ public class MoveHarvesterSettings extends MoveHarvesterSettingsToHigherNumber {
     public void update(Connection connection) throws SQLException {
         super.counter.set(100);
         try (Statement statement = connection.createStatement()) {
-            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (2, 'harvesting')");
-            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (1, 'harvesting')");
+//            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (2, 'harvesting')");
+//            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (1, 'harvesting')");
         }
         super.update(connection);
         try (Statement statement = connection.createStatement()) {
-            statement.execute("UPDATE harvestersettings SET parentid=1 WHERE parentid=2");
-            statement.execute("DELETE FROM harvestersettings WHERE id=2");
+            statement.execute("UPDATE HarvesterSettings SET parentid=1 WHERE parentid=2");
+            statement.execute("DELETE FROM HarvesterSettings WHERE id=2");
         }
     }
 

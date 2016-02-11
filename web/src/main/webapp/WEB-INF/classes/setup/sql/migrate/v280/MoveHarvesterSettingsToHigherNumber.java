@@ -34,7 +34,7 @@ public class MoveHarvesterSettingsToHigherNumber implements DatabaseMigrationTas
         }
 
         private void loadChildren(Statement statement) throws SQLException {
-            final ResultSet resultSet2 = statement.executeQuery("SELECT * FROM Settings where parentId = "+originalId);
+            final ResultSet resultSet2 = statement.executeQuery("SELECT * FROM " + getHarvesterSettingsName() + " where parentId = "+originalId);
             try {
                 while (resultSet2.next()) {
                     children.add(new HarvesterSetting(id, resultSet2));
@@ -61,18 +61,18 @@ public class MoveHarvesterSettingsToHigherNumber implements DatabaseMigrationTas
             for (HarvesterSetting child : children) {
                 child.delete(statement);
             }
-            statement.execute("DELETE FROM Settings WHERE id=" + originalId);
+            statement.execute("DELETE FROM " + getHarvesterSettingsName() + " WHERE id=" + originalId);
         }
     }
 
     protected String getHarvesterSettingsName() {
-        return "Settings";
+        return "settings";
     }
 
     @Override
     public void update(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
-            final String selectHarvestersSQL = "SELECT * FROM Settings WHERE parentId = (SELECT id FROM Settings WHERE name='harvesting' and parentId=0)";
+            final String selectHarvestersSQL = "SELECT * FROM " + getHarvesterSettingsName() + " WHERE parentId = (SELECT id FROM " + getHarvesterSettingsName() + " WHERE name='harvesting' and parentId=0)";
 
             final ResultSet resultSet = statement.executeQuery(selectHarvestersSQL);
 
