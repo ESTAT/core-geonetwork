@@ -89,6 +89,10 @@ public class DbLib {
         for (String row : data) {
             if (!row.toUpperCase().startsWith("REM") && !row.startsWith("--")
                 && !row.trim().equals("")) {
+
+                // Remove extra spaces
+                row = row.trim();
+
                 sb.append(" ");
                 sb.append(row);
 
@@ -136,6 +140,10 @@ public class DbLib {
         for (String row : data) {
             if (!row.toUpperCase().startsWith("REM") && !row.startsWith("--")
                 && !row.trim().equals("")) {
+
+                // Remove extra spaces
+                row = row.trim();
+
                 sb.append(" ");
                 sb.append(row);
 
