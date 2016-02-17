@@ -38,7 +38,7 @@
         <call name="subtemplates" class="jeeves.services.db.Select">
           <param name="db" value="main-db"/>
           <param name="query"
-            value="SELECT distinct(root) AS type FROM metadata WHERE isTemplate = 's'"/>
+            value="SELECT distinct(root) AS type FROM Metadata WHERE isTemplate = 's'"/>
         </call>
       </output>
     </service>
@@ -57,7 +57,7 @@
         <call name="subtemplates" class="jeeves.services.db.Select">
           <param name="db" value="main-db"/>
           <param name="query"
-            value="SELECT distinct(root) AS type FROM metadata WHERE isTemplate = 's'"/>
+            value="SELECT distinct(root) AS type FROM Metadata WHERE isTemplate = 's'"/>
         </call>
       </output>
 
@@ -77,7 +77,7 @@
         <call name="subtemplates" class="jeeves.services.db.Select">
           <param name="db" value="main-db"/>
           <param name="query"
-            value="SELECT distinct(root) AS type FROM metadata WHERE isTemplate = 's'"/>
+            value="SELECT distinct(root) AS type FROM Metadata WHERE isTemplate = 's'"/>
         </call>
       </output>
     </service>
