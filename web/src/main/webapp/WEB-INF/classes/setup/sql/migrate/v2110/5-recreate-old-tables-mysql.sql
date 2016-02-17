@@ -30,7 +30,7 @@ DROP TABLE users;
 CREATE TABLE users
   (
     id            int           not null,
-    username      varchar(256)  not null,
+    username      varchar(255)  not null,
     password      varchar(120)  not null,
     surname       varchar(32),
     name          varchar(32),

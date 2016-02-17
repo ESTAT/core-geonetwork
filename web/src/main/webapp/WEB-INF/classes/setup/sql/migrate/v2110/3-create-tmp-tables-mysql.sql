@@ -14,7 +14,7 @@ CREATE TABLE USERGROUPS_TMP
 CREATE TABLE USERS_TMP
   (
     id            int         AUTO_INCREMENT,
-    username      varchar(256),
+    username      varchar(255),
     password      varchar(120),
     surname       varchar(32),
     name          varchar(32),
