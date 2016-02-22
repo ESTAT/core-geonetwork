@@ -1041,6 +1041,13 @@
         <artifactId>jaxb-impl</artifactId>
         <version>2.2.7</version>
       </dependency>
+
+      <!-- OWASP Enterprise Security API -->
+      <dependency>
+        <groupId>org.owasp.esapi</groupId>
+        <artifactId>esapi</artifactId>
+        <version>2.1.0.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
