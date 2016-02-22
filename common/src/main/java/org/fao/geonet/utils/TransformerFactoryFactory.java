@@ -21,9 +21,32 @@ public class TransformerFactoryFactory {
     private final static String SYSTEM_PROPERTY_NAME = "javax.xml.transform.TransformerFactory";
 
     public static void init(String implementationName) {
-    	debug("Implementation name: " + implementationName);
+        debug("Implementation name: " + implementationName);
         if(implementationName != null && implementationName.length() > 0) {
-            factory = TransformerFactory.newInstance(implementationName, null);
+            // Code for DIGIT environment (ESTAT).
+            // TODO: Solve this with the custom class loader
+            Properties props = System.getProperties();
+            // remember current system property
+            String currentSystemProperty = null;
+            if(props.containsKey(SYSTEM_PROPERTY_NAME)) {
+                currentSystemProperty = props.getProperty(SYSTEM_PROPERTY_NAME);
+                debug("Current system property: " + currentSystemProperty);
+            }
+            // set system property to what GeoNetwork needs
+            props.setProperty(SYSTEM_PROPERTY_NAME, implementationName);
+            // use the system property
+            factory = TransformerFactory.newInstance();
+            // reset the system property to what it was before
+            if(currentSystemProperty != null) {
+                props.setProperty(SYSTEM_PROPERTY_NAME, currentSystemProperty);
+            }
+            else {
+                props.remove(SYSTEM_PROPERTY_NAME);
+            }
+            // End - Code for DIGIT environment (ESTAT).
+
+            //factory = TransformerFactory.newInstance(implementationName, null);
+
         } else {
             factory = TransformerFactory.newInstance();
         }
