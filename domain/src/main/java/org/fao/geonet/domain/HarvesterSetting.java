@@ -34,6 +34,7 @@ public class HarvesterSetting extends GeonetEntity {
     private HarvesterSetting _parent;
     private String _name;
     private String _value;
+    private char encrypted  = Constants.YN_FALSE;
 
     /**
      * Get the setting id. This is a generated value and as such new instances should not have this set as it will simply be ignored and
@@ -175,6 +176,46 @@ public class HarvesterSetting extends GeonetEntity {
      */
     public HarvesterSetting setValue(boolean value) {
         return setValue(String.valueOf(value));
+    }
+
+    /**
+     * For backwards compatibility we need the activated column to be either 'n' or 'y'.
+     * This is a workaround to allow this until future
+     * versions of JPA that allow different ways of controlling how types are mapped to the database.
+     */
+    @Column(name = "encrypted", nullable = false, length = 1, columnDefinition="char default 'y'")
+    protected char getEncrypted_JpaWorkaround() {
+        return encrypted;
+    }
+
+    /**
+     * Set the column value. Constants.YN_ENABLED for true Constants.YN_DISABLED for false.
+     *
+     * @param encryptedValue the column value. Constants.YN_ENABLED for true Constants.YN_DISABLED for false.
+     * @return
+     */
+    protected void setEncrypted_JpaWorkaround(char encryptedValue) {
+        encrypted = encryptedValue;
+    }
+
+    /**
+     * Return true if the setting is public.
+     *
+     * @return true if the setting is public.
+     */
+    @Transient
+    public boolean isEncrypted() {
+        return Constants.toBoolean_fromYNChar(getEncrypted_JpaWorkaround());
+    }
+
+    /**
+     * Set true if the setting is private.
+     *
+     * @param encrypted true if the setting is private.
+     */
+    public HarvesterSetting setEncrypted(boolean encrypted) {
+        setEncrypted_JpaWorkaround(Constants.toYN_EnabledChar(encrypted));
+        return this;
     }
 
     @Override

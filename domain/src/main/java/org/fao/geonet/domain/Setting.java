@@ -1,7 +1,10 @@
 package org.fao.geonet.domain;
 
+import org.apache.commons.lang.StringUtils;
+import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.entitylistener.SettingEntityListenerManager;
 import org.hibernate.annotations.Type;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 import javax.persistence.*;
 
@@ -24,6 +27,7 @@ public class Setting extends GeonetEntity {
     private SettingDataType dataType = SettingDataType.STRING;
     private int position = 0;
     private char internal = Constants.YN_TRUE;
+    private char encrypted  = Constants.YN_FALSE;
 
     @Id
     @Column(name = "name", nullable = false, length = 255/* mysql cannot accept it any bigger if it is to be the id */)
@@ -41,12 +45,14 @@ public class Setting extends GeonetEntity {
     @Type(type="org.hibernate.type.StringClobType") // this is a work around for postgres so postgres can correctly load clobs
     public String getValue() {
         return value;
+
     }
 
     public Setting setValue(String value) {
         this.value = value;
         return this;
     }
+
 
     @Column(name = "datatype")
     public SettingDataType getDataType() {
@@ -106,6 +112,47 @@ public class Setting extends GeonetEntity {
     public Setting setInternal(boolean internal) {
       setInternal_JpaWorkaround(Constants.toYN_EnabledChar(internal));
       return this;
+    }
+
+
+    /**
+     * For backwards compatibility we need the activated column to be either 'n' or 'y'.
+     * This is a workaround to allow this until future
+     * versions of JPA that allow different ways of controlling how types are mapped to the database.
+     */
+    @Column(name = "encrypted", nullable = false, length = 1, columnDefinition="char default 'y'")
+    protected char getEncrypted_JpaWorkaround() {
+        return encrypted;
+    }
+
+    /**
+     * Set the column value. Constants.YN_ENABLED for true Constants.YN_DISABLED for false.
+     *
+     * @param encryptedValue the column value. Constants.YN_ENABLED for true Constants.YN_DISABLED for false.
+     * @return
+     */
+    protected void setEncrypted_JpaWorkaround(char encryptedValue) {
+        encrypted = encryptedValue;
+    }
+
+    /**
+     * Return true if the setting is public.
+     *
+     * @return true if the setting is public.
+     */
+    @Transient
+    public boolean isEncrypted() {
+        return Constants.toBoolean_fromYNChar(getEncrypted_JpaWorkaround());
+    }
+
+    /**
+     * Set true if the setting is private.
+     *
+     * @param encrypted true if the setting is private.
+     */
+    public Setting setEncrypted(boolean encrypted) {
+        setEncrypted_JpaWorkaround(Constants.toYN_EnabledChar(encrypted));
+        return this;
     }
 
     @Override

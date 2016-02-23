@@ -31,6 +31,16 @@
     <property name="numberOfConcurrentRequests" value="30" />
   </bean>
 
+  <bean id="strongEncryptor"
+        class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+    <property name="algorithm">
+      <value>PBEWithMD5AndDES</value>
+    </property>
+    <property name="password">
+      <value>jasypt</value>
+    </property>
+  </bean>
+
   <bean id="defaultLanguage" class="java.lang.String">
     <constructor-arg index="0" value="eng" />
   </bean>
