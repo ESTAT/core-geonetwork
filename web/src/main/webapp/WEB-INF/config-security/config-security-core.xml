@@ -93,9 +93,7 @@
 		class="org.springframework.security.authentication.ProviderManager">
 		<property name="providers">
 			<list>
-				<!-- Check if the preAuthenticationFilter has already authenticated user -->
-				<ref bean="preFilterAuthenticationProvider" />
-				<ref bean="geonetworkAuthenticationProvider" />
+				<ref bean="casAuthenticationProvider" />
 			</list>
 		</property>
 	</bean>

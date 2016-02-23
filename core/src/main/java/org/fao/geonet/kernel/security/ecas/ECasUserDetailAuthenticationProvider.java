@@ -71,7 +71,8 @@ public class ECasUserDetailAuthenticationProvider extends
     }
 
     private static final String CAS_STATEFUL = "_cas_stateful_";
-    private static final String CAS_FLAG = "ECAS";
+    private static final String CAS_FLAG = "CAS";
+    private static final String ECAS_FLAG = "ECAS";
 
     @Override
     protected UserDetails retrieveUser(String username,
@@ -84,7 +85,8 @@ public class ECasUserDetailAuthenticationProvider extends
         }
         try {
             User user = userRepo.findOneByUsername(username);
-            if (user != null && !user.getSecurity().getAuthType().equalsIgnoreCase(CAS_FLAG)) {
+            if (user != null && !user.getSecurity().getAuthType().equalsIgnoreCase(CAS_FLAG)
+                    && !user.getSecurity().getAuthType().equalsIgnoreCase(ECAS_FLAG)) {
                 throw new AuthenticationServiceException(
                         "Trying to authenticate through ECAS a user that is not ECAS");
             }

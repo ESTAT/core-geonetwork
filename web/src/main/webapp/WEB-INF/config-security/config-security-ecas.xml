@@ -23,7 +23,7 @@ geonetwork.https.url=https://ec.europa.eu:8443/geonetwork
           http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context-3.0.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-3.1.xsd"
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd"
     xmlns:sec="http://www.springframework.org/schema/security" xmlns:ctx="http://www.springframework.org/schema/context"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
 
@@ -81,72 +81,72 @@ geonetwork.https.url=https://ec.europa.eu:8443/geonetwork
         <!-- This part can be moved to config-security-core: -->
         <!-- CAS: http://stackoverflow.com/questions/11163095/how-to-make-cas-return-to-right-spring-page -->
         <property name="authenticationSuccessHandler">
-            <bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+       		<bean class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
                 <property name="defaultTargetUrl" value="/"/>
-                <property name="alwaysUseDefaultTargetUrl" value="true"/>
-            </bean>
-        </property>
-        
-    </bean>
+       			<property name="alwaysUseDefaultTargetUrl" value="true"/>
+       		</bean>
+   		</property>
+   		
+	</bean>
 
-    <bean id="casEntryPoint"
-        class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
-        <property name="loginUrl" value="${cas.login.url}" />
-        <property name="serviceProperties" ref="serviceProperties" />
-    </bean>
+	<bean id="casEntryPoint"
+		class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+		<property name="loginUrl" value="${cas.login.url}" />
+		<property name="serviceProperties" ref="serviceProperties" />
+	</bean>
 
     <bean class="org.fao.geonet.kernel.security.ecas.ECasUserDetailAuthenticationProvider" id="gnCasUserDetailAuthenticationProvider"/>
 
-<!--    <bean id="casAuthenticationProvider" -->
-<!--        class="org.springframework.security.cas.authentication.CasAuthenticationProvider"> -->
-    <bean id="casAuthenticationProvider"
+<!-- 	<bean id="casAuthenticationProvider" -->
+<!-- 		class="org.springframework.security.cas.authentication.CasAuthenticationProvider"> -->
+	<bean id="casAuthenticationProvider"
         class="org.fao.geonet.kernel.security.ecas.ECasAuthenticationProvider">
-        <property name="authenticationUserDetailsService">
-            <bean
-                class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-<!--                <constructor-arg ref="geonetworkAuthenticationProvider" />
- -->                <constructor-arg ref="gnCasUserDetailAuthenticationProvider" />
-            </bean>
-        </property>
-        <property name="serviceProperties" ref="serviceProperties" />
-        <property name="ticketValidator" ref="casTicketValidator"/>
-        <property name="key" value="GeonetworkCasAuthenticatorProviderKey" />
-        <property name="statelessTicketCache" ref="casStatelessTicketCache" />
-    </bean>
-    
-    <bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
-<!--    <bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ProxyTicketValidator">  -->
-        <!-- Geonetwork class in start method will update the baseurl with the one in the settings table -->
-        <!-- If baseurlTag is not set then the proxyCallbackURL will not be updated -->
-        <constructor-arg index="0" value="${cas.ticket.validator.url}" />
-<!--        <property name="proxyCallbackUrl" value="${geonetwork.https.url}/j_spring_cas_security_proxyreceptor" /> -->
-<!--        <property name="proxyGrantingTicketStorage" ref="pgtStorage" /> -->
-<!--        <property name="acceptAnyProxy" value="true"/> -->
-    </bean>
-    <!-- TODO implement custom storage, maybe that stores in database -->
-<!--    <bean id="pgtStorage" class="org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl"/> -->
-    
-    
-    
-    
-    
-    
-    <!-- This filter handles a Single Logout Request from the CAS Server -->
-    <bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" /> 
-    <!-- This filter redirects to the CAS Server to signal Single Logout should be performed -->
-    <bean id="requestSingleLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
-        <constructor-arg ref="logoutSuccessHandler" />
-        <constructor-arg>
-            <array>
-                <bean class="jeeves.config.springutil.LogoutUserSessionHandler" />
-                <bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
-            </array>
-        </constructor-arg>
-        <property name="filterProcessesUrl" value="/j_spring_security_logout" />
-    </bean>
+		<property name="authenticationUserDetailsService">
+			<bean
+				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+<!-- 				<constructor-arg ref="geonetworkAuthenticationProvider" />
+ -->				<constructor-arg ref="gnCasUserDetailAuthenticationProvider" />
+			</bean>
+		</property>
+		<property name="serviceProperties" ref="serviceProperties" />
+		<property name="ticketValidator" ref="casTicketValidator"/>
+		<property name="key" value="GeonetworkCasAuthenticatorProviderKey" />
+		<property name="statelessTicketCache" ref="casStatelessTicketCache" />
+	</bean>
+	
+	<bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+<!--  	<bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ProxyTicketValidator">  -->
+		<!-- Geonetwork class in start method will update the baseurl with the one in the settings table -->
+		<!-- If baseurlTag is not set then the proxyCallbackURL will not be updated -->
+		<constructor-arg index="0" value="${cas.ticket.validator.url}" />
+<!-- 		<property name="proxyCallbackUrl" value="${geonetwork.https.url}/j_spring_cas_security_proxyreceptor" /> -->
+<!-- 		<property name="proxyGrantingTicketStorage" ref="pgtStorage" /> -->
+<!-- 		<property name="acceptAnyProxy" value="true"/> -->
+	</bean>
+	<!-- TODO implement custom storage, maybe that stores in database -->
+<!-- 	<bean id="pgtStorage" class="org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl"/> -->
+	
+	
+	
+	
+	
+	
+	<!-- This filter handles a Single Logout Request from the CAS Server -->
+	<bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" /> 
+	<!-- This filter redirects to the CAS Server to signal Single Logout should be performed -->
+	<bean id="requestSingleLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg ref="logoutSuccessHandler" />
+		<constructor-arg>
+			<array>
+				<bean class="jeeves.config.springutil.LogoutUserSessionHandler" />
+				<bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+			</array>
+		</constructor-arg>
+		<property name="filterProcessesUrl" value="/j_spring_security_logout" />
+	</bean>
     <bean id="logoutSuccessHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
         <property name="defaultTargetUrl" value="${cas.logout.url}"></property>
-    </bean>
+     </bean>
     <bean id="casStatelessTicketCache"
         class="org.springframework.security.cas.authentication.EhCacheBasedTicketCache">
         <property name="cache">
