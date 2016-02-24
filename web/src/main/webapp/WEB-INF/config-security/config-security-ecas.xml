@@ -52,12 +52,12 @@ geonetwork.https.url=https://ec.europa.eu:8443/geonetwork
             </list>
         </constructor-arg>
     </bean>
-    <!-- Adds the CasAuthenticationProvider to the AuthenticationManager -->
-    <bean id="casAuthenticationProviderPostProcessor"
+    <!-- Adds the CasAuthenticationProvider to the AuthenticationManager. NOT required as already added in config-security-core.xml in the authenticationManager -->
+    <!--<bean id="casAuthenticationProviderPostProcessor"
         class="jeeves.config.springutil.AddAuthenticationProviderPostProcessor">
         <constructor-arg value="0" />
         <constructor-arg ref="casAuthenticationProvider"></constructor-arg>
-    </bean>
+    </bean>-->
     <!-- End overrides -->
     
     <bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
