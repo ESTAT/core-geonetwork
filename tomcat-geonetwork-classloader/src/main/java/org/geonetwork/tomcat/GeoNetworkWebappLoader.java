@@ -58,8 +58,6 @@ public class GeoNetworkWebappLoader extends WebappClassLoader {
         if (log.isDebugEnabled())
             log.debug("loadClass(" + name + ", " + resolve + ")");
 
-        System.out.println("loadClass(" + name + ", " + resolve + ")");
-
         Class<?> clazz = null;
 
         // Log access to stopped classloader
