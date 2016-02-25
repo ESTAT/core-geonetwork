@@ -6,6 +6,3 @@ INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system
 
 UPDATE settings SET value='3.0.2' WHERE name='system/platform/version';
 UPDATE settings SET value='SNAPSHOT' WHERE name='system/platform/subVersion';
-
-
-create table HarvesterData (harvesterUuid varchar(255) not null, `key` varchar(255) not null, `value` varchar(255) not null, primary key (`harvesterUuid`, `key`)); 
