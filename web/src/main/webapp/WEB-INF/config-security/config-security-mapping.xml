@@ -97,6 +97,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/xml.relation.insert!?.*" access="hasRole('Editor')"></sec:intercept-url>
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/xml.relation.delete!?.*" access="hasRole('Editor')"></sec:intercept-url>
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/geoserver.publisher!?.*" access="hasRole('Editor')"></sec:intercept-url>
+                
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/home!?.*" access="permitAll"></sec:intercept-url>
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/main.error!?.*" access="permitAll"></sec:intercept-url>
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/metadata.thumbnail!?.*" access="permitAll"></sec:intercept-url>
@@ -385,11 +386,12 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/portal.sru!?.*" access="permitAll"/>
                 
+
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.search!?.*" access="permitAll"/>
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.search.nojs!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.signin!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/contact.us!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/contact.send!?.*" access="permitAll"/>
+				<!-- <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.signin!?.*" access="permitAll"/> -->
+                <!-- <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/contact.us!?.*" access="permitAll"/> -->
+                <!-- <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/contact.send!?.*" access="permitAll"/> -->
 
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/admin.ownership.editors!?.*" access="hasRole('Administrator')"/>
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/admin.ownership.groups!?.*" access="hasRole('Administrator')"/>
@@ -417,15 +419,16 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/crs.search!?.*" access="permitAll"/>
 
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/new.account!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/create.account!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/new.password!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/password.reminder!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/password.change!?.*" access="permitAll"/>
+<!--                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/new.account!?.*" access="permitAll"/> -->
+<!--                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/create.account!?.*" access="permitAll"/> -->
+<!--                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/new.password!?.*" access="permitAll"/> -->
+<!--                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/password.reminder!?.*" access="permitAll"/> -->
+<!--                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/password.change!?.*" access="permitAll"/> -->
 
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.edit!?.*" access="hasRole('Editor')"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.viewer!?.*" access="permitAll"/>
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/node-change-warning!?.*" access="permitAll"/>
+                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.viewer!?.*" access="hasRole('RegisteredUser')"/>
+<!-- <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/catalog.viewer!?.*" access="permitAll"/> -->
+                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/node-change-warning!?.*" access="permitAll"/>
 
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/system.properties.set!?.*" access="hasRole('Administrator')"/>
 
