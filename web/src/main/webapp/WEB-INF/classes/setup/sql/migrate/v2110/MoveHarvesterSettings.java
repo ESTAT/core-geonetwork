@@ -14,8 +14,8 @@ public class MoveHarvesterSettings extends MoveHarvesterSettingsToHigherNumber {
     public void update(Connection connection) throws SQLException {
         super.counter.set(100);
         try (Statement statement = connection.createStatement()) {
-//            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (2, 'harvesting')");
-//            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (1, 'harvesting')");
+            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (2, 'harvesting')");
+            statement.execute("INSERT INTO harvestersettings (ID, NAME) VALUES (1, 'harvesting')");
         }
         super.update(connection);
         try (Statement statement = connection.createStatement()) {
@@ -25,7 +25,12 @@ public class MoveHarvesterSettings extends MoveHarvesterSettingsToHigherNumber {
     }
 
     @Override
-    protected String getHarvesterSettingsName() {
+    protected String getHarvesterDestinationSettingsName() {
         return "HarvesterSettings";
+    }
+
+    @Override
+    protected String getHarvesterOriginSettingsName() {
+        return "settings";
     }
 }

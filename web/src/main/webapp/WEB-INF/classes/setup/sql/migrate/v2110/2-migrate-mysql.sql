@@ -5,7 +5,7 @@ ALTER TABLE serviceparameters DROP FOREIGN KEY `serviceparameters_ibfk_1`;
 ALTER TABLE serviceparameters DROP COLUMN id;
 
 
-ALTER TABLE settings MODIFY name varchar(512);
+ALTER TABLE settings MODIFY name varchar(255);
 
 -- 0 is char, 1 is number, 2 is boolean
 ALTER TABLE Settings ADD datatype int;

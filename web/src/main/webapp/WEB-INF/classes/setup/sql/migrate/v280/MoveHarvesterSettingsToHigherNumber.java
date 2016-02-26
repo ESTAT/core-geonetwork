@@ -34,7 +34,7 @@ public class MoveHarvesterSettingsToHigherNumber implements DatabaseMigrationTas
         }
 
         private void loadChildren(Statement statement) throws SQLException {
-            final ResultSet resultSet2 = statement.executeQuery("SELECT * FROM " + getHarvesterSettingsName() + " where parentId = "+originalId);
+            final ResultSet resultSet2 = statement.executeQuery("SELECT * FROM " + getHarvesterOriginSettingsName() + " where parentId = "+originalId);
             try {
                 while (resultSet2.next()) {
                     children.add(new HarvesterSetting(id, resultSet2));
@@ -48,7 +48,7 @@ public class MoveHarvesterSettingsToHigherNumber implements DatabaseMigrationTas
         }
 
         public void write(Statement statement) throws SQLException {
-            final String sql = format("INSERT INTO " + getHarvesterSettingsName() + " (id, parentId, name, value) VALUES (%s, %s, " +
+            final String sql = format("INSERT INTO " + getHarvesterDestinationSettingsName() + " (id, parentId, name, value) VALUES (%s, %s, " +
                                       "'%s', '%s')", id, parentId, name, value);
             statement.execute(sql);
             for (HarvesterSetting child : children) {
@@ -61,18 +61,22 @@ public class MoveHarvesterSettingsToHigherNumber implements DatabaseMigrationTas
             for (HarvesterSetting child : children) {
                 child.delete(statement);
             }
-            statement.execute("DELETE FROM " + getHarvesterSettingsName() + " WHERE id=" + originalId);
+            statement.execute("DELETE FROM " + getHarvesterOriginSettingsName() + " WHERE id=" + originalId);
         }
     }
 
-    protected String getHarvesterSettingsName() {
+    protected String getHarvesterOriginSettingsName() {
+        return "settings";
+    }
+
+    protected String getHarvesterDestinationSettingsName() {
         return "settings";
     }
 
     @Override
     public void update(Connection connection) throws SQLException {
         try (Statement statement = connection.createStatement()) {
-            final String selectHarvestersSQL = "SELECT * FROM " + getHarvesterSettingsName() + " WHERE parentId = (SELECT id FROM " + getHarvesterSettingsName() + " WHERE name='harvesting' and parentId=0)";
+            final String selectHarvestersSQL = "SELECT * FROM " + getHarvesterOriginSettingsName() + " WHERE parentId = (SELECT id FROM " + getHarvesterOriginSettingsName() + " WHERE name='harvesting' and parentId=0)";
 
             final ResultSet resultSet = statement.executeQuery(selectHarvestersSQL);
 
