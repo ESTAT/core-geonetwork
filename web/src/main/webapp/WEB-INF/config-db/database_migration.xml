@@ -124,6 +124,7 @@
               value-type="java.lang.String">
         <entry key="3.0.3">
             <list>
+                <value>java:v303.SetSequenceMySqlTableValueToMaxOfMetadataAndStats</value>
                 <value>WEB-INF/classes/setup/sql/migrate/v303/migrate-</value>
             </list>
         </entry>
