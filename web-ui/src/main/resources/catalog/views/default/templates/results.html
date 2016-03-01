@@ -50,7 +50,7 @@
             data-ng-show="searching"></span>
 
       <div class="alert alert-warning" role="alert"
-           ng-if="!searching && searchResults.count == 0">
+           data-ng-if="!searching && searchResults.count == 0">
         <i class="fa fa-frown-o"></i>
         <span data-translate="">zarooResult</span>
       </div>
@@ -62,14 +62,14 @@
            data-map="searchObj.searchMap"></div>
 
     </div>
-  </div>
 
-  <div data-gn-map-field="searchObj.searchMap"
-       data-gn-map-field-geom="searchObj.params.geometry"
-       data-gn-map-field-opt="searchObj.mapfieldOption"
-       class="gn-search-map" 
-       data-set-class-when-at-top="fix-to-top" 
-       data-padding-when-at-top="55">
+	  <div data-gn-map-field="searchObj.searchMap"
+	       data-gn-map-field-geom="searchObj.params.geometry"
+	       data-gn-map-field-opt="searchObj.mapfieldOption"
+	       class="gn-search-map" 
+	       data-set-class-when-at-top="fix-to-bottom" 
+	       data-padding-when-at-top="55">
+	  </div>
   </div>
 
   <button data-ng-click="toggleMap()"

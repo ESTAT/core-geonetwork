@@ -173,4 +173,34 @@
 //        $scope.activeTab = $location.path().
 //            match(/^(\/[a-zA-Z0-9]*)($|\/.*)/)[1];
      
+     
+     
+     module.directive('setClassWhenAtTop', ['$window', function($window) {
+       var $win = angular.element($window); // wrap window object as jQuery object
+
+       return {
+           restrict: 'A',
+           link: function (scope, element, attrs)
+           {
+             var topClass = attrs.setClassWhenAtTop;
+             var topPadding = parseInt(attrs.paddingWhenAtTop, 10);
+             var parent = element.parent();
+
+             $win.on("scroll", function () {
+                 // dynamic page layout so have to recalculate every time;
+                 // take offset of parent because after the element gets fixed
+                 // it now has a different offset from the top
+                 var offsetTop = parent.offset().top - topPadding;
+                 if (parent.offset().top + $("#map").height() + 200 < $win.scrollTop()) {
+                     element.addClass(topClass);
+                     parent.height(element.height());
+                 } else {
+                     element.removeClass(topClass);
+                     parent.css("height", null);
+                 }
+             });
+           }
+       };
+   }]);
+     
 })();
