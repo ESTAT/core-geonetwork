@@ -672,6 +672,12 @@ INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metada
 -- INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/ui/defaultView', 'default', 0, 10100, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/ui/defaultView', 'estat', 0, 10100, 'n');
 
+-- ESTAT specific
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/build_date', '', 0, 171, 'y');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/git_revision', '', 0, 172, 'y');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/xlinkResolver/ignore', 'true', 2, 2312, 'n');
+-- ESTAT specific
+
 INSERT INTO HarvesterSettings (id, parentid, name, value) VALUES  (1,NULL,'harvesting',NULL);
 
 -- ======================================================================

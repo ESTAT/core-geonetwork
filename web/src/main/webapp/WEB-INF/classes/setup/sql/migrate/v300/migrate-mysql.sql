@@ -3,7 +3,18 @@ INSERT INTO settings (name, value, datatype, position, internal) VALUES ('region
 INSERT INTO settings (name, value, datatype, position, internal) VALUES ('region/getmap/summaryWidth', '500', 0, 9590, 'n');
 INSERT INTO settings (name, value, datatype, position, internal) VALUES ('region/getmap/mapproj', 'EPSG:3857', 0, 9590, 'n');
 
-INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system/proxy/ignorehostlist', NULL, 0, 560, 'y');
+
+-- Custom ESTAT - was already available in ESTAT 2.10
+--INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system/proxy/ignorehostlist', NULL, 0, 560, 'y');
+UPDATE settings set name = 'system/proxy/ignorehostlist' WHERE name = 'ignorehostlist';
+UPDATE settings set name = 'system/site/build_date' WHERE name = 'build_date';
+UPDATE settings set name = 'system/site/git_revision' WHERE name = 'git_revision';
+UPDATE settings set name = 'system/xlinkResolver/ignore' WHERE name = 'ignore';
+
+UPDATE settings set name = 'system/ui/snippet' WHERE name = 'snippet';
+
+DELETE FROM settings where name = 'harvesting';
+-- Custom ESTAT
 
 INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system/inspire/atom', 'disabled', 0, 7230, 'y');
 INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system/inspire/atomSchedule', '0 0 0/24 ? * *', 0, 7240, 'y');
