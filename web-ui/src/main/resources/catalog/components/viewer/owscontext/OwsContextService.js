@@ -68,6 +68,7 @@
       this.loadContext = function(text, map) {
         var context = unmarshaller.unmarshalString(text).value;
         // first remove any existing layer
+
         var layersToRemove = [];
         map.getLayers().forEach(function(layer) {
           if (layer.displayInLayerManager) {
@@ -103,9 +104,11 @@
         var self = this;
         var re = /type\s*=\s*([^,|^}|^\s]*)/;
         var promises = [];
+
         for (i = 0; i < layers.length; i++) {
           var layer = layers[i];
           if (layer.name) {
+
             if (layer.group == 'Background layers' &&
                 layer.name.match(re)) {
               var type = re.exec(layer.name)[1];
@@ -227,6 +230,7 @@
         angular.forEach(gnViewerSettings.bgLayers, function(layer) {
           var source = layer.getSource();
           var name;
+
           var params = {
             hidden: map.getLayers().getArray().indexOf(layer) < 0,
             opacity: layer.getOpacity(),
@@ -240,6 +244,17 @@
             name = '{type=mapquest}';
           } else if (source instanceof ol.source.BingMaps) {
             name = '{type=bing_aerial}';
+          } else if (source instanceof ol.source.Stamen) {
+            name = '{type=stamen}';
+          } else if (source instanceof ol.source.TileWMS) {
+            //We need to distinguish which WMS layer is... using the title
+            if (layer.get('title')=='Hypsometric'){
+                name = '{type=hypsometric}';
+            } else if (layer.get('title')=='Natural Earth'){
+                name = '{type=natural_earth}';
+            } else if (layer.get('title')=='Blue Marble'){
+                name = '{type=blue_marle}';
+            }else console.warn('something went wrong checking the source of: ' + layer.get('title'));
           } else if (source instanceof ol.source.WMTS) {
             name = '{type=wmts,name=' + layer.get('name') + '}';
             params.server = [{
@@ -249,6 +264,7 @@
               service: 'urn:ogc:serviceType:WMS'
             }];
           } else {
+                      console.warn('we dont know what it is');
             return;
           }
           params.name = name;

@@ -1293,6 +1293,44 @@
                   }),
                   title: 'Bing Aerial'
                 });
+              case 'stamen':
+                  return new ol.layer.Tile({
+                  source: new ol.source.Stamen({
+                    layer: 'watercolor'
+                  }),
+                  title: 'Stamen'
+                });
+              case 'hypsometric':
+                return new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Hypsometric_3857/MapServer/WMSServer?',
+                        params: {
+                            'LAYERS': '0', 'TILED': true
+                        }, serverType: 'mapserver'
+                    }),
+                    title: 'Hypsometric'
+                });
+              case 'natural_earth':
+                return new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Natural_Earth_3857/MapServer/WMSServer?',
+                        params: {
+                            'LAYERS': '0', 'TILED': true
+                        }, serverType: 'mapserver'
+                    }),
+                    title: 'Natural Earth'
+                });
+              case 'blue_marble':
+                return new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'https://webgate.acceptance.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Blue_marble_3857/MapServer/WMSServer?',
+                        params: {
+                            'LAYERS': '0', 'TILED': true
+                        }, serverType: 'mapserver'
+                    }),
+                    title: 'Blue Marble'
+                });
+
               case 'wmts':
                 var that = this;
                 if (opt.name && opt.url) {
@@ -1310,7 +1348,7 @@
                       });
                 }
                 else {
-                  console.warn('cant load wmts, url or name not provided');
+                 console.warn('cant load wmts, url or name not provided');
                 }
             }
             $log.warn('Unsupported layer type: ', type);
