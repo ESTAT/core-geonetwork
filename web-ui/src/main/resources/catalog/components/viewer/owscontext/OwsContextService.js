@@ -253,7 +253,7 @@
             } else if (layer.get('title')=='Natural Earth'){
                 name = '{type=natural_earth}';
             } else if (layer.get('title')=='Blue Marble'){
-                name = '{type=blue_marle}';
+                name = '{type=blue_marble}';
             }else console.warn('something went wrong checking the source of: ' + layer.get('title'));
           } else if (source instanceof ol.source.WMTS) {
             name = '{type=wmts,name=' + layer.get('name') + '}';
