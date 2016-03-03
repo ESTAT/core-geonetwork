@@ -7,12 +7,12 @@ INSERT INTO settings (name, value, datatype, position, internal) VALUES ('region
 -- Custom ESTAT - was already available in ESTAT 2.10
 --INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system/proxy/ignorehostlist', NULL, 0, 560, 'y');
 UPDATE settings set name = 'system/proxy/ignorehostlist', datatype = 0 WHERE name = 'ignorehostlist';
-UPDATE settings set name = 'system/site/build_date', datatype = 0 WHERE name = 'build_date';
-UPDATE settings set name = 'system/site/git_revision', datatype = 0 WHERE name = 'git_revision';
 UPDATE settings set name = 'system/xlinkResolver/ignore', datatype = 0 WHERE name = 'ignore';
-
 UPDATE settings set name = 'system/ui/snippet', datatype = 0 WHERE name = 'snippet';
 
+-- These settings are managed in a properties file
+DELETE FROM settings where name = 'build_date';
+DELETE FROM settings where name = 'git_revision';
 DELETE FROM settings where name = 'harvesting';
 -- Custom ESTAT
 
