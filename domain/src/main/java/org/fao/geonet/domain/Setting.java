@@ -120,7 +120,7 @@ public class Setting extends GeonetEntity {
      * This is a workaround to allow this until future
      * versions of JPA that allow different ways of controlling how types are mapped to the database.
      */
-    @Column(name = "encrypted", nullable = false, length = 1, columnDefinition="char default 'y'")
+    @Column(name = "encrypted", nullable = false, length = 1, columnDefinition="char default 'n'")
     protected char getEncrypted_JpaWorkaround() {
         return encrypted;
     }
