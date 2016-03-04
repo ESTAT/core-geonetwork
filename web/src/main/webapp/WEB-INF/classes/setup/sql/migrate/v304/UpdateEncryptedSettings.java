@@ -1,31 +1,57 @@
 package v304;
 
+import jeeves.config.springutil.JeevesApplicationContext;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.DatabaseMigrationTask;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.utils.Log;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  *
  */
-public class UpdateEncryptedSettings implements DatabaseMigrationTask {
+public class UpdateEncryptedSettings implements DatabaseMigrationTask, ApplicationContextAware {
+    private static ApplicationContext applicationContext = null;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 
     @Override
     public void update(Connection connection) throws SQLException {
-        // TODO: Take the values from a config file. Can't inject the bean as the DatabaseMigrationTask executes before all beans are initialised
+        // Take the StandardPBEStringEncryptor configuration from the properties file
         StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
-        standardPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
-        standardPBEStringEncryptor.setPassword("jasypt");
+
+        String path = ((JeevesApplicationContext) applicationContext).getServletContext()
+                .getRealPath("WEB-INF/config-security/config-security.properties");
+        Properties properties = new Properties();
+
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(path);
+            properties.load(fileReader);
+
+            standardPBEStringEncryptor.setAlgorithm(properties.getProperty("encrypter.algorithm"));
+            standardPBEStringEncryptor.setPassword(properties.getProperty("encrypter.password"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(fileReader);
+        }
 
         try (Statement statement = connection.createStatement()) {
             final String encryptedSettings = "SELECT name, value FROM Settings WHERE encrypted = 'y'";
