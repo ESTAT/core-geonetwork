@@ -468,6 +468,11 @@
             <groupId>org.owasp.esapi</groupId>
             <artifactId>esapi</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt-spring31</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

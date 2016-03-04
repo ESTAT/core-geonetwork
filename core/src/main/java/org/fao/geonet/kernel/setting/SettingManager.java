@@ -24,6 +24,7 @@
 package org.fao.geonet.kernel.setting;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.sources.http.ServletPathFinder;
+import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.NodeInfo;
 import org.fao.geonet.constants.Geonet;
@@ -35,6 +36,7 @@ import org.fao.geonet.repository.LanguageRepository;
 import org.fao.geonet.repository.SettingRepository;
 import org.fao.geonet.repository.SortUtils;
 import org.fao.geonet.utils.Log;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jdom.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,6 +47,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
+import javax.crypto.SecretKey;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletContext;
@@ -84,10 +87,14 @@ public class SettingManager {
 
     @PersistenceContext
     private EntityManager _entityManager;
+
     @Autowired
-    private ServletContext servletContext;
+    private StandardPBEStringEncryptor encryptor;
 
     private ServletPathFinder pathFinder;
+
+    @Autowired
+    private ServletContext servletContext;
 
     @PostConstruct
     private void init() {
@@ -119,7 +126,8 @@ public class SettingManager {
                 settingEl.setAttribute("position", String.valueOf(setting.getPosition()));
                 settingEl.setAttribute("datatype", String.valueOf(setting.getDataType()));
                 settingEl.setAttribute("internal", String.valueOf(setting.isInternal()));
-                settingEl.setText(setting.getValue());
+                settingEl.setText(getSettingValue(setting));
+
                 env.addContent(settingEl);
             }
         }
@@ -148,9 +156,8 @@ public class SettingManager {
                         }
                         currentElement.setAttribute("datatype", String.valueOf(dataType.ordinal()));
                         currentElement.setAttribute("datatypeName", dataType.name());
+                        currentElement.setText(xmlContentEscaper().escape(getSettingValue(setting)));
 
-                        if (setting.getValue() != null)
-                            currentElement.setText(xmlContentEscaper().escape(setting.getValue()));
                     } else {
                         currentElement.setText("");
                     }
@@ -185,7 +192,8 @@ public class SettingManager {
             Log.error(Geonet.SETTINGS, "  Requested setting with name: " + path + "  not found. Add it to the settings table.");
             return null;
         }
-        String value = se.getValue();
+        String value = getSettingValue(se);
+
         if (value == null) {
             Log.warning(Geonet.SETTINGS, "  Requested setting with name: " + path + " but null value found. Check the settings table.");
         }
@@ -282,7 +290,7 @@ public class SettingManager {
 
         setting.getDataType().validate(value);
 
-        setting.setValue(value);
+        setSettingValue(setting, value);
 
         repo.save(setting);
         return true;
@@ -368,5 +376,33 @@ public class SettingManager {
         String locServ = baseURL +"/"+ nodeInfo.getId() +"/" + language + "/";
 
         return protocol + "://" + host + (port.equals("80") ? "" : ":" + port) + locServ;
+    }
+
+    /**
+     * Sets a setting value, encrypting the value if required.
+     *
+     * @param s
+     * @param value
+     */
+    private void setSettingValue(Setting s, String value) {
+        if (s.isEncrypted() && StringUtils.isNotEmpty(value)) {
+            s.setValue(this.encryptor.encrypt(value));
+        } else {
+            s.setValue(value);
+        }
+    }
+
+    /**
+     * Retrieves a setting value, decrypting the value if required.
+     *
+     * @param se
+     * @return
+     */
+    private String getSettingValue(Setting se) {
+        if (se.isEncrypted() && StringUtils.isNotEmpty(se.getValue())) {
+            return this.encryptor.decrypt(se.getValue());
+        } else {
+            return se.getValue();
+        }
     }
 }

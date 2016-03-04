@@ -24,12 +24,15 @@
 package org.fao.geonet.kernel.setting;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.HarvesterSetting;
 import org.fao.geonet.repository.HarvesterSettingRepository;
 import org.fao.geonet.utils.Log;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jdom.Element;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +67,9 @@ public class HarvesterSettingsManager {
 
     @PersistenceContext
     private EntityManager _entityManager;
+
+    @Autowired
+    private StandardPBEStringEncryptor encryptor;
 
     // ---------------------------------------------------------------------------
     // ---
@@ -138,7 +144,12 @@ public class HarvesterSettingsManager {
         HarvesterSettingRepository settingsRepo = ApplicationContextHolder.get().getBean(HarvesterSettingRepository.class);
         HarvesterSetting s = settingsRepo.findOneByPath(path);
 
-        return (s == null) ? null : s.getValue();
+
+        if (s == null) {
+            return null;
+        } else {
+            return getSettingValue(s);
+        }
     }
 
     // ---------------------------------------------------------------------------
@@ -209,7 +220,8 @@ public class HarvesterSettingsManager {
                 success = false;
                 Log.warning(Geonet.SETTINGS, "Unable to find Settings row for: " + path + ". Check settings table.");
             } else {
-                s.setValue(value);
+                setSettingValue(s, value);
+
                 if (Log.isDebugEnabled(Geonet.SETTINGS)) {
                     Log.debug(Geonet.SETTINGS, "Set path: " + path + ", value: " + value);
                 }
@@ -231,6 +243,10 @@ public class HarvesterSettingsManager {
      * @return
      */
     public String add(String path, Object name, Object value) {
+        return add(path, name, value, false);
+    }
+
+    public String add(String path, Object name, Object value, boolean encrypted) {
         if (name == null)
             throw new IllegalArgumentException("Name cannot be null");
 
@@ -246,7 +262,8 @@ public class HarvesterSettingsManager {
         if (parent == null)
             return null;
 
-        HarvesterSetting child = new HarvesterSetting().setParent(parent).setName(sName).setValue(sValue);
+        HarvesterSetting child = new HarvesterSetting().setParent(parent).setName(sName).setEncrypted(encrypted);
+        setSettingValue(child, sValue);
 
         settingsRepo.save(child);
         return Integer.toString(child.getId());
@@ -361,7 +378,7 @@ public class HarvesterSettingsManager {
 		el.setAttribute("id", Integer.toString(s.getId()));
 		if (s.getValue() != null) {
 			Element value = new Element("value");
-            value.setText(s.getValue());
+            value.setText(getSettingValue(s));
             el.addContent(value);
 		}
 		
@@ -395,7 +412,7 @@ public class HarvesterSettingsManager {
 
         if (s.getValue() != null) {
             Element value = new Element("value");
-            value.setText(s.getValue());
+            value.setText(getSettingValue(s));
 
             el.addContent(value);
         }
@@ -428,5 +445,34 @@ public class HarvesterSettingsManager {
 
     public void refresh() {
         _entityManager.getEntityManagerFactory().getCache().evict(HarvesterSetting.class);
+    }
+
+
+    /**
+     * Sets a setting value, encrypting the value if required.
+     *
+     * @param s
+     * @param value
+     */
+    private void setSettingValue(HarvesterSetting s, String value) {
+        if (s.isEncrypted() && StringUtils.isNotEmpty(value)) {
+            s.setValue(this.encryptor.encrypt(value));
+        } else {
+            s.setValue(value);
+        }
+    }
+
+    /**
+     * Retrieves a setting value, decrypting the value if required.
+     *
+     * @param s
+     * @return
+     */
+    private String getSettingValue(HarvesterSetting s) {
+        if (s.isEncrypted() && StringUtils.isNotEmpty(s.getValue())) {
+            return this.encryptor.decrypt(s.getValue());
+        } else {
+            return s.getValue();
+        }
     }
 }
