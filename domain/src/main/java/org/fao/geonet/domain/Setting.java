@@ -1,11 +1,7 @@
 package org.fao.geonet.domain;
 
-import org.apache.commons.lang.StringUtils;
-import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.entitylistener.SettingEntityListenerManager;
 import org.hibernate.annotations.Type;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-
 import javax.persistence.*;
 
 /**
