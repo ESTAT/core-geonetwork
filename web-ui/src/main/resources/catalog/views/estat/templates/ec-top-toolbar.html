@@ -86,7 +86,7 @@
 	</li>    
       
       <li data-ng-show="authenticated">
-        <a href="admin.console#/organization/users?userOrGroup={{user.username}}"
+        <a data-gn-active-tb-item="admin.console#/organization/users?userOrGroup={{user.username}}"
            title="{{'userDetails' | translate}}"
            data-ng-disabled="!user.isUserAdminOrMore()" >
           <img class="img-circle" data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/>
@@ -101,14 +101,14 @@
         </a>
       </li>
       <li data-ng-show="authenticated">
-        <a href="../../j_spring_security_logout"
+        <a data-gn-active-tb-item="../../j_spring_security_logout"
            title="{{'signout' | translate}}">
           <i class="fa fa-sign-out"></i>&nbsp;
-          {{'signout' | translate}}
+          {{'signout' | translate}} and more
         </a>
       </li>
       <li data-ng-show="!authenticated && service !== 'catalog.signin'">
-        <a href="{{pages.signin}}?casLogin"
+        <a data-gn-active-tb-item="{{pages.signin}}?casLogin"
            title="{{'signIn'|translate}}"
            data-ng-keypress="$event">
            <i class="fa fa-sign-in"/>&nbsp;
@@ -126,7 +126,7 @@
  -->
   	</div>
 		<p class="banner-flag">
-			<img alt="European Commission logo" id="banner-flag" src="../../catalog/views/estat/images/logo/logo_en.gif">
+			<img alt="European Commission logo" id="banner-flag" data-ng-src="../../images/ec/logo_en.gif">
 		</p> 	
 		<p id="banner-title-text" style="color:#0065A2">{{info.site.name}}</p>
 			<span id="banner-image-title" class="title-banner"></span>
@@ -149,13 +149,13 @@
  -->		<div class="additional-tools-div">
 			<ul class="reset-list" id="additional-tools">
                 <li>
-                    <a href="javascript:print();" title="Print version"><img alt="Print version" src="../../catalog/views/estat/images/print.gif"></a>
+                    <a href="javascript:print();" title="Print version"><img alt="Print version" data-ng-src="../../images/ec/print.gif"></a>
                 </li>
                 <li>
-                    <a href="javascript:tools.fonts.decrease();" title="Decrease text"><img alt="Decrease text" src="../../catalog/views/estat/images/font-decrease.gif"></a>
+                    <a href="javascript:tools.fonts.decrease();" title="Decrease text"><img alt="Decrease text" data-ng-src="../../images/ec/font-decrease.gif"></a>
                 </li>
                 <li>
-                    <a href="javascript:tools.fonts.increase();" title="Increase text"><img alt="Increase text" src="../../catalog/views/estat/images/font-increase.gif"></a>
+                    <a href="javascript:tools.fonts.increase();" title="Increase text"><img alt="Increase text" data-ng-src="../../images/ec/font-increase.gif"></a>
                 </li>
 <!--                 <li>
                     <div id="share-tool">

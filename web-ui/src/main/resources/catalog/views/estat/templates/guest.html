@@ -1,7 +1,9 @@
 <div class="container-fluid">
   	<div class="row gn-row-main">
 	    <div data-ng-show="!authenticated">
-	    <p>Welcome to {{info.site.name}}. Please <a href="{{info['system.server.protocol']}}://{{info['system.server.host']}}:{{info['system.server.port']}}{{info.env.baseURL}}/{{info.env.node}}/eng/login?casLogin" target="_blank" title="login">sign in</a>.</p>
+<!-- 	    <p>Welcome to {{info.site.name}}. Please <a href="{{info['system.server.protocol']}}://{{info['system.server.host']}}:{{info['system.server.port']}}{{info.env.baseURL}}/{{info.env.node}}/eng/login?casLogin" target="_blank" title="login">sign in</a>.</p>
+ -->	    
+	    <p>Welcome to {{info.site.name}}. Please <a data-gn-active-tb-item="{{pages.signin}}?casLogin" title="{{'signIn'|translate}}">{{'signIn' | translate}}</a></p>
 	    </div>
 	</div>
 </div>
