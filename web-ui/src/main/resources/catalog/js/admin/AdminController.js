@@ -184,7 +184,8 @@
        */
       $scope.getMenuUrl = function(menu) {
         if (menu.route) {
-          return menu.route;
+          //return menu.route;
+          return $scope.info.env.baseURL + "/" + $scope.nodeId + "/"  + $scope.lang + "/" + $scope.service + menu.route;
         } else if (menu.url) {
           return $scope.url + menu.url;
         }
