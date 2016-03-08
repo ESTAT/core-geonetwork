@@ -381,17 +381,6 @@
         <url-pattern>/proxy</url-pattern>
     </servlet-mapping>
 
-    <!-- Web map context servlet -->
-    <servlet>
-        <servlet-name>wmc</servlet-name>
-        <servlet-class>org.geonetwork.map.wmc.WmcServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>wmc</servlet-name>
-        <url-pattern>/wmc/*</url-pattern>
-    </servlet-mapping>
-
     <welcome-file-list>
         <welcome-file>home</welcome-file>
         <welcome-file>index.html</welcome-file>
