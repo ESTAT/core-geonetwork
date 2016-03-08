@@ -11,7 +11,7 @@
               restrict: 'AE',
               replace: true,
               templateUrl:
-              '../../catalog/components/cookieWarning/partials/cookieWarning.html'
+              '../../catalog/components/cookieWarning/partials/eccookieWarning.html'
             };
           });
 

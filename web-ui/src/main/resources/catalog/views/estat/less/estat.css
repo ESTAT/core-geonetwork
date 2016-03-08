@@ -29,6 +29,11 @@
 	.layout-footer li{display:inline;padding-left:5px;background:url("../catalog/views/estat/images/services-separator.gif") transparent left center no-repeat;}
 
 
+	.ec-header-logo {background:url("../catalog/views/estat/images/logo/logo_en.gif") transparent left center no-repeat;}
+	.ec-tool-print {background:url("../catalog/views/estat/images/print.gif") transparent left center no-repeat;}
+	.ec-tool-font-increase {background:url("../catalog/views/estat/images/font-increase.gif") transparent left center no-repeat;}
+	.ec-tool-font-decrease {background:url("../catalog/views/estat/images/font-decrease.gif") transparent left center no-repeat;}
+
 .path-tools-div{
     background-color:#074A8B;
 }
@@ -84,6 +89,16 @@
     width: 100%;
 }
 
+
+#cookie-warning-caption {
+	color : #31708f;
+}
+
+.cookie-warning {
+	text-align: inherit;
+	border-radius: inherit;
+	border-bottom: 0px;
+}
 /* .container-fluid {
 	padding:0;
 } 

@@ -1,0 +1,14 @@
+<div class="layout container-fluid cookie-warning"  
+     data-ng-show="{{showCookieWarning}}"
+     data-ng-controller="CookieWarningController">
+	<div id="cookie-container">
+		<h1 id="cookie-warning-caption">Cookies</h1>
+		<p id="cookie-warning-message">This site uses cookies to offer you a better browsing experience.</p>
+		<p>
+			<span class="btn btn-primary" data-ng-click="close()">I accept cookies</span>
+<!-- 	    	<span></span>&nbsp;
+			<span class="btn btn-primary" data-ng-click="goAway()">I refuse cookies</span>
+ -->			
+ 		</p>
+	</div>
+</div>
