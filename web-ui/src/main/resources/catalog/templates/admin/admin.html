@@ -1,7 +1,7 @@
 <span>
   <div class="col-lg-8" data-ng-controller="GnAdminController">
     <div class="clearfix">
-      <a data-ng-repeat="m in getMenu()" href="{{getMenuUrl(m)}}"
+      <a data-ng-repeat="m in getMenu()" data-ng-href="{{getMenuUrl(m)}}"
         class="btn btn-lg btn-block {{m.classes}} gn-btn-admin">
         <i class="fa {{m.icon}} fa-4x"/>
         <p data-translate="">{{m.name}}</p>
