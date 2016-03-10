@@ -2,7 +2,7 @@
   <ul class="nav nav-pills">
     <li data-ng-repeat="t in pageMenu.tabs"
         data-ng-class="type === t.type && 'active'">
-      <a href="{{t.href}}">
+      <a data-ng-href="{{t.href}}">
         <i class="fa {{t.icon || 'fa-fw'}}"/>
         <span data-translate="">{{t.label}}</span>
       </a>

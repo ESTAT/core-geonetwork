@@ -45,7 +45,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>{{thesaurusSelected.title}} ({{thesaurusSelected.dname}})</strong>
-        <a href="{{thesaurusSelected.url}}" data-translate="">download</a>
+        <a data-ng-href="{{thesaurusSelected.url}}" data-translate="">download</a>
         <div class="btn-toolbar pull-right">
           <button type="button" class="btn btn-default"
                   data-ng-show="gnConfig[gnConfig.key.isXLinkEnabled] && !isExternal() && recordsRelatedToThesaurus > 0"

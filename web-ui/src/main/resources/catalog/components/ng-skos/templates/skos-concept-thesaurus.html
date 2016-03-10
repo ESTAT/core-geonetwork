@@ -7,7 +7,7 @@
     </ul>
     <div class="top top-classic">
         <span ng-if="notation" class="notation">{{notation[0]}}</span>
-        <b><span skos-label="concept" lang="{{language}}"></span></b><a ng-if="notation" class="uri" href="{{uri}}">
+        <b><span skos-label="concept" lang="{{language}}"></span></b><a ng-if="notation" class="uri" data-ng-href="{{uri}}">
         <span style="vertical-align:-10%" class="glyphicon glyphicon-globe"></span></a>
     </div>
     <div ng-if="altLabel.length" class="skos-concept-altlabel">

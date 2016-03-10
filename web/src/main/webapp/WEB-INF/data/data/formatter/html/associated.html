@@ -25,7 +25,7 @@
                 <td class="col-md-10">
                     <div id="{{'' | lastUUID}}">
                         <div fmt-repeat="link in link.links">
-                            <a href="#/metadata/{{link.metadataId}}"
+                            <a data-ng-href="#/metadata/{{link.metadataId}}"
                                title="{{link.tip}}" class="{{link.cls}} associated-link-a">{{link.text | escapeXmlContent}}</a>
 
                             <div id="{{'' | lastUUID}}" style="display: none;" class="associated-link-row">

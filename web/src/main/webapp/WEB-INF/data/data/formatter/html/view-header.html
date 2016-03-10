@@ -7,7 +7,7 @@
         if (iconLink.length > 0) {
             iconLink.attr("href", "{{logo}}");
         } else {
-            headEl.append("<link rel='shortcut icon' type='image/x-icon' href='{{logo}}'></link>");
+            headEl.append("<link rel='shortcut icon' type='image/x-icon' data-ng-href='{{logo}}'></link>");
         }
         //]]>
     </script>
@@ -23,14 +23,14 @@
         </li>
         <li fmt-if="addCompleteNavItem"><a fmt-translate="" href="" rel=".container > .entry:not(.overview)">complete</a></li>
         <li fmt-repeat="item in navBar" title="{{item.name | escapeXmlAttrs}}">
-            <a fmt-if="item.href" href="{{item.href | escapeXmlAttrs}}" target="_blank">{{item.abbrName | escapeXmlContent}}</a>
+            <a fmt-if="item.href" data-ng-href="{{item.href | escapeXmlAttrs}}" target="_blank">{{item.abbrName | escapeXmlContent}}</a>
             <a fmt-if="item.rel" rel="{{item.rel | escapeXmlAttrs}}">{{item.abbrName | escapeXmlContent}}</a>
         </li>
         <li fmt-if="showNavOverflow" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" title="More information"><i class="fa fa-ellipsis-h"></i><b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li fmt-repeat="item in navBarOverflow">
-                    <a fmt-if="item.href" href="{{item.href | escapeXmlAttrs}}" target="_blank">{{item.abbrName | escapeXmlContent}}</a>
+                    <a fmt-if="item.href" data-ng-href="{{item.href | escapeXmlAttrs}}" target="_blank">{{item.abbrName | escapeXmlContent}}</a>
                     <a fmt-if="item.rel" rel="{{item.rel | escapeXmlAttrs}}">{{item.abbrName | escapeXmlContent}}</a>
                 </li>
             </ul>

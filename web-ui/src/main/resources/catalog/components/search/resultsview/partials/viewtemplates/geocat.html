@@ -17,7 +17,7 @@
           <a href="" gn-metadata-open="md" gn-metadata-open-selector=".gn-resultview" title="{{md.title || md.defaultTitle}}">{{md.title || md.defaultTitle}}</a>
         </h4>
 
-        <a class="pull-left" ng-if="md.groupWebsite" href="{{md.groupWebsite}}" target="_blank">
+        <a class="pull-left" ng-if="md.groupWebsite" data-ng-href="{{md.groupWebsite}}" target="_blank">
           <img ng-src="../..{{md.logo}}" class="media-object"/>
         </a>
         <a class="pull-left" ng-if="!md.groupWebsite">
@@ -27,7 +27,7 @@
         <p class="text-justify" dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{md.abstract}}"></p>
         <p class="md-date" ng-if="showDate.date">(<i translate>{{showDate.type}}</i> : {{showDate.date}})</p>
         <p class="md-owner">
-          (<i translate>owner</i> : <a href="{{pages.admin}}#/organization/users?userOrGroupId={{md.owner}}" target="_blank">{{md.getOwnername()}}</a>)</p>
+          (<i translate>owner</i> : <a data-ng-href="{{pages.admin}}#/organization/users?userOrGroupId={{md.owner}}" target="_blank">{{md.getOwnername()}}</a>)</p>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="link in links">
-            <a href="{{link.url}}" target="_blank">{{link.desc}}</a></li>
+            <a data-ng-href="{{link.url}}" target="_blank">{{link.desc}}</a></li>
         </ul>
       </div>
 
@@ -55,7 +55,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="link in downloads">
-            <a href="{{link.url}}" download="{{link.desc}}">
+            <a data-ng-href="{{link.url}}" download="{{link.desc}}">
               <span class="fa fa-file-zip-o" ng-if="link.contentType=='application/zip'"></span>
               {{link.desc}} </a></li>
         </ul>

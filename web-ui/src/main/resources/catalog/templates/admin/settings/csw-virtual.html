@@ -33,7 +33,7 @@
         <span data-ng-hide="virtualCSWSelected.id == ''" data-translate="">updateVirtualCSW</span>
         <span data-ng-hide="virtualCSWSelected.id != ''" data-translate="">newVirtualCSW</span>
         <strong>{{virtualCSWSelected.name}}</strong> (<a
-          href="{{getCapabilitiesUrl(virtualCSWSelected)}}" data-translate="">capabilities</a>)
+          data-ng-href="{{getCapabilitiesUrl(virtualCSWSelected)}}" data-translate="">capabilities</a>)
 
         <div class="btn-toolbar">
           <button type="button" class="btn btn-primary pull-right"
