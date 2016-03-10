@@ -184,9 +184,7 @@
        */
       $scope.getMenuUrl = function(menu) {
         if (menu.route) {
-          //return menu.route;
-          //return $scope.info['system.server.protocol'] + "://" + $scope.info['system.server.host'] + window.location.pathname + menu.route;
-          return window.location.pathname + menu.route;
+          return menu.route;
         } else if (menu.url) {
           return $scope.url + menu.url;
         }
