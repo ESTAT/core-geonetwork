@@ -175,7 +175,8 @@
      
      
      
-     module.directive('setClassWhenAtTop', ['$window', function($window) {
+     module.directive('setClassWhenAtTop', ['$window', '$timeout', '$document',
+      function($window, $timeout, $document) {
        var $win = angular.element($window); // wrap window object as jQuery object
 
        return {
@@ -185,20 +186,78 @@
              var topClass = attrs.setClassWhenAtTop;
              var topPadding = parseInt(attrs.paddingWhenAtTop, 10);
              var parent = element.parent();
+             scope.fixed = false;
+             scope.startX = $("#layout").offset().left;
+             scope.startY = element.offset().top;
+             scope.x = 0;
+             scope.y = 0;
+             
+             $timeout(function() {
+               scope.reconfigure();
+             });
 
              $win.on("scroll", function () {
-                 // dynamic page layout so have to recalculate every time;
-                 // take offset of parent because after the element gets fixed
-                 // it now has a different offset from the top
-                 var offsetTop = parent.offset().top - topPadding;
-                 if (parent.offset().top + $("#map").height() + 200 < $win.scrollTop()) {
-                     element.addClass(topClass);
-                     parent.height(element.height());
-                 } else {
-                     element.removeClass(topClass);
-                     parent.css("height", null);
-                 }
+                scope.reconfigure();
              });
+
+             $win.on("resize", function () {
+                scope.reconfigure();
+             });
+             
+             scope.toggleFixed = function() {
+               scope.fixed = !scope.fixed;
+               scope.reconfigure();
+             }
+             
+             scope.reconfigure = function() {
+               var offsetTop = element.offset().top;
+               var brother = $(element.parent()[0].children[0]);
+               var winHeight = brother.offset().top + brother.height();
+               if (offsetTop > winHeight) {
+                   //on some browsers this is slow
+                   element.removeClass("ng-hide");
+                   
+                   if(!scope.fixed) {
+                     element.removeClass(topClass);
+                   } else {
+                     element.addClass(topClass);
+                   }
+               } 
+               
+               scope.style = {
+                   left : (!scope.fixed)? "-22px" : scope.x + "px",
+                   top : (!scope.fixed)? "" : scope.y + "px",
+                   position: (!scope.fixed)? "relative" : "",
+                   display: (!scope.fixed)? "inline-block" : ""
+                };
+               
+               if(scope.$root.$$phase != '$apply') {
+                 scope.$apply();
+               }
+             }
+                 
+             scope.mousedown = function(event) {
+               // Prevent default dragging of selected content
+               event.preventDefault();
+               scope.startX = event.screenX - scope.x;
+               scope.startY = event.screenY - scope.y;
+               $document.on('mousemove', scope.mousemove);
+               $document.on('mouseup', scope.mouseup);
+             }
+
+             scope.mousemove = function(event) {
+               scope.y = event.screenY - scope.startY;
+               scope.x = event.screenX - scope.startX;
+               scope.reconfigure();
+             }
+
+             scope.mouseup = function() {
+               $document.off('mousemove', scope.mousemove);
+               $document.off('mouseup', scope.mouseup);
+             }
+             
+
+             $("header", element).on('mousedown', scope.mousedown);
            }
        };
    }]);

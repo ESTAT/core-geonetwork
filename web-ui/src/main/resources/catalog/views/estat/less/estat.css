@@ -76,19 +76,19 @@
 .fix-to-top {
     position: fixed;
     top: 55px;
-    height: 50px;
     z-index: 999;
-    width: 100%;
 }
 
 .fix-to-bottom {
     position: fixed;
-    bottom: 215px;
-    height: 50px;
+    bottom: 5px;
     z-index: 999;
-    width: 100%;
 }
 
+
+.gn-search-map {
+    left:3px;
+}
 
 #cookie-warning-caption {
 	color : #31708f;
@@ -99,6 +99,18 @@
 	border-radius: inherit;
 	border-bottom: 0px;
 }
+
+.gn-search-page [data-gn-map-field] header:not(.ng-hide) ~ .btn-group-vertical,
+.gn-search-page [data-gn-map-field] header:not(.ng-hide) ~ .gn-draw-btn {
+	padding-top: 23px;
+}
+
+.gn-search-page [data-gn-map-field] header {
+	height:20px;
+	width:100%;
+	background-color:#074A8B;
+}
+
 /* .container-fluid {
 	padding:0;
 } 

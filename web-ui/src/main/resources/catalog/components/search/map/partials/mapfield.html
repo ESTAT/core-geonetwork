@@ -1,4 +1,5 @@
 <div ngeo-map="map">
+  <header data-ng-show="fixed"></header>
   <div class="btn-group-vertical">
     <!--<button class="btn btn-default"
             data-ng-click="gnMap.zoom(map, 1)">
@@ -8,6 +9,12 @@
             data-ng-click="gnMap.zoom(map, -1)">
       <i class="fa fa-minus"></i>
     </button>-->
+    <button data-ng-click="toggleFixed()"
+            data-ng-if="isMapViewerEnabled"
+            class="btn btn-default">
+      <i data-ng-if="fixed" class="fa fa-share"></i>
+      <i data-ng-if="!fixed" class="fa fa-thumb-tack"></i>
+    </button>
     <button data-ng-click="location.setMap()"
             data-ng-if="isMapViewerEnabled"
             title="{{'openLargeMap' | translate}}"
