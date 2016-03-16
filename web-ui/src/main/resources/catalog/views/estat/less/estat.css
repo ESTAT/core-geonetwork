@@ -100,6 +100,11 @@
 	border-bottom: 0px;
 }
 
+.toolbar-align-left > li {
+	float: left !important;
+}
+
+
 .gn-search-page [data-gn-map-field] header:not(.ng-hide) ~ .btn-group-vertical,
 .gn-search-page [data-gn-map-field] header:not(.ng-hide) ~ .gn-draw-btn {
 	padding-top: 23px;

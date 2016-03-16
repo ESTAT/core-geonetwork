@@ -42,19 +42,19 @@
       <li class="dropdown" data-ng-show="authenticated && user.isEditorOrMore()">
         <a href="" class="dropdown-toggle" data-toggle="dropdown"
            role="button" aria-expanded="false"><span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu toolbar-align-left" role="menu">
           <li>
-            <a data-gn-active-tb-item="catalog.edit#/create">
+            <a class="first" data-gn-active-tb-item="catalog.edit#/create">
               <i class="fa fa-plus"/>&nbsp;<span data-translate="">addRecord</span>
             </a>
           </li>
           <li>
-            <a data-gn-active-tb-item="catalog.edit#/import">
+            <a class="first" data-gn-active-tb-item="catalog.edit#/import">
               <i class="fa fa-upload"/>&nbsp;<span data-translate="">ImportRecord</span>
             </a>
           </li>
           <li>
-            <a data-gn-active-tb-item="catalog.edit#/directory"
+            <a class="first" data-gn-active-tb-item="catalog.edit#/directory"
                data-ng-if="user.isReviewerOrMore()">
               <i class="fa fa-list-ul"/>&nbsp;<span data-translate="">directoryManager</span>
             </a>
