@@ -903,4 +903,14 @@
       }
     };
   });
+  // The purpose of this directive is to avoid proxies from prefixing relative actions with the wrong url  
+  module.directive('gnAction', function($compile) {
+	    return {
+	      restrict: 'A',
+	      link: function(scope, element, attrs) {
+    		  element.attr('action', attrs.gnAction);
+	      }
+	    };
+	  });
+  
 })();

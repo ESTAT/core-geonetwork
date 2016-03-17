@@ -63,7 +63,7 @@
 
       <div class="panel-body">
         <form id="gn-group-edit" name="gnGroupEdit" data-ng-keypress="updatingGroup()" method="POST"
-             action="admin.group.update?_content_type=json" data-file-upload="mdImportUploadOptions"  role="form">
+             gn-action="admin.group.update?_content_type=json" data-file-upload="mdImportUploadOptions"  role="form">
           <fieldset>
             <input type="hidden" name="id" data-ng-model="groupSelected.id"
               value="{{groupSelected.id}}"/>
