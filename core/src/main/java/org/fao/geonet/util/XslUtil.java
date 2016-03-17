@@ -20,6 +20,7 @@ import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.search.CodeListTranslator;
 import org.fao.geonet.kernel.search.LuceneSearcher;
 import org.fao.geonet.kernel.search.Translator;
+import org.fao.geonet.kernel.setting.SettingInfo;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.languages.IsoLanguagesMapper;
 import org.fao.geonet.repository.UserRepository;
@@ -31,6 +32,8 @@ import org.geotools.referencing.CRS;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.owasp.esapi.errors.EncodingException;
+import org.owasp.esapi.reference.DefaultEncoder;
 
 import org.owasp.esapi.reference.DefaultEncoder;
 import org.owasp.esapi.errors.EncodingException;
@@ -507,6 +510,16 @@ public final class XslUtil
 		return ret;
 	}
 
+    public static String getSiteUrl() {
+        ServiceContext context = ServiceContext.get();
+        SettingInfo si = new SettingInfo();
+        return si.getSiteUrl() + "/" + context.getBaseUrl();
+    }
+
+    public static String getLanguage() {
+        ServiceContext context = ServiceContext.get();
+        return context.getLanguage();
+    }
     public static String encodeForJavaScript(String str) {
         return DefaultEncoder.getInstance().encodeForJavaScript(str);
     }
