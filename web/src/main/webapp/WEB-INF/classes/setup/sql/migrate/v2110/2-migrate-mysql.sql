@@ -190,7 +190,7 @@ UPDATE Settings SET value='SNAPSHOT' WHERE name='system/platform/subVersion';
 -- Populate new tables from Users
 INSERT INTO Address (SELECT id, address, city, state, zip, country FROM Users);
 INSERT INTO UserAddress (SELECT id, id FROM Users);
-INSERT INTO Email (SELECT id, email FROM Users);
+INSERT INTO Email (SELECT id, email FROM Users WHERE email IS NOT NULL and email <> '');
 
 
 --CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1 INCREMENT BY 1;
