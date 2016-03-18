@@ -102,24 +102,6 @@ public class GeonetWroModelFactory implements WroModelFactory {
             if (isMavenBuild() && _geonetworkRootDirectory.isEmpty()) {
                 _geonetworkRootDirectory = findGeonetworkRootDirectory(sourcesXmlFile);
             }
-            
-            //ESTAT
-            //Remove the wro cache
-            String systemDataDir = ApplicationContextHolder.get().
-                    getBean(GeonetworkDataDirectory.class).getSystemDataDir()
-                        .toFile().getAbsolutePath();
-            
-            File file = new File(systemDataDir + "/wro4j-cache.h2.db");
-            if(file.exists()) {
-                file.delete();
-            }
-            
-            file = new File(systemDataDir + "/wro4j-cache.trace.db");
-            if(file.exists()) {
-                file.delete();
-            }
-            //ESTAT
-            
             FileInputStream sourcesInputStream = null;
             try {
                 sourcesInputStream = new FileInputStream(sourcesXmlFile);
