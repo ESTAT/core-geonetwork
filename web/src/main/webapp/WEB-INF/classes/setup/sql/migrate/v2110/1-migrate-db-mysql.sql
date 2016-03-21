@@ -9,7 +9,7 @@ CREATE TABLE HarvesterSettings
 
     primary key(id),
 
-    foreign key(parentId) references HarvesterSettings(id)
+    foreign key(parentId) references HarvesterSettings(id) on delete cascade
   );
 
 CREATE TABLE Address
