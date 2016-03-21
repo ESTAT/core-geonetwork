@@ -12,11 +12,12 @@
   
   <xsl:include href="../../common/base-variables.xsl"/>
   <xsl:include href="../../common/profiles-loader-tpl-rdf.xsl"/>
-  
-  <xsl:variable name="port" select="$env/system/server/port"/>
-  <xsl:variable name="url" select="concat($env/system/server/protocol, '://', 
+
+  <xsl:variable name="protocol" select="$env/system/server/protocol"/>
+  <xsl:variable name="port" select="if ($protocol='http') then $env/system/server/port else $env/system/server/securePort"/>
+  <xsl:variable name="url" select="concat($env/system/server/protocol, '://',
     $env/system/server/host, 
-    if ($port='80') then '' else concat(':', $port),
+    if ($port='80' or $port='443') then '' else concat(':', $port),
     /root/gui/url)"/>
   
   <!-- TODO: should use Java language code mapper -->
