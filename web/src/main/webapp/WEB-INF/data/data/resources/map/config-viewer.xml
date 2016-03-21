@@ -8,7 +8,7 @@
     </ows:BoundingBox>
   </ows-context:General>
   <ows-context:ResourceList>
-    <ows-context:Layer name="{type=mapquest}"
+<!--     <ows-context:Layer name="{type=mapquest}"
                        group="Background layers"
                        hidden="false"
                        opacity="1">
@@ -26,6 +26,32 @@
                        hidden="true"
                        opacity="1">
       <ows:Title>Bing Aerial</ows:Title>
+    </ows-context:Layer>
+ -->
+ 
+    <ows-context:Layer name="{type=estat_gray_bg}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>European country boundaries on grey background</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=estat_bmarble}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Blue Marble mosaic of earth</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=estat_hypso}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Climate shaded relief of earth</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=estat_natural}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Landcover shaded relief of earth</ows:Title>
     </ows-context:Layer>
   </ows-context:ResourceList>
 </ows-context:OWSContext>

@@ -22,7 +22,7 @@
           // Keep one layer in the background
           // while the context is not yet loaded.
           viewerSettings.bgLayers = [
-            gnMap.createLayerForType('osm')
+             gnMap.createLayerForType('estat_bmarble')
           ];
 
           viewerSettings.servicesUrl =
@@ -73,9 +73,10 @@
 
           var searchMap = new ol.Map({
             controls:[],
-            layers: [new ol.layer.Tile({
-              source: new ol.source.OSM()
-            })],
+            layers: 
+            	[gnMap.createLayerForType('estat_bmarble')] 
+            	//[new ol.layer.Tile({source: new ol.source.OSM()})]
+          	,
             view: new ol.View({
               center: mapsConfig.center,
               zoom: 2

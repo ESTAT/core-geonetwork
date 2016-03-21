@@ -248,6 +248,8 @@
               }],
               service: 'urn:ogc:serviceType:WMS'
             }];
+          } else if (source instanceof ol.source.XYZ) {
+              name = '{type=' + layer.get('label') + '}';
           } else {
             return;
           }

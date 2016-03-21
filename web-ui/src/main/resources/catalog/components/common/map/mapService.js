@@ -45,6 +45,8 @@
         var defaultMapConfig = {
           'useOSM': 'true',
           'projection': 'EPSG:3857',
+//          'useOSM': 'false',
+//          'projection': 'EPSG:4326',
           'projectionList': [{
             'code': 'EPSG:4326',
             'label': 'WGS84 (EPSG:4326)'
@@ -68,6 +70,7 @@
             proj4.defs('EPSG:2154', '+proj=lcc +lat_1=49 +lat_2=44 +lat_0' +
                 '=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +' +
                 'towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+            proj4.defs('EPSG:4326', '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs');
             if (proj4 && angular.isArray(gnConfig['map.proj4js'])) {
               angular.forEach(gnConfig['map.proj4js'], function(item) {
                 proj4.defs(item.code, item.value);
@@ -1271,6 +1274,7 @@
            * @return {ol.layer} layer
            */
           createLayerForType: function(type, opt) {
+        	  var EPSGprojectioncode = 3857;
             switch (type) {
               case 'mapquest':
                 return new ol.layer.Tile({
@@ -1312,6 +1316,104 @@
                 else {
                   console.warn('cant load wmts, url or name not provided');
                 }
+
+              case 'estat_gray_bg':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/gray-bg/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'European country boundaries on grey background',
+                    label: 'estat_gray_bg'
+                   });
+              case 'estat_coast':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/coast/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Continental outlines',
+                    label: 'estat_coast'
+                  });
+              case 'estat_gray':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/gray/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Gray shaded relief of earth',
+                    label: 'estat_gray'
+                  });
+              case 'estat_hypso':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/hypso/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Climate shaded relief of earth',
+                    label: 'estat_hypso'
+                  });
+              case 'estat_natural':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/natural/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Landcover shaded relief of earth',
+                    label: 'estat_natural'
+                  });
+              case 'estat_bmarble':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/bmarble/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Blue Marble mosaic of earth',
+                    label: 'estat_bmarble'
+                  });
+              case 'estat_countryboundaries_world':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/countryboundaries_world/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Boundaries of all countries',
+                    label: 'estat_countryboundaries_world'
+                  });
+              case 'estat_roadswater_europe':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/roadswater_europe/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Cities, roads, rivers, lakes.Density dependson zoom',
+                    label: 'estat_roadswater_europe'
+                  });
+              case 'estat_countrynames_europe':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/countrynames_europe/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'European country names',
+                    label: 'estat_countrynames_europe'
+                  });
+              case 'estat_citynames_europe':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/citynames_europe/'+EPSGprojectioncode+'/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Names of settlements in Europe (cities, towns)',
+                    label: 'estat_citynames_europe'
+                  });
+              case 'estat_copernicus003':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/copernicus003/3857/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Copernicus (only support to 3857 implemented - no EPSG code in service name)',
+                    label: 'estat_copernicus003'
+                  });
+              case 'estat_osm-ec':
+                  return new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://europa.eu/webtools/maps/tiles/osm-ec/3857/{z}/{y}/{x}'
+                    }),                  
+                    title: 'Custom Open Street Map (only support to 3857 currently)',
+                    label:  'estat_osm-ec'
+                  });
+            
             }
             $log.warn('Unsupported layer type: ', type);
           },
