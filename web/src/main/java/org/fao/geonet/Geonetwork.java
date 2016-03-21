@@ -462,6 +462,24 @@ public class Geonetwork implements ApplicationHandler {
                 ApplicationContextHolder.set(_applicationContext);
                 GeonetWro4jFilter filter = (GeonetWro4jFilter) servletContext.getAttribute(GeonetWro4jFilter.GEONET_WRO4J_FILTER_KEY);
 
+                //ESTAT 
+                //Remove the wro cache       
+                String systemDataDir = context.getBean(GeonetworkDataDirectory.class).getSystemDataDir()     
+                            .toFile().getAbsolutePath();      
+                      
+                File file = new File(systemDataDir + "/wro4j-cache.h2.db");       
+                if(file.exists()) {       
+                    file.delete();        
+                }     
+                      
+                file = new File(systemDataDir + "/wro4j-cache.trace.db");     
+                if(file.exists()) {       
+                    file.delete();        
+                }     
+                //ESTAT;
+
+                
+                
                 @SuppressWarnings("unchecked")
                 List<String> wro4jUrls = _applicationContext.getBean("wro4jUrlsToInitialize", List.class);
 
