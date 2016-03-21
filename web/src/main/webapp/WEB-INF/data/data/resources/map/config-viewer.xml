@@ -8,24 +8,23 @@
     </ows:BoundingBox>
   </ows-context:General>
   <ows-context:ResourceList>
-    <ows-context:Layer name="{type=mapquest}"
+    <ows-context:Layer name="{type=hypsometric}"
                        group="Background layers"
                        hidden="false"
                        opacity="1">
-      <ows:Title>MapQuest</ows:Title>
+      <ows:Title>Hypsometric</ows:Title>
     </ows-context:Layer>
-    <ows-context:Layer name="{type=osm}"
+    <ows-context:Layer name="{type=natural_earth}"
                        group="Background layers"
-                       hidden="true"
+                       hidden="false"
                        opacity="1">
-      <ows:Title>OpenStreetMap
-      </ows:Title>
+      <ows:Title>Natural Earth</ows:Title>
     </ows-context:Layer>
-    <ows-context:Layer name="{type=bing_aerial}"
+    <ows-context:Layer name="{type=blue_marble}"
                        group="Background layers"
-                       hidden="true"
+                       hidden="false"
                        opacity="1">
-      <ows:Title>Bing Aerial</ows:Title>
+      <ows:Title>Blue Marble</ows:Title>
     </ows-context:Layer>
   </ows-context:ResourceList>
 </ows-context:OWSContext>

@@ -22,7 +22,7 @@
           // Keep one layer in the background
           // while the context is not yet loaded.
           viewerSettings.bgLayers = [
-            gnMap.createLayerForType('osm')
+            gnMap.createLayerForType('hypsometric')
           ];
 
           viewerSettings.servicesUrl =
@@ -60,28 +60,22 @@
           /*******************************************************************
              * Define maps
              */
-          var mapsConfig = {
+            var mapsConfig = {
             center: [280274.03240585705, 6053178.654789996],
             zoom: 2
             //maxResolution: 9783.93962050256
-          };
+            };
 
-          var viewerMap = new ol.Map({
-            controls: [],
-            view: new ol.View(mapsConfig)
-          });
-
-          var searchMap = new ol.Map({
+            var viewerMap = new ol.Map({
             controls:[],
-            layers: [new ol.layer.Tile({
-              source: new ol.source.OSM()
-            })],
-            view: new ol.View({
-              center: mapsConfig.center,
-              zoom: 2
-            })
-          });
+            view: new ol.View(mapsConfig)
+            });
 
+            var searchMap = new ol.Map({
+            controls:[],
+            layers: viewerMap.getLayers(),
+            view: new ol.View(mapsConfig)
+            });
 
           /** Facets configuration */
           searchSettings.facetsSummaryType = 'details';
