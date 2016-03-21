@@ -116,6 +116,13 @@
 	background-color:#074A8B;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 /* .container-fluid {
 	padding:0;
 } 

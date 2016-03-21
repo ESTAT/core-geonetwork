@@ -3,9 +3,9 @@
                         version="0.3.1" id="ows-context-ex-1-v3">
   <ows-context:General>
     <ows:BoundingBox crs="EPSG:3857">
-      <ows:LowerCorner>-8604130.477526832 -320097.07393612247</ows:LowerCorner>
-      <ows:UpperCorner>8948257.201654762 8720263.135408245</ows:UpperCorner>
-    </ows:BoundingBox>
+		<ows:LowerCorner>-2817774.6107047377 4079902.821749567</ows:LowerCorner>
+		<ows:UpperCorner>6790054.096628777 10282920.54114819</ows:UpperCorner>
+     </ows:BoundingBox>
   </ows-context:General>
   <ows-context:ResourceList>
 <!--     <ows-context:Layer name="{type=mapquest}"
@@ -29,12 +29,6 @@
     </ows-context:Layer>
  -->
  
-    <ows-context:Layer name="{type=estat_gray_bg}"
-                       group="Background layers"
-                       hidden="false"
-                       opacity="1">
-      <ows:Title>European country boundaries on grey background</ows:Title>
-    </ows-context:Layer>
     <ows-context:Layer name="{type=estat_bmarble}"
                        group="Background layers"
                        hidden="false"
@@ -52,6 +46,12 @@
                        hidden="false"
                        opacity="1">
       <ows:Title>Landcover shaded relief of earth</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=estat_gray_bg}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>European country boundaries on grey background</ows:Title>
     </ows-context:Layer>
   </ows-context:ResourceList>
 </ows-context:OWSContext>
