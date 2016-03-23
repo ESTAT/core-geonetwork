@@ -1,3 +1,7 @@
+@media all /* HTML RESET */
+{
+
+
 /* BANNER */
 
 /* LINK */
@@ -127,3 +131,14 @@
 	padding:0;
 } 
 */
+}
+
+ @media print {
+	html, body {
+ 		/* width: 210mm !important;
+    	height: 297mm !important; */
+    	/* just some way to make the font smaller on print */
+     	zoom: 67% !important; 
+ 	}
+}
+

@@ -24,11 +24,19 @@
       <link href="{/root/gui/url}/static/nv.d3.css{$minimizedParam}" rel="stylesheet" media="screen" />
     </xsl:if>
 
-    <link href="{/root/gui/url}/static/{$customFilename}.css{$minimizedParam}" rel="stylesheet" media="screen" />
+<!--     <link href="{/root/gui/url}/static/{$customFilename}.css{$minimizedParam}" rel="stylesheet" media="screen" />
 
     <link href="{/root/gui/url}/static/bootstrap-table.min.css" rel="stylesheet" media="screen"></link>
     <link href="{/root/gui/url}/static/ng-skos.css" rel="stylesheet" media="screen"></link>
     <link href="{/root/gui/url}/static/{/root/gui/nodeId}_custom_style.css{$minimizedParam}" rel="stylesheet" media="screen" />
+ -->
+ 	<!-- all media - allow simple printing -->
+    <link href="{/root/gui/url}/static/{$customFilename}.css{$minimizedParam}" rel="stylesheet" />
+
+    <link href="{/root/gui/url}/static/bootstrap-table.min.css" rel="stylesheet"></link>
+    <link href="{/root/gui/url}/static/ng-skos.css" rel="stylesheet" ></link>
+    <link href="{/root/gui/url}/static/{/root/gui/nodeId}_custom_style.css{$minimizedParam}" rel="stylesheet" />
+    
   </xsl:template>
 
 
