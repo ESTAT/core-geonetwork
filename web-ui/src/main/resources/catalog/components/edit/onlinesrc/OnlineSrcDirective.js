@@ -237,6 +237,13 @@
                 init();
                 $(scope.popupid).modal('show');
               });
+              
+              scope.$watch('pleaseLoad', function(newValue) {
+                if(scope.pleaseLoad)  {
+                  init();
+                  scope.pleaseLoad = false;
+                }
+              });
 
               // TODO: should be in gnEditor ?
               var getVersion = function() {

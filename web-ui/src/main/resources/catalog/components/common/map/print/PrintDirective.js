@@ -53,17 +53,26 @@
       };
 
       var activate = function() {
-        updatePrintConfig().then(function() {
-          deregister = [
-            $scope.map.on('precompose', handlePreCompose),
-            $scope.map.on('postcompose', handlePostCompose),
-            $scope.map.getView().on('propertychange', function(event) {
-              updatePrintRectanglePixels($scope.scale);
-            })
-          ];
-          $scope.scale = getOptimalScale();
-          refreshComp();
-          registerEvents();
+        
+        if(!$scope.loaded) {
+          $scope.pleaseLoad = true;
+        }
+        
+        $scope.$watch('loaded', function(newValue) {
+          if(newValue) {
+            updatePrintConfig().then(function() {
+              deregister = [
+                $scope.map.on('precompose', handlePreCompose),
+                $scope.map.on('postcompose', handlePostCompose),
+                $scope.map.getView().on('propertychange', function(event) {
+                  updatePrintRectanglePixels($scope.scale);
+                })
+              ];
+              $scope.scale = getOptimalScale();
+              refreshComp();
+              registerEvents();
+            });
+          }
         });
       };
 
