@@ -31,6 +31,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.dispatchers.ServiceManager;
 import org.apache.commons.io.IOUtils;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.exceptions.BadParameterEx;
 import org.fao.geonet.kernel.region.Region;
@@ -39,6 +40,7 @@ import org.fao.geonet.kernel.region.RegionsDAO;
 import org.fao.geonet.kernel.region.Request;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.lib.Lib;
+import org.fao.geonet.utils.Log;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.geotools.geometry.jts.ReferencedEnvelope;
@@ -248,12 +250,11 @@ public class GetMap{
         bboxOfImage.expandBy(bboxOfImage.getWidth() * expandFactor, bboxOfImage.getHeight() * expandFactor);
         Dimension imageDimensions = calculateImageSize(bboxOfImage, width, height);
 
-
         Exception error = null;
         if (background != null) {
 
             if (background.equalsIgnoreCase(SETTING_BACKGROUND) &&
-                settingManager.getValue(REGION_GETMAP_BACKGROUND).startsWith("http://")) {
+               (settingManager.getValue(REGION_GETMAP_BACKGROUND).startsWith("http://") || settingManager.getValue(REGION_GETMAP_BACKGROUND).startsWith("https://"))){
                 background = settingManager.getValue(REGION_GETMAP_BACKGROUND);
             } else if (this.regionGetMapBackgroundLayers.containsKey(background)) {
                 background = this.regionGetMapBackgroundLayers.get(background);
@@ -279,6 +280,7 @@ public class GetMap{
                 in = conn.getInputStream();
                 image = ImageIO.read(in);
             } catch (IOException e) {
+                Log.error(Geonet.GEONETWORK, "Error reading service " + background, e);
                 image = new BufferedImage(imageDimensions.width, imageDimensions.height, BufferedImage.TYPE_INT_ARGB);
                 error = e;
             }finally {
@@ -287,6 +289,10 @@ public class GetMap{
                 }
 
             }
+            
+            if (image==null)
+                Log.warning(Geonet.GEONETWORK, "Error reading service " + background);
+            	
         } else {
             image = new BufferedImage(imageDimensions.width, imageDimensions.height, BufferedImage.TYPE_INT_ARGB);
         }

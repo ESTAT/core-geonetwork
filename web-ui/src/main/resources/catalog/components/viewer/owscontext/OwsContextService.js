@@ -249,7 +249,9 @@
               service: 'urn:ogc:serviceType:WMS'
             }];
           } else if (source instanceof ol.source.XYZ) {
-              name = '{type=' + layer.get('label') + '}';
+              name = '{type=' + layer.get('gntype') + '}';
+          } else if (source instanceof ol.source.TileWMS) {
+              name = '{type=' + layer.get('gntype') + '}';
           } else {
             return;
           }

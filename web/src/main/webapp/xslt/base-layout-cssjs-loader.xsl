@@ -164,6 +164,11 @@
     <xsl:variable name="mapConfig"
                   select="util:getSettingValue('map/config')"/>
 
+      <xsl:variable name="regionGetMapBackground"
+                    select="util:getSettingValue('region/getmap/background')"/>
+      <xsl:variable name="regionGetMapMapproj"
+                    select="util:getSettingValue('region/getmap/mapproj')"/>
+
     <xsl:variable name="isMapViewerEnabled">
 	    <xsl:choose>
 	    <xsl:when test="util:getSettingValue('map/isMapViewerEnabled')"><xsl:value-of select="util:getSettingValue('map/isMapViewerEnabled')"/></xsl:when>
@@ -187,7 +192,11 @@
           </xsl:if>
           gnViewerSettings.mapConfig = <xsl:value-of select="$mapConfig"/>;
           gnGlobalSettings.isMapViewerEnabled = <xsl:value-of select="$isMapViewerEnabled"/>;
-        }]);
+  		  gnViewerSettings.regionGetMap = {
+		  	background: '<xsl:value-of select="$regionGetMapBackground"/>',
+		  	mapproj: '<xsl:value-of select="$regionGetMapMapproj"/>'
+		  };
+          }]);
       </script>
     </xsl:if>
     

@@ -2,11 +2,16 @@
                         xmlns:ows="http://www.opengis.net/ows"
                         version="0.3.1" id="ows-context-ex-1-v3">
   <ows-context:General>
-    <ows:BoundingBox crs="EPSG:3857">
+<!--         <ows:BoundingBox crs="EPSG:3857">
 		<ows:LowerCorner>-2817774.6107047377 4079902.821749567</ows:LowerCorner>
 		<ows:UpperCorner>6790054.096628777 10282920.54114819</ows:UpperCorner>
      </ows:BoundingBox>
-  </ows-context:General>
+ -->
+       <ows:BoundingBox crs="EPSG:4326">
+		<ows:LowerCorner>-16.1279296875 31.46484375</ows:LowerCorner>
+		<ows:UpperCorner>27.0263671875 69.609375</ows:UpperCorner>
+     </ows:BoundingBox>
+   </ows-context:General>
   <ows-context:ResourceList>
 <!--     <ows-context:Layer name="{type=mapquest}"
                        group="Background layers"
@@ -28,30 +33,67 @@
       <ows:Title>Bing Aerial</ows:Title>
     </ows-context:Layer>
  -->
- 
-    <ows-context:Layer name="{type=estat_bmarble}"
+      
+	<ows-context:Layer name="{type=Blue_marble_4326_tile}"
                        group="Background layers"
                        hidden="false"
                        opacity="1">
-      <ows:Title>Blue Marble mosaic of earth</ows:Title>
+      <ows:Title>Blue Marble</ows:Title>
     </ows-context:Layer>
-    <ows-context:Layer name="{type=estat_hypso}"
+	<ows-context:Layer name="{type=Blue_marble_4326_wms}"
                        group="Background layers"
                        hidden="false"
                        opacity="1">
-      <ows:Title>Climate shaded relief of earth</ows:Title>
+      <ows:Title>Blue Marble</ows:Title>
     </ows-context:Layer>
-    <ows-context:Layer name="{type=estat_natural}"
+	<ows-context:Layer name="{type=Blue_marble_3857_tile}"
                        group="Background layers"
                        hidden="false"
                        opacity="1">
-      <ows:Title>Landcover shaded relief of earth</ows:Title>
+      <ows:Title>Blue Marble</ows:Title>
     </ows-context:Layer>
-    <ows-context:Layer name="{type=estat_gray_bg}"
+	<ows-context:Layer name="{type=Blue_marble_3857_wms}"
                        group="Background layers"
                        hidden="false"
                        opacity="1">
-      <ows:Title>European country boundaries on grey background</ows:Title>
+      <ows:Title>Blue Marble</ows:Title>
     </ows-context:Layer>
-  </ows-context:ResourceList>
+    <ows-context:Layer name="{type=Hypsometric_4326_tile}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Hypsometric</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=Hypsometric_4326_wms}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Hypsometric</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=Natural_Earth_4326_tile}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Natural Earth</ows:Title>
+    </ows-context:Layer>
+    <ows-context:Layer name="{type=Natural_Earth_4326_wms}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>Natural Earth</ows:Title>
+    </ows-context:Layer>
+	<ows-context:Layer name="{type=CountriesEurope_4326_tile}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>CountriesEurope</ows:Title>
+    </ows-context:Layer>
+	<ows-context:Layer name="{type=CountriesEurope_4326_wms}"
+                       group="Background layers"
+                       hidden="false"
+                       opacity="1">
+      <ows:Title>CountriesEurope</ows:Title>
+    </ows-context:Layer>
+
+   </ows-context:ResourceList>
 </ows-context:OWSContext>

@@ -46,18 +46,22 @@ public class ImageReplacedElementFactory implements ReplacedElementFactory {
         if ("img".equals(nodeName) && src.contains("region.getmap.png")) {
             StringBuilder builder = new StringBuilder(baseURL);
             try {
-                String[] parts = src.split("\\?|&");
-                builder.append(parts[0]);
-                builder.append('?');
-                for (int i = 1; i < parts.length ; i++) {
-                    if(i>1) {
-                        builder.append('&');
-                    }
-                    String[] param = parts[i].split("=");
-                    builder.append(param[0]);
-                    builder.append('=');
-                    builder.append(URLEncoder.encode(param[1], "UTF-8"));
-                }
+            	// dont split on ? Consider the following (note the WMSServer?)
+            	// region.getmap.png?mapsrs=EPSG:4326&width=500&background=https://webgate.ec.europa.eu/estat/inspireec/gis/arcgis/services/Basemaps/Blue_marble_4326/MapServer/WMSServer?SERVICE=WMS%26REQUEST=GetMap%26VERSION=1.1.0%26LAYERS=0%26STYLES=default%26SRS={srs}%26BBOX={minx},{miny},{maxx},{maxy}%26WIDTH={width}%26HEIGHT={height}%26FORMAT=image/png&geom=Polygon((7.27294921875%2056.99707031250001,12.45849609375%2056.99707031250001,12.45849609375%2054.71191406250001,7.27294921875%2054.71191406250001,7.27294921875%2056.99707031250001))&geomsrs=EPSG:4326
+            	// assume src starts with region.getmap.png
+            	builder.append(src);
+//                String[] parts = src.split("\\?|&");
+//                builder.append(parts[0]);
+//                builder.append('?');
+//                for (int i = 1; i < parts.length ; i++) {
+//                    if(i>1) {
+//                        builder.append('&');
+//                    }
+//                    String[] param = parts[i].split("=");
+//                    builder.append(param[0]);
+//                    builder.append('=');
+//                    builder.append(URLEncoder.encode(param[1], "UTF-8"));
+//                }
             } catch (Exception e) {
                 Log.warning(Geonet.GEONETWORK, "Error writing metadata to PDF", e);
             }
@@ -98,6 +102,9 @@ public class ImageReplacedElementFactory implements ReplacedElementFactory {
     private ReplacedElement loadImage(LayoutContext layoutContext, BlockBox box, UserAgentCallback userAgentCallback,
                                       int cssWidth, int cssHeight, String url, float scaleFactor) {
         InputStream input = null;
+        
+        // The following line should not be here, it is just a hack to avoid ssl issues.
+        url = url.replace("https://ec.europa.eu:8443", "http://ec.europa.eu:8080");
         try {
             input = new URL(url).openStream();
             byte[] bytes = IOUtils.toByteArray(input);

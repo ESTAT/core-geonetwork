@@ -19,10 +19,12 @@
             viewerSettings.mapConfig.viewerMap ||
             '../../map/config-viewer.xml';
 
+          viewerSettings.selectedbgLayer = viewerSettings.mapConfig.gntype || 'Blue_marble_4326_tile';
+          
           // Keep one layer in the background
           // while the context is not yet loaded.
           viewerSettings.bgLayers = [
-             gnMap.createLayerForType('estat_bmarble')
+             gnMap.createLayerForType(viewerSettings.selectedbgLayer)
           ];
 
           viewerSettings.servicesUrl =
@@ -60,27 +62,37 @@
           /*******************************************************************
              * Define maps
              */
+          var mapproj = viewerSettings.mapConfig.projection || 'EPSG:4326';
+          var minZoom = viewerSettings.mapConfig.minZoom || 0;
+          var maxZoom = viewerSettings.mapConfig.maxZoom || 11;
           var mapsConfig = {
-            center: [280274.03240585705, 6053178.654789996],
-            zoom: 2
-            //maxResolution: 9783.93962050256
-          };
+              	projection: mapproj,
+                  center: [5,50],
+                  zoom: 4,
+                  maxZoom: maxZoom,
+                  minZoom: minZoom
+                };
 
+//          var mapsConfig = {
+//            center: [280274.03240585705, 6053178.654789996],
+//            zoom: 2
+//            //maxResolution: 9783.93962050256
+//          };
+          
           var viewerMap = new ol.Map({
-            controls: [],
-            view: new ol.View(mapsConfig)
+			   controls: [],
+        	   //controls: [new ol.control.ScaleLine()],
+			   view: new ol.View(mapsConfig)
           });
 
           var searchMap = new ol.Map({
             controls:[],
-            layers: 
-            	[gnMap.createLayerForType('estat_bmarble')] 
-            	//[new ol.layer.Tile({source: new ol.source.OSM()})]
-          	,
-            view: new ol.View({
-              center: mapsConfig.center,
-              zoom: 2
-            })
+            layers: [gnMap.createLayerForType(viewerSettings.selectedbgLayer)],
+            view: new ol.View(mapsConfig)
+//            view: new ol.View({
+//              center: mapsConfig.center,
+//              zoom: 2
+//            })
           });
 
 

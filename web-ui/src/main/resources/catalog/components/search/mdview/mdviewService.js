@@ -22,9 +22,10 @@
     'gnSearchSettings',
     'gnUrlUtils',
     'gnUtilityService',
+    'gnViewerSettings',
     function(gnSearchLocation, $rootScope, gnMdFormatter, Metadata,
              gnMdViewObj, gnSearchManagerService, gnSearchSettings,
-             gnUrlUtils, gnUtilityService) {
+             gnUrlUtils, gnUtilityService, gnViewerSettings) {
 
       // Keep where the metadataview come from to get back on close
       var initFromConfig = function() {
@@ -60,6 +61,19 @@
         // TODO: do not add duplicates
         gnMdViewObj.previousRecords.push(md);
 
+        // default
+        gnMdViewObj.mapconfig = {
+    		mapproj: 'EPSG:3857',
+    		background:'osm'
+        }
+        // read region/getmap settings
+        if (gnViewerSettings && gnViewerSettings.regionGetMap && gnViewerSettings.regionGetMap.background) {
+        	var proj = gnViewerSettings.regionGetMap.mapproj;
+            gnMdViewObj.mapconfig = {
+        		mapproj: proj,
+        		background:gnViewerSettings.regionGetMap.background
+            }
+    	}
       };
 
       /**
