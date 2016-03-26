@@ -89,7 +89,7 @@
         <a data-gn-active-tb-item="admin.console#/organization/users?userOrGroup={{user.username}}"
            title="{{'userDetails' | translate}}"
            data-ng-disabled="!user.isUserAdminOrMore()" >
-          <img class="img-circle" data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/>
+          <!-- <img class="img-circle" data-ng-src="http://gravatar.com/avatar/{{user.email | md5}}?s=18"/> -->
           {{user.name}} {{user.surname}} ({{user.profile | translate}})
           <span class="alert alert-danger ng-hide"
                 data-ng-show="session.remainingTime > 0 &&
