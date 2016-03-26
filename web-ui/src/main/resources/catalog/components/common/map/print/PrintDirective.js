@@ -469,7 +469,7 @@
               customParams: {
                 'EXCEPTIONS': 'XML',
                 'TRANSPARENT': 'true',
-                'CRS': 'EPSG:4326', // FIXME
+                //'CRS': 'EPSG:4326', // FIXME
                 'TIME': params.TIME
               },
               singleTile: config.singleTile || true
@@ -642,6 +642,8 @@
           return parseInt(scale.value);
         });
 
+        var currentbbox = view.calculateExtent($scope.map.getSize());
+
         $scope.jsonSpec = {
           layout: this.layout.name,
           srs: proj.getCode(),
@@ -655,10 +657,11 @@
           enableLegends: (encLegends && encLegends.length > 0),
           pages: [
             angular.extend({
-              center: getPrintRectangleCenterCoord(),
-              // scale has to be one of the advertise by the print server
-              scale: getOptimalScale().value,
-              dataOwner: '© ' + attributions.join(),
+            	bbox: currentbbox,
+//              center: getPrintRectangleCenterCoord(),
+//              // scale has to be one of the advertise by the print server
+//              scale: getOptimalScale().value,
+//              dataOwner: '© ' + attributions.join(),
               rotation: -((view.getRotation() * 180.0) / Math.PI)
             }, defaultPage)
           ]

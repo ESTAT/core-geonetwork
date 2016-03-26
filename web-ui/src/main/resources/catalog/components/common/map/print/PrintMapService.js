@@ -212,7 +212,7 @@
             customParams: {
               'EXCEPTIONS': 'XML',
               'TRANSPARENT': 'true',
-              'CRS': 'EPSG:3857',
+              //'CRS': 'EPSG:3857',
               'TIME': params.TIME
             },
             singleTile: config.singleTile || false

@@ -210,6 +210,10 @@
       var scales = $scope.config.scales.map(function(scale) {
         return parseInt(scale.value);
       });
+      
+      
+      var currentbbox = view.calculateExtent($scope.map.getSize());
+      
       var spec = {
         layout: $scope.config.layout.name,
         srs: proj.getCode(),
@@ -222,15 +226,18 @@
         enableLegends: $scope.enableLegends,
         pages: [
           angular.extend({
-            center: gnPrint.getPrintRectangleCenterCoord(
-                $scope.map, printRectangle),
+        	bbox: currentbbox,
+            //center: gnPrint.getPrintRectangleCenterCoord(
+                //$scope.map, printRectangle),
             // scale has to be one of the advertise by the print server
-            scale: $scope.config.scale.value,
+            //scale: $scope.config.scale.value,
             dataOwner: '© ' + attributions.join(),
             rotation: -((view.getRotation() * 180.0) / Math.PI)
           }, defaultPage)
         ]
       };
+      
+      
       var http = $http.post($scope.config.createURL + '?url=' +
           encodeURIComponent('../../pdf'), spec);
       http.success(function(data) {
@@ -261,6 +268,11 @@
 
         if (resolution <= maxResolution &&
             resolution >= minResolution) {
+        	
+//        if (src instanceof ol.source.TileWMS) {
+//            encLayer = gnPrint.encoders.layers['TileWMS'].call(this, layer, layerConfig);
+//        } else
+       	
           if (src instanceof ol.source.WMTS) {
             encLayer = gnPrint.encoders.layers['WMTS'].call(this,
                 layer, layerConfig);
