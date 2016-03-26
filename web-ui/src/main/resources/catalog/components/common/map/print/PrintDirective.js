@@ -563,7 +563,10 @@
         var view = $scope.map.getView();
         var proj = view.getProjection();
         var lang = $translate.uses();
-        var defaultPage = {};
+        var defaultPage = {
+            comment: '',
+            title: ''
+          };
         defaultPage['lang' + lang] = true;
         var encLayers = [];
         var encLegends;
