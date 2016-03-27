@@ -4,7 +4,7 @@
   var module = angular.module('gn_printmap_directive', []);
 
   var mapPrintController = function($scope, gnPrint, $http,
-                                    $translate, $window) {
+                                    $translate, $window, gnMap) {
 
     var printRectangle;
     var deregister;
@@ -269,9 +269,14 @@
         if (resolution <= maxResolution &&
             resolution >= minResolution) {
         	
-//        if (src instanceof ol.source.TileWMS) {
-//            encLayer = gnPrint.encoders.layers['TileWMS'].call(this, layer, layerConfig);
-//        } else
+        if (src instanceof ol.source.XYZ) {
+        	var gntype = layer.get('gntype');
+        	if (gntype){
+        		gntype = gntype.replace('_tile', '_wms');
+            	layer = gnMap.createLayerForType(gntype);
+                encLayer = gnPrint.encoders.layers['WMS'].call(this, layer, layerConfig);
+        	}
+        } else
        	
           if (src instanceof ol.source.WMTS) {
             encLayer = gnPrint.encoders.layers['WMTS'].call(this,
@@ -324,7 +329,8 @@
     'gnPrint',
     '$http',
     '$translate',
-    '$window'
+    '$window',
+    'gnMap'
   ];
 
   module.directive('gnMapprint',
