@@ -10,6 +10,7 @@ import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
 import org.codehaus.groovy.control.CompilationFailedException;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.services.metadata.format.groovy.Environment;
@@ -19,6 +20,7 @@ import org.fao.geonet.services.metadata.format.groovy.Handlers;
 import org.fao.geonet.services.metadata.format.groovy.template.TemplateCache;
 import org.fao.geonet.services.metadata.format.groovy.Transformer;
 import org.fao.geonet.utils.IO;
+import org.fao.geonet.utils.Log;
 import org.jdom.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -67,6 +69,7 @@ public class GroovyFormatter implements FormatterImpl {
         });
     }
     public String format(FormatterParams fparams) throws Exception {
+        Log.trace(Geonet.FORMATTER, "format(-)");
         EnvironmentProxy.clearContext();
         final Transformer transformer = createTransformer(fparams);
 
@@ -80,9 +83,13 @@ public class GroovyFormatter implements FormatterImpl {
     }
 
     private synchronized Transformer createTransformer(FormatterParams fparams) throws Exception {
+        
+        Log.trace(Geonet.FORMATTER, "createTransformer()");
+        
         Transformer transformer = this.transformers.getIfPresent(fparams.formatDir);
 
         if (fparams.isDevMode() || transformer == null) {
+            Log.trace(Geonet.FORMATTER, "transformer was null, try to create");
             final Path baseShared = fparams.context.getBean(GeonetworkDataDirectory.class).getFormatterDir().resolve(GROOVY_SCRIPT_ROOT);
             final Path schemaFormatterDir = getSchemaPluginFormatterDir(fparams, fparams.schema);
             final Path schemaShared = schemaFormatterDir.resolve(GROOVY_SCRIPT_ROOT);
@@ -93,6 +100,7 @@ public class GroovyFormatter implements FormatterImpl {
             };
             GroovyScriptEngine groovyScriptEngine = new GroovyScriptEngine(roots, cl);
 
+            Log.trace(Geonet.FORMATTER, "FormatDir: " + fparams.formatDir.toFile().getAbsolutePath());
             loadScripts(fparams.formatDir, groovyScriptEngine);
 
             Handlers handlers = new Handlers(fparams, schemaShared.getParent(), baseShared.getParent(), this.templateCache);
@@ -150,8 +158,14 @@ public class GroovyFormatter implements FormatterImpl {
 
     private void loadScripts(Path baseShared, final GroovyScriptEngine gse) throws ResourceException, ScriptException, IOException {
         if (!Files.exists(baseShared)) {
+            Log.trace(Geonet.FORMATTER, "loadScripts(" + baseShared.toFile().getAbsolutePath() + ") -> Doesn't exist");
             return;
         }
+        
+        Log.trace(Geonet.FORMATTER, 
+                "loadScripts(" + baseShared.toFile().getAbsolutePath() + ")");
+        
+        
         final Map<Path, Throwable> compileErrors = Maps.newHashMap();
         Files.walkFileTree(baseShared, new SimpleFileVisitor<Path>(){
             @Override

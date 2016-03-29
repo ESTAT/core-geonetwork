@@ -5,6 +5,8 @@ import com.google.common.collect.Sets;
 import groovy.util.slurpersupport.GPathResult;
 import org.apache.commons.io.IOUtils;
 import org.fao.geonet.Constants;
+import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.utils.Log;
 import org.springframework.beans.BeanUtils;
 
 import java.beans.PropertyDescriptor;
@@ -109,6 +111,15 @@ public class TRenderContext implements Appendable, Closeable {
 
         try {
             if (value == null) {
+                
+                if(Log.isTraceEnabled(Geonet.FORMATTER)) {
+                    Log.trace(Geonet.FORMATTER, "Value for property " + property + " is null");
+                    Log.trace(Geonet.FORMATTER, "Model keys available:");
+                    for(String s : getAllModelKeys()) {
+                        Log.trace(Geonet.FORMATTER, " > " + s);
+                    }
+                }
+                
                 throw new TemplateException(
                         "There is no object in the model map with the id '" + expr + "' in the model map.  The model selection " +
                         "expression is: " + expr.trim() + "." + property.trim() + "'.\nThe current options are: \n" + getAllModelKeys());

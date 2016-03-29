@@ -74,7 +74,7 @@
         <level value="WARN" />
     </logger>
     <logger name="geonetwork.formatter">
-        <level value="WARN" />
+        <level value="TRACE" />
     </logger>
     <logger name="geonetwork.harvester" additivity="false">
         <level value="WARN" />

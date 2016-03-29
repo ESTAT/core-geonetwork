@@ -155,7 +155,9 @@ public class Format extends AbstractFormatService implements ApplicationListener
     }
 
     public void copyNewerFilesToDataDir(final Path fromDir, final Path toDir) throws IOException {
+        Log.trace(Geonet.FORMATTER, "copyNewerFilesToDataDir()");
         if (Files.exists(fromDir)) {
+            Log.trace(Geonet.FORMATTER, " Files.exists(" + fromDir.toFile().getAbsolutePath() + ")");
             Files.walkFileTree(fromDir, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
@@ -164,6 +166,7 @@ public class Format extends AbstractFormatService implements ApplicationListener
                         (!Files.exists(path) || Files.getLastModifiedTime(path).compareTo(Files.getLastModifiedTime(file)) < 0)) {
                         Files.deleteIfExists(path);
                         IO.copyDirectoryOrFile(file, path, false);
+                        Log.trace(Geonet.FORMATTER, " > Copied " + file.getFileName());
                     }
                     return super.visitFile(file, attrs);
                 }
@@ -174,6 +177,7 @@ public class Format extends AbstractFormatService implements ApplicationListener
     @RequestMapping(value = "/{lang}/admin.format.clear")
     @ResponseBody
     public void clear() throws Exception {
+        Log.trace(Geonet.FORMATTER, "admin.format.clear called");
         FormatterCache formatterCache = ApplicationContextHolder.get().getBean(FormatterCache.class);
         formatterCache.clear();
     }
@@ -204,6 +208,7 @@ public class Format extends AbstractFormatService implements ApplicationListener
             @RequestParam(value = "mdpath", required = false) final String mdPath,
             final NativeWebRequest request) throws Exception {
 
+        Log.trace(Geonet.FORMATTER, "xml.format." + type);
         if (url == null && metadata == null) {
             throw new IllegalArgumentException("Either the metadata or url parameter must be declared.");
         }
@@ -216,6 +221,10 @@ public class Format extends AbstractFormatService implements ApplicationListener
         if (metadata == null) {
             metadata = getXmlFromUrl(context, lang, url, request);
         }
+        
+        if(Log.isTraceEnabled(Geonet.FORMATTER)) {
+            Log.trace(Geonet.FORMATTER, "Xml.loadString(" + metadata + ")");
+        }
         Element metadataEl = Xml.loadString(metadata, false);
 
         if(mdPath != null) {
@@ -226,6 +235,7 @@ public class Format extends AbstractFormatService implements ApplicationListener
         Metadata metadataInfo = new Metadata().setData(metadata).setId(1).setUuid("uuid");
         metadataInfo.getDataInfo().setType(MetadataType.METADATA).setRoot(metadataEl.getQualifiedName()).setSchemaId(schema);
 
+        Log.trace(Geonet.FORMATTER, "createFormatterAndParams()");
         Pair<FormatterImpl, FormatterParams> result = createFormatterAndParams(lang, formatType, xslid, width,
                 request, context, metadataEl, metadataInfo);
         final String formattedMetadata = result.one().format(result.two());
@@ -275,6 +285,8 @@ public class Format extends AbstractFormatService implements ApplicationListener
             @RequestParam(required = false) final String id,
             @RequestParam(value = "uuid", required = false) final String uuid,
             @RequestParam(value = "xsl", required = false) final String xslid) throws Exception {
+        
+        Log.trace(Geonet.FORMATTER, "md.format.public." + type);
         final FormatType formatType = FormatType.valueOf(type.toLowerCase());
 
         FormatterCache formatterCache = ApplicationContextHolder.get().getBean(FormatterCache.class);
@@ -314,6 +326,8 @@ public class Format extends AbstractFormatService implements ApplicationListener
             @RequestParam(value = "hide_withheld", required = false) final Boolean hide_withheld,
             @RequestParam(value = "width", defaultValue = "_100") final FormatterWidth width,
             final NativeWebRequest request) throws Exception {
+        
+        Log.trace(Geonet.FORMATTER, "md.format." + type);
         final FormatType formatType = FormatType.valueOf(type.toLowerCase());
 
         String resolvedId = resolveId(id, uuid);
@@ -367,6 +381,8 @@ public class Format extends AbstractFormatService implements ApplicationListener
     }
 
     private void writeOutResponse(ServiceContext context, String lang, HttpServletResponse response, FormatType formatType, byte[] formattedMetadata) throws Exception {
+        Log.trace(Geonet.FORMATTER, "writeOutResponse");
+        
         response.setContentType(formatType.contentType);
         String filename = "metadata." + formatType;
         response.addHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
@@ -493,6 +509,8 @@ public class Format extends AbstractFormatService implements ApplicationListener
 
             this.isFormatterInSchemaPluginMap.put(canonicalPath, isInSchemaPlugin);
         }
+        
+        Log.trace(Geonet.FORMATTER, "isFormatterInSchemaPlugin() -> " + isInSchemaPlugin);
         return isInSchemaPlugin;
     }
 
