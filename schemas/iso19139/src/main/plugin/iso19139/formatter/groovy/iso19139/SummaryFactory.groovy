@@ -48,7 +48,7 @@ class SummaryFactory {
         summary.title = this.isoHandlers.isofunc.isoText(metadata.'gmd:identificationInfo'.'*'.'gmd:citation'.'gmd:CI_Citation'.'gmd:title')
         summary.abstr = this.isoHandlers.isofunc.isoText(metadata.'gmd:identificationInfo'.'*'.'gmd:abstract')
 
-        configureKeywords(metadata, summary)
+        /*configureKeywords(metadata, summary)
         configureFormats(metadata, summary)
         configureExtent(metadata, summary)
         configureThumbnails(metadata, summary)
@@ -67,7 +67,7 @@ class SummaryFactory {
 
         if (!linkBlock.links.isEmpty()) {
             summary.links.add(linkBlock)
-        }
+        }*/
 
         /*
          * TODO fix the xslt transform required by loadHierarchyLinkBlocks when running tests.
@@ -78,7 +78,7 @@ class SummaryFactory {
             summary.associated.add(createDynamicAssociatedHtml(summary))
         }
 
-        def toNavBarItem = {s ->
+        /*def toNavBarItem = {s ->
             def name = f.nodeLabel(s, null)
             def abbrName = f.nodeTranslation(s, null, "abbrLabel")
             new NavBarItem(name, abbrName, '.' + s.replace(':', "_"))
@@ -87,7 +87,7 @@ class SummaryFactory {
         summary.navBarOverflow = this.isoHandlers.packageViews.findAll{!navBarItems.contains(it)}.collect (toNavBarItem)
         summary.navBarOverflow.add(isoHandlers.commonHandlers.createXmlNavBarItem())
         summary.content = this.isoHandlers.rootPackageEl(metadata)
-
+        */
         if (summaryCustomizer != null) {
             summaryCustomizer(summary);
         }
