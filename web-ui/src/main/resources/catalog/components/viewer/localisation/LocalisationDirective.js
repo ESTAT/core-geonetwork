@@ -75,7 +75,7 @@
               };
 
               //TODO: move api url and username to config
-              var url = 'http://api.geonames.org/searchJSON';
+              var url = 'https://api.geonames.org/searchJSON';
               $http.get(url, {
                 params: {
                   lang: 'fr',
