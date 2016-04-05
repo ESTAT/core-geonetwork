@@ -705,6 +705,8 @@
     "stylerurl": "Styler URL",
     "system": "System settings",
     "system/ui": "User interface configuration",
+    "system/ui/snippet": "Javascript code snippet",
+    "system/ui/snippet-help": "Javascript code snippet to add in application pages. For example, PIWIK code to track site access.",
     "system/ui/defaultView": "Choose the user interface to use",
     "system/autodetect": "Language detection",
     "system/autodetect/enable": "Enable auto-detecting search request language",
