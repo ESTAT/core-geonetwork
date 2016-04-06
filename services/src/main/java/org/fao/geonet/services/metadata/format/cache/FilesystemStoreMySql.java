@@ -78,7 +78,7 @@ public class FilesystemStoreMySql implements PersistentStore {
             }
 
             try {
-                metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl(), jdbcDataSource.getUsername(), jdbcDataSource.getUsername());
+                metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl(), jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
             } catch (Exception e) {
                 throw new Error(e);
             }
