@@ -163,7 +163,7 @@
             <item facet="status" translator="codelist:gmd:MD_ProgressCode"/>
             <item facet="serviceType"/>
             <item facet="denominator" sortBy="numValue" sortOrder="desc"/>
-            <item facet="resolution" sortBy="numValue" sortOrder="desc"/>
+            <item facet="resolution"/>
             <!--<item facet="metadataPOC" max="15"/>-->
         </summaryType>
         <summaryType name="subtemplates">
