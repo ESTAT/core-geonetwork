@@ -311,7 +311,7 @@ public class GetMap{
             if(error != null) {
 				graphics.setFont(new Font("TimesRoman", Font.PLAIN, 14));
 				graphics.setColor(Color.red);
-                graphics.drawString(error.getMessage(), 0, imageDimensions.height/2);
+                graphics.drawString(error.getMessage(), 10, imageDimensions.height/2);
             }
             ShapeWriter shapeWriter = new ShapeWriter();
             AffineTransform worldToScreenTransform = worldToScreenTransform(bboxOfImage, imageDimensions);
