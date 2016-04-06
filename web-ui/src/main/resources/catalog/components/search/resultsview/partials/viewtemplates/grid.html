@@ -78,9 +78,9 @@
         
         <div style="float:left; display:block; width: calc(100% - 162px)">
 
-          <div class="text-justify gn-md-abstract ellipsis">
+          <div class="text-justify gn-md-abstract">
             <div>
-              <p>{{(md.abstract || md.defaultAbstract) | striptags}}</p>
+              <p>{{(md.abstract || md.defaultAbstract) | striptags | characters:100}}</p>
             </div>
           </div>
 
