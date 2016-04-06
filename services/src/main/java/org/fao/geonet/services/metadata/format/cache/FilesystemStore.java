@@ -36,7 +36,7 @@ import static org.fao.geonet.constants.Params.Access.PUBLIC;
  *
  * @author Jesse on 3/5/2015.
  */
-public class FilesystemStore implements PersistentStore {
+    public class FilesystemStore implements PersistentStore {
     private static final String BASE_CACHE_DIR = "formatter-cache";
     private static final String INFO_TABLE = "info";
     private static final String KEY = "keyhash";
@@ -85,7 +85,7 @@ public class FilesystemStore implements PersistentStore {
                     "CREATE TABLE IF NOT EXISTS " + STATS_TABLE + " (" + NAME + " VARCHAR(64) PRIMARY KEY, " + VALUE + " VARCHAR(32) NOT NULL)"
 
             };
-            String init = ";INIT=" + Joiner.on("\\;").join(initSql) + ";DB_CLOSE_DELAY=-1";
+            String init = ";INIT=" + Joiner.on("\\;").join(initSql) + ";DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE";
             String dbPath = testing ? "mem:" + UUID.randomUUID() : getBaseCacheDir().resolve("info-store").toString();
             metadataDb = DriverManager.getConnection("jdbc:h2:" + dbPath + init, "fsStore", "");
 

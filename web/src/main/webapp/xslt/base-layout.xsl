@@ -5,6 +5,7 @@
 -->
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:util="java:org.fao.geonet.util.XslUtil"
                 exclude-result-prefixes="#all">
 
   <xsl:output omit-xml-declaration="yes" method="html" doctype-system="html" indent="yes"
@@ -71,6 +72,13 @@
 
               <xsl:if test="$isJsEnabled">
                 <xsl:call-template name="javascript-load"/>
+
+                <!-- Javascript snippet configured in system settings. Use only in public pages -->
+                <xsl:variable name="jsSnippet" select="util:getSettingValue('system/ui/snippet')" />
+                <xsl:if test="string($jsSnippet) and ($angularApp = 'gn_search' or $angularApp = 'gn_viewer')">
+                  <xsl:value-of select="$jsSnippet" disable-output-escaping="yes"/>
+                </xsl:if>
+
               </xsl:if>
             <xsl:if test="$isJsEnabled">
               <xsl:call-template name="no-js-alert"/>
