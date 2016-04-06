@@ -278,7 +278,16 @@ public class GetMap{
                 // Setup the proxy for the request
                 URLConnection conn = Lib.net.setupProxy(context, imageUrl);
                 in = conn.getInputStream();
-                image = ImageIO.read(in);
+                if (conn.getContentType().toString().startsWith("image")) {
+                	image = ImageIO.read(in);
+                }
+                else {
+                    //if (conn.getContentType().toString().startsWith("text"))
+                    image = new BufferedImage(imageDimensions.width, imageDimensions.height, BufferedImage.TYPE_INT_ARGB);
+                    error = new Exception("WMS service not accessible");
+                    Log.warning(Geonet.GEONETWORK, "Region map service failed for: " + conn.getContentType() + " - url: " + background);
+                }
+                
             } catch (IOException e) {
                 Log.error(Geonet.GEONETWORK, "Error reading service " + background, e);
                 image = new BufferedImage(imageDimensions.width, imageDimensions.height, BufferedImage.TYPE_INT_ARGB);
@@ -300,6 +309,8 @@ public class GetMap{
         Graphics2D graphics = image.createGraphics();
         try {
             if(error != null) {
+				graphics.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+				graphics.setColor(Color.red);
                 graphics.drawString(error.getMessage(), 0, imageDimensions.height/2);
             }
             ShapeWriter shapeWriter = new ShapeWriter();
