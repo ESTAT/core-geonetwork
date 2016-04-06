@@ -131,7 +131,18 @@
 	padding:0;
 } 
 */
+
+
+.col-centered{
+    margin: 0 auto !important;
+    float: none;
 }
+
+
+}  /* end MEDIA ALL */
+
+
+
 
  @media print {
 	html, body {

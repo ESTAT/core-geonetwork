@@ -26,7 +26,8 @@
               </option>
             </select>
           </td>
-          <td><div class="form-group">
+          <td>
+          <div class="form-group col-centered">
               <input
                 data-ng-model="extent.form[3]" type="number"
                 id="drawbbox-top" placeholder="{{'north' | translate}}" 
@@ -43,7 +44,7 @@
         </tr>
         <tr valign="middle" align="center">
           <td class="col-left">
-            <div class="form-group">
+            <div class="form-group pull-right">
               <input data-ng-model="extent.form[0]" type="number"
                 id="drawbbox-left" placeholder="{{'west' | translate}}"
                 data-ng-change="updateBbox(true)" />
@@ -62,8 +63,10 @@
           </td>
         </tr>
         <tr align="center">
-          <td colspan="3">
-            <div class="form-group">
+          <td class="col-left">
+          </td>
+          <td class="col-middle">
+            <div class="form-group col-centered">
             <input
               data-ng-model="extent.form[1]" type="number"
               id="drawbbox-bottom" placeholder="{{'south' | translate}}"
