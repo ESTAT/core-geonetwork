@@ -2,6 +2,7 @@ package org.fao.geonet.services.metadata.format.cache;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.lib.Lib;
@@ -9,6 +10,9 @@ import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,26 +21,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.UUID;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.PreDestroy;
 
 import static org.fao.geonet.constants.Params.Access.PRIVATE;
 import static org.fao.geonet.constants.Params.Access.PUBLIC;
 
 /**
- * A {@link org.fao.geonet.services.metadata.format.cache.PersistentStore} that saves the files to disk.
+ * A {@link PersistentStore} that saves the files to disk using the defined GN Db.
  *
- * @author Jesse on 3/5/2015.
+ * SQL commands used are setup for MySQL (TODO: Make them generic)
+ *
+ * @author Jose García
  */
-public class FilesystemStore implements PersistentStore {
+public class FilesystemStoreMySql implements PersistentStore {
     private static final String BASE_CACHE_DIR = "formatter-cache";
     private static final String INFO_TABLE = "info";
     private static final String KEY = "keyhash";
@@ -52,9 +50,9 @@ public class FilesystemStore implements PersistentStore {
 
     private static final String QUERY_GET_INFO = "SELECT * FROM " + INFO_TABLE + " WHERE " + KEY + "=?";
     private static final String QUERY_GET_INFO_FOR_RESIZE = "SELECT " +KEY + "," + PATH + " FROM " + INFO_TABLE + " ORDER BY " + CHANGE_DATE + " ASC";
-    private static final String QUERY_PUT = "MERGE INTO " + INFO_TABLE + " (" + KEY + "," + CHANGE_DATE + "," + PUBLISHED + "," + PATH + ") VALUES (?,?,?, ?)";
+    private static final String QUERY_PUT = "INSERT INTO " + INFO_TABLE + " (" + KEY + "," + CHANGE_DATE + "," + PUBLISHED + "," + PATH + ") VALUES (?,?,?, ?) ON DUPLICATE KEY UPDATE " + CHANGE_DATE + "=?," + PUBLISHED + "=?," + PATH + "=?";
     private static final String QUERY_REMOVE = "DELETE FROM " + INFO_TABLE + " WHERE " + KEY + "=?";
-    public static final String QUERY_SETCURRENT_SIZE = "MERGE INTO "+STATS_TABLE + " (" + NAME + ", " + VALUE + ") VALUES ('" + CURRENT_SIZE + "', ?)";
+    public static final String QUERY_SETCURRENT_SIZE = "INSERT INTO "+STATS_TABLE + " (" + NAME + ", " + VALUE + ") VALUES ('" + CURRENT_SIZE + "', ?) ON DUPLICATE KEY UPDATE " + VALUE + "=?";
     public static final String QUERY_GETCURRENT_SIZE = "SELECT "+VALUE+" FROM " + STATS_TABLE + " WHERE "+NAME+" = '"+CURRENT_SIZE+"'";
     private static final String QUERY_CLEAR_INFO = "DELETE FROM " + INFO_TABLE;
     private static final String QUERY_CLEAR_STATS = "DELETE FROM " + STATS_TABLE;
@@ -68,26 +66,41 @@ public class FilesystemStore implements PersistentStore {
     private volatile long currentSize = 0;
     private volatile boolean initialized = false;
 
+    @Autowired
+    private BasicDataSource jdbcDataSource;
+
     private synchronized void init() throws SQLException {
         if (!initialized) {
-            // using a h2 database and not normal geonetwork DB to ensure that the accesses are always on localhost and therefore
-            // hopefully quick.
             try {
-                Class.forName("org.h2.Driver");
+                Class.forName(jdbcDataSource.getDriverClassName());
             } catch (ClassNotFoundException e) {
                 throw new Error(e);
             }
 
-            String[] initSql = {
-                    "CREATE SCHEMA IF NOT EXISTS " + INFO_TABLE,
-                    "CREATE TABLE IF NOT EXISTS " + INFO_TABLE + "(" + KEY + " INT PRIMARY KEY, " + CHANGE_DATE + " BIGINT NOT NULL, " +
-                    PUBLISHED + " BOOL NOT NULL, " + PATH + " CLOB  NOT NULL)",
-                    "CREATE TABLE IF NOT EXISTS " + STATS_TABLE + " (" + NAME + " VARCHAR(64) PRIMARY KEY, " + VALUE + " VARCHAR(32) NOT NULL)"
+            try {
+                metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl(), jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
+            } catch (Exception e) {
+                throw new Error(e);
+            }
 
-            };
-            String init = ";INIT=" + Joiner.on("\\;").join(initSql) + ";DB_CLOSE_DELAY=-1;" + (testing?"":"AUTO_SERVER=TRUE;");
-            String dbPath = testing ? "mem:" + UUID.randomUUID() : getBaseCacheDir().resolve("info-store").toString();
-            metadataDb = DriverManager.getConnection("jdbc:h2:" + dbPath + init, "fsStore", "");
+            Statement statementCreate = null;
+            try {
+                String[] initSql = {
+                        "CREATE TABLE IF NOT EXISTS " + INFO_TABLE + "(" + KEY + " INT PRIMARY KEY, " + CHANGE_DATE + " BIGINT NOT NULL, " +
+                                PUBLISHED + " BOOL NOT NULL, " + PATH + " TEXT  NOT NULL);",
+                        "CREATE TABLE IF NOT EXISTS " + STATS_TABLE + " (" + NAME + " VARCHAR(64) PRIMARY KEY, " + VALUE + " VARCHAR(32) NOT NULL);"
+
+                };
+                statementCreate = metadataDb.createStatement();
+                for(int i =0; i < initSql.length; i++) {
+                    statementCreate.execute(initSql[i]);
+                }
+
+            } catch (Exception e) {
+                throw new Error(e);
+            } finally {
+              if (statementCreate != null) statementCreate.close();
+            }
 
             try (
                     Statement statement = metadataDb.createStatement();
@@ -96,20 +109,10 @@ public class FilesystemStore implements PersistentStore {
                     this.currentSize = Long.parseLong(rs.getString(1));
                 }
             }
-            initialized = true;
         }
-
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    close();
-                } catch (SQLException | ClassNotFoundException e) {
-                    Log.error(Geonet.FORMATTER, "Error shutting down FilesystemStore Database", e);
-                }
-            }
-        }));
+        initialized = true;
     }
+
 
     @PreDestroy
     synchronized void close() throws ClassNotFoundException, SQLException {
@@ -179,6 +182,10 @@ public class FilesystemStore implements PersistentStore {
             statement.setLong(2, data.getChangeDate());
             statement.setBoolean(3, data.isPublished());
             statement.setString(4, privatePath.toUri().toString());
+
+            statement.setLong(5, data.getChangeDate());
+            statement.setBoolean(6, data.isPublished());
+            statement.setString(7, privatePath.toUri().toString());
             statement.execute();
         }
     }
@@ -186,6 +193,7 @@ public class FilesystemStore implements PersistentStore {
     private void updateDbCurrentSize() throws SQLException {
         try (PreparedStatement statement = this.metadataDb.prepareStatement(QUERY_SETCURRENT_SIZE)) {
             statement.setString(1, String.valueOf(currentSize));
+            statement.setString(2, String.valueOf(currentSize));
             statement.execute();
         }
     }
