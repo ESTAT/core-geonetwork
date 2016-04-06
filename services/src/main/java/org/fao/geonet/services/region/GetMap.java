@@ -273,23 +273,29 @@ public class GetMap{
                     .replace("{HEIGHT}", Integer.toString(imageDimensions.height));
 
             InputStream in = null;
+            String connType = ""; 
             try {
                 URL imageUrl = new URL(background);
                 // Setup the proxy for the request
                 URLConnection conn = Lib.net.setupProxy(context, imageUrl);
                 in = conn.getInputStream();
-                if (conn.getContentType().toString().startsWith("image")) {
+                connType = conn.getContentType().toString();
+                if (connType.startsWith("image")) {
                 	image = ImageIO.read(in);
                 }
                 else {
                     //if (conn.getContentType().toString().startsWith("text"))
                     image = new BufferedImage(imageDimensions.width, imageDimensions.height, BufferedImage.TYPE_INT_ARGB);
                     error = new Exception("WMS service not accessible");
-                    Log.warning(Geonet.GEONETWORK, "Region map service failed for: " + conn.getContentType() + " - url: " + background);
+                    Log.warning(Geonet.GEONETWORK, "Region map service failed for: " + connType + " - url: " + background);
+                    if (connType.startsWith("text")) {
+	                	String rep = IOUtils.toString(in, "UTF-8"); 
+	                    Log.warning(Geonet.GEONETWORK, "Region map service failed reply: " + rep);
+                    }
                 }
                 
-            } catch (IOException e) {
-                Log.error(Geonet.GEONETWORK, "Error reading service " + background, e);
+            } catch (Exception e) {
+                Log.error(Geonet.GEONETWORK, "Error in region map service failed for: " + connType + " - url: " + background, e);
                 image = new BufferedImage(imageDimensions.width, imageDimensions.height, BufferedImage.TYPE_INT_ARGB);
                 error = e;
             }finally {
