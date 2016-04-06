@@ -36,7 +36,7 @@ import static org.fao.geonet.constants.Params.Access.PUBLIC;
  *
  * @author Jesse on 3/5/2015.
  */
-public class FilesystemStore implements PersistentStore {
+    public class FilesystemStore implements PersistentStore {
     private static final String BASE_CACHE_DIR = "formatter-cache";
     private static final String INFO_TABLE = "info";
     private static final String KEY = "keyhash";
