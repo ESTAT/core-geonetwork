@@ -85,7 +85,7 @@ import static org.fao.geonet.constants.Params.Access.PUBLIC;
                     "CREATE TABLE IF NOT EXISTS " + STATS_TABLE + " (" + NAME + " VARCHAR(64) PRIMARY KEY, " + VALUE + " VARCHAR(32) NOT NULL)"
 
             };
-            String init = ";INIT=" + Joiner.on("\\;").join(initSql) + ";DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE";
+            String init = ";INIT=" + Joiner.on("\\;").join(initSql) + ";DB_CLOSE_DELAY=-1;" + (testing?"":"AUTO_SERVER=TRUE;");
             String dbPath = testing ? "mem:" + UUID.randomUUID() : getBaseCacheDir().resolve("info-store").toString();
             metadataDb = DriverManager.getConnection("jdbc:h2:" + dbPath + init, "fsStore", "");
 
