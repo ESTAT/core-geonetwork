@@ -9,8 +9,13 @@
     var printRectangle;
     var deregister;
 
+    var path = $window.location.pathname.split('/');
+    var pdfurl = $window.location.origin + '/' + path[1] + '/pdf';
+    var pdfuri = encodeURIComponent(pdfurl);
+    
     var options = {
-      printConfigUrl: '../../pdf/info.json?url=..%2F..%2Fpdf',
+      printConfigUrl: pdfurl + '/info.json?url=' + pdfuri,
+      //printConfigUrl: '../../pdf/info.json?url=..%2F..%2Fpdf',
       graticule: false
     };
 
@@ -238,8 +243,17 @@
       };
       
       
-      var http = $http.post($scope.config.createURL + '?url=' +
-          encodeURIComponent('../../pdf'), spec);
+      // https://webgate.acceptance.ec.europa.eu/inspire-sdi/pdf/create.json?url=..%2F..%2Fpdf
+      // https://webgate.acceptance.ec.europa.eu/inspire-sdi/pdf/create.json?url=https://webgate.acceptance.ec.europa.eu/inspire-sdi/pdf
+    	  
+      var infourl = $window.location.origin;
+      var path = $window.location.pathname.split('/');
+      var pdfurl = $window.location.origin + '/' + path[1] + '/pdf';
+      var pdfuri = encodeURIComponent(pdfurl);
+      var http = $http.post(pdfurl + '/create.json?url=' + pdfuri, spec);
+      
+//      var http = $http.post($scope.config.createURL + '?url=' +
+//          encodeURIComponent('../../pdf'), spec);
       http.success(function(data) {
         $scope.printing = false;
         $scope.downloadUrl(data.getURL);
