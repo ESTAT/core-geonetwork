@@ -63,7 +63,7 @@ public class FilesystemStore implements PersistentStore {
     private GeonetworkDataDirectory geonetworkDataDir;
     @VisibleForTesting
     Connection metadataDb;
-    private boolean testing = false;
+    private boolean testing = true;
     private volatile long maxSizeB = 10000;
     private volatile long currentSize = 0;
     private volatile boolean initialized = false;
