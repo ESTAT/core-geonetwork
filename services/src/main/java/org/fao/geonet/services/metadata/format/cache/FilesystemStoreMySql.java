@@ -78,7 +78,7 @@ public class FilesystemStoreMySql implements PersistentStore {
             }
 
             try {
-                metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl(), jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
+                metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl() + "?autoReconnect=true", jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
             } catch (Exception e) {
                 throw new Error(e);
             }
@@ -111,6 +111,14 @@ public class FilesystemStoreMySql implements PersistentStore {
             }
         }
         initialized = true;
+
+        if (metadataDb.isClosed()) {
+            try {
+                metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl() + "?autoReconnect=true", jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
+            } catch (Exception e) {
+                throw new Error(e);
+            }
+        }
     }
 
 
