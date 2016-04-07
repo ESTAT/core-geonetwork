@@ -112,7 +112,7 @@ public class FilesystemStoreMySql implements PersistentStore {
         }
         initialized = true;
 
-        if (metadataDb.isClosed()) {
+        if (metadataDb.isClosed() || !metadataDb.isValid(0)) {
             try {
                 metadataDb = DriverManager.getConnection(jdbcDataSource.getUrl() + "?autoReconnect=true", jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
             } catch (Exception e) {
