@@ -25,12 +25,16 @@ class SummaryFactory {
     Closure<Summary> summaryCustomizer = null
 
     SummaryFactory(isoHandlers, summaryCustomizer) {
+        System.out.println "In SummaryFactory - start"
+
         this.isoHandlers = isoHandlers
         this.handlers = isoHandlers.handlers;
         this.f = isoHandlers.f;
         this.env = isoHandlers.env;
         this.navBarItems = ['gmd:identificationInfo', 'gmd:distributionInfo', isoHandlers.rootEl]
         this.summaryCustomizer = summaryCustomizer;
+        System.out.println "In SummaryFactory - end"
+
     }
     SummaryFactory(isoHandlers) {
         this(isoHandlers, null)
@@ -42,16 +46,27 @@ class SummaryFactory {
     }
 
     Summary create(metadata) {
+        System.out.println "In Summary create"
 
         Summary summary = new Summary(this.handlers, this.env, this.f)
 
         summary.title = this.isoHandlers.isofunc.isoText(metadata.'gmd:identificationInfo'.'*'.'gmd:citation'.'gmd:CI_Citation'.'gmd:title')
         summary.abstr = this.isoHandlers.isofunc.isoText(metadata.'gmd:identificationInfo'.'*'.'gmd:abstract')
 
+        System.out.println "In Summary create (summary.title)" + summary.title
+        System.out.println "In Summary create (summary.abstr)" + summary.abstr
+
         configureKeywords(metadata, summary)
+        System.out.println "In Summary create after keywords"
+
         configureFormats(metadata, summary)
+        System.out.println "In Summary create after formats"
+
         configureExtent(metadata, summary)
+        System.out.println "In Summary create after extent"
+
         configureThumbnails(metadata, summary)
+        System.out.println "In Summary create after extent"
 
 
         LinkBlock linkBlock = new LinkBlock('links', "fa fa-link");
@@ -64,6 +79,9 @@ class SummaryFactory {
                     protocol: isoHandlers.isofunc.clean(linkParts[3])
             ]
         })
+
+        System.out.println "In Summary create after link"
+
 
         if (!linkBlock.links.isEmpty()) {
             summary.links.add(linkBlock)
@@ -78,6 +96,8 @@ class SummaryFactory {
             summary.associated.add(createDynamicAssociatedHtml(summary))
         }
 
+        System.out.println "In Summary create after associated"
+
         def toNavBarItem = {s ->
             def name = f.nodeLabel(s, null)
             def abbrName = f.nodeTranslation(s, null, "abbrLabel")
@@ -86,7 +106,12 @@ class SummaryFactory {
         summary.navBar = this.isoHandlers.packageViews.findAll{navBarItems.contains(it)}.collect (toNavBarItem)
         summary.navBarOverflow = this.isoHandlers.packageViews.findAll{!navBarItems.contains(it)}.collect (toNavBarItem)
         summary.navBarOverflow.add(isoHandlers.commonHandlers.createXmlNavBarItem())
+
+        System.out.println "In Summary create after navBar"
+
         summary.content = this.isoHandlers.rootPackageEl(metadata)
+
+        System.out.println "In Summary create after content"
 
         if (summaryCustomizer != null) {
             summaryCustomizer(summary);
