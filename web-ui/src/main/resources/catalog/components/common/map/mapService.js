@@ -120,6 +120,27 @@
         	});
         }
 
+        var _createEstatLayerWMS_multilayer = function( basemap, projCode, title, type, layers, styles ){
+        	var projection = ol.proj.get('EPSG:' + projCode);
+        	var projectionExtent = projection.getExtent();
+        	return new ol.layer.Tile({
+        		source: new ol.source.TileWMS({
+        			url: estatService + '/estat/inspireec/gis/arcgis/services/Basemaps/' + basemap + '_' + projCode +'/MapServer/WMSServer?',
+        			projection: projection,
+        			extent: projectionExtent,
+        			params: {
+        				'LAYERS': layers || '0', 
+        				'STYLES': styles || 'default',
+        				'TILED': true
+        			}, 
+        			serverType: 'mapserver'
+        		}),
+        		extent: projectionExtent,
+        		title: title,
+        		gntype: type
+        	});
+        }
+        
         var _createLayerForType = function(type, opt) {
 
         	switch (type) {
@@ -207,9 +228,11 @@
         		//return _createEstatLayerTile('CountriesEurope', 4326, 'Countries Europe (tile, 4326)', type );
         		return _createEstatLayerTile('gray-bg', 4326, 'Countries Europe (tile, 4326)', type );
         	case 'CountriesEurope_3857_wms':
-        		return _createEstatLayerWMS('CountriesEurope', 3857, 'Countries Europe (wms, 3857)', type );
+        		return _createEstatLayerWMS_multilayer('CountriesEurope', 3857, 'Countries Europe (wms, 3857)', type, '0,1,2,3,4,5,6,7,8,9,10,11,12,13', 'default,default,default,default,default,default,default,default,default,default,default,default,default,default' );
+//        	case 'CountriesEurope_4326_wms':
+//        		return _createEstatLayerWMS('CountriesEurope', 4326, 'Countries Europe (wms, 4326)', type );
         	case 'CountriesEurope_4326_wms':
-        		return _createEstatLayerWMS('CountriesEurope', 4326, 'Countries Europe (wms, 4326)', type );
+        		return _createEstatLayerWMS_multilayer('CountriesEurope', 4326, 'Countries Europe (wms, 4326)', type, '0,1,2,3,4,5,6,7,8,9,10,11,12,13', 'default,default,default,default,default,default,default,default,default,default,default,default,default,default' );
         	}
         	$log.warn('Unsupported layer type: ', type);
         };
