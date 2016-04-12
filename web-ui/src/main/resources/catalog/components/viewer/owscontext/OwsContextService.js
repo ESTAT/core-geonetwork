@@ -158,6 +158,18 @@
             var firstVisibleBgLayer = true;
             bgLayers = $filter('orderBy')(bgLayers, 'idx');
 
+            // check if the selectedbgLayer is visible in bgLayers
+            if (gnViewerSettings.selectedbgLayer){
+                $.each(bgLayers, function(index, item) {
+                	if (item.layer.getVisible()) {
+                		if (item.layer.get('gntype') == gnViewerSettings.selectedbgLayer){
+                            map.getLayers().insertAt(0, item.layer);
+                            firstVisibleBgLayer = false;
+                		}
+                	}
+                });
+            }
+            	
             $.each(bgLayers, function(index, item) {
               gnViewerSettings.bgLayers.push(item.layer);
               // the first visible bg layer wins and get displayed in the map
