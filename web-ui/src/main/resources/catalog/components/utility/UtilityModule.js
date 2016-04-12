@@ -15,6 +15,8 @@
           if (chars <= 0) return '';
           if (input && input.length >= chars) {
             input = input.substring(0, chars);
+            if (chars>3)
+              input = input.substring(0, chars-3);	// leave space for ...
 
             if (!breakOnWord) {
               var lastspace = input.lastIndexOf(' ');

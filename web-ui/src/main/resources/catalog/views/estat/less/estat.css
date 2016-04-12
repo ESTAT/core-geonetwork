@@ -138,7 +138,14 @@
     float: none;
 }
 
-
+.list-group-item-search-right {
+	display: inline-flex;
+}
+ 
+ .gn-facet-pull-right{
+	float: right;
+}
+ 
 }  /* end MEDIA ALL */
 
 
