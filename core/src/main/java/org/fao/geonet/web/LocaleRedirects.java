@@ -147,47 +147,51 @@ public class LocaleRedirects {
         if (langCookie != null) {
             return langCookie;
         }
-        if (langHeader == null) {
-            return _defaultLanguage;
-        }
 
-        String userLang = langHeader.split("-|,", 2)[0].toLowerCase();
-
-        if (userLang.matches("^en")) {
-            userLang = "eng";
-        } else if (userLang.matches("^fr")) {
-            userLang = "fre";
-        } else if (userLang.matches("^de")) {
-            userLang = "ger";
-        } else if (userLang.matches("^it")) {
-            userLang = "ita";
-        } else if (userLang.matches("^ca")) {
-            userLang = "cat";
-        } else if (userLang.matches("^es")) {
-            userLang = "spa";
-        } else if (userLang.matches("^fi")) {
-            userLang = "fin";
-        } else if (userLang.matches("^pl")) {
-            userLang = "pol";
-        } else if (userLang.matches("^no")) {
-            userLang = "nor";
-        } else if (userLang.matches("^nl")) {
-            userLang = "dut";
-        } else if (userLang.matches("^pt")) {
-            userLang = "por";
-        } else if (userLang.matches("^ar")) {
-            userLang = "ara";
-        } else if (userLang.matches("^zh")) {
-            userLang = "chi";
-        } else if (userLang.matches("^ru")) {
-            userLang = "rus";
-        } else if (userLang.matches("^tr")) {
-            userLang = "tur";
-        } else {
-            userLang = _defaultLanguage;
-        }
-
-        return userLang;
+        // For ESTAT - Always choose default language, regardless of the browser setting
+        return _defaultLanguage;
+        
+//        if (langHeader == null) {
+//            return _defaultLanguage;
+//        }
+//
+//        String userLang = langHeader.split("-|,", 2)[0].toLowerCase();
+//
+//        if (userLang.matches("^en")) {
+//            userLang = "eng";
+//        } else if (userLang.matches("^fr")) {
+//            userLang = "fre";
+//        } else if (userLang.matches("^de")) {
+//            userLang = "ger";
+//        } else if (userLang.matches("^it")) {
+//            userLang = "ita";
+//        } else if (userLang.matches("^ca")) {
+//            userLang = "cat";
+//        } else if (userLang.matches("^es")) {
+//            userLang = "spa";
+//        } else if (userLang.matches("^fi")) {
+//            userLang = "fin";
+//        } else if (userLang.matches("^pl")) {
+//            userLang = "pol";
+//        } else if (userLang.matches("^no")) {
+//            userLang = "nor";
+//        } else if (userLang.matches("^nl")) {
+//            userLang = "dut";
+//        } else if (userLang.matches("^pt")) {
+//            userLang = "por";
+//        } else if (userLang.matches("^ar")) {
+//            userLang = "ara";
+//        } else if (userLang.matches("^zh")) {
+//            userLang = "chi";
+//        } else if (userLang.matches("^ru")) {
+//            userLang = "rus";
+//        } else if (userLang.matches("^tr")) {
+//            userLang = "tur";
+//        } else {
+//            userLang = _defaultLanguage;
+//        }
+//
+//        return userLang;
     }
 
 
