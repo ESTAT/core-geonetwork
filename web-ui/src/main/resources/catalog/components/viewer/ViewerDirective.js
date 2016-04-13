@@ -15,8 +15,8 @@
    * @description
    */
   module.directive('gnMainViewer', [
-    'gnMap', 'gnConfig', 'gnSearchLocation',
-    function(gnMap, gnConfig, gnSearchLocation) {
+    'gnMap', 'gnConfig', 'gnSearchLocation', 'gnViewerSettings', 
+    function(gnMap, gnConfig, gnSearchLocation, gnViewerSettings) {
       return {
         restrict: 'A',
         replace: true,
@@ -49,6 +49,9 @@
               scope.zoomToMaxExtent = function(map) {
                 map.getView().fit(map.getView().
                     getProjection().getExtent(), map.getSize());
+              };
+              scope.zoomToInitialExtent = function(map) {
+                map.getView().fit(gnViewerSettings.initialExtent, map.getSize());
               };
               scope.ol3d = null;
 

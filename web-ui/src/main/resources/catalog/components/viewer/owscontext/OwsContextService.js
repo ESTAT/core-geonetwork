@@ -55,6 +55,20 @@
     function(gnMap, gnOwsCapabilities, $http, gnViewerSettings,
              $translate, $q, $filter, $timeout) {
 
+    	var getMapSizeValid = function(s){
+            var valid = (s && s.length == 2 && s[0] > 0 && s[1] > 0);
+            return valid;
+    	};
+    	
+    	var initialZoomToExtent = function(map, extent){
+            //$timeout(function() {
+            	var s = map.getSize();
+                //console.warn("initialZoomToExtent, map-size: " + s + ", extent: " + extent);
+                if (getMapSizeValid(s)){
+                	map.getView().fit(extent, s, { nearest: true });
+                }
+            //}, 0, false);
+    	};
       /**
        * @ngdoc method
        * @name gnOwsContextService#loadContext
@@ -94,8 +108,33 @@
 
         // $timeout used to avoid map no rendered (eg: null size)
         $timeout(function() {
-          map.getView().fit(extent, map.getSize(), { nearest: true });
+	        if (getMapSizeValid(map.getSize())){
+	    		//console.log('ows - attempt to set extent');
+	        	initialZoomToExtent(map, extent);
+	        }
+	        else {
+	    		//console.log('ows - wait for msp.change:size');
+	            var changelistener = map.on("change:size", function() {
+	            	var s = map.getSize();
+	    			//console.log('ows - map.change:size ' + s);
+	    			if (getMapSizeValid(s)){
+		    			initialZoomToExtent(map, gnViewerSettings.initialExtent);
+		    			map.unByKey(changelistener);
+		    			changelistener = null;
+		    			// Chrome does not always render the map the first time the map is shown 
+		                $timeout(function() {
+			    			//console.log('ows - map.render');
+		                	map.render();
+		                }, 1000, false);
+	    			}
+	            });
+	        }
         }, 0, false);
+//        $timeout(function() {
+//        	var s = map.getSize();
+//            console.warn("loadContext: map-size: " + s + ", extent: " + extent);
+//        	map.getView().fit(extent, s, { nearest: true });
+//        }, 0, false);
 
         // load the resources
         var layers = context.resourceList.layer;

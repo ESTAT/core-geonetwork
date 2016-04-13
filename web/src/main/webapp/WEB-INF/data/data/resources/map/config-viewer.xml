@@ -8,8 +8,15 @@
      </ows:BoundingBox>
  -->
        <ows:BoundingBox crs="EPSG:4326">
-		<ows:LowerCorner>-16.1279296875 31.46484375</ows:LowerCorner>
+<!-- 		<ows:LowerCorner>-16.1279296875 31.46484375</ows:LowerCorner>
 		<ows:UpperCorner>27.0263671875 69.609375</ows:UpperCorner>
+ -->
+<!-- 		<ows:LowerCorner>-30.849609375 20.8740234375</ows:LowerCorner>
+		<ows:UpperCorner>55.458984375 76.5087890625</ows:UpperCorner>
+ -->		
+		<ows:LowerCorner>-20 30</ows:LowerCorner>
+		<ows:UpperCorner>50 70</ows:UpperCorner>
+		
      </ows:BoundingBox>
    </ows-context:General>
   <ows-context:ResourceList>
