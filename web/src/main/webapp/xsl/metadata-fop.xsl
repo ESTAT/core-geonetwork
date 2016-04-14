@@ -175,6 +175,13 @@
     <xsl:param name="gui"/>
     <xsl:param name="remote"/>
 
+    <xsl:variable name="protocol" select="$server/protocol"/>
+    <xsl:variable name="port" select="if ($protocol='http') then $server/port else $server/securePort"/>
+    <xsl:variable name="url" select="concat($protocol, '://',
+    $server/host,
+    if ($port='80' or $port='443') then '' else concat(':', $port),
+    $gui/url)"/>
+
     <xsl:for-each select="$res/*">
 
       <xsl:variable name="md">
@@ -193,7 +200,7 @@
             <fo:block>
               <fo:external-graphic content-width="35pt">
                 <xsl:attribute name="src"> url('<xsl:value-of
-                    select="concat($server/protocol, '://', $server/host,':', $server/port, $gui/url, '/images/logos/', $source , '.png')"
+                    select="concat($url, '/images/logos/', $source , '.png')"
                   />')" </xsl:attribute>
               </fo:external-graphic>
             </fo:block>
@@ -288,6 +295,9 @@
     <xsl:param name="metadata"/>
     <xsl:param name="server"/>
 
+    <xsl:variable name="protocol" select="$server/protocol"/>
+    <xsl:variable name="port" select="if ($protocol='http') then $server/port else $server/securePort"/>
+
     <fo:block padding-top="4pt" padding-bottom="4pt" padding-right="4pt" padding-left="4pt">
       <!-- Thumbnails - Use the first one only -->
       <xsl:if test="$metadata/image">
@@ -306,7 +316,7 @@
               <xsl:attribute name="src">
                 <xsl:text>url('</xsl:text>
                 <xsl:value-of
-                  select="concat($server/protocol, '://', $server/host,':', $server/port, $metadata/image[1])"/>
+                  select="concat($server/protocol, '://', $server/host,':', $port, $metadata/image[1])"/>
                 <xsl:text>')"</xsl:text>
               </xsl:attribute>
             </fo:external-graphic>
@@ -327,13 +337,23 @@
     <xsl:param name="title" select="true()"/>
     <xsl:param name="remote" select="false()"/>
 
+    <xsl:variable name="protocol" select="$server/protocol"/>
+    <xsl:variable name="port" select="if ($protocol='http') then $server/port else $server/securePort"/>
+    <xsl:variable name="url" select="concat($protocol, '://',
+    $server/host,
+    if ($port='80' or $port='443') then '' else concat(':', $port),
+    /root/gui/url)"/>
+
     <!-- display metadata url but only if its not a remote result -->
     <xsl:call-template name="info-rows">
       <xsl:with-param name="label" select="if ($title) then $gui/strings/resources else ''"/>
       <xsl:with-param name="content">
         <xsl:choose>
           <xsl:when test="$remote=false()"><fo:basic-link text-decoration="underline" color="blue">
-							<xsl:choose>
+            <xsl:attribute name="external-destination"> url('<xsl:value-of
+              select="concat($url, '/srv/',/root/gui/language, '/catalog.search#/metadata/', $metadata/geonet:info/uuid)"
+            />') </xsl:attribute>
+							<!--<xsl:choose>
 								<xsl:when test="/root/gui/config/client/@widget='true'">
 									<xsl:attribute name="external-destination"> url('<xsl:value-of
 										select="concat($server/protocol, '://', $server/host,':', $server/port, /root/gui/url, '/apps/tabsearch/', /root/gui/config/client/@url,'?uuid=', $metadata/geonet:info/uuid , '&amp;hl=', /root/gui/language)"
@@ -344,11 +364,11 @@
 										select="concat($server/protocol, '://', $server/host,':', $server/port, /root/gui/url, '/srv/',/root/gui/language, '/' ,/root/gui/config/client/@url,'?uuid=', $metadata/geonet:info/uuid)"
 									/>') </xsl:attribute>
 								</xsl:otherwise>
-							</xsl:choose>
+							</xsl:choose>-->
               <xsl:value-of select="$gui/strings/show"/>
           </fo:basic-link> | <fo:basic-link text-decoration="underline" color="blue">
             <xsl:attribute name="external-destination"> url('<xsl:value-of
-              select="concat($server/protocol, '://', $server/host,':', $server/port, /root/gui/url, '/srv/',/root/gui/language,'/xml.metadata.get?uuid=', $metadata/geonet:info/uuid)"
+              select="concat($url, '/srv/',/root/gui/language,'/xml.metadata.get?uuid=', $metadata/geonet:info/uuid)"
             />') </xsl:attribute>
             <xsl:value-of select="$gui/strings/show"/> (XML)
           </fo:basic-link> | </xsl:when>
@@ -386,6 +406,14 @@
 		main pdf banner
 	-->
   <xsl:template name="banner">
+    <xsl:variable name="server" select="/root/gui/env/server"/>
+    <xsl:variable name="protocol" select="$server/protocol"/>
+    <xsl:variable name="port" select="if ($protocol='http') then $server/port else $server/securePort"/>
+    <xsl:variable name="url" select="concat($protocol, '://',
+    $server/host,
+    if ($port='80' or $port='443') then '' else concat(':', $port),
+    /root/gui/url)"/>
+
     <fo:table table-layout="fixed" width="100%">
       <fo:table-column column-width="20cm"/>
       <!--<fo:table-column column-width="4cm"/>-->
@@ -399,7 +427,7 @@
               padding-left="4pt">
               <fo:external-graphic padding-right="4pt">
                 <xsl:attribute name="src"> url('<xsl:value-of
-                    select="concat( /root/gui/env/server/protocol, '://', /root/gui/env/server/host,':', /root/gui/env/server/port, /root/gui/url,'/images/logos/', /root/gui/env/site/siteId,'.png')"
+                    select="concat( $url,'/images/logos/', /root/gui/env/site/siteId,'.png')"
                   />')" </xsl:attribute>
               </fo:external-graphic>
               <xsl:value-of select="upper-case(/root/gui/env/site/name)"/> (<xsl:value-of
