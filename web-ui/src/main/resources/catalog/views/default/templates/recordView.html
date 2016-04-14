@@ -330,6 +330,39 @@
           </tbody>
         </table>
 
+        <h2 data-translate="" data-ng-if="mdView.current.record.specificationTitle">conformity</h2>
+
+        <table class="table table-striped" data-ng-if="mdView.current.record.specificationTitle">
+          <tbody>
+          <tr >
+            <th data-translate="">title</th>
+            <td>
+              <p data-ng-bind-html="mdView.current.record.specificationTitle | newlines"/>
+            </td>
+          </tr>
+          <tr data-ng-if="mdView.current.record.specificationDate">
+            <th data-translate="">date</th>
+            <td>
+              <span data-gn-humanize-time="{{mdView.current.record.specificationDate}}"
+                  data-format="YYYY-MM-DD"/> ({{mdView.current.record.specificationDateType}})
+            </td>
+          </tr>
+          <tr data-ng-if="mdView.current.record.specificationExplanation">
+            <th data-translate="">explanation</th>
+            <td>
+              <p data-ng-bind-html="mdView.current.record.specificationExplanation | newlines"/>
+            </td>
+          </tr>
+          <tr>
+            <th data-translate="">conformity</th>
+            <td>
+              <span data-translate="" data-ng-if="mdView.current.record.degree === undefined">notEvaluated</span>
+              <span data-translate="" data-ng-if="mdView.current.record.degree === 'true'">conformant</span>
+              <span data-translate="" data-ng-if="mdView.current.record.degree === 'false'">notConformant</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
         <div data-gn-related="mdView.current.record"
              data-types="fcat|hasfeaturecat"

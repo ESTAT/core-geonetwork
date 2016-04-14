@@ -309,5 +309,11 @@
   "wpsExecuteFailed": "Execute failed",
   "wpsErrorCodeReturned": "The server returned status code",
   "legal":"Legal notice",
-  "top":"Top"
+  "top":"Top",
+  "conformity": "Conformity",
+  "date": "Date",
+  "explanation": "Explanation",
+  "notEvaluated": "Not evaluated",
+  "notConformant": "Not conformant",
+  "conformant": "Conformant"
 }

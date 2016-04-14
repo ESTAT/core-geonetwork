@@ -156,6 +156,11 @@
       <field name="standardName" tagName="standardName"/>
       <field name="_groupWebsite" tagName="groupWebsite"/>
       <field name="attributeTable" tagName="attributeTable"/>
+      <field name="specificationTitle" tagName="specificationTitle" />
+      <field name="specificationDate" tagName="specificationDate" />
+      <field name="specificationDateType" tagName="specificationDateType" />
+      <field name="specificationExplanation" tagName="specificationExplanation" />
+      <field name="degree" tagName="degree" />
     </dumpFields>
   </search>
 

@@ -688,6 +688,10 @@
             <xsl:for-each select="//gmd:specification/*/gmd:date/*/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue">
                 <Field name="specificationDateType" string="{string(.)}" store="true" index="true"/>
             </xsl:for-each>
+
+            <xsl:for-each select="//gmd:explanation/gco:CharacterString">
+                <Field name="specificationExplanation" string="{string(.)}" store="true" index="true"/>
+            </xsl:for-each>
         </xsl:for-each>
 
         <xsl:for-each select="gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString">
