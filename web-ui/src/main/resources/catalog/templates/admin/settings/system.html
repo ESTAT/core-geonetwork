@@ -219,6 +219,16 @@
                 <input data-ng-switch-when="system/site/svnUuid" type="text" class="form-control"
                      id="{{s['@name']}}" name="{{s.formName}}" value="{{s['#text']}}" readonly="readonly"/>
 
+                <input data-ng-switch-when="system/proxy/password"
+                       type="password"
+                       class="form-control"
+                       id="{{s['@name']}}" name="{{s.formName}}" value="{{s['#text']}}"/>
+
+                <input data-ng-switch-when="system/feedback/mailServer/password"
+                       type="password"
+                       class="form-control"
+                       id="{{s['@name']}}" name="{{s.formName}}" value="{{s['#text']}}"/>
+
                 <div data-ng-switch-when="system/server/host">
                   <div data-ng-class="processName !== null ? 'input-group' : ''">
                     <input type="text" class="form-control"
