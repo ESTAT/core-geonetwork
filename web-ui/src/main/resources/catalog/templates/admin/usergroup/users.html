@@ -47,7 +47,7 @@
         </span>
         <div class="btn-toolbar">
           <button type="button" class="btn btn-default pull-right"
-            data-ng-hide="userSelected.security.authtype == 'LDAP'"
+            data-ng-hide="userSelected.security.authtype == 'LDAP' || userSelected.security.authtype == 'CAS'"
             data-ng-click="resetPassword(userSelected.id)">
             <i class="fa fa-lock"></i> <span data-translate=""
             >resetPassword</span></button>
