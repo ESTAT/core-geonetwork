@@ -49,6 +49,11 @@
   <enum3>List of values is :</enum3>
 
   <!-- INSPIRE view labels and help -->
+  <onlineResource>Online resource</onlineResource>
+  <onlineResourceUrl>Url</onlineResourceUrl>
+  <onlineResourceProtocol>Protocol</onlineResourceProtocol>
+  <onlineResourceName>Name</onlineResourceName>
+  <onlineResourceDescription>Description</onlineResourceDescription>
   <url>Online resource</url>
   <identifier>Resource identifier</identifier>
   <rsIdentifier>Projection</rsIdentifier>

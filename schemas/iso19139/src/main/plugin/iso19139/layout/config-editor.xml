@@ -272,7 +272,8 @@
           <!-- FIXME: MUST be provided in template and thesaurus available in the catalog, to be displayed properly -->
 
 
-          <field name="url" templateModeOnly="true" notDisplayedIfMissing="true"
+
+<!--           <field name="url" templateModeOnly="true" notDisplayedIfMissing="true"
             xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions
             /gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage"
             del="../..">
@@ -287,6 +288,43 @@
               </snippet>
             </template>
           </field>
+ -->
+ 
+           <field name="onlineResource" templateModeOnly="true" notDisplayedIfMissing="true"
+            xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions
+            /gmd:MD_DigitalTransferOptions/gmd:onLine"
+            del=".">
+            <template> 
+              <values>
+                <key label="onlineResourceUrl" xpath="gmd:CI_OnlineResource/gmd:linkage/gmd:URL" tooltip="gmd:linkage"/>
+                <key label="onlineResourceProtocol" xpath="gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString" tooltip="gmd:protocol"/>
+                <key label="onlineResourceName" xpath="gmd:CI_OnlineResource/gmd:name/gco:CharacterString" tooltip="gmd:name"/>
+                <key label="onlineResourceDescription" 
+                	 xpath="gmd:CI_OnlineResource/gmd:description/gco:CharacterString" 
+                	 tooltip="gmd:description"
+                	 use="textarea"/>
+              </values>
+              <snippet>
+			  <gmd:onLine>
+			  <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>{{onlineResourceUrl}}</gmd:URL>
+                </gmd:linkage>
+					<gmd:protocol>
+						<gco:CharacterString>{{onlineResourceProtocol}}</gco:CharacterString>
+					</gmd:protocol>
+					<gmd:name>
+						<gco:CharacterString>{{onlineResourceName}}</gco:CharacterString>
+					</gmd:name>
+					<gmd:description>
+						<gco:CharacterString>{{onlineResourceDescription}}</gco:CharacterString>
+					</gmd:description>
+				</gmd:CI_OnlineResource>
+				</gmd:onLine>
+              </snippet>
+            </template>
+          </field>
+
 
           <action type="add" name="url" or="onLine"
             in="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions">

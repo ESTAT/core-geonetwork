@@ -451,7 +451,7 @@
 
                 <!-- Only display label if more than one key to match -->
                 <xsl:if test="count($template/values/key) > 1">
-                  <label for="{$id}_{@label}">
+                  <label class="control-label" for="{$id}_{@label}">
                     <xsl:value-of select="$strings/*[name() = $valueLabelKey]"/>
                   </label>
                 </xsl:if>
