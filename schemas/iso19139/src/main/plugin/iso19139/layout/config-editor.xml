@@ -297,7 +297,9 @@
             <template> 
               <values>
                 <key label="onlineResourceUrl" xpath="gmd:CI_OnlineResource/gmd:linkage/gmd:URL" tooltip="gmd:linkage"/>
-                <key label="onlineResourceProtocol" xpath="gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString" tooltip="gmd:protocol"/>
+                <key label="onlineResourceProtocol" xpath="gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString" tooltip="gmd:protocol">
+                  <helper name="gmd:protocol" />
+                </key>
                 <key label="onlineResourceName" xpath="gmd:CI_OnlineResource/gmd:name/gco:CharacterString" tooltip="gmd:name"/>
                 <key label="onlineResourceDescription" 
                 	 xpath="gmd:CI_OnlineResource/gmd:description/gco:CharacterString" 
