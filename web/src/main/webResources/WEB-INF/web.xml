@@ -388,5 +388,6 @@
 
     <session-config>
         <session-timeout>${sessionTimeout}</session-timeout>
+    	<cookie-config><secure>true</secure></cookie-config>
     </session-config>
 </web-app>
