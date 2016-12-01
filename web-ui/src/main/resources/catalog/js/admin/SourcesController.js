@@ -19,7 +19,7 @@
 
       $scope.$on('$locationChangeStart', function(event) {
         if ($('.ng-dirty').length > 0 &&
-            !confirm($translate('unsavedChangesWarning')))
+            !confirm($translate.instant('unsavedChangesWarning')))
           event.preventDefault();
       });
 
@@ -32,7 +32,7 @@
           });
 
       $scope.selectSource = function(source) {
-        if ($('.ng-dirty').length > 0 && confirm($translate('doSaveConfirm'))) {
+        if ($('.ng-dirty').length > 0 && confirm($translate.instant('doSaveConfirm'))) {
           $scope.saveSources(false);
         }
         $scope.sourcesSelected = source;
@@ -82,14 +82,14 @@
             .success(function(data) {
               $('.ng-dirty').removeClass('ng-dirty');
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('settingsUpdated'),
+                msg: $translate.instant('settingsUpdated'),
                 timeout: 2,
                 type: 'success'});
             })
             .error(function(data) {
               $('.ng-dirty').removeClass('ng-dirty');
                   $rootScope.$broadcast('StatusUpdated', {
-                    title: $translate('settingsUpdateError'),
+                    title: $translate.instant('settingsUpdateError'),
                     error: data,
                     timeout: 0,
                     type: 'danger'});

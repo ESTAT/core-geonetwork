@@ -64,12 +64,12 @@
             $scope.systemInfo.stagingProfile)
           .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('profileUpdated'),
+                msg: $translate.instant('profileUpdated'),
                 timeout: 2,
                 type: 'success'});
             }).error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('profileUpdatedFailed'),
+                msg: $translate.instant('profileUpdatedFailed'),
                 timeout: 2,
                 type: 'danger'});
             });
@@ -172,7 +172,7 @@
             })
             .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('settingsUpdated'),
+                msg: $translate.instant('settingsUpdated'),
                 timeout: 2,
                 type: 'success'});
 
@@ -180,7 +180,7 @@
             })
             .error(function(data) {
                   $rootScope.$broadcast('StatusUpdated', {
-                    title: $translate('settingsUpdateError'),
+                    title: $translate.instant('settingsUpdateError'),
                     error: data,
                     timeout: 0,
                     type: 'danger'});
@@ -190,7 +190,7 @@
       $scope.processRecommended = function(processName) {
         $scope.processName = processName;
         $scope.processTitle =
-            $translate('processRecommendedOnHostChange-help', {
+            $translate.instant('processRecommendedOnHostChange-help', {
               old: buildUrl($scope.initalSettings),
               by: buildUrl($scope.settings)
             });
@@ -199,7 +199,7 @@
       $scope.processRecommendedForId = function(processName) {
         $scope.resourceIdProcessName = processName;
         $scope.processResourceTitle =
-            $translate('processRecommendedOnHostChange-help', {
+            $translate.instant('processRecommendedOnHostChange-help', {
               old: buildUrl($scope.initalSettings),
               by: buildUrl($scope.settings)
             });

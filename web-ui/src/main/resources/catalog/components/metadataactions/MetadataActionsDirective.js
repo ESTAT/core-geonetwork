@@ -48,13 +48,13 @@
                   gnMetadataManager.updateMdObj(scope.md);
                   scope.$emit('metadataStatusUpdated', true);
                   scope.$emit('StatusUpdated', {
-                    msg: $translate('metadataStatusUpdatedWithNoErrors'),
+                    msg: $translate.instant('metadataStatusUpdatedWithNoErrors'),
                     timeout: 2,
                     type: 'success'});
                 }, function(data) {
                   scope.$emit('metadataStatusUpdated', false);
                   scope.$emit('StatusUpdated', {
-                    title: $translate('metadataStatusUpdatedErrors'),
+                    title: $translate.instant('metadataStatusUpdatedErrors'),
                     error: data,
                     timeout: 0,
                     type: 'danger'});
@@ -154,7 +154,7 @@
                   scope.currentCategories.push(c.name);
                 }, function(response) {
                   $rootScope.$broadcast('StatusUpdated', {
-                    title: $translate('assignCategoryError',
+                    title: $translate.instant('assignCategoryError',
                         {category: c.name}),
                     error: response.error,
                     timeout: 0,
@@ -213,7 +213,7 @@
                   scope.groupOwner = g['@id'];
                 }, function(error) {
                   $rootScope.$broadcast('StatusUpdated', {
-                    title: $translate('changeCategoryError'),
+                    title: $translate.instant('changeCategoryError'),
                     error: error,
                     timeout: 0,
                     type: 'danger'});
@@ -298,7 +298,7 @@
               });
             }).error(function(error) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('loadUserGroupsError'),
+                msg: $translate.instant('loadUserGroupsError'),
                 timeout: 0,
                 type: 'danger'});
             }).then(function() {
@@ -342,7 +342,7 @@
                 });
               }).error(function(error) {
                 $rootScope.$broadcast('StatusUpdated', {
-                  msg: $translate('loadUsersError'),
+                  msg: $translate.instant('loadUsersError'),
                   timeout: 0,
                   type: 'danger'});
               }).then(function() {
@@ -359,7 +359,7 @@
               }
             }).success(function(result) {
               scope.$emit('TransferOwnership', true);
-              var msg = $translate('transferOwnershipSuccessMsg', result);
+              var msg = $translate.instant('transferOwnershipSuccessMsg', result);
               $rootScope.$broadcast('StatusUpdated', {
                 msg: msg,
                 timeout: 2,
@@ -367,7 +367,7 @@
             }).error(function() {
               scope.$emit('TransferOwnership', false);
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('transferOwnershipError'),
+                msg: $translate.instant('transferOwnershipError'),
                 timeout: 0,
                 type: 'danger'});
             });

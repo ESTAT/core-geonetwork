@@ -96,7 +96,7 @@
               if (langId) {
                 // Add the language label
                 inputEl.before('<span class="label label-primary">' +
-                    $translate(getISO3Code(langId)) + '</span>');
+                    $translate.instant(getISO3Code(langId)) + '</span>');
 
                 // Set the direction attribute
                 if ($.inArray(langId, rtlLanguages) !== -1) {
@@ -132,8 +132,8 @@
           };
 
           var setLabel = function(key) {
-            scope.languageSwitchLabel = $translate(key);
-            scope.languageSwitchHelp = $translate(key + '-help');
+            scope.languageSwitchLabel = $translate.instant(key);
+            scope.languageSwitchHelp = $translate.instant(key + '-help');
           };
 
           scope.displayAllLanguages = function(force, focus) {

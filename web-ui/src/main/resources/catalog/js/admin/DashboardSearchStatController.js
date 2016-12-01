@@ -143,7 +143,7 @@
               }
 
               $scope.statistics.search.temporal.push({
-                key: $translate(data.requests[i]['@service']),
+                key: $translate.instant(data.requests[i]['@service']),
                 values: values
               });
             }
@@ -194,7 +194,7 @@
               $scope.statistics.search.byServiceType = data;
               nv.addGraph(function() {
                 var chart = nv.models.pieChart()
-                         .x(function(d) { return $translate(d.service) })
+                         .x(function(d) { return $translate.instant(d.service) })
                          .y(function(d) { return d.nbsearch})
                          .values(function(d) { return d})
                          .tooltips(true)
@@ -203,7 +203,7 @@
                       // the current set of displayed values
                       return '<h3>' + key + '</h3>' +
                              '<p>' + parseInt(y).toFixed() + ' ' +
-                             $translate('searches') + ' (' +
+                             $translate.instant('searches') + ' (' +
                              (y / total * 100).toFixed() + '%)</p>';
                     })
                          .showLabels(true);

@@ -9,12 +9,14 @@
       role="menu">
     <li role="presentation" class="dropdown-header"
         data-translate="">setMetadataGroup</li>
-    <li data-ng-repeat="g in groups | orderBy:sortByLabel"
+     <li data-ng-repeat="g in groups | orderBy:sortByLabel"
         data-ng-class="g['@id'] === groupOwner ? 'disabled' : ''">
       <a data-ng-click="assignGroup(g, $event)"
           href="">
-        <span data-translate="">{{g.label[lang]}}</span>
+        <span >{{g.label[lang]}}</span>
+        <!-- <span data-translate="">{{g.label[lang]}}</span> -->
       </a>
     </li>
+
   </ul>
 </div>

@@ -161,11 +161,11 @@
                */
               var readResponse = function(data, action) {
                 if (data['@status'] == '404') {
-                  scope.statusCode = $translate('datasetNotFound');
+                  scope.statusCode = $translate.instant('datasetNotFound');
 
                   if (scope.isPublished) {
                     map.getLayerGroup().getLayers().pop();
-                    scope.statusCode = $translate('unpublishSuccess');
+                    scope.statusCode = $translate.instant('unpublishSuccess');
                   }
                   scope.isPublished = false;
                 }
@@ -177,9 +177,9 @@
                       });
                   scope.isPublished = true;
                   if (action == 'check') {
-                    scope.statusCode = $translate('datasetFound');
+                    scope.statusCode = $translate.instant('datasetFound');
                   } else if (action == 'publish') {
-                    scope.statusCode = $translate('publishSuccess');
+                    scope.statusCode = $translate.instant('publishSuccess');
                   }
                 } else if (data['status'] !== '') {
                   if (scope.isPublished) {

@@ -43,13 +43,13 @@
           .success(function(data) {
               loadSchemas();
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('standardAdded'),
+                msg: $translate.instant('standardAdded'),
                 timeout: 2,
                 type: 'success'});
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('standardAddError'),
+                title: $translate.instant('standardAddError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -61,7 +61,7 @@
           .success(function(data) {
               if (data['@status'] === 'error') {
                 $rootScope.$broadcast('StatusUpdated', {
-                  title: $translate('standardsDeleteError'),
+                  title: $translate.instant('standardsDeleteError'),
                   msg: data['@message'],
                   timeout: 0,
                   type: 'danger'});
@@ -71,7 +71,7 @@
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('standardsDeleteError'),
+                title: $translate.instant('standardsDeleteError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});

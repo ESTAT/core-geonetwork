@@ -218,7 +218,7 @@
           headers: {'Content-type': 'application/xml'}
         }).success(function(data) {
           $rootScope.$broadcast('StatusUpdated', {
-            msg: $translate('transfertPrivilegesFinished',
+            msg: $translate.instant('transfertPrivilegesFinished',
                 {privileges: data.privileges, metadata: data.metadata}),
             timeout: 2,
             type: 'success'});
@@ -317,7 +317,7 @@
                   data.notProcessFound != 0 ||
                   data.metadataErrorReport.metadataErrorReport.length != 0;
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('processFinished'),
+                msg: $translate.instant('processFinished'),
                 timeout: 2,
                 type: 'success'});
               $scope.processing = false;
@@ -341,7 +341,7 @@
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('processError'),
+                title: $translate.instant('processError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -441,7 +441,7 @@
             })
             .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('rebuildIndexError'),
+                title: $translate.instant('rebuildIndexError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -452,14 +452,14 @@
         return $http.get('admin.index.optimize')
             .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('indexOptimizationInProgress'),
+                msg: $translate.instant('indexOptimizationInProgress'),
                 timeout: 2,
                 type: 'success'});
               // TODO: Does this is asynch and make the search unavailable?
             })
             .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('rebuildIndexError'),
+                title: $translate.instant('rebuildIndexError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -470,13 +470,13 @@
         return $http.get('admin.index.config.reload')
             .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('luceneConfigReloaded'),
+                msg: $translate.instant('luceneConfigReloaded'),
                 timeout: 2,
                 type: 'success'});
             })
             .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('rebuildIndexError'),
+                title: $translate.instant('rebuildIndexError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -487,14 +487,14 @@
         return $http.get('admin.index.rebuildxlinks')
             .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('xlinkCacheCleared'),
+                msg: $translate.instant('xlinkCacheCleared'),
                 timeout: 2,
                 type: 'success'});
               // TODO: Does this is asynch and make the search unavailable?
             })
             .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('rebuildIndexError'),
+                title: $translate.instant('rebuildIndexError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -505,14 +505,14 @@
         return $http.get('admin.format.clear')
             .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('formatterCacheCleared'),
+                msg: $translate.instant('formatterCacheCleared'),
                 timeout: 2,
                 type: 'success'});
               // TODO: Does this is asynch and make the search unavailable?
             })
             .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('formatCacheClearFailure'),
+                title: $translate.instant('formatCacheClearFailure'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -559,7 +559,7 @@
               angular.fromJson($scope.data.replacementsConfig);
         } catch (e) {
           $rootScope.$broadcast('StatusUpdated', {
-            title: $translate('error'),
+            title: $translate.instant('error'),
             error: e,
             timeout: 0,
             type: 'danger'});

@@ -61,14 +61,14 @@
         gnMetadataActions.deleteMd(md, $scope.searchObj.params).
             then(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('metadataRemoved',
+                title: $translate.instant('metadataRemoved',
                     {title: md.title || md.defaultTitle}),
                 timeout: 2
               });
               deferred.resolve(data);
             }, function(reason) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate(reason.data.error.message),
+                title: $translate.instant(reason.data.error.message),
                 timeout: 0,
                 type: 'danger'
               });

@@ -131,7 +131,7 @@
               angular.forEach(data[0], function(value) {
                 $scope.harvesterTypes[value] = {
                   label: value,
-                  text: $translate('harvester-' + value)
+                  text: $translate.instant('harvester-' + value)
                 };
                 $.getScript('../../catalog/templates/admin/harvest/type/' +
                     value + '.js')
@@ -232,12 +232,12 @@
           }
           $scope.$parent.loadHarvesters().then(refreshSelectedHarvester);
           $rootScope.$broadcast('StatusUpdated', {
-            msg: $translate('harvesterUpdated'),
+            msg: $translate.instant('harvesterUpdated'),
             timeout: 2,
             type: 'success'});
         }).error(function(data) {
           $rootScope.$broadcast('StatusUpdated', {
-            msg: $translate('harvesterUpdated'),
+            msg: $translate.instant('harvesterUpdated'),
             error: data,
             timeout: 2,
             type: 'danger'});
@@ -357,7 +357,7 @@
 
             }).error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('harvesterSchedule' + status),
+                title: $translate.instant('harvesterSchedule' + status),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -420,7 +420,7 @@
             $scope.oaipmhSets = data[0].sets;
             $scope.oaipmhPrefix = data[0].formats;
           } else {
-            $scope.oaipmhInfo = $translate('oaipmh-FailedToGetSetsAndPrefix');
+            $scope.oaipmhInfo = $translate.instant('oaipmh-FailedToGetSetsAndPrefix');
           }
         }).error(function(data) {
         });
@@ -519,7 +519,7 @@
 
                 } catch (e) {
                   $scope.cswCriteriaInfo =
-                      $translate('csw-FailedToParseCapabilities');
+                      $translate.instant('csw-FailedToParseCapabilities');
                 }
 
               }).error(function(data) {

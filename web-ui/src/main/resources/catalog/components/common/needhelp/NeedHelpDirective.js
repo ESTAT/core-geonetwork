@@ -111,7 +111,7 @@
             //         $(modalObj).modal('toggle');
             //       }).error(function() {
             //   modalBody.innerHTML = '<div class="alert alert-danger">' +
-            //             $translate('docNotFound', {page: helpPageUrl}) +
+            //             $translate.instant('docNotFound', {page: helpPageUrl}) +
             //             '</div>';
             //         $(modalObj).modal('toggle');
             //       });

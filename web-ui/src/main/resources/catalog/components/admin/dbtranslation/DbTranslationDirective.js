@@ -51,7 +51,7 @@
             }).error(function(data) {
               // FIXME: XML error to be converted to JSON ?
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate(scope.type + 'TranslationUpdateError'),
+                title: $translate.instant(scope.type + 'TranslationUpdateError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
