@@ -276,6 +276,13 @@
                * Onlinesrc uploaded with error, broadcast it.
                */
               var uploadThumbnailError = function(data) {
+                  $rootScope.$broadcast('StatusUpdated', {
+                      title: $translate.instant('thumbnailCreationError'),
+//                      error: {
+//                        message: data.type
+//                      },
+                      timeout: 0,
+                      type: 'danger'});
               };
 
               // upload directive options

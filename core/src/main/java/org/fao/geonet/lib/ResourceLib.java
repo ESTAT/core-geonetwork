@@ -29,12 +29,14 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.Operation;
 import org.fao.geonet.domain.ReservedOperation;
+import org.fao.geonet.exceptions.FileUploadInvalidTypeEx;
 import org.fao.geonet.exceptions.OperationNotAllowedEx;
 import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.utils.IO;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
 import java.util.Set;
@@ -149,6 +151,17 @@ public class ResourceLib {
 			denyAccess(context);
 	}
 
+	
+	public void checkIsImageFile(MultipartFile file)
+			throws Exception {
+		String ct = file.getContentType();
+		if (ct != null && ct.startsWith("image/")) {
+			    // It's an image.
+		}
+		else
+			throw new FileUploadInvalidTypeEx();
+	}
+	
 	/**
 	 * @return the absolute path of the folder choosen to store all deleted
 	 *         metadata
