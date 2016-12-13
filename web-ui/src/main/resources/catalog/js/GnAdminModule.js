@@ -14,6 +14,7 @@
   goog.require('gn_module');
 
   var module = angular.module('gn_admin', [
+    //'ngSanitize',
     'gn_module',
     'gn_admin_controller'
   ]);

@@ -144,13 +144,13 @@
           .success(function(data) {
               loadCSWVirtual();
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('virtualCswUpdated'),
+                msg: $translate.instant('virtualCswUpdated'),
                 timeout: 2,
                 type: 'success'});
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('virtualCswUpdateError'),
+                title: $translate.instant('virtualCswUpdateError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -165,7 +165,7 @@
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('virtualCswDeleteError'),
+                title: $translate.instant('virtualCswDeleteError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});

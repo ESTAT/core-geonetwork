@@ -23,7 +23,15 @@
       var DPI2 = 254;
       var MM_PER_INCHES = 25.4;
       var UNITS_RATIO = 39.37;
+      
+      // https://webgate.acceptance.ec.europa.eu/inspire-sdi/pdf/create.json?url=..%2F..%2Fpdf
+      // https://webgate.acceptance.ec.europa.eu/inspire-sdi/pdf/create.json?url=https://webgate.acceptance.ec.europa.eu/inspire-sdi/pdf
+//      var path = $window.location.pathname.split('/');
+//      var pdfurl = $window.location.origin + '/' + path[1] + '/pdf';
+//      var pdfuri = encodeURIComponent(pdfurl);
+      
       $scope.options = {
+        //printConfigUrl: pdfurl + '/info.json?url=' + pdfuri,
         printConfigUrl: '../../pdf/info.json?url=..%2F..%2Fpdf',
         heightMargin: 0,
         widthMargin: 0

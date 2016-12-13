@@ -69,7 +69,7 @@
            })
           .error(function(data) {
              $rootScope.$broadcast('StatusUpdated', {
-               title: $translate('registrationError'),
+               title: $translate.instant('registrationError'),
                error: data,
                timeout: 0,
                type: 'danger'});
@@ -86,7 +86,7 @@
            })
             .error(function(data) {
              $rootScope.$broadcast('StatusUpdated', {
-               title: $translate('passwordReminderError'),
+               title: $translate.instant('passwordReminderError'),
                error: data,
                timeout: 0,
                type: 'danger'});
@@ -106,7 +106,7 @@
             .error(function(data) {
 
              $rootScope.$broadcast('StatusUpdated', {
-               title: $translate('passwordUpdateError'),
+               title: $translate.instant('passwordUpdateError'),
                error: data,
                timeout: 0,
                type: 'danger'});

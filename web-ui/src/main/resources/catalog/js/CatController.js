@@ -4,8 +4,10 @@
   goog.require('gn_search_manager');
   goog.require('gn_session_service');
 
-  var module = angular.module('gn_cat_controller',
-      ['gn_search_manager', 'gn_session_service']);
+  var module = angular.module('gn_cat_controller', [
+       //'ngSanitize', 
+       'gn_search_manager', 
+       'gn_session_service']);
 
 
   module.constant('gnGlobalSettings', {
@@ -135,8 +137,8 @@
               error(function(data, status, headers, config) {
                 $rootScope.$broadcast('StatusUpdated',
                    {
-                     title: $translate('somethingWrong'),
-                     msg: $translate('msgNoCatalogInfo'),
+                     title: $translate.instant('somethingWrong'),
+                     msg: $translate.instant('msgNoCatalogInfo'),
                      type: 'danger'});
               });
         });
@@ -203,7 +205,7 @@
               error(function(data, status, headers, config) {
                 // TODO : translate
                 $rootScope.$broadcast('StatusUpdated',
-                   {msg: $translate('msgNoUserInfo')}
+                   {msg: $translate.instant('msgNoUserInfo')}
                 );
               });
         });

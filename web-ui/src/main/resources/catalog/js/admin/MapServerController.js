@@ -67,13 +67,13 @@
           .success(function(data) {
               loadMapservers();
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('mapserverUpdated'),
+                msg: $translate.instant('mapserverUpdated'),
                 timeout: 2,
                 type: 'success'});
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('mapserverUpdateError'),
+                title: $translate.instant('mapserverUpdateError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -113,7 +113,7 @@
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('mapserverDeleteError'),
+                title: $translate.instant('mapserverDeleteError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});

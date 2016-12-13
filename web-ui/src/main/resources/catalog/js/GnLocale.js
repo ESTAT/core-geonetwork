@@ -66,6 +66,7 @@
       gnGlobalSettings.lang = gnGlobalSettings.locale.lang ||
           location.href.split('/')[5].substring(0, 2) || 'en';
       $translateProvider.preferredLanguage(gnGlobalSettings.lang);
+      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
       moment.lang(gnGlobalSettings.lang);
     }]);
 

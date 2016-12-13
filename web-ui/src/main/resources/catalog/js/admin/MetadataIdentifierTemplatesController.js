@@ -17,7 +17,7 @@
 
       $scope.$on('$locationChangeStart', function(event) {
         if ($('.ng-dirty').length > 0 &&
-            !confirm($translate('unsavedChangesWarning')))
+            !confirm($translate.instant('unsavedChangesWarning')))
           event.preventDefault();
       });
 
@@ -25,7 +25,7 @@
       $scope.mdIdentifierTemplateSelected = {};
 
       $scope.selectTemplate = function(template) {
-        if ($('.ng-dirty').length > 0 && confirm($translate('doSaveConfirm'))) {
+        if ($('.ng-dirty').length > 0 && confirm($translate.instant('doSaveConfirm'))) {
           $scope.saveMetadataIdentifierTemplate(false);
         }
         $scope.mdIdentifierTemplateSelected = template;
@@ -62,14 +62,14 @@
               $('.ng-dirty').removeClass('ng-dirty');
               loadMetadataUrnTemplates();
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('metadataUrnTemplateDeleted'),
+                msg: $translate.instant('metadataUrnTemplateDeleted'),
                 timeout: 2,
                 type: 'success'});
             })
           .error(function(data) {
               $('.ng-dirty').removeClass('ng-dirty');
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('metadataUrnTemplateDeletedError'),
+                title: $translate.instant('metadataUrnTemplateDeletedError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -90,14 +90,14 @@
               $('.ng-dirty').removeClass('ng-dirty');
               loadMetadataUrnTemplates();
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('metadataIdentifierTemplateUpdated'),
+                msg: $translate.instant('metadataIdentifierTemplateUpdated'),
                 timeout: 2,
                 type: 'success'});
             })
           .error(function(data) {
               $('.ng-dirty').removeClass('ng-dirty');
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('metadataIdentifier TemplateUpdateError'),
+                title: $translate.instant('metadataIdentifier TemplateUpdateError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});

@@ -102,7 +102,7 @@
         switch (keyCode) {
           case 13: //ENTER key
             if (dupName) {
-              alert($translate('dupNameWarning'));
+              alert($translate.instant('dupNameWarning'));
             } else {
               $scope.saveGroupEdit();
             }
@@ -145,7 +145,7 @@
         }
       };
       $scope.confirmationDialog = {
-        message: $translate('confirmDeleteSchematronCriteriaGroup'),
+        message: $translate.instant('confirmDeleteSchematronCriteriaGroup'),
         showDialog: function() {
           $('#schematronConfirmationDialog').modal('show');
         },
@@ -156,7 +156,7 @@
       };
       $scope.deleteSchematronGroup = function(group) {
         $scope.confirmationDialog.message =
-            $translate('confirmDeleteSchematronCriteriaGroup');
+            $translate.instant('confirmDeleteSchematronCriteriaGroup');
         $scope.confirmationDialog.deleteConfirmed = function() {
           gnSchematronAdminService.group
             .remove(group, $scope.schematronGroups, function() {
@@ -197,7 +197,7 @@
         if (!newGroup) {
           newGroup = {
             id: {
-              name: $translate('NEW'),
+              name: $translate.instant('NEW'),
               schematronid: $scope.selection.schematron.id
             },
             requirement: $scope.requirements[0]

@@ -25,6 +25,7 @@ package org.fao.geonet.services.logo;
 
 import org.fao.geonet.domain.responses.StatusResponse;
 import org.fao.geonet.exceptions.BadParameterEx;
+import org.fao.geonet.lib.Lib;
 import org.fao.geonet.resources.Resources;
 import org.fao.geonet.utils.IO;
 import org.springframework.context.ApplicationContext;
@@ -66,7 +67,9 @@ public class Add implements ApplicationContextAware {
 	StatusResponse exec(@RequestParam("fname") MultipartFile fname)
 			throws Exception {
 
+		Lib.resource.checkIsImageFile(fname);
 		try {
+
             Path logoDir;
             synchronized (this) {
                 if(this.logoDirectory == null) {

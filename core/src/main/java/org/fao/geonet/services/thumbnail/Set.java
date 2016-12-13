@@ -99,6 +99,7 @@ public class Set {
         ServiceManager serviceManager = ApplicationContextHolder.get().getBean(ServiceManager.class);
         ServiceContext context = serviceManager.createServiceContext("md.thumbnail.upload", lang, request);
 
+		Lib.resource.checkIsImageFile(file);
 		Lib.resource.checkEditPrivilege(context, id);
 
 		//-----------------------------------------------------------------------

@@ -41,7 +41,7 @@
             })
         .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('categoryDeleteError'),
+                title: $translate.instant('categoryDeleteError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
@@ -57,13 +57,13 @@
               $scope.unselectCategory();
               loadCategories();
               $rootScope.$broadcast('StatusUpdated', {
-                msg: $translate('categoryUpdated'),
+                msg: $translate.instant('categoryUpdated'),
                 timeout: 2,
                 type: 'success'});
             })
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
-                title: $translate('categoryUpdateError'),
+                title: $translate.instant('categoryUpdateError'),
                 error: data,
                 timeout: 0,
                 type: 'danger'});
