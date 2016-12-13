@@ -401,7 +401,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/admin.languages.get!?.*" access="permitAll"/>
 
-                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/admin.console!?.*" access="hasRole('RegisteredUser')"/>
+                <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/admin.console!?.*" access="hasRole('Editor')"/>
 
                 <!-- Formatter services -->
                 <sec:intercept-url pattern="/[a-zA-Z0-9_\-]+/[a-z]{2,3}/xml.format.[^?]+(\?.*)?" access="permitAll"/>
