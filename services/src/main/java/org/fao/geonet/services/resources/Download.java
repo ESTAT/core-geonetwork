@@ -40,6 +40,7 @@ import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.OperationAllowedRepository;
 import org.fao.geonet.services.resources.handlers.IResourceDownloadHandler;
 import org.fao.geonet.util.MailSender;
+import org.fao.geonet.utils.FilePathChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
@@ -86,10 +88,8 @@ public class Download {
         final ServiceContext context = serviceManager.createServiceContext("resources.get", lang, httpServletRequest);
         boolean doNotify = false;
 
-		if (fname.contains("..")) {
-			throw new BadParameterEx("Invalid character found in resource name.", fname);
-		}
-		
+        FilePathChecker.verify(fname);
+
 		if (access.equals(Params.Access.PRIVATE))
 		{
 			Lib.resource.checkPrivilege(context, id, ReservedOperation.download);
@@ -99,12 +99,8 @@ public class Download {
 		// Build the response
 		Path dir = Lib.resource.getDir(context, access, id);
 		Path file= dir.resolve(fname);
-		
-		if(fname.startsWith("/") || fname.startsWith("://", 1)) {
-		    throw new SecurityException("Wrong filename");
-		}
 
-		context.info("File is : " +file);
+        context.info("File is : " +file);
 
 		if (!Files.exists(file))
 			throw new ResourceNotFoundEx(fname);

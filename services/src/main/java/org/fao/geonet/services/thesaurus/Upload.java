@@ -37,6 +37,7 @@ import org.fao.geonet.kernel.ThesaurusManager;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.languages.IsoLanguagesMapper;
 import org.fao.geonet.lib.Lib;
+import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.GeonetHttpRequestFactory;
 import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Log;
@@ -144,9 +145,8 @@ public class Upload implements Service {
 			}
 		} else {
 	                fname = param.getTextTrim();
-			if (fname.contains("..")) {
-				throw new BadParameterEx("Invalid character found in thesaurus name.", fname);
-			}
+
+			FilePathChecker.verify(fname);
 			
 			rdfFile = uploadDir.resolve(fname);
             fname = fname.replaceAll("\\s+", "");

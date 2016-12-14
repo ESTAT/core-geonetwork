@@ -32,6 +32,7 @@ import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.MetadataFileUpload;
 import org.fao.geonet.lib.Lib;
 import org.fao.geonet.repository.MetadataFileUploadRepository;
+import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Log;
 import org.jdom.Element;
@@ -109,6 +110,9 @@ public class DefaultResourceUploadHandler implements IResourceUploadHandler {
     
 	private static void moveFile(InputStream is, String filename,
 			Path targetDir, String overwrite) throws Exception {
+
+		FilePathChecker.verify(filename);
+
 		Path f = targetDir.resolve(filename);
 		
 		if(!Files.exists(targetDir)) {
