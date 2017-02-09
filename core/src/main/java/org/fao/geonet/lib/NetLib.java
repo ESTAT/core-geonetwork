@@ -184,6 +184,55 @@ public class NetLib
 
 	//---------------------------------------------------------------------------
 
+	/**
+	 * Setups proxy for java.net.URL.
+	 *
+	 * @param context
+	 * @param url
+	 * @return
+	 * @throws IOException
+     */
+	public URLConnection setupProxy(ServiceContext context, URL url) throws IOException
+	{
+		GeonetContext  gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
+		SettingManager sm = gc.getBean(SettingManager.class);
+
+		boolean enabled = sm.getValueAsBool(ENABLED, false);
+		String  host    = sm.getValue(HOST);
+		String  port    = sm.getValue(PORT);
+		String  username= sm.getValue(USERNAME);
+		String  password= sm.getValue(PASSWORD);
+		String ignoreHostList = sm.getValue(IGNOREHOSTLIST);
+
+		URLConnection conn = null;
+		if (enabled) {
+			if (!Lib.type.isInteger(port)) {
+				Log.error(Geonet.GEONETWORK, "Proxy port is not an integer : "+ port);
+			} else {
+				if (!isProxyHostException(url.getHost(), ignoreHostList)) {
+
+					InetSocketAddress sa = new InetSocketAddress(host, Integer.parseInt(port));
+					Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
+					conn = url.openConnection(proxy);
+
+					if (username.trim().length() != 0) {
+						String encodedUserPwd = new Base64().encodeAsString((username + ":" + password).getBytes());
+						conn.setRequestProperty("Accept-Charset", "UTF-8");
+						conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedUserPwd);
+					}
+
+				} else {
+					conn = url.openConnection();
+				}
+			}
+		} else {
+			conn = url.openConnection();
+		}
+
+		return conn;
+	}
+	//---------------------------------------------------------------------------
+
 	public boolean isUrlValid(String url)
 	{
 		try {
@@ -217,47 +266,6 @@ public class NetLib
 
         return false;
     }
-
-    public URLConnection setupProxy(ServiceContext context, URL url) throws IOException
-    {
-        GeonetContext  gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
-        SettingManager sm = gc.getBean(SettingManager.class);
-
-        boolean enabled = sm.getValueAsBool(ENABLED, false);
-        String  host    = sm.getValue(HOST);
-        String  port    = sm.getValue(PORT);
-        String  username= sm.getValue(USERNAME);
-        String  password= sm.getValue(PASSWORD);
-        String ignoreHostList = sm.getValue(IGNOREHOSTLIST);
-
-        URLConnection conn = null;
-        if (enabled) {
-            if (!Lib.type.isInteger(port)) {
-                Log.error(Geonet.GEONETWORK, "Proxy port is not an integer : "+ port);
-            } else {
-                if (!isProxyHostException(url.getHost(), ignoreHostList)) {
-
-                    InetSocketAddress sa = new InetSocketAddress(host, Integer.parseInt(port));
-                    Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
-                    conn = url.openConnection(proxy);
-
-                    if (username.trim().length() != 0) {
-                        String encodedUserPwd = new Base64().encodeAsString((username + ":" + password).getBytes());
-                        conn.setRequestProperty("Accept-Charset", "UTF-8");
-                        conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedUserPwd);
-                    }
-
-                } else {
-                    conn = url.openConnection();
-                }
-            }
-        } else {
-            conn = url.openConnection();
-        }
-
-        return conn;
-    }
-
 }
 
 //=============================================================================

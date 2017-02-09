@@ -80,11 +80,12 @@ public class Add implements ApplicationContextAware {
                 logoDir = this.logoDirectory;
             }
 
-            if (StringUtils.isEmpty(fname.getName())) {
-                throw new Exception("Logo name is not defined.");
-            }
 
             FilePathChecker.verify(fname.getName());
+
+			if (StringUtils.isEmpty(fname.getName())) {
+				throw new Exception("Logo name is not defined.");
+			}
 
 			Path serverFile = logoDir.resolve(fname.getOriginalFilename());
 			if (Files.exists(serverFile)) {

@@ -104,7 +104,7 @@ public class DownloadArchive implements Service
 			String fname = Util.getParam(params, Params.FNAME);
 
 			FilePathChecker.verify(fname);
-			
+
 			Path file = dir.resolve(fname);
 			return BinaryFile.encode(200, file, false).getElement();
 		}

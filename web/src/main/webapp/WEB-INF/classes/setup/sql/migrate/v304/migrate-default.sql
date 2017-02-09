@@ -6,4 +6,5 @@ UPDATE Settings SET encrypted='y' WHERE name='system/feedback/mailServer/passwor
 UPDATE HarvesterSettings SET encrypted='y' WHERE name='password';
 
 UPDATE Settings SET value='3.0.4' WHERE name='system/platform/version';
-UPDATE Settings SET value='SNAPSHOT' WHERE name='system/platform/subVersion';
+UPDATE Settings SET value='0' WHERE name='system/platform/subVersion';
+ALTER TABLE HarvesterData RENAME COLUMN "key" TO keyvalue;

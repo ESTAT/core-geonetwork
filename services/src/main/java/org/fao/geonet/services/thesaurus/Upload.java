@@ -144,10 +144,11 @@ public class Upload implements Service {
                 }
 			}
 		} else {
-	                fname = param.getTextTrim();
+
+			fname = param.getTextTrim();
 
 			FilePathChecker.verify(fname);
-			
+
 			rdfFile = uploadDir.resolve(fname);
             fname = fname.replaceAll("\\s+", "");
 		}

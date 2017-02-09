@@ -668,6 +668,9 @@ INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALU
 INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('metadata/resourceIdentifierPrefix', 'http://localhost:8080/geonetwork/srv/metadata/', 0, 10001, 'n', 'n');
 
 INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('metadata/workflow/draftWhenInGroup', '', 0, 100002, 'n', 'n');
+INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('metadata/workflow/allowPublishInvalidMd', 'true', 2, 100003, 'n', 'n');
+INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('metadata/workflow/automaticUnpublishInvalidMd', 'false', 2, 100004, 'n', 'n');
+INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('metadata/workflow/forceValidationOnMdSave', 'false', 2, 100005, 'n', 'n');
 
 INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('system/ui/defaultView', 'default', 0, 10100, 'n', 'n');
 

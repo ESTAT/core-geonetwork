@@ -7,3 +7,4 @@ UPDATE HarvesterSettings SET encrypted='y' WHERE name='password';
 
 UPDATE settings SET value='3.0.4' WHERE name='system/platform/version';
 UPDATE settings SET value='SNAPSHOT' WHERE name='system/platform/subVersion';
+ALTER TABLE HarvesterData CHANGE `key` keyvalue varchar(255);
