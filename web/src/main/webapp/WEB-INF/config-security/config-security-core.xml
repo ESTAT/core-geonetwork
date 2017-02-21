@@ -94,8 +94,10 @@
 		<property name="providers">
 			<list>
 				<!-- Check if the preAuthenticationFilter has already authenticated user -->
-				<ref bean="preFilterAuthenticationProvider" />
-				<ref bean="geonetworkAuthenticationProvider" />
+<!-- 				<ref bean="preFilterAuthenticationProvider" /> -->
+<!-- 				<ref bean="geonetworkAuthenticationProvider" /> -->
+				<!-- ECAS -->
+				<ref bean="casAuthenticationProvider" />
 			</list>
 		</property>
 	</bean>
