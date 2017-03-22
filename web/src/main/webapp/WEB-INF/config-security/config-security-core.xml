@@ -65,12 +65,7 @@
 			<list>
 				<ref bean="securityContextPersistenceFilter" />
 				<ref bean="logoutFilter" />
-				<!-- A filter that check if an external service already authenticated user
-					 (default implementation does nothing but can be overridden) -->
-				<ref bean="multiNodeAuthenticationFilter" />
-				<ref bean="preAuthenticationFilter" />
-				<ref bean="basicAuthenticationFilter" />
-				<ref bean="formLoginFilter" />
+        <ref bean="ecasPreAuthenticationFilter" />
 				<ref bean="requestCacheFilter" />
 				<ref bean="anonymousFilter" />
 				<ref bean="sessionMgmtFilter" />
