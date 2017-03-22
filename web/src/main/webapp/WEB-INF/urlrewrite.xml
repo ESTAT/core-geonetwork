@@ -17,6 +17,19 @@
     
 -->
 <urlrewrite use-query-string="true" use-context="false">
+    <!-- ECAS remove token from url -->
+    <rule>
+		    <note>Remove ticket from embedded urls - for urls WITH query parameters</note>
+		    <from>^(.+)?ticket=.*[&amp;](.*)$</from>
+		    <to type="redirect">%{context-path}$1?$2</to>
+		</rule>
+		
+		<rule>
+		    <note>Remove ticket from embedded urls - for urls WITHOUT query parameters</note>
+		    <from>^(.+)?ticket=.*[^&amp;]$</from>
+		    <to type="redirect">%{context-path}$1</to>
+		</rule>
+
 
     <!-- Rule to redirect old deprecated @json requests -->
     <rule>
