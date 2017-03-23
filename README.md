@@ -3,9 +3,9 @@ How to Deploy
 
 This instructions are based on https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+Tomcat+Client .
 
-To deploy GeoNetwork with the ECAS authentication enabled, you should use the Tomcat provided by the European Commission. On this case, we are using a Tomcat version 8.0.28 running over Java jdk1.8.0_66. On this installation of Tomcat you have to add two files to the lib folder (tomcat/lib): ecas-tomcat-8.0-4.13.0.jar and log4j-1.2.17.jar. Inside this same folder (lib) you have to create two other folders more: org/apache/catalina/authenticator and org/apache/catalina/startup.
+To deploy GeoNetwork with the ECAS authentication enabled, you should use the Tomcat provided by the European Commission. On this case, we are using a Tomcat version 8.0.28 running over Java jdk1.8.0_66. On this installation of Tomcat you have to add two files to the lib folder (`tomcat/lib`): `ecas-tomcat-8.0-4.13.0.jar` and `log4j-1.2.17.jar`. Inside this same folder (`lib`) you have to create two other folders more: `org/apache/catalina/authenticator` and `org/apache/catalina/startup`.
 
-On the folder lib/org/apache/catalina/authenticator you have to create a file called mbeans-descriptors.xml with the following content:
+On the folder `lib/org/apache/catalina/authenticator` you have to create a file called `mbeans-descriptors.xml` with the following content:
 
 ```
 <?xml version="1.0"?>
@@ -395,7 +395,7 @@ On the folder lib/org/apache/catalina/authenticator you have to create a file ca
 
 ```
 
-On the folder lib/org/apache/catalina/startup you have to create a file called Authenticators.properties with the following content:
+On the folder `lib/org/apache/catalina/startup `you have to create a file called `Authenticators.properties` with the following content:
 
 ```
 #
@@ -433,8 +433,10 @@ ECAS=eu.cec.digit.ecas.client.j2ee.tomcat.EcasAuthenticator
 
 Finally, make sure your jdk trusts the ECAS certificates. Download them from https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates and import them on the keystore of your Tomcat:
 
+```
 $ keytool -import -v -keystore cacerts -storepass changeit -alias EuropeanCommissionRootCA -file EuropeanCommissionRootCA.cer
 
 $ keytool -import -v -keystore cacerts -storepass changeit -alias CommisSignClassA -file CommisSignClassA.cer
+```
 
 Now you can run GeoNetwork on this Tomcat and it will use ECAS authentication based on the Tomcat configuration.
