@@ -431,12 +431,14 @@ SPNEGO=org.apache.catalina.authenticator.SpnegoAuthenticator
 ECAS=eu.cec.digit.ecas.client.j2ee.tomcat.EcasAuthenticator
 ```
 
-Finally, make sure your jdk trusts the ECAS certificates. Download them from https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates and import them on the keystore of your Tomcat:
+Finally, make sure your jdk trusts the ECAS certificates. Download them from https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates and import them on the keystore of your JVM or specific certstore for Tomcat (see https://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html).
+
+To import in the JVM certstore:
 
 ```
-$ keytool -import -v -keystore cacerts -storepass changeit -alias EuropeanCommissionRootCA -file EuropeanCommissionRootCA.cer
+$ keytool -import -v -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -alias EuropeanCommissionRootCA -file EuropeanCommissionRootCA.cer
 
-$ keytool -import -v -keystore cacerts -storepass changeit -alias CommisSignClassA -file CommisSignClassA.cer
+$ keytool -import -v -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -alias CommisSignClassA -file CommisSignClassA.cer
 ```
 
 Now you can run GeoNetwork on this Tomcat and it will use ECAS authentication based on the Tomcat configuration.
