@@ -90,10 +90,10 @@ public class TermUriTranslator implements Translator {
         try {
             keyword = thesaurus.getKeyword(key, langCode);
         } catch (TermNotFoundException e) {
-            Log.error(Geonet.THESAURUS, "Term not found: " + key);
+            Log.error(Geonet.THESAURUS, "Term not found: " + key + " with language " + langCode);
             return key;
         } catch (NullPointerException e) {
-            Log.error(Geonet.THESAURUS, "NPE searching term: " + key);
+            Log.error(Geonet.THESAURUS, "NPE searching term: " + key + " with language " + langCode);
             return key;
         }
 
