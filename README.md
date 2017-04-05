@@ -441,4 +441,12 @@ $ keytool -import -v -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass ch
 $ keytool -import -v -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -alias CommisSignClassA -file CommisSignClassA.cer
 ```
 
+If GeoNetwork is proxied in Apache Web Server or similar, should be uncommented the following line from the file `WEB-INF/classes/ecas-config.properties` removing the # at the beginning and configured the URL to Geonetwork. 
+
+For example if GeoNetwork is accesible in https://myserver.com/geonetwork, should be configured like:
+
+```
+edu.yale.its.tp.cas.client.filter.serviceUrl=https://myserver.com/geonetwork
+```
+
 Now you can run GeoNetwork on this Tomcat and it will use ECAS authentication based on the Tomcat configuration.
