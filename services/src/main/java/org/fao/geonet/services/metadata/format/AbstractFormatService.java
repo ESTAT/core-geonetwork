@@ -9,6 +9,7 @@ import org.fao.geonet.exceptions.ResourceNotFoundEx;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.repository.MetadataRepository;
+import org.fao.geonet.utils.FilePathChecker;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -70,10 +71,12 @@ abstract class AbstractFormatService {
     }
 
     protected Path getAndVerifyFormatDir(GeonetworkDataDirectory dataDirectory, String paramName, String xslid,
-                                         Path schemaDir) throws BadParameterEx, IOException {
+                                         Path schemaDir) throws BadParameterEx, IOException, Exception {
         if (xslid == null) {
             throw new BadParameterEx(paramName, "missing " + paramName + " param");
         }
+
+        FilePathChecker.verify(xslid);
 
         checkLegalId(paramName, xslid);
         Path formatDir = null;

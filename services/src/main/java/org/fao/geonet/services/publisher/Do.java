@@ -29,6 +29,7 @@ import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
 import org.fao.geonet.domain.MapServer;
 import org.fao.geonet.repository.MapServerRepository;
+import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.GeonetHttpRequestFactory;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.Util;
@@ -231,6 +232,8 @@ public class Do implements Service {
     		    if (file.startsWith("file://") || file.startsWith("http://")) {
     		        return addExternalFile(action, gs, file, metadataUuid, metadataTitle, metadataAbstract);
     		    } else {
+					FilePathChecker.verify(file);
+
     		        // Get ZIP file from data directory
                     Path f = Lib.resource.getDir(context, access, metadataId).resolve(file);
                     return addZipFile(action, gs, f, file, metadataUuid, metadataTitle, metadataAbstract);

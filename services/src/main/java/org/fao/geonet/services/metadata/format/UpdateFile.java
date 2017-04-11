@@ -32,6 +32,7 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.SchemaManager;
+import org.fao.geonet.utils.FilePathChecker;
 import org.jdom.Element;
 
 import java.net.URLDecoder;
@@ -58,7 +59,8 @@ public class UpdateFile extends AbstractFormatService implements Service {
         }
 
         Path formatDir = getAndVerifyFormatDir(context.getBean(GeonetworkDataDirectory.class), Params.ID, xslid, schemaDir);
-        
+
+        FilePathChecker.verify(fileName);
         Path toUpdate = formatDir.resolve(fileName);
         
         Files.write(toUpdate, Collections.singleton(data), Constants.CHARSET);

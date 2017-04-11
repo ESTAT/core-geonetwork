@@ -224,6 +224,8 @@ public class Upload implements Service {
 		xml.detach();
 
 		if (!style.equals("_none_")) {
+			FilePathChecker.verify(style);
+
 			tsXml = Xml.transform(xml, stylePath.resolve(style));
 			tsXml.detach();
 		} else

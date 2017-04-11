@@ -55,6 +55,7 @@ import org.fao.geonet.repository.MetadataRepository;
 import org.fao.geonet.repository.OperationAllowedRepository;
 import org.fao.geonet.repository.SourceRepository;
 import org.fao.geonet.repository.Updater;
+import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
@@ -257,6 +258,8 @@ public class Importer {
                         "_none_");
 
                 if (!style.equals("_none_") && stylePath != null) {
+                    FilePathChecker.verify(style);
+
                     md.add(index, Xml.transform(md.get(index), stylePath.resolve(style)));
                 }
 

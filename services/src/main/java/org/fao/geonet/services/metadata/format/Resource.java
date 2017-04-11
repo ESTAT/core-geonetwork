@@ -27,6 +27,7 @@ import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.SchemaManager;
+import org.fao.geonet.utils.FilePathChecker;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,8 @@ public class Resource extends AbstractFormatService {
         if (schema != null) {
             schemaDir = applicationContext.getBean(SchemaManager.class).getSchemaDir(schema);
         }
+
+        FilePathChecker.verify(fileName);
 
         Path formatDir = getAndVerifyFormatDir(applicationContext.getBean(GeonetworkDataDirectory.class), Params.ID, xslid, schemaDir);
         Path desiredFile = formatDir.resolve(fileName);

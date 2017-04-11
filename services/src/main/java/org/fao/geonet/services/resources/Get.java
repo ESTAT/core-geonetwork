@@ -55,10 +55,10 @@ public class Get extends NotInReadOnlyModeService {
 
         Lib.resource.checkEditPrivilege(context, id);
 
+        FilePathChecker.verify(filename);
+
         // delete the file
         Path file = Lib.resource.getDir(context, access, id).resolve(filename);
-
-        FilePathChecker.verify(filename);
 
         Files.deleteIfExists(file);
 

@@ -34,6 +34,7 @@ import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.thumbnail.ThumbnailMaker;
 import org.fao.geonet.lib.Lib;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
 import org.jdom.Element;
 
@@ -77,6 +78,8 @@ public class Generate extends NotInReadOnlyModeService {
         //--- create destination directory
         Path dataDir = Lib.resource.getDir(context, Params.Access.PUBLIC, id);
         Files.createDirectories(dataDir);
+
+        FilePathChecker.verify(file);
 
         Path outFile = dataDir.resolve(file);
 
