@@ -116,7 +116,7 @@
     <filter>
         <filter-name>XFrameOptionsFilter</filter-name>
         <filter-class>
-            org.fao.geonet.webfilter.XFrameOptionsFilter
+            org.fao.geonet.web.XFrameOptionsFilter
         </filter-class>
         <!-- Mode: DENY, SAMEORIGIN. Any other value will default to DENY -->
         <init-param>

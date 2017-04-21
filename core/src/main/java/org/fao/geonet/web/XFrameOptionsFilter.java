@@ -1,4 +1,4 @@
-package org.fao.geonet.webfilter;
+package org.fao.geonet.web;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
