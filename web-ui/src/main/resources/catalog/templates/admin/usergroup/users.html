@@ -24,8 +24,10 @@
         </div>
 
 
+        <!-- ESTAT customisation - Disable add new users -->
         <button type="button" class="btn btn-primary btn-block" id="gn-btn-user-add"
           data-ng-click="addUser()"
+          data-ng-hide="true"
           data-ng-show="user.isUserAdminOrMore()">
           <i class="fa fa-plus"/>
           <span data-translate="">newUser</span>
