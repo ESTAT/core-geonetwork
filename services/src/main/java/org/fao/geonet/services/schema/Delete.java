@@ -34,6 +34,7 @@ import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.search.MetaSearcher;
 import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.kernel.search.SearcherType;
+import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 
 import java.nio.file.Path;
@@ -93,8 +94,9 @@ public class Delete implements Service {
 				return response;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			String errStr = "Cannot remove schema "+schema+" because the search for records that belong to this schema FAILED ("+e.getMessage()+")";
+			Log.error(Geonet.SCHEMA_MANAGER, errStr, e);
+
       context.error(errStr);
       response.setAttribute("status", "error");
       response.setAttribute("message", errStr);
@@ -118,7 +120,7 @@ public class Delete implements Service {
 			response.setAttribute("status", "ok");
 			response.setAttribute("message", "Schema "+schema+" deleted");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.error(Geonet.SCHEMA_MANAGER, "Could not delete schema, error if any was " + e.getMessage(), e);
 			response.setAttribute("status", "error");
 			response.setAttribute("message", "Could not delete schema, error if any was "+e.getMessage());
 		}

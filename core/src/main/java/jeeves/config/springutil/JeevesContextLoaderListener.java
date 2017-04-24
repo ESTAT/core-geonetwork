@@ -5,6 +5,7 @@ import jeeves.server.JeevesEngine;
 import jeeves.server.overrides.ConfigurationOverrides;
 import org.fao.geonet.NodeInfo;
 import org.fao.geonet.domain.User;
+import org.fao.geonet.utils.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.File;
@@ -86,7 +87,7 @@ public class JeevesContextLoaderListener implements ServletContextListener {
             throw new IllegalArgumentException("There are no default contexts defined");
         }
         } catch (Throwable e) {
-        	e.printStackTrace();
+            Log.error(Log.JEEVES, "JeevesContextLoaderListener: " + e.getMessage(), e);
             JeevesEngine.handleStartupError(e);
         }
     }

@@ -25,6 +25,8 @@ package org.fao.geonet.arcgis;
 import com.esri.sde.sdk.client.SeConnection;
 import com.esri.sde.sdk.client.SeError;
 import com.esri.sde.sdk.client.SeException;
+import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.utils.Log;
 
 /**
  * 
@@ -37,7 +39,8 @@ import com.esri.sde.sdk.client.SeException;
  *
  */
 public class ArcSDEConnection {
-	
+	static final String ARCSDE_LOG_MODULE_NAME = Geonet.HARVESTER + ".arcsde";
+
 	protected SeConnection seConnection ;
 	
 	/**
@@ -52,14 +55,13 @@ public class ArcSDEConnection {
 	public ArcSDEConnection(String server, int instance, String database, String username, String password) {
 		try {			
 			seConnection = new SeConnection(server, instance, database, username, password);
-			System.out.println("Connected to ArcSDE");
+			Log.debug(ARCSDE_LOG_MODULE_NAME, "Connected to ArcSDE");
 			seConnection.setConcurrency(SeConnection.SE_LOCK_POLICY);
 		}
 		catch (SeException x) {
 			SeError error = x.getSeError();
 			String description = error.getExtError() + " " + error.getExtErrMsg() + " " + error.getErrDesc();
-			System.out.println(description);
-			x.printStackTrace();			
+			Log.error(ARCSDE_LOG_MODULE_NAME, "ArcSDEConnection error: " + description, x);
 			throw new ExceptionInInitializerError(x);
 		}
 	}
@@ -72,7 +74,9 @@ public class ArcSDEConnection {
 			seConnection.close();
 		}
 		catch (SeException x) {
-			x.printStackTrace();
+			SeError error = x.getSeError();
+			String description = error.getExtError() + " " + error.getExtErrMsg() + " " + error.getErrDesc();
+			Log.error(ARCSDE_LOG_MODULE_NAME, "ArcSDEConnection close: " + description, x);
 			// TODO handle exception
 		}		
 	}
@@ -85,7 +89,7 @@ public class ArcSDEConnection {
 			seConnection.close();
 		}
 		catch(Throwable x) {
-			x.printStackTrace();
+			Log.error(ARCSDE_LOG_MODULE_NAME, "ArcSDEConnection close: " + x.getMessage(), x);
 			throw x;
 		}
 		finally {

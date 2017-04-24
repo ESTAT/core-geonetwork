@@ -36,6 +36,7 @@ import org.fao.geonet.lib.Lib;
 import org.fao.geonet.services.NotInReadOnlyModeService;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
+import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 
 import java.nio.file.Files;
@@ -56,7 +57,7 @@ public class Generate extends NotInReadOnlyModeService {
         try {
             rotationAngle = Integer.valueOf(rotation);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Log.warning(Geonet.RESOURCES, "Thumbnail - rotation angle - " + e.getMessage());
         }
 
         Lib.resource.checkEditPrivilege(context, id);

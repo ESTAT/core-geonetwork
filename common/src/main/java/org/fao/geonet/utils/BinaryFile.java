@@ -318,8 +318,7 @@ public final class BinaryFile
 					    session.disconnect();
 					}
 				} catch (Exception e) {
-					Log.error(Log.RESOURCES,"Problem with scp from site: "+remoteUser+"@"+remoteSite+":"+remotePath);
-					e.printStackTrace();
+					Log.error(Log.RESOURCES,"Problem with scp from site: "+remoteUser+"@"+remoteSite+":"+remotePath, e);
 				}
 			} else if (remoteProtocol.equals("ftp")) {
 			 	// set up globus FTP client

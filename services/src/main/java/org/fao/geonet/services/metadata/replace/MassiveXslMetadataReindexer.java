@@ -13,6 +13,7 @@ import org.fao.geonet.kernel.MetadataIndexerProcessor;
 import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.search.LuceneSearcher;
 import org.fao.geonet.repository.MetadataRepository;
+import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
 
@@ -239,8 +240,7 @@ public class MassiveXslMetadataReindexer extends MetadataIndexerProcessor {
                 metadata.add(new Integer(id));
             } catch (Exception e) {
                 report.addMetadataError(iId, e);
-                context.error("  Processing failed with error " + e.getMessage());
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK, "  Processing failed with error " + e.getMessage(), e);
             }
 
             return processedMetadata;

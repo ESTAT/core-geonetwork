@@ -204,7 +204,6 @@ public class JeevesEngine {
         Log.fatal  (Log.ENGINE, "   Stack     : " + Util.getStackTrace(e));
 
         if (Boolean.TRUE.toString().equalsIgnoreCase(System.getProperty(Jeeves.SHUTDOWN_ON_STARTUP_ERROR))) {
-            e.printStackTrace();
             System.err.println("\n\n\tERROR STARTING UP GEONETWORK.  System property "+Jeeves.SHUTDOWN_ON_STARTUP_ERROR+" == "+System.getProperty(Jeeves.SHUTDOWN_ON_STARTUP_ERROR));
             System.err.println("\n\n\t>> HARD SHUTDOWN INITIATED <<");
             System.exit(1);

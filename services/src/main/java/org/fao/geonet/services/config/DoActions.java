@@ -37,6 +37,7 @@ import org.fao.geonet.exceptions.OperationAbortedEx;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.setting.SettingInfo;
 import org.fao.geonet.kernel.setting.SettingManager;
+import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.ProxyInfo;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
@@ -88,7 +89,7 @@ public class DoActions implements Service
                 dataMan.disableOptimizer();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error(Geonet.SETTINGS, "Parameters saved but cannot restart Lucene Index Optimizer: " + e.getMessage(), e);
             throw new OperationAbortedEx("Parameters saved but cannot restart Lucene Index Optimizer: "+e.getMessage());
         }
         
@@ -106,7 +107,7 @@ public class DoActions implements Service
                 pi.setProxyInfo(proxyHost, Integer.valueOf(proxyPort), username, password);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error(Geonet.SETTINGS, "Parameters saved but cannot set proxy information: " + e.getMessage(), e);
             throw new OperationAbortedEx("Parameters saved but cannot set proxy information: " + e.getMessage());
         }
         // FIXME: should also restart the Z server?

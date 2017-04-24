@@ -1,9 +1,11 @@
 package org.fao.geonet.kernel.security.listener;
 
 import org.fao.geonet.ApplicationContextHolder;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.User;
 import org.fao.geonet.repository.UserRepository;
+import org.fao.geonet.utils.Log;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
@@ -49,8 +51,7 @@ public class UpdateTimestampListener implements
 				userRepo.save(user);
 
 			} catch (Exception ex) {
-				// TODO: Log exception
-				ex.printStackTrace();
+				Log.error(Geonet.GEONETWORK, "UpdateTimestampListener error: " + ex.getMessage(), ex);
 			}
 
 		}

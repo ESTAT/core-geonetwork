@@ -12,7 +12,9 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.setting.SettingManager;
+import org.fao.geonet.utils.Log;
 
 /**
  * Utility class to send mails. Supports both html and plain text. It usually
@@ -43,7 +45,7 @@ public class MailUtil {
         try {
             email.setHtmlMsg(htmlMessage);
         } catch (EmailException e1) {
-            e1.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"HTML email send error: " + e1.getMessage(), e1);
             return false;
         }
 
@@ -52,7 +54,7 @@ public class MailUtil {
             try {
                 email.addBcc(add);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"HTML email send error: " + e.getMessage(), e);
                 return false;
             }
         }
@@ -80,7 +82,7 @@ public class MailUtil {
         try {
             email.setMsg(message);
         } catch (EmailException e1) {
-            e1.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Email send error: " + e1.getMessage(), e1);
             return false;
         }
         email.setSSL(true);
@@ -90,7 +92,7 @@ public class MailUtil {
             try {
                 email.addBcc(add);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"Email send error: " + e.getMessage(), e);
             }
         }
 
@@ -119,10 +121,10 @@ public class MailUtil {
             addressColl.add(new InternetAddress(replyTo, replyToDesc));
             email.setReplyTo(addressColl);
         } catch (UnsupportedEncodingException e2) {
-            e2.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Email send error: " + e2.getMessage(), e2);
             return false;
         } catch (EmailException e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Email send error: " + e.getMessage(), e);
             return false;
         }
 
@@ -130,7 +132,7 @@ public class MailUtil {
         try {
             email.setMsg(message);
         } catch (EmailException e1) {
-            e1.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Email send error: " + e1.getMessage(), e1);
             return false;
         }
         email.setSSL(true);
@@ -140,7 +142,7 @@ public class MailUtil {
             try {
                 email.addBcc(add);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"Email send error: " + e.getMessage(), e);
             }
         }
 
@@ -172,7 +174,8 @@ public class MailUtil {
         try {
             email.setHtmlMsg(htmlMessage);
         } catch (EmailException e1) {
-            e1.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"HTML email send error: " + e1.getMessage(), e1);
+
             return false;
         }
         email.setSSL(true);
@@ -216,7 +219,7 @@ public class MailUtil {
             try {
                 email.attach(attach);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"HTML email with attachment send error: " + e.getMessage(), e);
             }
         }
 
@@ -224,7 +227,7 @@ public class MailUtil {
         try {
             email.setHtmlMsg(htmlMessage);
         } catch (EmailException e1) {
-            e1.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"HTML email with attachment send error: " + e1.getMessage(), e1);
             return false;
         }
         email.setSSL(true);
@@ -234,7 +237,7 @@ public class MailUtil {
             try {
                 email.addBcc(add);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"HTML email with attachment send error: " + e.getMessage(), e);
                 return false;
             }
         }
@@ -251,14 +254,14 @@ public class MailUtil {
                     try {
 						email.send();
 					} catch (EmailException e) {
-						e.printStackTrace();
+                        Log.error(Geonet.GEONETWORK,"Email send error: " + e.getMessage(), e);
 					}
         		}
         	};
         	
         	t.start();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Email send error: " + e.getMessage(), e);
             return false;
         }
         return true;
@@ -288,7 +291,7 @@ public class MailUtil {
         try {
             email.setMsg(message);
         } catch (EmailException e1) {
-            e1.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Email send error: " + e1.getMessage(), e1);
             return false;
         }
         email.setSSL(true);
@@ -298,7 +301,7 @@ public class MailUtil {
             try {
                 email.addBcc(add);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"Email send error: " + e.getMessage(), e);
                 return false;
             }
         }
@@ -342,7 +345,7 @@ public class MailUtil {
             try {
                 email.setFrom(from);
             } catch (EmailException e) {
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK,"Configure email error: " + e.getMessage(), e);
             }
         } else {
             throw new IllegalArgumentException(

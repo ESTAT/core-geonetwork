@@ -67,7 +67,7 @@ public class HistoryDelete implements Service {
                         }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    org.fao.geonet.utils.Log.error(Geonet.HARVESTER, e.getMessage(), e);
                 }
             }
 

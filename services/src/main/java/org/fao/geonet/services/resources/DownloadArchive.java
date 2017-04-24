@@ -25,7 +25,6 @@ package org.fao.geonet.services.resources;
 
 import org.fao.geonet.ZipUtil;
 import org.fao.geonet.domain.*;
-import org.fao.geonet.exceptions.BadParameterEx;
 import org.fao.geonet.exceptions.ResourceNotFoundEx;
 import jeeves.interfaces.Service;
 import jeeves.server.ServiceConfig;
@@ -39,6 +38,7 @@ import org.fao.geonet.utils.BinaryFile;
 import org.fao.geonet.Util;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
+import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
@@ -391,7 +391,7 @@ public class DownloadArchive implements Service
 							        sm.getValueAsBool("system/feedback/mailServer/ssl"), 
 							        from, fromDescr, email, null, subject, message);
 						} catch (Exception e) {
-							e.printStackTrace();
+							Log.error(Geonet.RESOURCES, e.getMessage(), e);
 						}
 					}
 				}

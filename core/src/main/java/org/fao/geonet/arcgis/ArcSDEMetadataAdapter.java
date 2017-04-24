@@ -28,6 +28,7 @@ import com.esri.sde.sdk.client.SeQuery;
 import com.esri.sde.sdk.client.SeRow;
 import com.esri.sde.sdk.client.SeSqlConstruct;
 import org.fao.geonet.Constants;
+import org.fao.geonet.utils.Log;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class ArcSDEMetadataAdapter extends ArcSDEConnection {
 	private static final String ISO_METADATA_IDENTIFIER = "MD_Metadata";
 	
 	public List<String> retrieveMetadata(AtomicBoolean cancelMonitor) throws Exception {
-		System.out.println("start retrieve metadata");
+		Log.info(ARCSDE_LOG_MODULE_NAME, "Start retrieve metadata");
 		List<String> results = new ArrayList<String>();
 		try {	
 			// query table containing XML metadata
@@ -80,7 +81,7 @@ public class ArcSDEMetadataAdapter extends ArcSDEConnection {
 					bytes.read(buff);
 					String document = new String(buff, Constants.ENCODING);
 					if(document.contains(ISO_METADATA_IDENTIFIER)) {
-						System.out.println("ISO metadata found");
+						Log.debug(ARCSDE_LOG_MODULE_NAME, "ISO metadata found");
 						results.add(document);
 					}
 				}
@@ -89,14 +90,13 @@ public class ArcSDEMetadataAdapter extends ArcSDEConnection {
 				}
 			}			
 			query.close();
-			System.out.println("cool");
+
 			return results;
 		}
 		catch(SeException x) {
 			SeError error = x.getSeError();
 			String description = error.getExtError() + " " + error.getExtErrMsg() + " " + error.getErrDesc();
-			System.out.println(description);
-			x.printStackTrace();
+			Log.error(ARCSDE_LOG_MODULE_NAME, "retrieveMetadata error:" + description, x);
 			throw new Exception(x);
 		}
 	}

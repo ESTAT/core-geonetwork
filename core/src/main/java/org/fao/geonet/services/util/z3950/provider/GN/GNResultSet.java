@@ -74,9 +74,7 @@ public class GNResultSet extends AbstractIRResultSet implements IRResultSet {
                                        Geonet.File.SEARCH_Z3950_SERVER);
 
                } catch (Exception e) {
-                   if(Log.isDebugEnabled(Geonet.Z3950_SERVER))
-                       Log.debug(Geonet.Z3950_SERVER, "error constructing GNresult set: " + e);
-                       e.printStackTrace();
+                   Log.error(Geonet.Z3950_SERVER, "error constructing GNresult set: " + e.getMessage(), e);
                }
        }
 
@@ -107,8 +105,7 @@ public class GNResultSet extends AbstractIRResultSet implements IRResultSet {
                        setTaskStatusCode(IRResultSetStatus.COMPLETE);
 
                } catch (Throwable e) {
-                       Log.error(Geonet.Z3950_SERVER, "error evaluating query.." + e);
-                       e.printStackTrace();
+                       Log.error(Geonet.Z3950_SERVER, "error evaluating query.." + e.getMessage(), e);
                }
                return (getStatus());
        }

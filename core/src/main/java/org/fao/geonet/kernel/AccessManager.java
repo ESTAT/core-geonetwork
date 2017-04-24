@@ -26,6 +26,7 @@ package org.fao.geonet.kernel;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import org.fao.geonet.ApplicationContextHolder;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Group;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.domain.MetadataSourceInfo;
@@ -49,6 +50,7 @@ import org.fao.geonet.repository.SortUtils;
 import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.UserRepository;
 import org.fao.geonet.repository.specification.UserGroupSpecs;
+import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.domain.Specification;
@@ -558,7 +560,7 @@ public class AccessManager {
                 return (lAddress & lIntranetMask) == lIntranetNet;
             }
         } catch (Exception nfe) {
-			nfe.printStackTrace();
+            Log.error(Geonet.ACCESS_MANAGER,"isIntranet error: " + nfe.getMessage(), nfe);
 		}
         return false;
 	}

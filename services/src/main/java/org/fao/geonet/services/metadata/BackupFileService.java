@@ -7,6 +7,7 @@ import org.fao.geonet.lib.Lib;
 import org.fao.geonet.services.NotInReadOnlyModeService;
 import org.fao.geonet.utils.BinaryFile;
 import org.fao.geonet.utils.IO;
+import org.fao.geonet.utils.Log;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -48,8 +49,7 @@ public abstract class BackupFileService extends NotInReadOnlyModeService {
             }
         }
         catch(Exception e) {
-            context.warning("Cannot backup mef file : "+e.getMessage());
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK, "Cannot backup mef file : "+e.getMessage(), e);
         }
         IO.deleteFile(file, false, Geonet.MEF);
     }

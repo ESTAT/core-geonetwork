@@ -27,6 +27,7 @@ import jeeves.server.context.ServiceContext;
 import jeeves.server.dispatchers.ServiceManager;
 import jeeves.services.ReadWriteController;
 import org.fao.geonet.ApplicationContextHolder;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.Metadata;
@@ -260,8 +261,7 @@ public class XslProcessing {
 	            // Using hash on processMd and metadata ?
             } catch (Exception e) {
             	report.addMetadataError(iId, e);
-            	context.error("  Processing failed with error " + e.getMessage());
-                e.printStackTrace();
+                Log.error(Geonet.GEONETWORK, "  Processing failed with error " + e.getMessage(), e);
             }
             return processedMetadata;
         }

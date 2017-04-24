@@ -405,7 +405,7 @@ public final class XslUtil
                } 
             } // TODO : Other type of URLConnection
         } catch (Throwable e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Get URL status error: " + e.getMessage(), e);
             return e.toString();
         }
         
@@ -528,7 +528,7 @@ public final class XslUtil
         try {
             return DefaultEncoder.getInstance().encodeForURL(str) ;
         } catch (EncodingException ex) {
-            ex.printStackTrace();
+            Log.error(Geonet.GEONETWORK,"Encode for URL error: " + ex.getMessage(), ex);
             return str;
         }
     }

@@ -30,6 +30,7 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.harvest.harvester.AbstractHarvester;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.util.MailUtil;
+import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 
 /**
@@ -83,7 +84,7 @@ public class SendNotification {
 			try {
 				receiver = ah.getOwnerEmail();
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				Log.error(Geonet.HARVESTER, e1.getMessage(), e1);
 			}
 		}
 

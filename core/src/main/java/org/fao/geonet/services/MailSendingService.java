@@ -1,6 +1,8 @@
 package org.fao.geonet.services;
 
 import jeeves.interfaces.Service;
+import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.utils.Log;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -52,10 +54,10 @@ public abstract class MailSendingService implements Service {
             isSendout = true;
         } catch (AddressException e) {
             isSendout = false;
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK, "Send mail error: " + e.getMessage(), e);
         } catch (MessagingException e) {
             isSendout = false;
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK, "Send mail error: " + e.getMessage(), e);
         }
         return isSendout;
     }

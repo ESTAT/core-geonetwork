@@ -85,9 +85,10 @@ public class GNSearchable implements Searchable {
             result.evaluate(timeout);
             result.setStatus(IRResultSetStatus.COMPLETE);
         } catch (Exception e) {
+            Log.error(Geonet.Z3950_SERVER, e.getMessage(), e);
+
             if(result!=null)
                 result.setStatus(IRResultSetStatus.FAILURE);
-            e.printStackTrace();
         }
 
         return result;

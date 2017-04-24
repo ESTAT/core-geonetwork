@@ -57,21 +57,20 @@ public class GNTransformer extends FragmentTransformer {
             if(Log.isDebugEnabled(Geonet.SEARCH_ENGINE))
                 Log.debug(Geonet.SEARCH_ENGINE, "Stylesheet for "+from+" to "+to+" is "+stylesheet);
 		} catch (Exception e) {
-			Log.error(Geonet.SEARCH_ENGINE, "Problem with stylesheet: "+stylesheet);
-			e.printStackTrace();
+			Log.error(Geonet.SEARCH_ENGINE, "Problem with stylesheet: "+stylesheet, e);
 		}
 
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-      dbf.setValidating(false);
-      dbf.setNamespaceAware(true);
-      dbf.setIgnoringComments(false);
-      dbf.setIgnoringElementContentWhitespace(false);
-      dbf.setExpandEntityReferences(false);
-      htmldb = dbf.newDocumentBuilder();
+			dbf.setValidating(false);
+			dbf.setNamespaceAware(true);
+			dbf.setIgnoringComments(false);
+			dbf.setIgnoringElementContentWhitespace(false);
+			dbf.setExpandEntityReferences(false);
+			htmldb = dbf.newDocumentBuilder();
 		}  catch ( Exception e ) {
-      e.printStackTrace();
-    }
+			Log.error(Geonet.SEARCH_ENGINE, e.getMessage(), e);
+		}
 	}
 	
 
