@@ -152,8 +152,7 @@ public class SvnManager implements AfterCommitTransactionListener, BeforeRollbac
         try {
             repo = getRepository();
         } catch (SVNException se) {
-            Log.error(Geonet.SVN_MANAGER, "Failed to open subversion repo at path " + subversionPath);
-            se.printStackTrace();
+            Log.error(Geonet.SVN_MANAGER, "Failed to open subversion repo at path " + subversionPath, se);
             throw se;
         }
 
@@ -438,8 +437,8 @@ public class SvnManager implements AfterCommitTransactionListener, BeforeRollbac
             if (Log.isDebugEnabled(Geonet.SVN_MANAGER))
                 Log.debug(Geonet.SVN_MANAGER, "Commit returned " + commitInfo);
         } catch (SVNException svne) {
+            Log.error(Geonet.SVN_MANAGER, "Create metadata dir. error: " + svne.getMessage(), svne);
             editor.abortEdit();
-            svne.printStackTrace();
             throw svne;
         }
     }
@@ -473,7 +472,6 @@ public class SvnManager implements AfterCommitTransactionListener, BeforeRollbac
         } catch (SVNException svne) {
             Log.error(Geonet.SVN_MANAGER, "Delete metadata dir. error: " +  svne.getMessage(),  svne);
             editor.abortEdit(); // abort the update on the XML in the repository
-            svne.printStackTrace();
             throw svne;
         }
     }

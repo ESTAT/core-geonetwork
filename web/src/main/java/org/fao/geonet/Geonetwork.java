@@ -309,9 +309,8 @@ public class Geonetwork implements ApplicationHandler {
         try {
             maxWritesInTransaction = Integer.parseInt(maxWritesInTransactionStr);
         } catch (NumberFormatException nfe) {
-            logger.error("Invalid config parameter: maximum number of writes to spatial index in a transaction (maxWritesInTransaction)"
+            logger.error("Invalid config parameter (" + maxWritesInTransactionStr + "): maximum number of writes to spatial index in a transaction (maxWritesInTransaction)"
                          + ", Using " + maxWritesInTransaction + " instead.");
-            nfe.printStackTrace();
         }
 
         SettingInfo settingInfo = context.getBean(SettingInfo.class);

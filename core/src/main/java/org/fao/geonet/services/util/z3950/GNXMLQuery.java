@@ -162,7 +162,7 @@ class GNRemoteQueryDecoder
                }
                catch (InvalidQueryException iqe)
                {
-                       iqe.printStackTrace();
+                   Log.error(Geonet.Z3950, "GNRemoteQueryDecoder - invalid query error: " + iqe.getMessage(), iqe);
                }
        }
 
