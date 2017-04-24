@@ -115,6 +115,12 @@ public class Update {
             @RequestParam(value = Params.KIND, required = false) String kind,
             @RequestParam(value = Params.ENABLED) Boolean enabled)
             throws Exception {
+
+        // ESTAT - Disable create user
+        if (operation.equalsIgnoreCase(Params.Operation.NEWUSER)) {
+            throw new IllegalArgumentException("Create new user is not allowed");
+        }
+
         if (id == null && operation.equalsIgnoreCase(Params.Operation.NEWUSER)) {
             id = "";
         }
