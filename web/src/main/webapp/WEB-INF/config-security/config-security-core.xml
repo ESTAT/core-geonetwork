@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/beans/spring-beans.xsd
           http://www.springframework.org/schema/context
-          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/context/spring-context.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-3.2.xsd"
+          http://www.springframework.org/schema/security/spring-security.xsd"
           xmlns:sec="http://www.springframework.org/schema/security"
           xmlns:ctx="http://www.springframework.org/schema/context"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns="http://www.springframework.org/schema/beans">
 
+  <bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
+    <constructor-arg>
+      <ref bean="csrfTokenRepository"/>
+    </constructor-arg>
+  </bean>
+  
+  <bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"
+        id="csrfTokenRepository">
+  </bean>
+      
 	<alias name="filterChainProxy" alias="springSecurityFilterChain" />
 
 	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
@@ -65,13 +75,14 @@
 		<constructor-arg>
 			<list>
 				<ref bean="securityContextPersistenceFilter" />
+        <ref bean="csrfFilter" />
 				<ref bean="logoutFilter" />
         <ref bean="ecasPreAuthenticationFilter" />
 				<ref bean="requestCacheFilter" />
 				<ref bean="anonymousFilter" />
 				<ref bean="sessionMgmtFilter" />
 				<ref bean="exceptionTranslationFilter" />
-				<ref bean="filterSecurityInterceptor" />
+        <ref bean="filterSecurityInterceptor" />
 			</list>
 		</constructor-arg>
 	</bean>

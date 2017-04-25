@@ -1,7 +1,16 @@
 package org.fao.geonet.kernel;
 
-import com.google.common.collect.Lists;
-import junit.framework.Assert;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
+import static org.fao.geonet.constants.Geonet.Namespaces.GCO;
+import static org.fao.geonet.constants.Geonet.Namespaces.GMD;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.domain.Pair;
@@ -11,19 +20,13 @@ import org.jdom.Content;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import com.google.common.collect.Lists;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.fao.geonet.Assert.assertFalse;
-import static org.fao.geonet.Assert.assertTrue;
-import static org.fao.geonet.Assert.fail;
-import static org.fao.geonet.constants.Geonet.Namespaces.GCO;
-import static org.fao.geonet.constants.Geonet.Namespaces.GMD;
+import junit.framework.Assert;
 
 /**
  * Test EditLib methods.
@@ -605,7 +608,6 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
         assertEquals(2, a1 && a2);
 
         assertEqualsText(text, metadataElement, charStringXpath, GMD, GCO);
->>>>>>> 95f2d5420a... Update to Spring security 3.2 for compatibility with Spring 4.
         assertEquals(att, Xml.selectString(metadataElement, attXPath, Arrays.asList(GMD, GCO)));
     }
 
