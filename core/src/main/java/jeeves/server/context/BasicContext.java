@@ -134,8 +134,18 @@ public class BasicContext implements Logger {
     }
 
     @Override
+    public void debug(final String message, Throwable ex) {
+        logger.debug(message, ex);
+    }
+
+    @Override
     public void info(final String message) {
         logger.info(message);
+    }
+
+    @Override
+    public void info(final String message, Throwable ex) {
+        logger.info(message, ex);
     }
 
     @Override
@@ -144,8 +154,18 @@ public class BasicContext implements Logger {
     }
 
     @Override
+    public void warning(final String message, Throwable ex) {
+        logger.warning(message, ex);
+    }
+
+    @Override
     public void error(final String message) {
         logger.error(message);
+    }
+
+    @Override
+    public void error(final String message, Throwable ex) {
+        logger.error(message, ex);
     }
 
     @Override
@@ -156,6 +176,11 @@ public class BasicContext implements Logger {
     @Override
     public void fatal(final String message) {
         logger.fatal(message);
+    }
+
+    @Override
+    public void fatal(final String message, Throwable t) {
+        logger.fatal(message, t);
     }
 
     @Override

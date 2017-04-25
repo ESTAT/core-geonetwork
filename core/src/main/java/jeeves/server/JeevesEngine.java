@@ -251,8 +251,7 @@ public class JeevesEngine {
         		msg += " and servlet.getServletContext().getResourceAsStream("+TRANSFORMER_PATH+")";
         	}
         	warning(msg);
-            error(x.getMessage());
-            x.printStackTrace();
+            warning("  Stack     : " +Util.getStackTrace(x));
         } finally {
             IOUtils.closeQuietly(in);
             if(br != null) {

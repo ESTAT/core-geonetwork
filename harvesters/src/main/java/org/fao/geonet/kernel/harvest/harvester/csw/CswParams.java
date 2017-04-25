@@ -25,9 +25,11 @@ package org.fao.geonet.kernel.harvest.harvester.csw;
 
 import org.fao.geonet.Constants;
 import org.fao.geonet.Util;
+import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.exceptions.BadInputEx;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.harvest.harvester.AbstractParams;
+import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 
 import java.io.UnsupportedEncodingException;
@@ -72,8 +74,7 @@ public class CswParams extends AbstractParams {
             capabUrl = URLDecoder.decode(capabUrl, Constants.ENCODING);
         }
         catch (UnsupportedEncodingException x) {
-            System.out.println(x.getMessage());
-            x.printStackTrace();
+			Log.error(Geonet.HARVEST_MAN, x.getMessage(), x);
             // TODO should not swallow
         }
 		icon     = Util.getParam(site, "icon", "default.gif");
@@ -111,8 +112,7 @@ public class CswParams extends AbstractParams {
             capabUrl = URLDecoder.decode(capabUrl, Constants.ENCODING);
         }
         catch (UnsupportedEncodingException x) {
-            System.out.println(x.getMessage());
-            x.printStackTrace();
+			Log.error(Geonet.HARVEST_MAN, x.getMessage(), x);
             // TODO should not swallow
         }
         queryScope = Util.getParam(site, "queryScope", queryScope);

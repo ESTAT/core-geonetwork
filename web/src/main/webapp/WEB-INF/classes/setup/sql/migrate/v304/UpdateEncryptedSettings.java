@@ -48,7 +48,8 @@ public class UpdateEncryptedSettings implements DatabaseMigrationTask, Applicati
             standardPBEStringEncryptor.setAlgorithm(properties.getProperty("encrypter.algorithm"));
             standardPBEStringEncryptor.setPassword(properties.getProperty("encrypter.password"));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.debug(Geonet.DB, " Error retrieving encrypter, error is: " + ex.getMessage());
+            Log.error(Geonet.DB, ex);
         } finally {
             IOUtils.closeQuietly(fileReader);
         }
@@ -96,7 +97,8 @@ public class UpdateEncryptedSettings implements DatabaseMigrationTask, Applicati
 
                 Log.debug(Geonet.DB, "  Number of harvester settings: " + numberOfHarvesterSettings);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                Log.debug(Geonet.DB, " Error updating harvester settings password, error is: " + ex.getMessage());
+                Log.error(Geonet.DB, ex);
             } finally {
                 harvesterSettingsResultSet.close();
             }

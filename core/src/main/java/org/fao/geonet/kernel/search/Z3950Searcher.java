@@ -270,9 +270,9 @@ class Z3950Searcher extends MetaSearcher
 								Result result = new StreamResult(filename.toUri().getPath());
 								xformer.transform(source,result);
 							} catch (TransformerConfigurationException e) {
-								e.printStackTrace();
+								Log.debug(Geonet.SEARCH_ENGINE, e.getMessage(), e);
 							} catch (TransformerException e) {
-								e.printStackTrace();
+								Log.debug(Geonet.SEARCH_ENGINE, e.getMessage(), e);
 							}
 						} else {
 							htmlError = "HTML result not available. Error message: "+docObj.toString();
@@ -298,13 +298,12 @@ class Z3950Searcher extends MetaSearcher
 
 					response.add(jDoc);
 				} catch (Exception ex) {
-					ex.printStackTrace();
 					Element error = new Element("error");
 					error.setAttribute("server",  frag.getSourceRepositoryID());
 					error.setAttribute("collection",  frag.getSourceCollectionName());
 					error.setAttribute("id",      (getFrom() + i)+"");
 					error.setAttribute("message", ex.getClass().getName() + ": " + ex.getMessage());
-					Log.error(Geonet.SEARCH_ENGINE, "Exception raised during Z3950 search and retrieval "+" Server: "+error.getAttributeValue("server")+" id: "+error.getAttributeValue("id"));
+					Log.error(Geonet.SEARCH_ENGINE, "Exception raised during Z3950 search and retrieval "+" Server: "+error.getAttributeValue("server")+" id: "+error.getAttributeValue("id"), ex);
 					response.add(new Document(error));
 				}
 			}

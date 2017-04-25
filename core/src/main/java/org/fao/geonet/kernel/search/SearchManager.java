@@ -349,8 +349,7 @@ public class SearchManager {
             }
         } catch (Exception z) {
             Log.warning(Geonet.SEARCH_ENGINE, " Error on analyzer initialization: " + z.getMessage() + ". Check your Lucene " +
-                                              "configuration. Hardcoded default analyzer will be used for field " + field);
-            z.printStackTrace();
+                                              "configuration. Hardcoded default analyzer will be used for field " + field, z);
         } finally {
             // creation of analyzer has failed, default to GeoNetworkAnalyzer
             if(analyzer == null) {

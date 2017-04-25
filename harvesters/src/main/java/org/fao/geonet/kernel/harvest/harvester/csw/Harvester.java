@@ -675,7 +675,7 @@ class Harvester implements IHarvester<HarvestResult>
 
 			String identif  = dm.extractUUID(schema, record); 
 			if (identif.length() == 0) {
-      	log.warning("Record doesn't have a uuid : "+ name);
+      	        log.warning("Record doesn't have a uuid : "+ name);
 				return null; // skip this one
 			}
 			
@@ -683,11 +683,10 @@ class Harvester implements IHarvester<HarvestResult>
 			if (modified.length() == 0) modified = null;
             if(log.isDebugEnabled())
                 log.debug("getRecordInfo: adding "+identif+" with modification date "+modified);
-      return new RecordInfo(identif, modified);
+            return new RecordInfo(identif, modified);
 		} catch (Exception e) {
-      log.warning("Skipped record not in supported format : "+ name);
-			e.printStackTrace();
-    }
+            log.warning("Skipped record not in supported format : "+ name, e);
+        }
 
 		// we get here if we didn't recognize the schema and/or couldn't get the 
 		// UUID or date modified

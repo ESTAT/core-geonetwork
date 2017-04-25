@@ -920,12 +920,11 @@ public class Harvest extends AbstractOperation implements CatalogService {
             }
             // never mind, just log it
             catch(IOException x) {
-                System.err.println("WARNING: " + x.getMessage() + " (this exception is swallowed)");
-                x.printStackTrace();
+                Log.error(Geonet.CSW_HARVEST, "WARNING: " + x.getMessage() + " (this exception is swallowed)", x);
             }
             // never mind, just log it
             catch(URISyntaxException x) {
-                Log.debug(Geonet.CSW_HARVEST, "WARNING: " + x.getMessage() + " (this exception is swallowed)", x);
+                Log.error(Geonet.CSW_HARVEST, "WARNING: " + x.getMessage() + " (this exception is swallowed)", x);
             }
             finally {
                 if(ftpClient != null && ftpClient.isConnected()) {
@@ -934,8 +933,7 @@ public class Harvest extends AbstractOperation implements CatalogService {
                     }
                     // never mind, just log it
                     catch(IOException x) {
-                        System.err.println("WARNING: " + x.getMessage() + " (this exception is swallowed)");
-                        x.printStackTrace();
+                        Log.error(Geonet.CSW_HARVEST, "WARNING: " + x.getMessage() + " (this exception is swallowed)", x);
                     }
                 }
             }

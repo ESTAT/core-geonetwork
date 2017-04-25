@@ -195,6 +195,7 @@ public class Aligner extends BaseAligner
 		        errors.add(new HarvestError(t, log));
                 log.error("Unable to process record from csw (" + this.params.getName() + ")");
                 log.error("   Record failed: " + ri.uuid + ". Error is: " + t.getMessage());
+                log.error(t);
 		    } finally {
 		        result.originalMetadata++;
 		    }
@@ -418,8 +419,7 @@ public class Aligner extends BaseAligner
 		}
 		catch(Exception e)
 		{
-			log.warning("Raised exception while getting record : "+ e);
-			e.printStackTrace();
+			log.warning("Raised exception while getting record : "+ e.getMessage(), e);
 			result.unretrievable++;
 
 			//--- we don't raise any exception here. Just try to go on
@@ -485,8 +485,7 @@ public class Aligner extends BaseAligner
                     }
                 }
             } catch (Throwable e) {
-                log.warning("      - Error when searching for resource duplicate " + uuid + ". Error is: " + e.getMessage());
-                e.printStackTrace();
+                log.warning("      - Error when searching for resource duplicate " + uuid + ". Error is: " + e.getMessage(), e);
             }
         }
         return false;

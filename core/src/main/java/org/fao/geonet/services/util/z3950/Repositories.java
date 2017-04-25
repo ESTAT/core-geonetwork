@@ -78,8 +78,7 @@ public class Repositories
 		}
 		catch (Exception e)
 		{
-			context.warning("Cannot initialize Z39.50 repositories : "+ e.getMessage());
-			e.printStackTrace();
+			context.warning("Cannot initialize Z39.50 repositories : "+ e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -114,15 +113,14 @@ public class Repositories
              }
 
 		} catch (Exception e) {
-			context.warning("Cannot clear Z39.50 repositories template : "+ e.getMessage());
-			e.printStackTrace();
+			context.warning("Cannot clear Z39.50 repositories template : "+ e.getMessage(), e);
+
 			// restore the backup copy
 			if (copied) {
 				try {
                     java.nio.file.Files.copy(backRepo, tempRepo);
 				} catch (IOException ioe) {
-					context.error("Cannot restore Z39.50 repositories template : this is serious and should not happen"+ ioe.getMessage());
-					ioe.printStackTrace();
+					context.error("Cannot restore Z39.50 repositories template : this is serious and should not happen"+ ioe.getMessage(), ioe);
 				}
 			}
 			return false;
@@ -170,15 +168,15 @@ public class Repositories
                 Xml.writeResponse(new Document(copy), os);
             }
 		} catch (Exception e) {
-			context.warning("Cannot add Z39.50 repository " + Xml.getString(repo) + " : "+ e.getMessage());
-			e.printStackTrace();
+			context.warning("Cannot add Z39.50 repository " + Xml.getString(repo) + " : "+ e.getMessage(), e);
+
 			// restore the backup copy
 			if (copied) {
 				try {
 				    Files.copy(backRepo, tempRepo);
 				} catch (IOException ioe) {
-					context.error("Cannot restore Z39.50 repositories template : this is serious and should not happen"+ ioe.getMessage());
-					ioe.printStackTrace();
+					context.error("Cannot restore Z39.50 repositories template : this is serious and should not happen"+ ioe.getMessage(), ioe);
+
 				}
 			}
 			return false;

@@ -72,7 +72,7 @@ public final class Log
         Logger.getLogger(module).debug(message);
     }
 
-    public static void debug(String module, Object message, Exception e)
+    public static void debug(String module, Object message, Throwable e)
     {
         Logger.getLogger(module).debug(message,e);
     }
@@ -92,7 +92,7 @@ public final class Log
         Logger.getLogger(module).trace(message);
     }
 
-    public static void trace(String module, Object message, Exception e)
+    public static void trace(String module, Object message, Throwable e)
     {
         Logger.getLogger(module).trace(message,e);
     }
@@ -144,6 +144,12 @@ public final class Log
 		Logger.getLogger(module).fatal(message);
 	}
 
+	public static void fatal(String module, Object message, Throwable t)
+	{
+		Logger.getLogger(module).fatal(message, t);
+	}
+
+
 	//--------------------------------------------------------------------------
 	/** Returns a simple logger object */
 	public static org.fao.geonet.Logger createLogger(final String module)
@@ -163,20 +169,42 @@ public final class Log
 				Log.debug(module, message);
 			}
 
+			@Override
+			public void debug(String message, Throwable t) {
+				Log.debug(module, message, t);
+			}
+
 			public void info(String message) {
 				Log.info(module, message);
+			}
+
+			public void info(String message, Throwable t) {
+				Log.info(module, message, t);
 			}
 
 			public void warning(String message) {
 				Log.warning(module, message);
 			}
 
+			public void warning(String message, Throwable t) {
+				Log.warning(module, message, t);
+			}
+
 			public void error(String message) {
 				Log.error(module, message);
 			}
 
+			public void error(String message, Throwable t) {
+				Log.error(module, message, t);
+			}
+
 			public void fatal(String message) {
 				Log.fatal(module, message);
+			}
+
+			@Override
+			public void fatal(String message, Throwable ex) {
+				Log.fatal(module, message, ex);
 			}
 
 			public void error(Throwable t) {

@@ -33,6 +33,7 @@ import org.fao.geonet.kernel.search.MetaSearcher;
 import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.kernel.search.SearcherType;
 import org.fao.geonet.utils.GeonetHttpRequestFactory;
+import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
 import org.fao.geonet.utils.XmlRequest;
 import org.apache.commons.lang.StringUtils;
@@ -268,7 +269,7 @@ public class InspireAtomUtil {
             Map<Integer,Metadata> allMdInfo = ((LuceneSearcher)searcher).getAllMdInfo(context, searcher.getSize());
             return new ArrayList<Metadata>(allMdInfo.values());
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.error(Geonet.ATOM, ex.getMessage(), ex);
             return new ArrayList<Metadata>();
         } finally {
             if (searcher != null) searcher.close();
@@ -278,7 +279,7 @@ public class InspireAtomUtil {
 
     public static String retrieveDatasetUuidFromIdentifier(ServiceContext context,
                                                       SearchManager searchMan,
-                                                      String datasetIdCode) {
+                                                      String datasetIdCode) throws Exception {
 
         String uuid = "";
 
@@ -296,8 +297,6 @@ public class InspireAtomUtil {
             if (uuids.size() > 0) {
                 uuid = uuids.get(0);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
 
         return uuid;

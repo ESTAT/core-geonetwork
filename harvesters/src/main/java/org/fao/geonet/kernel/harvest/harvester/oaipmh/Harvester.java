@@ -136,14 +136,11 @@ class Harvester extends BaseAligner implements IHarvester<HarvestResult>
             try {
                 records.addAll(search(req, s));
             } catch (Exception e) {
-                log.error("Unknown error trying to harvest");
-                log.error(e.getMessage());
-                e.printStackTrace();
+                log.error("Unknown error trying to harvest: " + e.getMessage(), e);
                 errors.add(new HarvestError(e, log));
             } catch (Throwable e) {
                 log.fatal("Something unknown and terrible happened while harvesting");
-                log.fatal(e.getMessage());
-                e.printStackTrace();
+                log.fatal(e.getMessage(), e);
                 errors.add(new HarvestError(e, log));
             }
         }
@@ -153,14 +150,11 @@ class Harvester extends BaseAligner implements IHarvester<HarvestResult>
                 log.debug("Doing an empty search");
                 records.addAll(search(req, Search.createEmptySearch()));
             } catch(Exception e) {
-                log.error("Unknown error trying to harvest");
-                log.error(e.getMessage());
-                e.printStackTrace();
+                log.error("Unknown error trying to harvest: " + e.getMessage(), e);
                 errors.add(new HarvestError(e, log));
             } catch(Throwable e) {
                 log.fatal("Something unknown and terrible happened while harvesting");
-                log.fatal(e.getMessage());
-                e.printStackTrace();
+                log.fatal(e.getMessage(), e);
                 errors.add(new HarvestError(e, log));
             }
         }

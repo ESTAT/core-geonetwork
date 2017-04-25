@@ -31,11 +31,16 @@ public interface Logger
 {
     public boolean isDebugEnabled();
 	public void debug  (String message);
+    public void debug  (String message, Throwable t);
 	public void info   (String message);
+    public void info   (String message, Throwable t);
 	public void warning(String message);
+    public void warning(String message, Throwable t);
 	public void error  (String message);
+    public void error  (String message, Throwable t);
     public void error  (Throwable ex);
 	public void fatal  (String message);
+    public void fatal  (String message, Throwable t);
     public String getModule();
     public void setAppender(FileAppender fa);
     public String getFileAppender();

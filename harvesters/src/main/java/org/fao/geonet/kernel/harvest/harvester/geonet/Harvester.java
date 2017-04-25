@@ -144,14 +144,11 @@ class Harvester implements IHarvester<HarvestResult> {
             try {
                 records.addAll(search(req, s));
             } catch (Exception t) {
-                log.error("Unknown error trying to harvest");
-                log.error(t.getMessage());
-                log.error(t);
+                log.error("Unknown error trying to harvest: " + t.getMessage(), t);
                 errors.add(new HarvestError(t, log));
             } catch (Throwable t) {
                 log.fatal("Something unknown and terrible happened while harvesting");
-                log.fatal(t.getMessage());
-                t.printStackTrace();
+                log.fatal(t.getMessage(), t);
                 errors.add(new HarvestError(t, log));
             }
         }
@@ -161,14 +158,11 @@ class Harvester implements IHarvester<HarvestResult> {
                 log.debug("Doing an empty search");
                 records.addAll(search(req, Search.createEmptySearch()));
             } catch (Exception t) {
-                log.error("Unknown error trying to harvest");
-                log.error(t.getMessage());
-                log.error(t);
+                log.error("Unknown error trying to harvest: " + t.getMessage(), t);
                 errors.add(new HarvestError(t, log));
             } catch (Throwable t) {
                 log.fatal("Something unknown and terrible happened while harvesting");
-                log.fatal(t.getMessage());
-                t.printStackTrace();
+                log.fatal(t.getMessage(), t);
                 errors.add(new HarvestError(t, log));
             }
         }

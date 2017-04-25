@@ -173,8 +173,7 @@ public class DatabaseMigration implements BeanPostProcessor {
             from = parseVersionNumber(dbVersion);
             to = parseVersionNumber(webappVersion);
         } catch (Exception e) {
-            _logger.warning("      Error parsing version numbers: " + e.getMessage());
-            e.printStackTrace();
+            _logger.warning("      Error parsing version numbers: " + e.getMessage(), e);
         }
 
         switch (from.compareTo(to)) {
@@ -211,8 +210,8 @@ public class DatabaseMigration implements BeanPostProcessor {
                                 try {
                                     Lib.db.insertData(servletContext, statement, path, filePath, filePrefix);
                                 } catch (Exception e) {
-                                    _logger.info("          Errors occurs during SQL migration file: " + e.getMessage());
-                                    e.printStackTrace();
+                                    _logger.info("          Errors occurs during SQL migration file: " + e.getMessage(), e);
+
                                     anyMigrationError = true;
                                 }
                             }

@@ -251,8 +251,7 @@ public class Geonetwork implements ApplicationHandler {
                     
                 } catch (Exception e) {
                     logger.error("     Repositories file init FAILED - Z3950 server disabled and Z3950 client services (remote search, " +
-                                 "harvesting) may not work. Error is:" + e.getMessage());
-                    e.printStackTrace();
+                                 "harvesting) may not work. Error is:" + e.getMessage(), e);
                 }
 
             } else {
@@ -585,8 +584,7 @@ public class Geonetwork implements ApplicationHandler {
                     }
                 } catch (Throwable x) {
                     // any uncaught exception would cause the scheduled execution to silently stop
-                    logger.error("DBHeartBeat error: " + x.getMessage() + " This error is ignored.");
-                    x.printStackTrace();
+                    logger.error("DBHeartBeat error: " + x.getMessage() + " This error is ignored.", x);
                 }
             }
 

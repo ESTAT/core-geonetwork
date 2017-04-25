@@ -429,7 +429,7 @@ public class Aligner extends BaseAligner
             if(log.isDebugEnabled())
                 log.debug("  - Skipped unretrievable metadata (maybe has been removed) with uuid:"+ ri.uuid);
             result.unretrievable++;
-            e.printStackTrace();
+            log.error(e);
         }
         finally
         {

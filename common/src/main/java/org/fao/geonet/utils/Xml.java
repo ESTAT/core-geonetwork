@@ -218,8 +218,7 @@ public final class Xml
 
 			result = (Element)jdoc.getRootElement().detach();
 		} catch (Exception e) {
-		    Log.error(Log.ENGINE, "Error loading URL " + url.getPath() + " .Threw exception "+e);
-			e.printStackTrace();
+		    Log.error(Log.ENGINE, "Error loading URL " + url.getPath() + " .Threw exception "+e, e);
 		}
 		return result;
 	}
@@ -548,8 +547,7 @@ public final class Xml
                 }
             }
             catch (URISyntaxException e) {
-                Log.warning(Log.XML_RESOLVER, "URI syntax problem: "+e.getMessage());
-                e.printStackTrace();
+                Log.warning(Log.XML_RESOLVER, "URI syntax problem: "+e.getMessage(), e);
             }
         }
          
@@ -1103,7 +1101,7 @@ public final class Xml
 				}
 				x.setText(xpath);
 			} catch (JDOMException e) {
-				e.printStackTrace();
+                Log.error(Log.ENGINE, e.getMessage(), e);
 				x.setText("nopath");
 			}
 			String message = exception.getMessage() + " (Element: " + elem.getQualifiedName();

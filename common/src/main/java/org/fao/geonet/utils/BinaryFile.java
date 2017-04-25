@@ -329,8 +329,7 @@ public final class BinaryFile
 					DataSinkStream outputSink = new DataSinkStream(output);
 					ftp.get(remotePath, outputSink, null);
 				} catch (Exception e) {
-					Log.error(Log.RESOURCES,"Problem with ftp from site: "+remoteUser+"@"+remoteSite+":"+remotePath);
-					e.printStackTrace();
+					Log.error(Log.RESOURCES,"Problem with ftp from site: "+remoteUser+"@"+remoteSite+":"+remotePath, e);
 				}
 			} else {
 				Log.error(Log.RESOURCES,"Unknown remote protocol in config file");
