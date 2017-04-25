@@ -84,6 +84,7 @@ public class MapServer {
      * @return mapserver name
      */
     @Column(nullable = false, length = 32)
+    @javax.validation.constraints.Size(max=32, message = "Name length should not be greater than 32")
     public String getName() {
         return _name;
     }
@@ -112,6 +113,7 @@ public class MapServer {
      * @return the description.
      */
     @Column(length = 255)
+    @javax.validation.constraints.Size(max=32, message = "Description length should not be greater than 255")
     public String getDescription() {
         return _description;
     }
@@ -133,6 +135,7 @@ public class MapServer {
      * @return the REST API URL.
      */
     @Column(nullable = false, length = 255)
+    @javax.validation.constraints.Size(max=255, message = "Configuration URL length should not be greater than 255")
     public String getConfigurl() {
         return _configurl;
     }
@@ -154,6 +157,7 @@ public class MapServer {
      * @return the WMS URL.
      */
     @Column(length = 255)
+    @javax.validation.constraints.Size(max=255, message = "WMS URL length should not be greater than 255")
     public String getWmsurl() {
         return _wmsurl;
     }
@@ -169,6 +173,7 @@ public class MapServer {
      * @return the WFS URL.
      */
     @Column(length = 255)
+    @javax.validation.constraints.Size(max=255, message = "WFS URL length should not be greater than 255")
     public String getWfsurl() {
         return _wfsurl;
     }
@@ -184,6 +189,7 @@ public class MapServer {
      * @return the WCS URL.
      */
     @Column(length = 255)
+    @javax.validation.constraints.Size(max=255, message = "WCS URL length should not be greater than 255")
     public String getWcsurl() {
         return _wcsurl;
     }
@@ -199,6 +205,7 @@ public class MapServer {
      * @return the styler URL.
      */
     @Column(length = 255)
+    @javax.validation.constraints.Size(max=255, message = "Styler URL length should not be greater than 255")
     public String getStylerurl() {
         return _stylerurl;
     }
@@ -214,6 +221,7 @@ public class MapServer {
      * @return the username.
      */
     @Column(length = 128)
+    @javax.validation.constraints.Size(max=128, message = "Username length should not be greater than 128")
     public String getUsername() {
         return _username;
     }
@@ -229,6 +237,7 @@ public class MapServer {
      * @return the password.
      */
     @Column(length = 128)
+    @javax.validation.constraints.Size(max=128, message = "Username length should not be greater than 128")
     public String getPassword() {
         return _password;
     }
@@ -244,6 +253,7 @@ public class MapServer {
      *
      * @return the workspace namespace prefix.
      */
+    @javax.validation.constraints.Size(max=255, message = "Namespace prefix length should not be greater than 255")
     public String getNamespacePrefix() {
         return _namespaceprefix;
     }
@@ -259,6 +269,7 @@ public class MapServer {
      *
      * @return the workspace namespace URL.
      */
+    @javax.validation.constraints.Size(max=255, message = "Namespace length should not be greater than 255")
     public String getNamespace() {
         return _namespace;
     }

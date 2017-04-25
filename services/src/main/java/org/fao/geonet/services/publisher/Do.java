@@ -29,6 +29,7 @@ import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
 import org.fao.geonet.domain.MapServer;
 import org.fao.geonet.repository.MapServerRepository;
+import org.fao.geonet.util.ValidateEntity;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.GeonetHttpRequestFactory;
 import org.fao.geonet.utils.Log;
@@ -153,6 +154,9 @@ public class Do implements Service {
                     .setNamespace(Util.getParam(params, "namespace", ""))
                     .setNamespacePrefix(Util.getParam(params, "namespaceprefix", ""))
                     .setPushStyleInWorkspace(Util.getParam(params, "pushstyleinworkspace", false));
+
+			new ValidateEntity().check(m);
+
             context.getBean(MapServerRepository.class).save(m);
             return new Element(action.toString())
                         .setText("ok")
@@ -176,6 +180,9 @@ public class Do implements Service {
                     .setNamespace(Util.getParam(params, "namespace", ""))
                     .setNamespacePrefix(Util.getParam(params, "namespaceprefix", ""))
                     .setPushStyleInWorkspace(Util.getParam(params, "pushstyleinworkspace", false));
+
+				new ValidateEntity().check(m);
+
                 repo.save(m);
             }
             return new Element(action.toString()).setText("ok");

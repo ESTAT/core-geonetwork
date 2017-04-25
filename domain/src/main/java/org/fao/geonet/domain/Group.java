@@ -110,6 +110,7 @@ public class Group extends Localized {
      * @return group name
      */
     @Column(nullable = false, length = 32)
+    @javax.validation.constraints.Size(max=32, message = "Name length should not be greater than 32")
     public String getName() {
         return _name;
     }
@@ -138,6 +139,7 @@ public class Group extends Localized {
      * @return the description.
      */
     @Column(length = 255)
+    @javax.validation.constraints.Size(max=255, message = "Description length should not be greater than 255")
     public String getDescription() {
         return _description;
     }
@@ -160,6 +162,7 @@ public class Group extends Localized {
      * @return the email address.
      */
     @Column(length = 128)
+    @javax.validation.constraints.Size(max=255, message = "Email length should not be greater than 128")
     public String getEmail() {
         return _email;
     }
@@ -285,6 +288,7 @@ public class Group extends Localized {
      * @return the website url for this group or null if there is none.
      */
     @Nullable
+    @javax.validation.constraints.Size(max=255, message = "Website length should not be greater than 255")
     public String getWebsite() {
         return website;
     }

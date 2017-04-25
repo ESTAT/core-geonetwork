@@ -55,6 +55,7 @@ public class ServiceParam extends GeonetEntity {
      *
      * @return the name of the service.
      */
+    @javax.validation.constraints.Size(max=64, message = "Parameter name length should not be greater than 64")
     public String getName() {
         return this.name;
     }
@@ -72,6 +73,7 @@ public class ServiceParam extends GeonetEntity {
     /**
      * Get the parameter value
      */
+    @javax.validation.constraints.Size(max=1048, message = "Parameter value length should not be greater than 1048")
     public String getValue() {
         return value;
     }

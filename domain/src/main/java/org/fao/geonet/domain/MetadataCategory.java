@@ -3,6 +3,7 @@ package org.fao.geonet.domain;
 import org.fao.geonet.entitylistener.MetadataCategoryEntityListenerManager;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -49,6 +50,7 @@ public class MetadataCategory extends Localized {
      * @return the name.
      */
     @Column(nullable = false)
+    @javax.validation.constraints.Size(max=255, message = "Name length should not be greater than 255")
     public String getName() {
         return _name;
     }

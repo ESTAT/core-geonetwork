@@ -44,6 +44,7 @@ public class CustomElementSet extends GeonetEntity {
      * This is a required element.
      */
     @Column(length = XPATH_COLUMN_LENGTH, nullable = false)
+    @javax.validation.constraints.Size(max=XPATH_COLUMN_LENGTH, message = "ElementSetName xPath length should not be greater than 1000")
     public String getXpath() {
         return _xpath;
     }

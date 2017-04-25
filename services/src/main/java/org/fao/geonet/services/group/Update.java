@@ -25,20 +25,20 @@ package org.fao.geonet.services.group;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.validation.*;
 
 import org.apache.commons.io.FilenameUtils;
 import org.fao.geonet.Util;
 import org.fao.geonet.constants.Params;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.Language;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.UserGroup;
+import org.fao.geonet.domain.*;
+import org.fao.geonet.exceptions.BadFormatEx;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.LanguageRepository;
 import org.fao.geonet.repository.MetadataCategoryRepository;
@@ -47,6 +47,7 @@ import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.specification.GroupSpecs;
 import org.fao.geonet.resources.Resources;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.util.ValidateEntity;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
 import org.jdom.Element;
@@ -78,7 +79,10 @@ public class Update extends NotInReadOnlyModeService {
         final String copyLogo = Util.getParam(params, "copyLogo", null);
         final String email = params.getChildText(Params.EMAIL);
         final String category = Util.getParam(params, Params.CATEGORY, "-1");
-        
+
+
+        // Validate fields
+
         final java.util.List<Integer> allowedCategories = Util.getParamsAsInt(params, "allowedCategories");
         final Boolean enableAllowedCategories = Util.getParam(params, "enableAllowedCategories", false);
         
@@ -154,6 +158,8 @@ public class Update extends NotInReadOnlyModeService {
                 group.getLabelTranslations().put(l.getId(), name);
             }
 
+            new ValidateEntity().check(group);
+
             groupRepository.save(group);
 
             elRes.addContent(new Element(Jeeves.Elem.OPERATION).setText(Jeeves.Text.ADDED));
@@ -178,6 +184,8 @@ public class Update extends NotInReadOnlyModeService {
                     if (deleteLogo) {
                         entity.setLogo(null);
                     }
+
+                    new ValidateEntity().check(entity);
                 }
             });
 
@@ -252,4 +260,5 @@ public class Update extends NotInReadOnlyModeService {
         }
 
         return file;
-    }}
+    }
+}

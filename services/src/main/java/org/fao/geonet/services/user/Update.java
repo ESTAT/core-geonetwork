@@ -43,6 +43,7 @@ import org.fao.geonet.repository.UserRepository;
 import org.fao.geonet.repository.specification.UserGroupSpecs;
 import org.fao.geonet.repository.specification.UserSpecs;
 import org.fao.geonet.util.PasswordUtil;
+import org.fao.geonet.util.ValidateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.domain.Specifications;
@@ -271,6 +272,9 @@ public class Update {
         if (operation.equals(Params.Operation.NEWUSER)
             || operation.equals(Params.Operation.FULLUPDATE)
             || operation.equals(Params.Operation.EDITINFO)) {
+
+            new ValidateEntity().check(user);
+
             user = userRepository.save(user);
             setUserGroups(user, groups);
         } else {

@@ -120,8 +120,19 @@
         $http.get('admin.config.csw.customelementset.save?_content_type=json&' +
                 $(formId).serialize())
           .success(function(data) {
+              $rootScope.$broadcast('StatusUpdated', {
+                  msg: $translate.instant('settingsUpdated'),
+                  timeout: 2,
+                  type: 'success'});
+
               loadCSWElementSetName();
-            });
+          }).error(function(data) {
+              $rootScope.$broadcast('StatusUpdated', {
+                  title: $translate.instant('settingsUpdateError'),
+                  error: data,
+                  timeout: 0,
+                  type: 'danger'});
+          });
       };
 
       /**

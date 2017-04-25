@@ -987,6 +987,11 @@
             <artifactId>hibernate-ehcache</artifactId>
             <version>4.3.6.Final</version>
         </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>4.3.2.Final</version>
+      </dependency>
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>

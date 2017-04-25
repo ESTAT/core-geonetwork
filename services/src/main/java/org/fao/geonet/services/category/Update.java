@@ -31,12 +31,11 @@ import org.fao.geonet.exceptions.MissingParameterEx;
 import org.fao.geonet.repository.LanguageRepository;
 import org.fao.geonet.repository.MetadataCategoryRepository;
 import org.fao.geonet.repository.Updater;
+import org.fao.geonet.util.ValidateEntity;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Nonnull;
 
@@ -82,6 +81,8 @@ public class Update {
                 @Override
                 public void apply(@Nonnull MetadataCategory entity) {
                     entity.setName(name);
+
+                    new ValidateEntity().check(entity);
                 }
             });
 

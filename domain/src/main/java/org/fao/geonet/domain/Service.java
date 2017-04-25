@@ -69,6 +69,7 @@ public class Service extends GeonetEntity {
      * @return the name of the service.
      */
     @Column(nullable = false, unique = true)
+    @javax.validation.constraints.Size(max=255, message = "Name length should not be greater than 255")
     public String getName() {
         return _name;
     }
@@ -107,6 +108,7 @@ public class Service extends GeonetEntity {
      * @return the description of the service. Maximum length is 1024 characters.
      */
     @Column(length = 1024)
+    @javax.validation.constraints.Size(max=255, message = "Description length should not be greater than 1024")
     public String getDescription() {
         return description;
     }
@@ -126,6 +128,7 @@ public class Service extends GeonetEntity {
      * @return the init parameters to pass to the service.  The Key is the parameter name the value is the parameter value.
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "service", orphanRemoval = true)
+    @javax.validation.Valid
     public List<ServiceParam> getParameters() {
         return _parameters;
     }

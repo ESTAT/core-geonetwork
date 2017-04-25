@@ -27,6 +27,7 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.CustomElementSet;
 import org.fao.geonet.domain.responses.OkResponse;
 import org.fao.geonet.repository.CustomElementSetRepository;
+import org.fao.geonet.util.ValidateEntity;
 import org.fao.geonet.utils.Log;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,8 @@ public class Set {
         for(String xpath : xpathList) {
             CustomElementSet customElementSet = new CustomElementSet();
             customElementSet.setXpath(xpath);
+
+            new ValidateEntity().check(customElementSet);
 
             customElementSetRepository.save(customElementSet);
         }

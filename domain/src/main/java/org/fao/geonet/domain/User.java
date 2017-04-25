@@ -72,6 +72,7 @@ public class User extends GeonetEntity implements UserDetails {
      * @return the username
      */
     @Column(nullable = false, unique = true)
+    @javax.validation.constraints.Size(max=255, message = "Username length should not be greater than 255")
     @Nonnull
     public String getUsername() {
         return _username;
@@ -104,6 +105,7 @@ public class User extends GeonetEntity implements UserDetails {
      * @return the Surname/lastname of the user.  May be null
      */
     @Nullable
+    @javax.validation.constraints.Size(max=255, message = "Surname length should not be greater than 255")
     public String getSurname() {
         return _surname;
     }
@@ -125,6 +127,7 @@ public class User extends GeonetEntity implements UserDetails {
      *
      * @return the user's actual first name.  May be null.
      */
+    @javax.validation.constraints.Size(max=255, message = "Name length should not be greater than 255")
     @Nullable
     public String getName() {
         return _name;
@@ -229,6 +232,7 @@ public class User extends GeonetEntity implements UserDetails {
      *
      * @return the user's organization.
      */
+    @javax.validation.constraints.Size(max=255, message = "Organisation length should not be greater than 255")
     public String getOrganisation() {
         return _organisation;
     }
@@ -243,6 +247,7 @@ public class User extends GeonetEntity implements UserDetails {
      * application. An example is GOV or CONTRACTOR.
      */
     @Column(length = 16)
+    @javax.validation.constraints.Size(max=16, message = "Kind length should not be greater than 16")
     public String getKind() {
         return _kind;
     }

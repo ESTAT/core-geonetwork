@@ -31,6 +31,7 @@ import org.fao.geonet.domain.Service;
 import org.fao.geonet.domain.ServiceParam;
 import org.fao.geonet.domain.responses.OkResponse;
 import org.fao.geonet.repository.ServiceRepository;
+import org.fao.geonet.util.ValidateEntity;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -114,6 +115,8 @@ public class Update {
             for (ServiceParam param : params) {
                 service.addParameter(param);
             }
+
+            new ValidateEntity().check(service);
             serviceRepository.save(service);
             serviceId = String.valueOf(service.getId());
         } else if (operation.equals(Params.Operation.UPDATESERVICE)) {
@@ -128,6 +131,7 @@ public class Update {
                 service.addParameter(param);
             }
 
+            new ValidateEntity().check(service);
             serviceRepository.save(service);
         }
 

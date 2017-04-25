@@ -74,7 +74,7 @@
           .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                 title: $translate.instant('mapserverUpdateError'),
-                error: data,
+                error: data.error,
                 timeout: 0,
                 type: 'danger'});
             });
