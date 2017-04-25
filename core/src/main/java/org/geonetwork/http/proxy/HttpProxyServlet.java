@@ -268,10 +268,10 @@ public class HttpProxyServlet extends HttpServlet {
             }
         } 
         catch (UnknownHostException e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK+".httpproxy", "url can't be found:"+e.getMessage(), e);
             response.sendError(HttpStatus.SC_NOT_FOUND, "url can't be found");
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK+".httpproxy", e.getMessage(), e);
             //throw new ServletException("Some unexpected error occurred. Error text was: " + e.getMessage());
             returnExceptionMessage(response, HttpStatus.SC_INTERNAL_SERVER_ERROR,
                     "Some unexpected error occurred. Error text was: " + e.getMessage());
@@ -388,10 +388,10 @@ public class HttpProxyServlet extends HttpServlet {
             	returnExceptionMessage(response, HttpStatus.SC_FORBIDDEN, "only HTTP(S) protocol supported");
             }
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK+".httpproxy", "url can't be found:"+e.getMessage(), e);
             response.sendError(HttpStatus.SC_NOT_FOUND, "url can't be found");
         } catch (Throwable e) {
-            e.printStackTrace();
+            Log.error(Geonet.GEONETWORK+".httpproxy", e.getMessage(), e);
             //throw new ServletException("Some unexpected error occurred. Error text was: " + e.getMessage());
             returnExceptionMessage(response, HttpStatus.SC_INTERNAL_SERVER_ERROR,
                     "Some unexpected error occurred. Error text was: " + e.getMessage());

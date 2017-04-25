@@ -111,8 +111,7 @@ public class DatabaseMigration implements BeanPostProcessor {
                 return bean;
             }
         } catch (ClassNotFoundException e) {
-            _logger.error(String.format("DB Migration / '%s' is an invalid value for initAfter. Class not found. Error is %s", initAfter, e.getMessage()));
-            e.printStackTrace();
+            _logger.error(String.format("DB Migration / '%s' is an invalid value for initAfter. Class not found. Error is %s", initAfter, e.getMessage()), e);
         }
         return bean;
     }
@@ -285,7 +284,7 @@ public class DatabaseMigration implements BeanPostProcessor {
             _logger.error("          Errors occurs during Java migration file: " + error);
             return true;
         } catch (Throwable e) {
-            e.printStackTrace();
+            _logger.error("          Errors occurs during Java migration file: " +  e.getMessage(), e);
             return true;
         }
     }

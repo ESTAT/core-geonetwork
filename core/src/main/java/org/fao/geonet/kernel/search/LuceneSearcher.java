@@ -1407,8 +1407,7 @@ public class LuceneSearcher extends MetaSearcher implements MetadataRecordSelect
             for (String facet : configurationErrors.keySet()) {
                 message.append("\n  * ").append(facet);
             }
-            Log.error(Geonet.FACET_ENGINE, message);
-            configurationErrors.values().iterator().next().printStackTrace();
+            Log.error(Geonet.FACET_ENGINE, message, configurationErrors.values().iterator().next());
         }
     }
 

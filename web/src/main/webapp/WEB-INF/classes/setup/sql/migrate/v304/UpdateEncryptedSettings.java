@@ -72,7 +72,7 @@ public class UpdateEncryptedSettings implements DatabaseMigrationTask, Applicati
                 }
                 Log.debug(Geonet.DB, "  Number of settings: " + numberOfSettings);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                Log.error(Geonet.DB, ex.getMessage(), ex);
             } finally {
                 settingsResultSet.close();
             }
