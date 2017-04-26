@@ -76,7 +76,9 @@
 		<constructor-arg>
 			<list>
 				<ref bean="securityContextPersistenceFilter" />
+				<!-- To disable csrf security (not recommended) comment the following line -->
         <ref bean="csrfFilter" />
+        <!-- To disable csrf security (not recommended) comment the upper line -->
 				<ref bean="logoutFilter" />
         <ref bean="ecasPreAuthenticationFilter" />
 				<ref bean="requestCacheFilter" />
