@@ -193,5 +193,10 @@
             viewerMap: viewerMap,
             searchMap: searchMap
           });
+          
+
+
+          $http.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+          $http.defaults.xsrfCookieName = 'XSRF-TOKEN';
         }]);
 })();

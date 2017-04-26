@@ -17,8 +17,9 @@
     </constructor-arg>
   </bean>
   
-  <bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"
+  <bean class="org.fao.geonet.security.web.csrf.CookieCsrfTokenRepository"
         id="csrfTokenRepository">
+    <property name="cookieHttpOnly" value="false"/>
   </bean>
       
 	<alias name="filterChainProxy" alias="springSecurityFilterChain" />
