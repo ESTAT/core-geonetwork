@@ -1,7 +1,7 @@
 <div>
   <form id="gn-upload-onlinesrc" class="form-horizontal" role="form"
      method="POST" enctype="multipart/form-data"
-     action="resource.upload.and.link"
+     action="{{'resource.upload.and.link?_csrf=' + csrf}}"
      data-file-upload="onlinesrcUploadOptions">
 
     <div class="onlinesrc-container">
@@ -19,7 +19,6 @@
             {{'upload' | translate}}</button>
         </div>
       </div>
-
       <!-- Protocol Combo -->
       <div class="form-group" data-ng-show="mode == 'url' && schema !== 'dublin-core'">
         <label class="col-sm-2 control-label">

@@ -37,9 +37,11 @@
     '$scope', '$http', '$q', '$rootScope', '$translate',
     'gnSearchManagerService', 'gnConfigService', 'gnConfig',
     'gnGlobalSettings', '$location', 'gnUtilityService', 'gnSessionService',
+    'gnLangs', 'gnAdminMenu', '$cookies',
     function($scope, $http, $q, $rootScope, $translate,
             gnSearchManagerService, gnConfigService, gnConfig,
-            gnGlobalSettings, $location, gnUtilityService, gnSessionService) {
+            gnGlobalSettings, $location, gnUtilityService, gnSessionService,
+            gnLangs, gnAdminMenu, $cookies) {
       $scope.version = '0.0.1';
       // TODO : add language
       var tokens = location.href.split('/');
@@ -68,6 +70,18 @@
       $scope.layout = {
         hideTopToolBar: false
       };
+      
+      /**
+       * CSRF support
+       */
+      
+      //Comment the following lines if you want to remove csrf support
+      $http.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+      $http.defaults.xsrfCookieName = 'XSRF-TOKEN';
+      $scope.$watch(function() { return $cookies.get('XSRF-TOKEN'); }, function(value){
+        $rootScope.csrf=value;
+      }) ;
+      //Comment the upper lines if you want to remove csrf support
 
       /**
        * Number of selected metadata records.

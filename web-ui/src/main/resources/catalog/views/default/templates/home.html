@@ -107,33 +107,35 @@
         </div>
     </div>
   </div>
-  <div class="row gn-row-info">
-      <div class="col-xs-12">
-        <tabset id="info-tabset">
-          <tab heading="{{'lastRecords' | translate}}"
-               active="infoTabs.lastRecords.active">
-            <form class="form-horizontal"
-                  role="nav"
-                  data-ng-controller="gnsSearchLatestController"
-                  data-ng-search-form=""
-                  data-runSearch="true"
-                  data-ng-show="searchResults.records.length > 0">
+  <div class="row gn-row-info" data-ng-show="searchInfo.count > 0">
+    <div class="col-xs-12">
+      <tabset id="info-tabset">
+        <tab heading="{{'lastRecords' | translate}}"
+             active="infoTabs.lastRecords.active">
+          <form class="form-horizontal"
+                role="nav"
+                data-ng-controller="gnsSearchLatestController"
+                data-ng-search-form=""
+                data-runSearch="true"
+                data-ng-show="searchResults.records.length > 0">
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
 
-              <div data-gn-info-list=""></div>
-            </form>
-          </tab>
-          <tab heading="{{'preferredRecords' | translate}}"
-               active="infoTabs.preferredRecords.active">
-            <form class="form-horizontal"
-                  role="nav"
-                  data-ng-controller="gnsSearchPopularController"
-                  data-ng-search-form=""
-                  data-runSearch="true"
-                  data-ng-show="searchResults.records.length > 0">
-              <div data-gn-info-list=""></div>
-            </form>
-          </tab>
-        </tabset>
-      </div>
+            <div data-gn-info-list=""></div>
+          </form>
+        </tab>
+        <tab heading="{{'preferredRecords' | translate}}"
+             active="infoTabs.preferredRecords.active">
+          <form class="form-horizontal"
+                role="nav"
+                data-ng-controller="gnsSearchPopularController"
+                data-ng-search-form=""
+                data-runSearch="true"
+                data-ng-show="searchResults.records.length > 0">
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
+            <div data-gn-info-list=""></div>
+          </form>
+        </tab>
+      </tabset>
+    </div>
   </div>
 </div>

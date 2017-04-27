@@ -4,6 +4,8 @@
     <div class="form-group" data-ng-repeat="(key,param) in gnSuggestion.getCurrent().params">
       <label data-ng-if="param.type == 'string' || param.type == 'expression' || param.type == 'codelist'"
              class="col-sm-4 control-label">
+
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
         {{key | translate}}
       </label>
       <div data-ng-if="param.type == 'string'" class="col-sm-8">

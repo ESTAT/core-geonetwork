@@ -35,6 +35,7 @@
         <span data-ng-hide="categorySelected['@id'] != ''" data-translate="">newCategory</span>
         <strong>{{categorySelected.label[lang]}}</strong>
 
+
         <div class="btn-toolbar">
           <button type="button" class="btn btn-primary pull-right"
             data-ng-disabled="!categoryUpdated" data-ng-click="saveCategory('#gn-category-edit')"
@@ -48,6 +49,7 @@
       <div class="panel-body">
         <form id="gn-category-edit" class="form-horizontal" data-ng-keypress="updatingCategory()">
           <fieldset>
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
             <input type="hidden" name="id" data-ng-model="categorySelected['@id']"
               value="{{categorySelected['@id']}}"> </input>
             <label data-translate="" class="col-lg-2 control-label">categoryName</label>

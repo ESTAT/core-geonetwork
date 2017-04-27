@@ -4,21 +4,23 @@
   <div class="panel-heading">
     <span data-translate="">settings</span>
     <div class="btn-toolbar">
-        <form class="form-inline pull-right">
-            <select ng-change="updateProfile()" class="form-control"
-                    data-ng-model="systemInfo.stagingProfile">
-                <option data-ng-repeat="p in stagingProfiles" value="{{p}}"
-                        ng-selected="p === systemInfo.stagingProfile">{{p | translate}}</option>
-            </select>
-            &nbsp;
-            <button type="submit" class="btn btn-primary"
-                    id="gn-btn-settings-save"
-                    data-ng-disabled="!gnSettings.$valid"
-                    data-ng-click="saveSettings('#gn-settings')">
-              <span class="fa fa-save"></span>
-              {{"saveSettings"|translate}}
-            </button>
-        </form>
+      <form class="form-inline pull-right">
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
+        <select ng-change="updateProfile()" class="form-control"
+                data-ng-model="systemInfo.stagingProfile">
+          <option data-ng-repeat="p in stagingProfiles" value="{{p}}"
+                  ng-selected="p === systemInfo.stagingProfile">{{p | translate}}
+          </option>
+        </select>
+        &nbsp;
+        <button type="submit" class="btn btn-primary"
+                id="gn-btn-settings-save"
+                data-ng-disabled="!gnSettings.$valid"
+                data-ng-click="saveSettings('#gn-settings')">
+          <span class="fa fa-save"></span>
+          {{"saveSettings"|translate}}
+        </button>
+      </form>
     </div>
   </div>
   <div class="panel-body">

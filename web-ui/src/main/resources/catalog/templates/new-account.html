@@ -3,8 +3,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" data-translate="">needAnAccount</div>
       <div class="panel-body">
-        <form class="form-horizontal" id="userinfo" action="create.account" method="post">
-
+        <form class="form-horizontal" id="userinfo" action="{{'create.account?_csrf=' + csrf }}" method="post">
           <div class="form-group">
             <label class="control-label col-lg-4" data-translate="">email</label>
             <div class="col-lg-8">

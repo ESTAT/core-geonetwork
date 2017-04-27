@@ -15,12 +15,13 @@
                 ><span class="fa fa-save"></span> {{"createReport"|translate}}
         </button>
       </div>
-    </div>
-    <div class="panel-body">
-      <form id="gn-metadata-fileuploads-report" name="gnMetadataFileUploadsReport" class="form-horizontal">
-        <fieldset>
-          <div
-            class="form-group">
+      <div class="panel-body">
+        <form id="gn-metadata-fileuploads-report" name="gnMetadataFileUploadsReport"
+              class="form-horizontal">
+          <fieldset>
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
+            <div
+              class="form-group">
 
             <label class="control-label col-sm-3" data-translate=""></label>
             <div class="col-sm-9">

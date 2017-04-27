@@ -70,6 +70,7 @@
         </td>
         <td class="text-center" data-ng-if="displayProfile">
           {{g.userProfile || (user.isAdministrator() ? 'Administrator' : '')}}
+              <input type="hidden" name="_csrf" value="{{csrf}}"/>
         </td>
 
       </tr>
