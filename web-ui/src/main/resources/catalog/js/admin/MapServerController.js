@@ -15,7 +15,7 @@
     '$scope', '$http', '$rootScope', '$translate',
     function($scope, $http, $rootScope, $translate) {
 
-      $scope.mapservers = {};
+      $scope.mapservers = [];
       $scope.mapserverSelected = null;
       $scope.mapserverUpdated = false;
       $scope.mapserverSearch = '';
