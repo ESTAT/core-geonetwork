@@ -131,7 +131,7 @@
       $scope.editors = {};
       $scope.groupinfo = {};
       $scope.editorSelectedId = null;
-      $scope.editorGroups = {};
+      $scope.editorGroups = [];
 
 
 
@@ -174,7 +174,7 @@
         $scope.editorSelectedId = id;
         $http.get('admin.usergroups.list?_content_type=json&id=' + id)
             .success(function(data) {
-              var uniqueGroup = {};
+              var uniqueGroup = [];
               angular.forEach(data, function(value) {
                 if (!uniqueGroup[value.id]) {
                   uniqueGroup[value.id] = value;
