@@ -36,6 +36,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,7 +48,7 @@ import java.util.List;
 @Controller("admin.category.remove")
 @ReadWriteController
 public class Remove {
-    @RequestMapping(value = "/{lang}/admin.category.remove", produces = {
+    @RequestMapping(value = "/{lang}/admin.category.remove", method= RequestMethod.DELETE, produces = {
             MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public CategoryUpdateResponse exec(

@@ -37,9 +37,12 @@ import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.languages.IsoLanguagesMapper;
 import org.fao.geonet.repository.ThesaurusActivationRepository;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 
 /**
  * For editing : adds a tag to a thesaurus. Access is restricted
@@ -56,6 +59,8 @@ public class Add extends NotInReadOnlyModeService {
 
 	public Element serviceSpecificExec(Element params, ServiceContext context)
 			throws Exception {
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
 		GeonetContext gc = (GeonetContext) context
 				.getHandlerContext(Geonet.CONTEXT_NAME);
 

@@ -137,10 +137,12 @@
         }, 100);
       };
       $scope.saveVirtualCSW = function(formId) {
-
-        $http.get('admin.config.virtualcsw.update?' +
-            '_content_type=json&operation=' + operation +
-            '&' + $(formId).serialize())
+          $http({
+              method: 'POST',
+              url: 'admin.config.virtualcsw.update',
+              data:  '_content_type=json&operation=' + operation + '&' + $(formId).serialize(),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
           .success(function(data) {
               loadCSWVirtual();
               $rootScope.$broadcast('StatusUpdated', {
@@ -158,8 +160,12 @@
       };
 
       $scope.deleteVirtualCSW = function() {
-        $http.get('admin.config.virtualcsw.remove?id=' +
-            $scope.virtualCSWSelected.id)
+          var data = $.param({
+              id:  $scope.virtualCSWSelected.id,
+              "_content_type": "json"
+          });
+
+          $http.delete('admin.config.virtualcsw.remove?' + data)
           .success(function(data) {
               loadCSWVirtual();
             })

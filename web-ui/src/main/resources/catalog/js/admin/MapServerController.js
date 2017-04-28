@@ -61,9 +61,12 @@
       };
       $scope.saveMapServer = function(formId) {
 
-        $http.get('geoserver.publisher?_content_type=json&action=' +
-            $scope.operation +
-            '&' + $(formId).serialize())
+          $http({
+              method: 'POST',
+              url: 'geoserver.publisher',
+              data: '_content_type=json&action=' +$scope.operation + '&' + $(formId).serialize(),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
           .success(function(data) {
               loadMapservers();
               $rootScope.$broadcast('StatusUpdated', {
@@ -89,13 +92,19 @@
       };
 
       $scope.saveNewPassword = function() {
-        var params = {action: 'UPDATE_NODE_ACCOUNT',
+        var params =  $.param({action: 'UPDATE_NODE_ACCOUNT',
           id: $scope.mapserverSelected.id,
+          "_content_type": "json",
           username: $scope.resetUsername,
           password: $scope.resetPassword
-        };
+        });
 
-        $http.post('geoserver.publisher@json', null, {params: params})
+          $http({
+              method: 'POST',
+              url: 'geoserver.publisher',
+              data: params,
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
           .success(function(data) {
               $scope.resetPassword = null;
               $('#passwordResetModal').modal('hide');
@@ -105,9 +114,13 @@
 
       };
       $scope.deleteMapServer = function() {
-        $http.get('geoserver.publisher?_content_type=json&action=' +
-            'REMOVE_NODE&id=' +
-                  $scope.mapserverSelected.id)
+        var data = $.param({
+            id: $scope.mapserverSelected.id,
+            "_content_type": "json",
+            action: "REMOVE_NODE"
+        });
+
+        $http.delete('geoserver.publisher?' + data)
           .success(function(data) {
               loadMapservers();
             })

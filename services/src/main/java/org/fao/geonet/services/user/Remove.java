@@ -35,11 +35,10 @@ import org.fao.geonet.domain.UserGroupId_;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -59,7 +58,7 @@ import static org.springframework.data.jpa.domain.Specifications.where;
 public class Remove {
 
 
-    @RequestMapping(value = "/{lang}/admin.user.remove", produces = {
+    @RequestMapping(value = "/{lang}/admin.user.remove", method = RequestMethod.DELETE, produces = {
             MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody String run(HttpSession session,
             @RequestParam(value = Params.ID, required = false) String id)

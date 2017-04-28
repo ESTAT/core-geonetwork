@@ -34,11 +34,14 @@ import org.fao.geonet.kernel.Thesaurus;
 import org.fao.geonet.kernel.ThesaurusManager;
 import org.fao.geonet.repository.ThesaurusActivationRepository;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.services.Utils;
 import org.fao.geonet.utils.IO;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 /**
  * Removes a thesaurus from the system.
@@ -54,6 +57,8 @@ public class Delete extends NotInReadOnlyModeService {
 
 	public Element serviceSpecificExec(Element params, ServiceContext context) throws Exception
 	{
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		ThesaurusManager manager = gc.getBean(ThesaurusManager.class);
 		

@@ -31,9 +31,12 @@ import org.fao.geonet.domain.Group;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.Updater;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import javax.annotation.Nonnull;
 
 public class XmlUpdate extends NotInReadOnlyModeService {
@@ -47,6 +50,7 @@ public class XmlUpdate extends NotInReadOnlyModeService {
     //--------------------------------------------------------------------------
 
     public Element serviceSpecificExec(final Element params, final ServiceContext context) throws Exception {
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
 
         final GroupRepository groupRepository = context.getBean(GroupRepository.class);
         for (Object g : params.getChildren("group")) {

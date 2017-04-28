@@ -36,13 +36,12 @@ import org.fao.geonet.kernel.KeywordBean;
 import org.fao.geonet.kernel.Thesaurus;
 import org.fao.geonet.kernel.ThesaurusManager;
 import org.fao.geonet.languages.IsoLanguagesMapper;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 //=============================================================================
 
@@ -67,7 +66,9 @@ public class AddElement implements Service {
 
 	public Element exec(Element params, ServiceContext context)
 			throws Exception {
-		GeonetContext gc = (GeonetContext) context
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
+        GeonetContext gc = (GeonetContext) context
 				.getHandlerContext(Geonet.CONTEXT_NAME);
 
 		String ref = Util.getParam(params, Params.REF);

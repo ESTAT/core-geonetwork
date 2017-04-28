@@ -10,18 +10,42 @@ import org.fao.geonet.GeonetContext;
 import org.fao.geonet.Util;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
+import org.fao.geonet.exceptions.MethodNotAllowedEx;
 import org.fao.geonet.exceptions.MissingParameterEx;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.search.IndexAndTaxonomy;
 import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.kernel.search.index.GeonetworkMultiReader;
 import org.jdom.Element;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class Utils {
+
+	/**
+	 * Verifies if an http method is allowed. Used in Jeeves services to verify that http method requested is valid.
+	 *
+	 * @param allowedHttpMethods
+	 * @throws MethodNotAllowedEx
+	 */
+	public static void checkHttpMethod(List<String> allowedHttpMethods) throws MethodNotAllowedEx {
+		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		HttpServletRequest req = sra.getRequest();
+
+		if (allowedHttpMethods == null) {
+			throw new MethodNotAllowedEx("Not allowed http method: " + req.getMethod());
+		}
+
+		if (!allowedHttpMethods.contains(req.getMethod())) {
+			throw new MethodNotAllowedEx("Not allowed http method: " + req.getMethod());
+		}
+	}
 
 	/**
 	 * Search for a UUID or an internal identifier parameter and return an

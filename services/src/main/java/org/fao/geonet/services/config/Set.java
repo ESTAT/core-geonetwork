@@ -41,8 +41,11 @@ import org.fao.geonet.repository.MetadataRepository;
 import org.fao.geonet.repository.SourceRepository;
 import org.fao.geonet.repository.specification.MetadataSpecs;
 import org.fao.geonet.repository.statistic.PathSpec;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.criteria.Path;
@@ -72,6 +75,8 @@ public class Set implements Service {
      * @throws Exception
      */
     public Element exec(Element params, ServiceContext context) throws Exception {
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
         GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
         SettingManager sm = gc.getBean(SettingManager.class);
 

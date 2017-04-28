@@ -46,8 +46,8 @@ import javax.annotation.Nonnull;
 @ReadWriteController
 public class Update {
 
-    @RequestMapping(value = "/{lang}/admin.category.update", produces = {
-            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value = "/{lang}/admin.category.update", method = {RequestMethod.POST, RequestMethod.PUT},
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public CategoryUpdateResponse exec(
             @RequestParam final Integer id,

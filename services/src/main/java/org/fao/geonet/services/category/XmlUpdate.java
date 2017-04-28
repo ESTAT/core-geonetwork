@@ -37,6 +37,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Nonnull;
@@ -48,8 +49,8 @@ import javax.xml.bind.annotation.XmlValue;
 @ReadWriteController
 public class XmlUpdate{
 
-    @RequestMapping(value = "/{lang}/admin.category.update.labels", produces = {
-            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value = "/{lang}/admin.category.update.labels", method = {RequestMethod.POST, RequestMethod.PUT},
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public OkResponse serviceSpecificExec(@RequestBody String request) throws Exception {
 

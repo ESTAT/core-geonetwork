@@ -52,6 +52,10 @@
 			<xml name="error" file="xml/file-too-big-error.xml" />
 		</error>
 
+		<error id="method-not-allowed"  sheet="../xslt/common/error.xsl" statusCode="405">
+			<xml name="error" file="xml/method-not-allowed-error.xml" />
+		</error>
+
 		<!-- general error -->
 
 		<error sheet="../xslt/common/error.xsl">

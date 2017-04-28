@@ -39,7 +39,12 @@
       }
 
       $scope.addStandard = function(formId, action) {
-        $http.get('admin.schema.' + action + '?' + $(formId).serialize())
+          $http({
+              method: 'POST',
+              url: 'admin.schema.' + action,
+              data: $(formId).serialize(),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
           .success(function(data) {
               loadSchemas();
               $rootScope.$broadcast('StatusUpdated', {
@@ -57,7 +62,12 @@
       };
 
       $scope.removeStandard = function(s) {
-        $http.get('admin.schema.remove@json?schema=' + s)
+          var data = $.param({
+              schema: s,
+              "_content_type": "json"
+          });
+
+          $http.delete('admin.schema.remove?' + data)
           .success(function(data) {
               if (data['@status'] === 'error') {
                 $rootScope.$broadcast('StatusUpdated', {

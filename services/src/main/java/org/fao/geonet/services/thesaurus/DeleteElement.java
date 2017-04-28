@@ -35,9 +35,12 @@ import org.fao.geonet.kernel.KeywordBean;
 import org.fao.geonet.kernel.Thesaurus;
 import org.fao.geonet.kernel.ThesaurusManager;
 import org.fao.geonet.kernel.search.KeywordsSearcher;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,6 +56,8 @@ public class DeleteElement implements Service {
     }
 
     public Element exec(Element params, ServiceContext context) throws Exception {
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+
         GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
         UserSession session = context.getUserSession();
 

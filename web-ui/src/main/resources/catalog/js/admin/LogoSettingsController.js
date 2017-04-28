@@ -60,8 +60,12 @@
       $scope.setCatalogLogo = function(logoName, favicon) {
         var setFavicon = favicon ? '1' : '0';
 
-        $http.get('admin.logo.update?fname=' + logoName +
-            '&favicon=' + setFavicon)
+        $http({
+            method: 'POST',
+            url: 'admin.logo.update',
+            data:  'fname=' + logoName + '&favicon=' + setFavicon,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
           .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                 msg: $translate.instant('logoUpdated'),
@@ -83,7 +87,11 @@
        * Remove the logo and refresh the list when done.
        */
       $scope.removeLogo = function(logoName) {
-        $http.get('admin.logo.remove?fname=' + logoName)
+        var data = $.param({
+            fname:  logoName
+        });
+
+        $http.delete('admin.logo.remove?' + data)
           .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                 msg: $translate.instant('logoRemoved'),

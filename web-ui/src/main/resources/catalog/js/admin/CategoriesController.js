@@ -33,8 +33,11 @@
        * Delete a category
        */
       $scope.deleteCategory = function(id) {
-        $http.get('admin.category.remove?id=' +
-            id)
+        var data = $.param({
+            id: id
+        });
+
+        $http.delete('admin.category.remove?' + data)
         .success(function(data) {
               $scope.unselectCategory();
               loadCategories();
@@ -52,7 +55,12 @@
        * Save a category
        */
       $scope.saveCategory = function(formId) {
-        $http.get('admin.category.update?' + $(formId).serialize())
+          $http({
+              method: 'POST',
+              url: 'admin.category.update',
+              data: $(formId).serialize(),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
           .success(function(data) {
               $scope.unselectCategory();
               loadCategories();

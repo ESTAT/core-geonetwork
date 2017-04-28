@@ -386,8 +386,11 @@
        * Delete a user.
        */
       $scope.deleteUser = function(formId) {
-        $http.get('admin.user.remove?id=' +
-                $scope.userSelected.id)
+          var data = $.param({
+              id: $scope.userSelected.id
+          });
+
+        $http.delete('admin.user.remove?' + data)
             .success(function(data) {
               $scope.unselectUser();
               loadUsers();
@@ -464,16 +467,29 @@
               '&deleteLogo=true' : '';
           var addLogo = $scope.groupSelected.logoFromHarvest ?
               '&copyLogo=' + $scope.groupSelected.logoFromHarvest : '';
-          $http.get('admin.group.update?' + $(formId).serialize() +
+
+          $http({
+              method: 'POST',
+              url: 'admin.group.update',
+              data: $(formId).serialize() + deleteLogo + addLogo,
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+          .success(uploadImportMdDone)
+          .error(uploadImportMdError);
+
+          /*$http.get('admin.group.update?' + $(formId).serialize() +
               deleteLogo + addLogo)
               .success(uploadImportMdDone)
-              .error(uploadImportMdError);
+              .error(uploadImportMdError);*/
         }
       };
 
       $scope.deleteGroup = function(formId) {
-        $http.get('admin.group.remove?id=' +
-                $scope.groupSelected.id)
+          var data = $.param({
+              id: $scope.groupSelected.id
+          });
+
+          $http.delete('admin.group.remove?' + data)
             .success(function(data) {
               $scope.unselectGroup();
               loadGroups();

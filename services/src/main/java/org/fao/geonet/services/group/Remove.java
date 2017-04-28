@@ -40,7 +40,9 @@ import org.fao.geonet.repository.OperationAllowedRepository;
 import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.specification.OperationAllowedSpecs;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -62,8 +64,9 @@ public class Remove extends NotInReadOnlyModeService {
 
 	public Element serviceSpecificExec(Element params, ServiceContext context) throws Exception
 	{
-		String id = Util.getParam(params, Params.ID);
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
 
+        String id = Util.getParam(params, Params.ID);
 
         OperationAllowedRepository operationAllowedRepo = context.getBean(OperationAllowedRepository.class);
         UserGroupRepository userGroupRepo = context.getBean(UserGroupRepository.class);

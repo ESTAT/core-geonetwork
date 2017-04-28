@@ -29,13 +29,15 @@ import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.Util;
 import org.fao.geonet.constants.Params;
-import org.fao.geonet.exceptions.BadParameterEx;
 import org.fao.geonet.resources.Resources;
+import org.fao.geonet.services.Utils;
 import org.fao.geonet.utils.FilePathChecker;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class Delete implements Service {
     private volatile Path logoDirectory;
@@ -45,6 +47,8 @@ public class Delete implements Service {
 
     public Element exec(Element params, ServiceContext context)
             throws Exception {
+
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
 
         if (logoDirectory == null) {
             synchronized (this) {

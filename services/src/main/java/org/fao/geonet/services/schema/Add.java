@@ -32,11 +32,14 @@ import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.kernel.SchemaManager;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 //=============================================================================
 
@@ -56,6 +59,7 @@ public class Add implements Service {
 	// --------------------------------------------------------------------------
 
 	public Element exec(Element params, ServiceContext context) throws Exception {
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
 
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		SchemaManager scm = gc.getBean(SchemaManager.class);

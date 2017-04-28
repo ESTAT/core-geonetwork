@@ -25,20 +25,17 @@ package org.fao.geonet.services.group;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Set;
+import java.util.Arrays;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-import javax.validation.*;
 
 import org.apache.commons.io.FilenameUtils;
 import org.fao.geonet.Util;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.*;
-import org.fao.geonet.exceptions.BadFormatEx;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.LanguageRepository;
 import org.fao.geonet.repository.MetadataCategoryRepository;
@@ -47,6 +44,7 @@ import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.specification.GroupSpecs;
 import org.fao.geonet.resources.Resources;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.services.Utils;
 import org.fao.geonet.util.ValidateEntity;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
@@ -56,6 +54,7 @@ import jeeves.constants.Jeeves;
 import jeeves.server.ServiceConfig;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
+import org.springframework.http.HttpMethod;
 
 
 /**
@@ -72,6 +71,8 @@ public class Update extends NotInReadOnlyModeService {
     //--------------------------------------------------------------------------
 
     public Element serviceSpecificExec(final Element params, final ServiceContext context) throws Exception {
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
         final String id = params.getChildText(Params.ID);
         final String name = Util.getParam(params, Params.NAME);
         final String description = Util.getParam(params, Params.DESCRIPTION, "");

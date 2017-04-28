@@ -253,8 +253,11 @@
        * Remove a thesaurus from the catalog thesaurus repository
        */
       $scope.deleteThesaurus = function() {
-        $http.get('thesaurus.remove?ref=' +
-                  $scope.thesaurusSelected.key)
+        var data = $.param({
+            ref: $scope.thesaurusSelected.key
+        });
+
+        $http.delete('thesaurus.remove?' + data)
           .success(function(data) {
               $scope.thesaurusSelected = null;
               loadThesaurus();
@@ -443,8 +446,13 @@
      */
       $scope.deleteKeyword = function(k) {
         $scope.keywordSelected = k;
-        $http.get('thesaurus.keyword.remove?pThesaurus=' + k.thesaurus.key +
-            '&id=' + encodeURIComponent(k.uri))
+
+        var data = $.param({
+            pThesaurus:k.thesaurus.key,
+            id: k.uri
+        });
+
+        $http.delete('thesaurus.keyword.remove?' + data)
           .success(function(data) {
               searchThesaurusKeyword();
             })

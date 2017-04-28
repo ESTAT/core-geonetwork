@@ -34,10 +34,13 @@ import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.search.MetaSearcher;
 import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.kernel.search.SearcherType;
+import org.fao.geonet.services.Utils;
 import org.fao.geonet.utils.Log;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 //=============================================================================
@@ -58,6 +61,8 @@ public class Delete implements Service {
 	// --------------------------------------------------------------------------
 
 	public Element exec(Element params, ServiceContext context) throws Exception {
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		SchemaManager scm = gc.getBean(SchemaManager.class);
 

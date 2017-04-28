@@ -36,6 +36,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -61,8 +62,8 @@ public class Update {
             "_content_type"
     };
 
-    @RequestMapping(value = "/{lang}/admin.config.virtualcsw.update", produces = {
-            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value = "/{lang}/admin.config.virtualcsw.update", method = {RequestMethod.POST, RequestMethod.PUT},
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody
     OkResponse exec(@RequestParam String operation,
                  @RequestParam(Params.ID)  String serviceId,

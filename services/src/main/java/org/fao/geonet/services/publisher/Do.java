@@ -29,6 +29,7 @@ import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
 import org.fao.geonet.domain.MapServer;
 import org.fao.geonet.repository.MapServerRepository;
+import org.fao.geonet.services.Utils;
 import org.fao.geonet.util.ValidateEntity;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.GeonetHttpRequestFactory;
@@ -40,10 +41,11 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.lib.Lib;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -141,6 +143,8 @@ public class Do implements Service {
     	if (action.equals(ACTION.LIST)) {
             return loadDbConfiguration(context);
     	} else if (action.equals(ACTION.ADD_NODE)) {
+			Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
             MapServer m = new MapServer()
                     .setName(Util.getParam(params, "name", ""))
                     .setDescription(Util.getParam(params, "description", ""))
@@ -162,13 +166,17 @@ public class Do implements Service {
                         .setText("ok")
                         .setAttribute("id", String.valueOf(m.getId()));
         } else if (action.equals(ACTION.REMOVE_NODE)) {
-            MapServer m = repo.findOneById(Util.getParam(params, "id"));
+			Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+
+			MapServer m = repo.findOneById(Util.getParam(params, "id"));
             if (m != null) {
                 repo.delete(m);
             }
             return new Element(action.toString()).setText("ok");
         } else if (action.equals(ACTION.UPDATE_NODE)) {
-            MapServer m = repo.findOneById(Util.getParam(params, "id"));
+			Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
+			MapServer m = repo.findOneById(Util.getParam(params, "id"));
             if (m != null) {
                 m.setName(Util.getParam(params, "name", ""))
                     .setDescription(Util.getParam(params, "description", ""))
@@ -187,7 +195,9 @@ public class Do implements Service {
             }
             return new Element(action.toString()).setText("ok");
         } else if (action.equals(ACTION.UPDATE_NODE_ACCOUNT)) {
-            MapServer m = repo.findOneById(Util.getParam(params, "id"));
+			Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
+			MapServer m = repo.findOneById(Util.getParam(params, "id"));
             if (m != null) {
                 m.setUsername(Util.getParam(params, "username", ""))
                     .setPassword(Util.getParam(params, "password", ""));
@@ -196,8 +206,14 @@ public class Do implements Service {
             return new Element(action.toString()).setText("ok");
         } else if (action.equals(ACTION.CREATE) || action.equals(ACTION.UPDATE)
     			|| action.equals(ACTION.DELETE) || action.equals(ACTION.GET)) {
-    
-    		// Check parameters
+
+    		if (action.equals(ACTION.DELETE)) {
+				Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+			} else if (action.equals(ACTION.CREATE) || action.equals(ACTION.UPDATE)) {
+				Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+			}
+
+			// Check parameters
     		String nodeId = Util.getParam(params, "nodeId");
     		String metadataId = Util.getParam(params, "metadataId");
     		String metadataUuid = Util.getParam(params, "metadataUuid", "");
