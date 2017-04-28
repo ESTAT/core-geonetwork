@@ -37,11 +37,11 @@
     '$scope', '$http', '$q', '$rootScope', '$translate',
     'gnSearchManagerService', 'gnConfigService', 'gnConfig',
     'gnGlobalSettings', '$location', 'gnUtilityService', 'gnSessionService',
-    'gnLangs', 'gnAdminMenu', '$cookies',
+    '$cookies',
     function($scope, $http, $q, $rootScope, $translate,
             gnSearchManagerService, gnConfigService, gnConfig,
             gnGlobalSettings, $location, gnUtilityService, gnSessionService,
-            gnLangs, gnAdminMenu, $cookies) {
+            $cookies) {
       $scope.version = '0.0.1';
       // TODO : add language
       var tokens = location.href.split('/');
