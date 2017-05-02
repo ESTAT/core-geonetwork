@@ -11,11 +11,14 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.HarvestHistory;
 import org.fao.geonet.repository.HarvestHistoryRepository;
 import org.fao.geonet.repository.specification.HarvestHistorySpecs;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpMethod;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -38,6 +41,8 @@ public class HistoryDelete implements Service {
     //--------------------------------------------------------------------------
 
     public Element exec(Element params, ServiceContext context) throws Exception {
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+
         long nrRecs = 0;
         final HarvestHistoryRepository historyRepository = context.getBean(HarvestHistoryRepository.class);
 

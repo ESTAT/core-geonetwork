@@ -155,9 +155,12 @@
         saveSettings(formId, 'admin.config.csw.save');
       };
       var saveSettings = function(formId, service) {
-
-        $http.get(service + '?' +
-                gnUtilityService.serialize(formId))
+          $http({
+              method: 'POST',
+              url: service,
+              data:   gnUtilityService.serialize(formId),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
             .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                 msg: $translate.instant('settingsUpdated'),

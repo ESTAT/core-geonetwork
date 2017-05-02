@@ -24,14 +24,17 @@
 package org.fao.geonet.services.harvesting;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import org.fao.geonet.kernel.harvest.Common.OperResult;
 import org.fao.geonet.kernel.harvest.HarvestManager;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
 
 import jeeves.interfaces.Service;
 import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
+import org.springframework.http.HttpMethod;
 
 
 /**
@@ -58,6 +61,8 @@ public class Clear implements Service
 
 	public Element exec(Element params, ServiceContext context) throws Exception
 	{
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+
 		return Util.exec(params, context, new Util.Job()
 		{
 			public OperResult execute(HarvestManager hm, String id) throws Exception
