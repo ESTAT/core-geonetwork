@@ -241,11 +241,13 @@
         if ($scope.importAs === 'file') {
           $scope.submit();
         } else {
-          $http.get('thesaurus.upload?' + $(formId).serialize())
-              .success(uploadThesaurusDone)
-              .error(function(data) {
-                uploadThesaurusError(null, data);
-              });
+          $http.post('thesaurus.upload', $(formId).serialize(), {
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+            .success(uploadThesaurusDone)
+            .error(function(data) {
+              uploadThesaurusError(null, data);
+            });
         }
       };
 
@@ -276,11 +278,14 @@
        * use it in the metadata editor.
        */
       $scope.enableThesaurus = function() {
-        $http.get('thesaurus.enable?_content_type=json' +
-                '&ref=' + $scope.thesaurusSelected.key +
-                '&activated=' +
-                    ($scope.thesaurusSelected.activated == 'y' ? 'n' : 'y')
-        ).success(function(data) {
+          $http({
+              method: 'POST',
+              url: 'thesaurus.enable',
+              data:  '_content_type=json&ref=' + $scope.thesaurusSelected.key +
+              '&activated=' + ($scope.thesaurusSelected.activated == 'y' ? 'n' : 'y'),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
+            .success(function(data) {
           $scope.thesaurusSelected.activated = data.activated;
         });
       };

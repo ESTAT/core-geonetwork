@@ -36,9 +36,12 @@ import org.fao.geonet.domain.ThesaurusActivation;
 import org.fao.geonet.kernel.Thesaurus;
 import org.fao.geonet.kernel.ThesaurusManager;
 import org.fao.geonet.repository.ThesaurusActivationRepository;
+import org.fao.geonet.services.Utils;
 import org.jdom.Element;
+import org.springframework.http.HttpMethod;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 
 
 /**
@@ -53,6 +56,8 @@ public class Activate implements Service {
     }
 
     public Element exec(Element params, ServiceContext context) throws Exception {
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
+
         GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 
         String fname = Util.getParam(params, Params.REF);

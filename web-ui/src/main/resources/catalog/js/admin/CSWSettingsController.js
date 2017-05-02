@@ -117,8 +117,13 @@
         $scope.cswElementSetName.splice(index, 1);
       };
       $scope.saveCSWElementSetName = function(formId) {
-        $http.get('admin.config.csw.customelementset.save?_content_type=json&' +
-                $(formId).serialize())
+          $http({
+              method: 'POST',
+              url: 'admin.config.csw.customelementset.save',
+              data:  '_content_type=json&' +
+                  $(formId).serialize(),
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          })
           .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                   msg: $translate.instant('settingsUpdated'),
