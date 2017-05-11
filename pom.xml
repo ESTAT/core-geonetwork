@@ -1227,7 +1227,6 @@
     <module>services</module>
     <module>wro4j</module>
     <module>inspire-atom</module>
-    <module>tomcat-geonetwork-classloader</module>
   </modules>
 
   <profiles>
@@ -1259,17 +1258,6 @@
       <id>jmeter</id>
       <modules>
         <module>jmeter</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>tomcat-geonetwork-classloader</id>
-      <activation>
-        <file>
-          <exists>tomcat-geonetwork-classloader/pom.xml</exists>
-        </file>
-      </activation>
-      <modules>
-        <module>tomcat-geonetwork-classloader</module>
       </modules>
     </profile>
   </profiles>
