@@ -19,9 +19,9 @@
    * TODO: Init form from route parameters
    */
   module.controller('GnImportController', [
-    '$scope',
+    '$scope', '$rootScope',
     'gnMetadataManager',
-    function($scope, gnMetadataManager) {
+    function($scope, $rootScope, gnMetadataManager) {
       $scope.importMode = 'uploadFile';
       $scope.file_type = 'single';
       $scope.uuidAction = 'nothing';
@@ -55,7 +55,8 @@
         autoUpload: false,
         done: uploadImportMdDone,
         fail: uploadImportMdError,
-        singleUpload: true
+        singleUpload: true,
+        headers: {'X-XSRF-TOKEN': $rootScope.csrf}
       };
       /** --- */
 
