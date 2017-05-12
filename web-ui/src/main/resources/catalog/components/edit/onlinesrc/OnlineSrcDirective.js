@@ -478,7 +478,8 @@
                 singleUpload: true,
                 // TODO: acceptFileTypes: /(\.|\/)(xml|skos|rdf)$/i,
                 done: uploadOnlinesrcDone,
-                fail: uploadOnlineSrcError
+                fail: uploadOnlineSrcError,
+                headers: {'X-XSRF-TOKEN': $rootScope.csrf}
               };
 
               /**
