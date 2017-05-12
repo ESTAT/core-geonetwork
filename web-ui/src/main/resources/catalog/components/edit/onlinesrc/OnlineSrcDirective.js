@@ -294,7 +294,8 @@
                 dropZone: $('#gn-upload-thumbnail'),
                 //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|tif?f)$/i,
                 done: uploadThumbnailDone,
-                fail: uploadThumbnailError
+                fail: uploadThumbnailError,
+                headers: {'X-XSRF-TOKEN': $rootScope.csrf}
               };
 
               /**
@@ -320,7 +321,8 @@
                         $http.post(scope.action,
                             $('#gn-upload-thumbnail').serialize(), {
                               headers: {'Content-Type':
-                                    'application/x-www-form-urlencoded'}
+                                    'application/x-www-form-urlencoded',
+                                    'X-XSRF-TOKEN': $rootScope.csrf}
                             }).success(function(data) {
                           uploadThumbnailDone();
                           deferred.resolve(data);
