@@ -38,12 +38,7 @@ import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.languages.IsoLanguagesMapper;
 import org.fao.geonet.lib.Lib;
 import org.fao.geonet.services.Utils;
-import org.fao.geonet.utils.FilePathChecker;
-import org.fao.geonet.utils.GeonetHttpRequestFactory;
-import org.fao.geonet.utils.IO;
-import org.fao.geonet.utils.Log;
-import org.fao.geonet.utils.Xml;
-import org.fao.geonet.utils.XmlRequest;
+import org.fao.geonet.utils.*;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.springframework.http.HttpMethod;
@@ -52,7 +47,7 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Upload one thesaurus file using file upload or file URL. <br/>
@@ -155,6 +150,11 @@ public class Upload implements Service {
 			FilePathChecker.verify(fname);
 
 			rdfFile = uploadDir.resolve(fname);
+
+			// Verify mimetype
+			java.util.List<String> allowedMimeTypes = Arrays.asList("text/xml", "application/xml", "application/rdf+xml");
+			FileMimetypeChecker.verify(rdfFile, allowedMimeTypes);
+
             fname = fname.replaceAll("\\s+", "");
 		}
 
