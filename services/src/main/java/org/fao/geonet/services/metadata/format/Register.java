@@ -35,6 +35,7 @@ import org.fao.geonet.ZipUtil;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
+import org.fao.geonet.utils.FileMimetypeChecker;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
 import org.fao.oaipmh.exceptions.BadArgumentException;
@@ -52,7 +53,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.fao.geonet.services.metadata.format.FormatterConstants.VIEW_XSL_FILENAME;
@@ -99,6 +102,11 @@ public class Register extends AbstractFormatService {
         FilePathChecker.verify(file.getOriginalFilename());
 
         Path uploadedFile = context.getUploadDir().resolve(file.getOriginalFilename());
+
+        // Verify mimetype
+        List<String> allowedMimeTypes = Arrays.asList("application/zip");
+        FileMimetypeChecker.verify(file.getInputStream(), allowedMimeTypes);
+
         byte[] data = ByteStreams.toByteArray(file.getInputStream());
         Files.write(uploadedFile, data);
 

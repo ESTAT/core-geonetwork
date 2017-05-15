@@ -45,6 +45,21 @@ public class FileMimetypeChecker {
      * @param file
      * @throws Exception
      */
+    public static void verify(InputStream inputStream, List<String> allowedMimetypes) throws IOException {
+        String type = new Tika().detect(inputStream);
+
+        if (!allowedMimetypes.contains(type)) {
+            throw new FileUploadInvalidTypeEx();
+
+        }
+    }
+
+    /**
+     * Checks the file mimetype is valid from a list of allowed mime types. If not valid throws an exception.
+     *
+     * @param file
+     * @throws Exception
+     */
     public static void verify(Path file, List<String> allowedMimetypes) throws IOException {
         if (!Files.exists(file)) return;
 
