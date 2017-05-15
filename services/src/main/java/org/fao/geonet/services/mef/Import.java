@@ -43,14 +43,13 @@ import org.fao.geonet.kernel.mef.MEFLib;
 import org.fao.geonet.kernel.search.IndexAndTaxonomy;
 import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.services.NotInReadOnlyModeService;
+import org.fao.geonet.utils.FileMimetypeChecker;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.IO;
 import org.jdom.Element;
 
 import java.nio.file.Path;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Import MEF file.
@@ -94,9 +93,19 @@ public class Import extends NotInReadOnlyModeService {
         String fileType = Util.getParam(params, "file_type", "mef");
 		Path uploadDir = context.getUploadDir();
 
+        Path file = uploadDir.resolve(mefFile);
+
         FilePathChecker.verify(mefFile);
 
-		Path file = uploadDir.resolve(mefFile);
+        // Verify mimetype
+        List<String> allowedMimeTypes;
+        if (fileType.equalsIgnoreCase("mef")) {
+            allowedMimeTypes = Arrays.asList("application/zip");
+        } else {
+            allowedMimeTypes = Arrays.asList("text/xml", "application/xml");
+        }
+
+        FileMimetypeChecker.verify(file, allowedMimeTypes);
 
 		List<String> id = MEFLib.doImport(params, context, file, stylePath);
         StringBuilder ids = new StringBuilder();
