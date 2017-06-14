@@ -42,7 +42,7 @@ public class FileMimetypeChecker {
     /**
      * Checks the file mimetype is valid from a list of allowed mime types. If not valid throws an exception.
      *
-     * @param file
+     * @param inputStream
      * @throws Exception
      */
     public static void verify(InputStream inputStream, List<String> allowedMimetypes) throws IOException {

@@ -469,6 +469,13 @@
                * Onlinesrc uploaded with error, broadcast it.
                */
               var uploadOnlineSrcError = function(data) {
+                  $rootScope.$broadcast('StatusUpdated', {
+                      title: $translate.instant('error'),
+                      error: {
+                          message: $translate.instant('errorUploadFile')
+                      },
+                      timeout: 0,
+                      type: 'danger'});
               };
 
               scope.onlinesrcUploadOptions = {

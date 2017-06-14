@@ -27,15 +27,18 @@ import com.google.common.collect.Maps;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.dispatchers.ServiceManager;
+import org.apache.commons.io.FilenameUtils;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.responses.IdResponse;
 import org.fao.geonet.exceptions.BadParameterEx;
+import org.fao.geonet.exceptions.FileUploadInvalidTypeEx;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.lib.Lib;
 import org.fao.geonet.services.metadata.XslProcessing;
 import org.fao.geonet.services.metadata.XslProcessingReport;
 import org.fao.geonet.services.resources.handlers.IResourceUploadHandler;
+import org.fao.geonet.utils.FileMimetypeChecker;
 import org.jdom.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -46,6 +49,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
@@ -93,6 +100,36 @@ public class UploadAndProcess {
 
         String fname = file.getOriginalFilename();
         String fsize = Long.toString(file.getSize());
+
+
+        // Verify mimetype
+        // Tika identifies msi files as application-x-tika-msoffice, this seem a bug.
+        List<String> nonAllowedMimetypes = Arrays.asList("application/x-msdownload",
+                "application/x-msdownload; format=pe", "application/x-tika-msoffice");
+
+        SettingManager sm = context.getBean(SettingManager.class);
+
+        String allowedMimeTypes = sm.getValue("metadata/editor/allowedUploadMimetypes");
+
+        // TODO: Check: acc,  all ogc/ogr file types, key  (Keynote presentation) identified as application/zip
+        // zip,  xls, xlsx,  .odt, csv, txt, doc, docx,  jpg, jpeg, png, gif, pdf,  rtf, ppt, .pptx, .ppsx, .pps, .odt, mdb,
+        String[] allowedMimetypesArr = allowedMimeTypes.split(",");
+        for(int i = 0; i < allowedMimetypesArr.length; i++) {
+            allowedMimetypesArr[i] = allowedMimetypesArr[i] .trim();
+        }
+
+        List<String> allowedMimetypes = Arrays.asList(allowedMimetypesArr);
+
+        if (!allowedMimetypes.isEmpty()) {
+            FileMimetypeChecker.verify(file.getInputStream(), allowedMimetypes);
+            // Explicitly disallow msi as seem a bug in Tika that identifies it as application-x-tika-msoffice,
+            // used also for other types
+            if (file.getContentType().equalsIgnoreCase("application/octet-stream") &&
+                    FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().endsWith("msi")) {
+                throw new FileUploadInvalidTypeEx();
+            }
+        }
+
         IResourceUploadHandler uploadHook = (IResourceUploadHandler) context.getApplicationContext().getBean("resourceUploadHandler");
         uploadHook.onUpload(file.getInputStream(), context, access, overwrite, Integer.parseInt(id), fname, Double.parseDouble(fsize));
 

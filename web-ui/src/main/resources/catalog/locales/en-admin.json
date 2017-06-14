@@ -1065,7 +1065,9 @@
     "region/getmap/width": "Width",
     "metadata/editor": "Metadata editor configuration",
     "metadata/editor/schemaConfig": "Standard configuration",
-	  "logActivity" : "Activity",
+    "metadata/editor/allowedUploadMimetypes": "Allowed upload mime types",
+    "metadata/editor/allowedUploadMimetypes-help": "Comma separated list of mime types allowed for file upload in the metadata editor. Mime types are identified using Apache Tika library.",
+    "logActivity" : "Activity",
     "selectExistingLogo": "Select from existing logos",
     "logoUploadError" : "Logo upload failed"
 }

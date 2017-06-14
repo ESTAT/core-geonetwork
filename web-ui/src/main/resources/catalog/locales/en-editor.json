@@ -214,5 +214,6 @@
     "notConformant": "Not conformant",
     "capabilitiesParseError": "Error parsing WMS capabilities",
     "conformant": "Conformant",
-    "thumbnailCreationError" : "Unable to create thumbnail"
+    "thumbnailCreationError" : "Unable to create thumbnail",
+    "errorUploadFile": "An error ocurred uploading the file. Check if the file type is allowed."
 }
