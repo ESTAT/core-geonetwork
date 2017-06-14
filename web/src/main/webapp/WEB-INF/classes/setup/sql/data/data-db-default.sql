@@ -665,8 +665,7 @@ INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALU
   ('metadata/editor/schemaConfig', '{"iso19110":{"defaultTab":"default","displayToolTip":false,"related":{"display":true,"readonly":true,"categories":["dataset"]},"validation":{"display":true}},"iso19139":{"defaultTab":"default","displayToolTip":false,"related":{"display":true,"categories":[]},"suggestion":{"display":true},"validation":{"display":true}},"dublin-core":{"defaultTab":"default","related":{"display":true,"readonly":false,"categories":["parent","onlinesrc"]}}}', 0, 10000, 'n', 'n');
 
 INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES
-  ('metadata/editor/allowedUploadMimetypes', 'text/plain, application/x-tika-ooxml, application/x-tika-msoffice, application/vnd.oasis.opendocument.spreadsheet, image/png, image/jpeg, image/jp2, image/gif, application/pdf, application/rtf, application/vnd.oasis.opendocument.presentation, application/zip, application/x-msaccess', 0, 10000, 'n', 'n');
-
+  ('metadata/editor/allowedUploadMimetypes', 'text/plain, application/x-tika-ooxml, application/x-tika-msoffice, application/vnd.oasis.opendocument.spreadsheet, image/png, image/jpeg, image/jp2, image/gif, application/pdf, application/rtf, application/vnd.oasis.opendocument.presentation, application/zip, application/x-msaccess, application/vnd.openxmlformats-officedocument.presentationml.presentation', 0, 10000, 'n', 'n');
 
 INSERT INTO Settings (name, value, datatype, position, internal, encrypted) VALUES ('metadata/resourceIdentifierPrefix', 'http://localhost:8080/geonetwork/srv/metadata/', 0, 10001, 'n', 'n');
 
