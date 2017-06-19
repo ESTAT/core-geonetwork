@@ -85,25 +85,43 @@
           controller: 'GnAdminMetadataController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Guest');
+              authorizationService.$get[0]().check('Editor');
             }
           }
         }).
-        when('/metadata/:tab', {
+        when('/metadata/metadata-and-template', {
           templateUrl: tplFolder + 'page-layout.html',
           controller: 'GnAdminMetadataController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Guest');
+              authorizationService.$get[0]().check('Administrator');
             }
           }
           }).
+        when('/metadata/formatter', {
+          templateUrl: tplFolder + 'page-layout.html',
+          controller: 'GnAdminMetadataController',
+          resolve: {
+            permission: function() {
+              authorizationService.$get[0]().check('UserAdmin');
+            }
+          }
+          }).
+        when('/metadata/schematron', {
+          templateUrl: tplFolder + 'page-layout.html',
+          controller: 'GnAdminMetadataController',
+          resolve: {
+            permission: function() {
+              authorizationService.$get[0]().check('Administrator');
+            }
+          }
+        }).
         when('/metadata/schematron/:schemaName', {
           templateUrl: tplFolder + 'page-layout.html',
           controller: 'GnAdminMetadataController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Guest');
+              authorizationService.$get[0]().check('Administrator');
             }
           }
         }).
@@ -112,7 +130,7 @@
           controller: 'GnAdminMetadataController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Guest');
+              authorizationService.$get[0]().check('Administrator');
             }
           }
         }).
@@ -121,16 +139,25 @@
           controller: 'GnAdminMetadataController',
           resolve: {
             permission: function() {
-               authorizationService.$get[0]().check('Guest');
+               authorizationService.$get[0]().check('Editor');
             }
           }
         }).
+        when('/metadata/:tab', {
+          templateUrl: tplFolder + 'page-layout.html',
+          controller: 'GnAdminMetadataController',
+          resolve: {
+            permission: function() {
+              authorizationService.$get[0]().check('Editor');
+            }
+          }
+          }).
         when('/dashboard', {
           templateUrl: tplFolder + 'page-layout.html',
           controller: 'GnDashboardController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Editor');
+              authorizationService.$get[0]().check('Administrator');
             }
           }
         }).
@@ -139,7 +166,7 @@
           controller: 'GnDashboardController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Editor');
+              authorizationService.$get[0]().check('Administrator');
             }
           }
         }).
@@ -220,7 +247,7 @@
           controller: 'GnHarvestController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Editor');
+              authorizationService.$get[0]().check('UserAdmin');
             }
           }
         }).
@@ -229,7 +256,7 @@
           controller: 'GnHarvestController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Editor');
+              authorizationService.$get[0]().check('UserAdmin');
             }
           }
         }).
@@ -256,7 +283,7 @@
           controller: 'GnStandardsController',
           resolve: {
             permission: function() {
-              authorizationService.$get[0]().check('Editor');
+              authorizationService.$get[0]().check('Administrator');
             }
           }
         }).
