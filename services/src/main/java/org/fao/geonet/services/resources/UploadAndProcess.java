@@ -128,6 +128,12 @@ public class UploadAndProcess {
                     FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().endsWith("msi")) {
                 throw new FileUploadInvalidTypeEx();
             }
+
+            // Explicitly disallow JAR, as identified in tika as application/zip
+            if (file.getContentType().equalsIgnoreCase("application/java-archive") ||
+                    FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase().endsWith("jar")) {
+                throw new FileUploadInvalidTypeEx();
+            }
         }
 
         IResourceUploadHandler uploadHook = (IResourceUploadHandler) context.getApplicationContext().getBean("resourceUploadHandler");
