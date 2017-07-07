@@ -36,11 +36,13 @@
                     var event = 'requestCapLoadESRI';
                     scope.$on(event, function(e, url) {
                       // Open layer selection;
-                      $('button[rel=#addLayers]').click();
+                      $timeout(function(){
+                        $('button[rel=#addLayers]').click();
+                        // Open Esri
+                        $('a', $('li[active="addLayerTabs.esri"]')).click();
+                        scope.setUrl(url);
+                      });
 
-                      // Open Esri
-                      $('a', $('li[active="addLayerTabs.esri"]')).click();
-                      scope.setUrl(url);
                     });
 
                     scope.setUrl = function(srv) {
