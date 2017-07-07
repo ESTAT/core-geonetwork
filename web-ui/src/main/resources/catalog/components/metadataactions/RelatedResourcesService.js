@@ -148,9 +148,16 @@
               $rootScope.$broadcast('requestCapLoadESRI', serviceUrl);
               
             } else {
+              
+              var serverType = "FeatureServer";
+              
+              if(link.protocol.indexOf("image") > 0) {
+                serverType = "MapServer";
+              }
+              
               gnMap.addEsriFToMap(serviceUrl, link.title, "",
-                  'Feature Layer', gnSearchSettings.viewerMap, link.title);
-
+                  serverType, gnSearchSettings.viewerMap, link.title);
+             
               gnSearchLocation.setMap();
               
             }
@@ -158,26 +165,8 @@
 
 
           var addESRIIToMap = function(link, md) {
-
-            var serviceUrl = link.url;
-            
-            if(!serviceUrl.endsWith("/")) {
-              serviceUrl = serviceUrl + "/";
-            }
-            
-            if(link.title.startsWith("http")) {
-              //We have no layer name, show layer chooser
-              // move to map
-              gnSearchLocation.setMap();
-              // open dialog 
-              $rootScope.$broadcast('requestCapLoadESRI', serviceUrl);
-              
-            } else {
-              gnMap.addEsriIToMap(serviceUrl, link.title, "",
-                  'Raster Layer', gnSearchSettings.viewerMap, link.title);
-            }
-
-              gnSearchLocation.setMap();
+            //Because... the code is the same :)
+            addESRIFToMap(link, md);
           };
 
 
