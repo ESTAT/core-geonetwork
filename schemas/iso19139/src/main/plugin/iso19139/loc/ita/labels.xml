@@ -1762,6 +1762,7 @@ elementi quali il software, il sistema operativo del computer, nome del file, e 
 		<label>Protocollo</label>
 		<description>Protocollo di connessione utilizzato</description>
 		<helper>
+      <option show="y"  value="ESRI:REST">Esri REST service</option>
 			<option show="y" value="ESRI:AIMS--http--configuration">ArcIMS Map Service: file di configurazione (*.AXL)</option>
 			<option show="y" value="ESRI:AIMS--http-get-feature">ArcIMS Internet Feature Map Service
 			</option>

@@ -2043,6 +2043,7 @@
 		<label>Используемый протокол связи</label>
 		<description>Используемый протокол связи</description>
 		<helper>
+      <option show="y"  value="ESRI:REST">Esri REST service</option>
 			<option show="y" value="ESRI:AIMS--http--configuration">Конфигурационный файл сервиса ArcIMS
 				(*.AXL)</option>
 			<option show="y" value="ESRI:AIMS--http-get-feature">Интернет-сервис ArcIMS Feature Map

@@ -2008,6 +2008,7 @@
 		<label>Protocol</label>
 		<description>Connection protocol to be used</description>
 		<helper>
+      <option show="y"  value="ESRI:REST">Esri REST service</option>
 			<option show="y" value="ESRI:AIMS--http--configuration">ArcIMS 地图服务配置文件 (*.AXL)</option>
 			<option show="y" value="ESRI:AIMS--http-get-feature">ArcIMS 网络要素服务</option>
 			<option show="-" value="ESRI:AIMS--http-get-image">ArcIMS 网络影像地图服务</option>

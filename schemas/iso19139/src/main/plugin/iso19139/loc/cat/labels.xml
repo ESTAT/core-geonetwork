@@ -1582,6 +1582,7 @@ esbiaixades</option>
 		<label>Protoco</label>
 		<description>Protocol de connexió que s'utilitzarà</description>
 		<helper sort="true">
+      <option show="y"  value="ESRI:REST">Esri REST service</option>
 			<option value="ESRI:AIMS--http--configuration">Fitxer de configuració del servei de mapes ArcIMS (*.AXL)</option>
 			<option value="ESRI:AIMS--http-get-feature">Servei d'Objectes Geogràfics d'ArcIMS</option>
 			<option value="ESRI:AIMS--http-get-image">Servei d'imatges d'ArcIMS</option>

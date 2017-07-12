@@ -1756,6 +1756,7 @@
 		<label>Protokoll</label>
 		<description>Protokoll som skal benyttes ved direktekobling</description>
 		<helper>
+      <option show="y"  value="ESRI:REST">Esri REST service</option>
 			<option show="-" value="ESRI:AIMS--http-get-image">ArcIMS Internet Image Map Service</option>
 			<option show="y" value="ESRI:AIMS--http--configuration">ArcIMS Map Service Configuration File (*.AXL)</option>
 			<option show="y" value="ESRI:AIMS--http-get-feature">ArcIMS Internet Feature Map Service</option>

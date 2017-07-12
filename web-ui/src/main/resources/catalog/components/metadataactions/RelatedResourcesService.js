@@ -315,6 +315,8 @@
                   return 'ESRI-FEATURE';
                 } else if (protocolOrType.match(/image/i)) {
                   return 'ESRI-IMAGE';
+                } else {
+                  return 'ESRI-IMAGE';
                 }
               } else if (protocolOrType.match(/link/i)) {
                 return 'LINK';

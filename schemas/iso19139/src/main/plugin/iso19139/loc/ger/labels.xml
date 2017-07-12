@@ -2325,6 +2325,7 @@
 		<condition />
 		<description>Zu verwendendes Verbindungsprotokoll</description>
 		<helper>
+      <option show="y"  value="ESRI:REST">Esri REST service</option>
 			<option value="WWW:LINK-1.0-http--link">Webaddresse (URL)</option>
 			<option value="WWW:LINK-1.0-http--samples">Beispielprodukt (URL)</option>
 			<option value="WWW:LINK-1.0-http--related">Verwandter Link (URL)</option>
