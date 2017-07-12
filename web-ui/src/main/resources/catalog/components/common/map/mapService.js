@@ -37,10 +37,11 @@
       'Metadata',
       'gnWfsService',
       'gnGlobalSettings',
+      '$http',
       function(ngeoDecorateLayer, gnOwsCapabilities, gnConfig, $log, 
           gnSearchLocation, $rootScope, gnUrlUtils, $q, $translate,
           gnWmsQueue, gnSearchManagerService, Metadata, gnWfsService,
-          gnGlobalSettings) {
+          gnGlobalSettings, $http) {
 
         var defaultMapConfig = {
           'useOSM': 'false',
@@ -691,6 +692,17 @@
               })
             });
             
+            var legendUrl = serviceUrl + name
+                    + "/" + serverType + "/legend";
+            
+            $http.get(legendUrl).then(function successCallback(response) {
+              var data = response.data;
+              data = data.substring(data.indexOf('<table class="formTable"'),
+                                    data.lastIndexOf('</table>') + 8);
+              tileLayer.set('htmllegend', data, true);
+            });
+            
+           
             tileLayer.displayInLayerManager = true;
             map.getLayers().push(tileLayer);
           },

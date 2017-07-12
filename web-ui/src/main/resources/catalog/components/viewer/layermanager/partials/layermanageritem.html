@@ -35,6 +35,9 @@
      <p ng-if="layer.get('legend')">
        <img ng-src="{{layer.get('legend')}}"/>
      </p>
+     <p data-ng-if="layer.get('htmllegend')">
+     <p data-ng-bind-html="layer.get('htmllegend')"></p>
+     </p>
      <h6 ng-if="layer.get('attribution')" data-translate="">Attribution</h6>
      <p ng-if="layer.get('attribution')"><em>{{layer.get('attribution')}}</em></p>
      <div gn-ncwms-transect="" map="map" layer="layer" data-ng-if="layer.ncInfo"/>
