@@ -13,8 +13,8 @@
    * given map
    */
   module.directive('gnBaselayerswitcher', [
-    'gnViewerSettings',
-    function(gnViewerSettings) {
+    'gnViewerSettings', '$rootScope',
+    function(gnViewerSettings, $rootScope) {
       return {
         restrict: 'A',
         templateUrl: '../../catalog/components/viewer/baselayerswitcher/' +
@@ -33,6 +33,10 @@
             layers.insertAt(0, layer);
             return false;
           };
+
+            $rootScope.$on('bgLayers-update', function(event, args) {
+              scope.layers = gnViewerSettings.bgLayers;
+          });
         }
       };
     }]);

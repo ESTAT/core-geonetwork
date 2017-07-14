@@ -17,10 +17,40 @@
           // Load the context defined in the configuration
           viewerSettings.defaultContext =
             viewerSettings.mapConfig.viewerMap ||
-            '../../map/config-viewer.xml';
+                (viewerSettings.mapConfig.projection == 'EPSG:3857')?
+                    '../../map/config-viewer-3857.xml':'../../map/config-viewer-4326.xml';
+
+         // window.localStorage.removeItem('owsContext');
+          var owsContextText = window.localStorage.getItem('owsContext');
+
+          // Update some map properties from localStorage owsContext
+          if (owsContextText) {
+              // OWC Client
+              // Jsonix wrapper to read or write OWS Context
+              var context = new Jsonix.Context(
+                  [XLink_1_0, OWS_1_0_0, Filter_1_0_0, GML_2_1_2, SLD_1_0_0, OWC_0_3_1],
+                  {
+                      namespacePrefixes: {
+                          'http://www.w3.org/1999/xlink': 'xlink',
+                          'http://www.opengis.net/ows': 'ows'
+                      }
+                  }
+              );
+              var unmarshaller = context.createUnmarshaller();
+              var owsContext = unmarshaller.unmarshalString(owsContextText).value;
+
+              var bbox = owsContext.general.boundingBox.value;
+              var projection = bbox.crs;
+
+              viewerSettings.mapConfig.center =
+                  ol.extent.getCenter(ol.extent.boundingExtent([bbox.lowerCorner, bbox.upperCorner]));
+
+
+              viewerSettings.mapConfig.projection = bbox.crs;
+          }
 
           viewerSettings.selectedbgLayer = viewerSettings.mapConfig.gntype || 'Blue_marble_4326_tile';
-          
+
           // Keep one layer in the background
           // while the context is not yet loaded.
           viewerSettings.bgLayers = [
@@ -65,9 +95,10 @@
           var mapproj = viewerSettings.mapConfig.projection || 'EPSG:4326';
           var minZoom = viewerSettings.mapConfig.minZoom || 0;
           var maxZoom = viewerSettings.mapConfig.maxZoom || 11;
+          var center = viewerSettings.mapConfig.center || [5,50];
           var mapsConfig = {
               	projection: mapproj,
-                  center: [5,50],
+                  center: center,
                   zoom: 4,
                   maxZoom: maxZoom,
                   minZoom: minZoom
@@ -78,7 +109,7 @@
 //            zoom: 2
 //            //maxResolution: 9783.93962050256
 //          };
-          
+
           var viewerMap = new ol.Map({
 			   controls: [],
         	   //controls: [new ol.control.ScaleLine()],
@@ -96,7 +127,143 @@
           });
 
 
-          /** Facets configuration */
+            function checkForProjection() {
+                if (jQuery('#projection').length === 0) {
+                    window.setTimeout(checkForProjection, 500);
+                    return;
+                }
+
+
+                ol.control.Projection = function(opt_options) {
+                    var options = opt_options || {};
+                    var _this = this;
+
+                    var projSwitcher = document.getElementById('projectionSelector');
+
+                    projSwitcher
+                        .addEventListener(
+                            'change',
+                            function(evt) {
+                                var oldProj =  _this.getMap().getView()
+                                    .getProjection();
+                                var newProj = ol.proj
+                                    .get(this.value);
+
+                                /*if (newProj.getCode() == 'EPSG:4326') {
+                                    minResolution: 0.0000000026193447411060333,
+                                    maxResolution: 0.3515625,
+                                } else {
+                                    minResolution: 0.0000000026193447411060333,
+                                    maxResolution: 0.3515625,
+                                }*/
+
+                                var newView = new ol.View({
+                                    //minResolution: 0.00029158412279196264,
+                                    //maxResolution: 39135.75848201024,
+                                    projection: newProj,
+                                    center:  ol.proj.transform(_this.getMap().getView().getCenter(), oldProj, newProj),
+                                    zoom:  _this.getMap().getView().getZoom(),
+                                    minZoom: 2
+                                    //maxZoom: parseInt(maxZoom)
+                                });
+
+                                // Set the view
+                                _this.getMap().setView(newView);
+
+                                _this
+                                    .getMap()
+                                    .getControls()
+                                    .forEach(
+                                        function(
+                                            control) {
+                                            if (typeof control.setProjection === "function") {
+                                                control
+                                                    .setProjection(newProj);
+                                            }
+                                        });
+
+
+                                if (newProj.getCode() == 'EPSG:4326') {
+                                    viewerSettings.selectedbgLayer = 'Natural_Earth_4326_tile';
+                                    viewerSettings.defaultContext = '../../map/config-viewer-4326.xml';
+                                } else {
+                                    viewerSettings.selectedbgLayer = 'Natural_Earth_3857_tile';
+                                    viewerSettings.defaultContext = '../../map/config-viewer-3857.xml';
+                                }
+
+                                // Keep one layer in the background
+                                // while the context is not yet loaded.
+                                viewerSettings.bgLayers = [
+                                    gnMap.createLayerForType(viewerSettings.selectedbgLayer)
+                                ];
+
+                                gnOwsContextService.
+                                loadContextFromUrl(viewerSettings.defaultContext ,
+                                    _this.getMap());
+
+                            });
+                    ol.control.Control.call(this, {
+                        element : projSwitcher,
+                        target : options.target
+                    });
+                    this.set('element', projSwitcher);
+                };
+                ol.inherits(ol.control.Projection, ol.control.Control);
+
+                ol.control.Projection.prototype.setMap = function(map) {
+                    ol.control.Control.prototype.setMap.call(this, map);
+                    if (map !== null) {
+                        this.get('element').value = map.getView()
+                            .getProjection().getCode();
+                    }
+                };
+
+                ol.control.Projection.prototype.changeLayerProjection = function(
+                    layer, oldProj, newProj) {
+                    if (layer instanceof ol.layer.Group) {
+                        layer.getLayers()
+                            .forEach(
+                                function(subLayer) {
+                                    this.changeLayerProjection(
+                                        subLayer, oldProj,
+                                        newProj);
+                                });
+                    } else if (layer instanceof ol.layer.Tile) {
+                        var tileLoadFunc = layer.getSource()
+                            .getTileLoadFunction();
+                        layer.getSource().setTileLoadFunction(
+                            tileLoadFunc);
+                    } else if (layer instanceof ol.layer.Vector) {
+                        var features = layer.getSource().getFeatures();
+                        for (var i = 0; i < features.length; i += 1) {
+                            features[i].getGeometry().transform(
+                                oldProj, newProj);
+                        }
+                    }
+                };
+
+                ol.control.Projection.prototype.addProjection = function(
+                    projection,text) {
+                    ol.proj.addProjection(projection);
+                    var projSwitcher = this.get('element');
+                    var newProjOption = document
+                        .createElement('option');
+                    newProjOption.value = projection.getCode();
+                    newProjOption.textContent = text;//projection.getCode();
+                    projSwitcher.appendChild(newProjOption);
+                };
+
+                var projControl = new ol.control.Projection({
+                    target : document.getElementById('projection')
+                });
+
+                viewerMap.addControl(projControl);
+            }
+
+            window.setTimeout(checkForProjection, 500);
+
+
+            /** Facets configuration */
           searchSettings.facetsSummaryType = 'details';
 
           /*
@@ -193,6 +360,6 @@
             viewerMap: viewerMap,
             searchMap: searchMap
           });
-          
+
         }]);
 })();

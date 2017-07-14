@@ -52,8 +52,9 @@
     '$q',
     '$filter',
     '$timeout',
+    '$rootScope',
     function(gnMap, gnOwsCapabilities, $http, gnViewerSettings,
-             $translate, $q, $filter, $timeout) {
+             $translate, $q, $filter, $timeout, $rootScope) {
 
     	var getMapSizeValid = function(s){
             var valid = (s && s.length == 2 && s[0] > 0 && s[1] > 0);
@@ -217,6 +218,8 @@
                 firstVisibleBgLayer = false;
               }
             });
+
+            $rootScope.$broadcast('bgLayers-update');
           }
         });
       };

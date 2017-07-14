@@ -46,6 +46,11 @@
       <span class="fa fa-pencil"></span>
       <span role="tooltip" data-translate="">Annotations</span>
     </button>
+    <button class="btn btn-default" ng-model="activeTools.proj" type="submit"
+            rel="#proj" gi-btn gnv-tools-btn>
+      <span class="fa fa-map"></span>
+      <span role="tooltip" data-translate="">ChangeProjection</span>
+    </button>
   </div>
   <!--Bottom right buttons - Navigation-->
   <div class="tools control-tools">
@@ -140,6 +145,24 @@
          data-dropup=""
          data-ng-show="is3dEnabled"></div>
     <br/>
+  </div>
+  <div class="panel panel-default force-hide panel-tools"
+       id="proj"
+       gnv-layermanager-btn="false">
+    <div class="panel-heading">
+      <h3>{{'ChangeProjection' | translate}}
+        <button type="button" class="btn btn-default close">
+          &times;
+        </button>
+      </h3>
+    </div>
+    <div id="projection" class="panel-body">
+      <label>{{'SelectProjection' | translate}}</label>
+      <select class="form-control" id="projectionSelector">
+        <option value="EPSG:4326">EPGS:4326</option>
+        <option value="EPSG:3857">Web Mercator</option>
+      </select>
+    </div>
   </div>
 
 
