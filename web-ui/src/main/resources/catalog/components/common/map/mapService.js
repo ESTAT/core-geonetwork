@@ -701,8 +701,8 @@
                                     data.lastIndexOf('</table>') + 8);
               tileLayer.set('htmllegend', data, true);
             });
-            
-           
+
+            ngeoDecorateLayer(olLayer);
             tileLayer.displayInLayerManager = true;
             map.getLayers().push(tileLayer);
           },

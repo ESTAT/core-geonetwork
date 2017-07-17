@@ -324,5 +324,6 @@
   "mdnovalidation": "Metadata has no validation information",
   "setall": "Set all privileges",
   "ChangeProjection": "Change map projection",
-  "SelectProjection": "Select the projection:"
+  "SelectProjection": "Select the projection:",
+  "LayerESRI": "ESRI layer"
 }

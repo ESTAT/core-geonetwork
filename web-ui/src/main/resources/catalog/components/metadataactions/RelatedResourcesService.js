@@ -260,7 +260,7 @@
             },
             'ESRI-IMAGE' : {
               iconClass: 'fa-globe',
-              label: 'webserviceLink',
+              label: 'addToMap',
               action: addESRIIToMap
             },
             'DEFAULT' : {
@@ -275,7 +275,7 @@
                 this.map['DEFAULT'].iconClass;
           };
 
-          this.getLabel = function(type) {
+           this.getLabel = function(type) {
             return this.map[type || 'DEFAULT'].label;
           };
           this.getAction = function(type) {
