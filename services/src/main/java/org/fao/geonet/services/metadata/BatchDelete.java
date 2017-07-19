@@ -39,6 +39,7 @@ import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.SelectionManager;
 import org.fao.geonet.kernel.mef.MEFLib;
+import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.lib.Lib;
 import org.fao.geonet.repository.MetadataRepository;
 import org.fao.geonet.utils.IO;
@@ -66,6 +67,7 @@ public class BatchDelete extends BackupFileService {
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager   dataMan   = gc.getBean(DataManager.class);
 		AccessManager accessMan = gc.getBean(AccessManager.class);
+        SearchManager searchManager = gc.getBean(SearchManager.class);
 		UserSession   session   = context.getUserSession();
 
 		Set<String> metadata = new HashSet<>();
@@ -116,6 +118,8 @@ public class BatchDelete extends BackupFileService {
                 metadata.add(uuid);
             }
         }
+
+        searchManager.forceIndexChanges();
 
 		// -- for the moment just return the sizes - we could return the ids
 		// -- at a later stage for some sort of result display

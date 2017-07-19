@@ -148,13 +148,13 @@
         if (md) {
           return gnMetadataManager.remove(md.getId()).then(function() {
             $rootScope.$broadcast('mdSelectNone');
-            $rootScope.$broadcast('resetSearch', searchParams);
+            $rootScope.$broadcast('search');
           });
         }
         else {
           return callBatch('mdDeleteBatch').then(function() {
             $rootScope.$broadcast('mdSelectNone');
-            $rootScope.$broadcast('resetSearch', searchParams);
+            $rootScope.$broadcast('search');
           });
         }
       };
