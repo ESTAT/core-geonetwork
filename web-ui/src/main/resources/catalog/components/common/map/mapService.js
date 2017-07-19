@@ -702,7 +702,7 @@
               tileLayer.set('htmllegend', data, true);
             });
 
-            ngeoDecorateLayer(olLayer);
+            ngeoDecorateLayer(tileLayer);
             tileLayer.displayInLayerManager = true;
             map.getLayers().push(tileLayer);
           },

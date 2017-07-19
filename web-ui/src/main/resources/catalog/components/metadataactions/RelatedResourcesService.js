@@ -145,24 +145,26 @@
             if(!serviceUrl.endsWith("/")) {
               serviceUrl = serviceUrl + "/";
             }
-            
-            if(link.title.startsWith("http")) {
-              link.title = link.title.substring(
-                  link.title.indexOf("services/") + 9,
-                  link.title.indexOf("Server"));
-              
-              link.title = link.title.substring(0, 
-                  link.title.lastIndexOf("/"));
+
+            var serviceName =
+                serviceUrl.substring(
+                    serviceUrl.indexOf("services/") + 9,
+                    serviceUrl.indexOf("Server"));
+
+            serviceName = serviceName.substring(0,
+                serviceName.lastIndexOf("/"));
+
+            if (!link.title || link.title.indexOf("http") == 0) {
+              link.title = serviceName;
             }
-            
-            serviceUrl = serviceUrl.substring(0, 
+            serviceUrl = serviceUrl.substring(0,
                 serviceUrl.indexOf("/rest/services") + 15);
             
             if(serverType == "FeatureServer") {
-              gnMap.addEsriFToMap(serviceUrl, link.title, "",
+              gnMap.addEsriFToMap(serviceUrl, serviceName, "",
                   serverType, gnSearchSettings.viewerMap, link.title);
             } else {
-              gnMap.addEsriIToMap(serviceUrl, link.title, "",
+              gnMap.addEsriIToMap(serviceUrl, serviceName, "",
                   serverType, gnSearchSettings.viewerMap, link.title);
             }
            
