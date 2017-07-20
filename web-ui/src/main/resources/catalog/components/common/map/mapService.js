@@ -38,7 +38,7 @@
       'gnWfsService',
       'gnGlobalSettings',
       '$http',
-      function(ngeoDecorateLayer, gnOwsCapabilities, gnConfig, $log, 
+      function(ngeoDecorateLayer, gnOwsCapabilities, gnConfig, $log,
           gnSearchLocation, $rootScope, gnUrlUtils, $q, $translate,
           gnWmsQueue, gnSearchManagerService, Metadata, gnWfsService,
           gnGlobalSettings, $http) {
@@ -55,20 +55,20 @@
             'label': 'Google mercator (EPSG:3857)'
           }]
         };
-        
+
         //var estatService = 'https://webgate.acceptance.ec.europa.eu';
         var estatService = 'https://webgate.ec.europa.eu';
         var _createEstatLayerTile = function( basemap, projCode, title, type ){
         	var projection = ol.proj.get('EPSG:' + projCode);
     		var projectionExtent = projection.getExtent();
         	if (projCode === 4326) {
-        		// NOTE: estat uses an offset for the tile service for EPSG:4326.   
+        		// NOTE: estat uses an offset for the tile service for EPSG:4326.
         		//var origin: ol.extent.getTopLeft(projectionExtent);
         		var origin = [-400, 400];
-        		var resolutions = [0.5948652514575701,   0.23794610058302804,   0.11897305029151402, 
-        		                   0.05948652514575701,  0.023794610058302804,  0.011897305029151402, 
+        		var resolutions = [0.5948652514575701,   0.23794610058302804,   0.11897305029151402,
+        		                   0.05948652514575701,  0.023794610058302804,  0.011897305029151402,
         		                   0.005948652514575701, 0.0023794610058302804, 0.0011897305029151402,
-        		                   0.0005948652514575701, 0.00023794610058302804, 0.00011897305029151402]; 
+        		                   0.0005948652514575701, 0.00023794610058302804, 0.00011897305029151402];
         		var matrixIds = [0,1,2,3,4,5,6,7,8,9,10,11];
 
         		return new ol.layer.Tile({
@@ -82,7 +82,7 @@
         					resolutions: resolutions,
         					matrixIds: matrixIds
         				})
-        			}),          
+        			}),
         			extent: projectionExtent,
         			title: title,
         			gntype: type
@@ -94,7 +94,7 @@
         			//url: estatService + '/estat/inspireec/gis/arcgis/rest/services/Basemaps/' + basemap + '_' + projCode +'/MapServer/tile/{z}/{y}/{x}'
         			projection: projection,
         			extent: projectionExtent
-        		}),                  
+        		}),
         		extent: projectionExtent,
         		title: title,
         		gntype: type
@@ -110,9 +110,9 @@
         			projection: projection,
         			extent: projectionExtent,
         			params: {
-        				'LAYERS': '0', 
+        				'LAYERS': '0',
         				'TILED': true
-        			}, 
+        			},
         			serverType: 'mapserver'
         		}),
         		extent: projectionExtent,
@@ -130,10 +130,10 @@
         			projection: projection,
         			extent: projectionExtent,
         			params: {
-        				'LAYERS': layers || '0', 
+        				'LAYERS': layers || '0',
         				'STYLES': styles || 'default',
         				'TILED': true
-        			}, 
+        			},
         			serverType: 'mapserver'
         		}),
         		extent: projectionExtent,
@@ -141,7 +141,7 @@
         		gntype: type
         	});
         }
-        
+
         var _createLayerForType = function(type, opt) {
 
         	switch (type) {
@@ -167,7 +167,7 @@
         				imagerySet: 'Aerial'
         			}),
         			title: 'Bing Aerial',
-        			gntype: type                  
+        			gntype: type
         		});
         	case 'wmts':
         		var that = this;
@@ -238,7 +238,7 @@
         	$log.warn('Unsupported layer type: ', type);
         };
 
-	  	
+
         return {
 
           /**
@@ -615,10 +615,10 @@
            */
           addEsriFToMap: function(serviceUrl, name, layer, serverType, map, label) {
             var esrijsonFormat = new ol.format.EsriJSON();
-            
+
             var vectorSource = new ol.source.Vector({
               loader: function(extent, resolution, projection) {
-                var url = serviceUrl 
+                var url = serviceUrl
                             + name
                             + "/"
                             + serverType
@@ -675,36 +675,79 @@
            * @param {ol.Map} map object
            */
           addEsriIToMap: function(serviceUrl, name, layer, serverType, map, label) {
-            
-            var urlTemplate = serviceUrl + name
-                + "/" + serverType + "/" //  + ((layer)? layer + "/"  : "") 
-                + "tile/{z}/{y}/{x}";
 
-            var tileLayer = new ol.layer.Tile({
-              label: label,
-              source: new ol.source.XYZ({
-                tileUrlFunction: function(tileCoord) {
-                  return urlTemplate.replace('{z}', (tileCoord[0]).toString())
-                                    .replace('{x}', tileCoord[1].toString())
-                                    .replace('{y}', (-tileCoord[2] - 1).toString());
-                },
-                wrapX: true
-              })
-            });
-            
-            var legendUrl = serviceUrl + name
+            // Retrieve service information
+            $http.get(
+                '../../proxy?url='
+                + encodeURIComponent(serviceUrl + name
+                  + "/" + serverType
+                    + "?f=json&pretty=true"), {
+                    cache : true
+                }).success(function(capability) {
+                  var tileLayer;
+                  // Tiles
+                  if (capability.tileInfo) {
+                    var projCode = capability.spatialReference.wkid;
+
+                    var projection = ol.proj.get('EPSG:' + projCode);
+                    var projectionExtent = projection.getExtent();
+
+                    var urlTemplate = serviceUrl + name
+                      + "/" + serverType + "/" //  + ((layer)? layer + "/"  : "")
+                      + "tile/{z}/{y}/{x}";
+
+                    var origin = [capability.tileInfo.origin.x, capability.tileInfo.origin.y];
+                    var resolutions = [];
+                    var matrixIds = [];
+                    for(var i = 0; i < capability.tileInfo.lods.length; i++) {
+                      resolutions.push(capability.tileInfo.lods[i].resolution);
+                      matrixIds.push(capability.tileInfo.lods[i].level);
+                    }
+
+                    tileLayer = new ol.layer.Tile({
+                      source: new ol.source.XYZ({
+                        url: urlTemplate,
+                        projection: projection,
+                        extent: projectionExtent,
+                        tileGrid: new ol.tilegrid.WMTS({
+                          origin: origin,
+                          resolutions: resolutions,
+                          matrixIds: matrixIds
+                        })
+                      }),
+                      extent: projectionExtent,
+                      title: label,
+                      label: label
+                    });
+
+                  } else {
+                    //  tiles
+                    var url = serviceUrl + name + "/" + serverType;
+
+                    tileLayer =
+                      new ol.layer.Tile({
+                        label: label,
+                        source: new ol.source.TileArcGISRest({
+                          params: {},
+                          url: url
+                        })
+                      });
+                  }
+
+                  var legendUrl = serviceUrl + name
                     + "/" + serverType + "/legend";
-            
-            $http.get(legendUrl).then(function successCallback(response) {
-              var data = response.data;
-              data = data.substring(data.indexOf('<table class="formTable"'),
-                                    data.lastIndexOf('</table>') + 8);
-              tileLayer.set('htmllegend', data, true);
-            });
 
-            ngeoDecorateLayer(tileLayer);
-            tileLayer.displayInLayerManager = true;
-            map.getLayers().push(tileLayer);
+                  $http.get(legendUrl).then(function successCallback(response) {
+                    var data = response.data;
+                    data = data.substring(data.indexOf('<table class="formTable"'),
+                      data.lastIndexOf('</table>') + 8);
+                    tileLayer.set('htmllegend', data, true);
+                  });
+
+                  ngeoDecorateLayer(tileLayer);
+                  tileLayer.displayInLayerManager = true;
+                  map.getLayers().push(tileLayer);
+            });
           },
 
           // Given only the url, it will show a dialog to select
@@ -1561,7 +1604,7 @@
               map.getView().fit(layer.get('cextent'), map.getSize());
             }
           },
-          
+
           /**
            * @ngdoc method
            * @methodOf gn_map.service:gnMap
