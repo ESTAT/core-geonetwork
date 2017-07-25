@@ -158,6 +158,7 @@
     "poweredBy": "Powered by GeoNetwork opensource",
     "previous": "Previous",
     "profile": "User profile",
+    "projectionMismatch": "Projection mismatch. Only layers with the same projection as the map can be loaded.",
     "recoverPassword": "Forgot your password",
     "register": "Register",
     "rememberMe": "Remember me",

@@ -37,11 +37,13 @@
       'Metadata',
       'gnWfsService',
       'gnGlobalSettings',
-      '$http',
+      '$http', 
+      'gnAlertService', 
+      '$translate',
       function(ngeoDecorateLayer, gnOwsCapabilities, gnConfig, $log,
           gnSearchLocation, $rootScope, gnUrlUtils, $q, $translate,
           gnWmsQueue, gnSearchManagerService, Metadata, gnWfsService,
-          gnGlobalSettings, $http) {
+          gnGlobalSettings, $http, gnAlertService, $translate) {
 
         var defaultMapConfig = {
           'useOSM': 'false',
@@ -618,6 +620,15 @@
 
             var vectorSource = new ol.source.Vector({
               loader: function(extent, resolution, projection) {
+
+                //Show error if projection is not right
+                if(map.getView().getProjection().constructor != projection.constructor) {
+                  gnAlertService.addAlert({
+                    msg: $translate.instant('projectionMismatch'),
+                    type: 'danger'
+                  });
+                }
+                
                 var url = serviceUrl
                             + name
                             + "/"
@@ -692,6 +703,15 @@
                     var projection = ol.proj.get('EPSG:' + projCode);
                     var projectionExtent = projection.getExtent();
 
+                    //Show error if projection is not right
+                    if(map.getView().getProjection().constructor != projection.constructor) {
+                      gnAlertService.addAlert({
+                        msg: $translate.instant('projectionMismatch'),
+                        type: 'danger'
+                      });
+                    }
+                    
+                    
                     var urlTemplate = serviceUrl + name
                       + "/" + serverType + "/" //  + ((layer)? layer + "/"  : "")
                       + "tile/{z}/{y}/{x}";
