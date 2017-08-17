@@ -37,8 +37,8 @@
       'Metadata',
       'gnWfsService',
       'gnGlobalSettings',
-      '$http', 
-      'gnAlertService', 
+      '$http',
+      'gnAlertService',
       '$translate',
       function(ngeoDecorateLayer, gnOwsCapabilities, gnConfig, $log,
           gnSearchLocation, $rootScope, gnUrlUtils, $q, $translate,
@@ -628,7 +628,7 @@
                     type: 'danger'
                   });
                 }
-                
+
                 var url = serviceUrl
                             + name
                             + "/"
@@ -710,8 +710,8 @@
                         type: 'danger'
                       });
                     }
-                    
-                    
+
+
                     var urlTemplate = serviceUrl + name
                       + "/" + serverType + "/" //  + ((layer)? layer + "/"  : "")
                       + "tile/{z}/{y}/{x}";
@@ -754,15 +754,54 @@
                       });
                   }
 
-                  var legendUrl = serviceUrl + name
-                    + "/" + serverType + "/legend";
+                  var legendUrlJson = serviceUrl + name
+                    + "/" + serverType + "/legend?f=pjson";
 
-                  $http.get(legendUrl).then(function successCallback(response) {
+                  $http.get(legendUrlJson).then(function successCallback(response) {
                     var data = response.data;
-                    data = data.substring(data.indexOf('<table class="formTable"'),
-                      data.lastIndexOf('</table>') + 8);
-                    tileLayer.set('htmllegend', data, true);
+
+                    // Build legend html
+                    var html= "<table>";
+                    for(var d in data.layers) {
+
+                      var htmlRow = "<tr class='layer-legend scalemin-" + data.layers[d].minScale + " scalemax-" + data.layers[d].maxScale  +
+                        "'><td><b>" + data.layers[d].layerName + "(" + data.layers[d].layerId + ")</b>";
+                      if (data.layers[d].minScale > 0) {
+                        htmlRow += "<br/><small>Min. scale: " + data.layers[d].minScale.toLocaleString() + "</small>";
+
+                        if (data.layers[d].maxScale > 0) {
+                          htmlRow += "<small> - Max. scale:" + data.layers[d].maxScale.toLocaleString() + "</small>";
+                        }
+                      } else {
+                        if (data.layers[d].maxScale > 0) {
+                          htmlRow += "<br/><small>Max. scale:" + data.layers[d].maxScale.toLocaleString() + "</small>";
+                        }
+                      }
+
+                      htmlRow += "<table>";
+
+
+                      for(var l in data.layers[d].legend) {
+                        var src = data.layers[d].legend[l].url;
+                        if (src == null) {
+                          src = "data:image/png;base64," + data.layers[d].legend[l].imageData;
+                        } else {
+                          src =  serviceUrl + name + "/" + serverType + '/' + data.layers[d].layerId + '/images/' + src;
+                        }
+
+                        htmlRow += "<tr><td><img src='" + src + "' /></td><td>" +  data.layers[d].legend[l].label + "</td></tr>";
+
+                      }
+
+                      htmlRow += "</table></td></tr>";
+                      html += htmlRow;
+                    }
+
+                    html += "</table>";
+
+                    tileLayer.set('htmllegend', html, true);
                   });
+
 
                   ngeoDecorateLayer(tileLayer);
                   tileLayer.displayInLayerManager = true;
