@@ -757,6 +757,12 @@
                   var legendUrlJson = serviceUrl + name
                     + "/" + serverType + "/legend?f=pjson";
 
+                  var unit = map.getView().getProjection().getUnits();
+                  var resolution = map.getView().getResolution();
+                  var inchesPerMetre = 39.37;
+                  var dpi =  $('#dpi').height();;
+                  var scale = resolution * ol.proj.METERS_PER_UNIT[unit] * inchesPerMetre * dpi;
+
                   $http.get(legendUrlJson).then(function successCallback(response) {
                     var data = response.data;
 
@@ -764,8 +770,18 @@
                     var html= "<table>";
                     for(var d in data.layers) {
 
+                      var minScale = data.layers[d].minScale;
+                      var maxScale = data.layers[d].maxScale;
+
+                      var style = "";
+                      if (!isNaN(minScale) && (minScale > 0)) {
+                        if ((scale > minScale) || (!isNaN(maxScale) && (scale < maxScale))) {
+                          style = " legend-hidden";
+                        }
+                      }
+
                       var htmlRow = "<tr class='layer-legend scalemin-" + data.layers[d].minScale + " scalemax-" + data.layers[d].maxScale  +
-                        "'><td><b>" + data.layers[d].layerName + "(" + data.layers[d].layerId + ")</b>";
+                        style +  "'><td><b>" + data.layers[d].layerName + "(" + data.layers[d].layerId + ")</b>";
                       if (data.layers[d].minScale > 0) {
                         htmlRow += "<br/><small>Min. scale: " + data.layers[d].minScale.toLocaleString() + "</small>";
 
