@@ -108,9 +108,9 @@ public class ThesaurusManager implements ThesaurusFinder {
 
         batchBuildTable(isTest, context, thesauriDir);
     }
-	
+
   /**
-   * Start task to build thesaurus table once the servlet is up. 
+   * Start task to build thesaurus table once the servlet is up.
    *
    * @param synchRun if false, run the initialization asynchronally
    * @param context ServiceContext used to check when servlet is up only
@@ -313,7 +313,7 @@ public class ThesaurusManager implements ThesaurusFinder {
         }
 
     }
-	
+
     /**
      *
      * @param name
@@ -355,7 +355,7 @@ public class ThesaurusManager implements ThesaurusFinder {
     public Path getThesauriDirectory() {
         return thesauriDirectory;
     }
-	
+
     @Override
     public Map<String, Thesaurus> getThesauriMap() {
         if (this.settingManager.getValueAsBool(SettingManager.ENABLE_ALL_THESAURUS)) {
@@ -380,6 +380,16 @@ public class ThesaurusManager implements ThesaurusFinder {
             try {
                 Thesaurus thesaurus = entry.getValue();
 
+                    StringBuilder conceptSchemas = new StringBuilder();
+                    for(String cs: thesaurus.getConceptSchemes()) {
+                        conceptSchemas.append(cs);
+                        conceptSchemas.append(",");
+
+                    }
+                    Log.warning(Geonet.THESAURUS_MAN, "getThesaurusByConceptScheme [uri:" + uri + ", key:" +
+                        thesaurus.getKey() + ", conceptSchemas: " + conceptSchemas.toString() + "]");
+
+
                 if (thesaurus.hasConceptScheme(uri)) {
                     return thesaurus;
                 }
@@ -402,7 +412,7 @@ public class ThesaurusManager implements ThesaurusFinder {
     }
 
 	/**
-	 * Create (or update an existing) rdf thesaurus from the specified ISO19135 
+	 * Create (or update an existing) rdf thesaurus from the specified ISO19135
 	 * register record.
 	 *
 	 * @param uuid Uuid of iso19135 register metadata record to update thesaurus
