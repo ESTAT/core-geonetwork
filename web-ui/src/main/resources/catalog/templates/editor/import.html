@@ -32,7 +32,7 @@
 
 
           <form id="gn-import" class="form-horizontal" role="form"
-                method="POST" enctype="{{enctype}}" action="{{action}}"
+                method="POST" enctype="{{enctype}}" gn-action="{{action}}"
                 data-file-upload="mdImportUploadOptions">
               <input type="hidden" name="_csrf" value="{{csrf}}"/>
         <!-- Folder Path and subfolder options -->
@@ -236,14 +236,14 @@
     <div class="progress-bar" style="width: 100%"/>
   </div>
 
- 
+
   <div data-ng-repeat="report in reports track by $index">
     <div class="panel panel-default" data-ng-class="report.exceptions || report.exception ||
          (!report.success && report.message) ?
                           'panel-danger' : 'panel-success'">
       <div class="panel-heading" data-translate="">importReport</div>
       <div class="panel-body">
-  
+
         <p data-ng-show="report.message" translate="">
           {{report.message}}
         </p>
@@ -260,7 +260,7 @@
           <!--Error message-->
           <span ng-show="!report.message && report.records" translate
                 translate-values="{records: '{{report.records}}', success: '{{report.success}}', time: '{{report.time}}'}">importFromDirReport</span>
-  
+
           <!--Exception report-->
           <table class="table table-striped" data-ng-show="report.exceptions">
             <tr>
