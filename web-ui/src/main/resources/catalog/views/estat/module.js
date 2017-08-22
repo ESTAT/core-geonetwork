@@ -70,44 +70,6 @@
       var viewerMap = gnSearchSettings.viewerMap;
       var searchMap = gnSearchSettings.searchMap;
 
-      // Update ESRI Legend depending on scale
-      viewerMap.getView().on('change:resolution', onZoomChanged);
-
-      function onZoomChanged(e){
-        var unit = e.target.getProjection().getUnits();
-        var resolution = e.target.getResolution();
-        var inchesPerMetre = 39.37;
-        var dpi =  $('#dpi').height();
-        var scale = resolution * ol.proj.METERS_PER_UNIT[unit] * inchesPerMetre * dpi;
-
-        var elements = document.getElementsByClassName("layer-legend");
-
-        for (var i = 0, len = elements.length; i < len; i++) {
-          var minScale = 0;
-          var maxScale = 0;
-
-          var classNames = elements[i].className.split(" ");
-
-          for(var j=0; j< classNames.length; j++) {
-            if (classNames[j].indexOf("scalemin-") > -1) {
-              minScale = classNames[j].split("-")[1];
-            }
-            if (classNames[j].indexOf("scalemax-") > -1) {
-              maxScale = classNames[j].split("-")[1];
-            }
-          }
-
-
-          if ((minScale > 0)) {
-            if ((scale > minScale) || (scale < maxScale)) {
-              elements[i].setAttribute( 'style', 'display: none' );
-            } else {
-              elements[i].setAttribute( 'style', 'display: block' );
-            }
-          }
-        }
-      }
-
       $scope.modelOptions = angular.copy(gnGlobalSettings.modelOptions);
       $scope.modelOptionsForm = angular.copy(gnGlobalSettings.modelOptions);
       $scope.gnWmsQueue = gnWmsQueue;
