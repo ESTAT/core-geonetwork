@@ -64,7 +64,7 @@ public class Remove extends NotInReadOnlyModeService {
 
 	public Element serviceSpecificExec(Element params, ServiceContext context) throws Exception
 	{
-        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
         String id = Util.getParam(params, Params.ID);
 

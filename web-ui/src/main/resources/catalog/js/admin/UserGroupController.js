@@ -4,7 +4,7 @@
   goog.require('gn_dbtranslation');
 
   var module = angular.module('gn_usergroup_controller', [
-//	'ngSanitize', 
+//	'ngSanitize',
     'gn_dbtranslation',
     'blueimp.fileupload']);
 
@@ -16,7 +16,7 @@
   module.controller('GnUserGroupController', [
     '$scope', '$routeParams', '$http', '$rootScope',
     '$translate', '$timeout', '$sanitize',
-    function($scope, $routeParams, $http, $rootScope, 
+    function($scope, $routeParams, $http, $rootScope,
         $translate, $timeout, $sanitize) {
 
       $scope.searchObj = {
@@ -390,7 +390,7 @@
               id: $scope.userSelected.id
           });
 
-        $http.delete('admin.user.remove?' + data)
+        $http.post('admin.user.remove?' + data)
             .success(function(data) {
               $scope.unselectUser();
               loadUsers();
@@ -489,7 +489,7 @@
               id: $scope.groupSelected.id
           });
 
-          $http.delete('admin.group.remove?' + data)
+          $http.post('admin.group.remove?' + data)
             .success(function(data) {
               $scope.unselectGroup();
               loadGroups();

@@ -286,7 +286,7 @@
 
       $scope.deleteHarvester = function() {
         $scope.deleting.push($scope.harvesterSelected['@id']);
-        return $http.delete('admin.harvester.remove?_content_type=json&id=' +
+        return $http.post('admin.harvester.remove?_content_type=json&id=' +
             $scope.harvesterSelected['@id'])
           .success(function(data) {
               $scope.harvesterSelected = {};
@@ -301,7 +301,7 @@
       };
 
       $scope.deleteHarvesterRecord = function() {
-        return $http.delete('admin.harvester.clear?_content_type=json&id=' +
+        return $http.post('admin.harvester.clear?_content_type=json&id=' +
             $scope.harvesterSelected['@id'])
           .success(function(data) {
               $scope.harvesterSelected = {};
@@ -313,7 +313,7 @@
             });
       };
       $scope.deleteHarvesterHistory = function() {
-        return $http.delete('admin.harvester.history.delete?uuid=' +
+        return $http.post('admin.harvester.history.delete?uuid=' +
             $scope.harvesterSelected.site.uuid)
           .success(function(data) {
             $scope.$parent.loadHarvesters().then(function() {

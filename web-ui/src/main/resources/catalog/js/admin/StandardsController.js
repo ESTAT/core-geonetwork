@@ -18,7 +18,7 @@
     'gnSearchManagerService',
     'gnUtilityService',
     function($scope, $routeParams, $http, $rootScope, $translate, $compile,
-            gnSearchManagerService, 
+            gnSearchManagerService,
             gnUtilityService) {
 
       $scope.pageMenu = {
@@ -67,7 +67,7 @@
               "_content_type": "json"
           });
 
-          $http.delete('admin.schema.remove?' + data)
+          $http.post('admin.schema.remove?' + data)
           .success(function(data) {
               if (data['@status'] === 'error') {
                 $rootScope.$broadcast('StatusUpdated', {

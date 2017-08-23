@@ -259,7 +259,7 @@
             ref: $scope.thesaurusSelected.key
         });
 
-        $http.delete('thesaurus.remove?' + data)
+        $http.post('thesaurus.remove?' + data)
           .success(function(data) {
               $scope.thesaurusSelected = null;
               loadThesaurus();
@@ -457,7 +457,7 @@
             id: k.uri
         });
 
-        $http.delete('thesaurus.keyword.remove?' + data)
+        $http.post('thesaurus.keyword.remove?' + data)
           .success(function(data) {
               searchThesaurusKeyword();
             })

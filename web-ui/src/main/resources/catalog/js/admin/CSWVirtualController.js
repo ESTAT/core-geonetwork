@@ -165,7 +165,7 @@
               "_content_type": "json"
           });
 
-          $http.delete('admin.config.virtualcsw.remove?' + data)
+          $http.post('admin.config.virtualcsw.remove?' + data)
           .success(function(data) {
               loadCSWVirtual();
             })

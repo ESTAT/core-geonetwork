@@ -48,7 +48,7 @@ import java.util.List;
 @Controller("admin.category.remove")
 @ReadWriteController
 public class Remove {
-    @RequestMapping(value = "/{lang}/admin.category.remove", method= RequestMethod.DELETE, produces = {
+    @RequestMapping(value = "/{lang}/admin.category.remove", method= {RequestMethod.DELETE, RequestMethod.POST}, produces = {
             MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public CategoryUpdateResponse exec(

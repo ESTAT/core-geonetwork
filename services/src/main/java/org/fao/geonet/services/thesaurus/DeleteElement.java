@@ -45,10 +45,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * For editing : removes a concept from a thesaurus. 
+ * For editing : removes a concept from a thesaurus.
  * Use parameter "namespace" and "code" to remove a specific concept, if not
  * set, the current selection is removed ({@link org.fao.geonet.services.thesaurus.SelectKeywords}).
- * 
+ *
  * Access is restricted
  */
 public class DeleteElement implements Service {
@@ -56,7 +56,7 @@ public class DeleteElement implements Service {
     }
 
     public Element exec(Element params, ServiceContext context) throws Exception {
-        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
         GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
         UserSession session = context.getUserSession();

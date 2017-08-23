@@ -91,7 +91,7 @@
             fname:  logoName
         });
 
-        $http.delete('admin.logo.remove?' + data)
+        $http.post('admin.logo.remove?' + data)
           .success(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                 msg: $translate.instant('logoRemoved'),

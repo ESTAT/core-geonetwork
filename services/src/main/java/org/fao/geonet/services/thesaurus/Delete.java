@@ -57,22 +57,22 @@ public class Delete extends NotInReadOnlyModeService {
 
 	public Element serviceSpecificExec(Element params, ServiceContext context) throws Exception
 	{
-		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		ThesaurusManager manager = gc.getBean(ThesaurusManager.class);
-		
+
 		// Get parameters
 		String name = Util.getParam(params, Params.REF);
-		
+
 
 		// Load file
 		Thesaurus thesaurus = manager.getThesaurusByName(name);
 		Path item = thesaurus.getFile();
-		
+
 		// Remove old file from thesaurus manager
 		manager.remove(name);
-		
+
 		// Remove file
 		if (Files.exists(item)) {
 			IO.deleteFile(item, true, Geonet.THESAURUS);
@@ -86,7 +86,7 @@ public class Delete extends NotInReadOnlyModeService {
         } else {
             throw new IllegalArgumentException("Thesaurus not found --> " + name);
         }
-		
+
 		return new Element(Jeeves.Elem.RESPONSE)
 							.addContent(new Element(Jeeves.Elem.OPERATION).setText(Jeeves.Text.REMOVED));
 	}

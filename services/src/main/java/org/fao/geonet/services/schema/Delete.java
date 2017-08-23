@@ -61,7 +61,7 @@ public class Delete implements Service {
 	// --------------------------------------------------------------------------
 
 	public Element exec(Element params, ServiceContext context) throws Exception {
-		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		SchemaManager scm = gc.getBean(SchemaManager.class);

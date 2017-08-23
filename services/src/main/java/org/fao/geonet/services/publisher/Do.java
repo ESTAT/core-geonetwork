@@ -51,23 +51,23 @@ import java.util.HashMap;
 
 /**
  * Service to manage GeoServer dataset publication.
- * Dataset could be 
+ * Dataset could be
  * <ul>
  *   <li>ESRI Shapefile (zipped) POST or external</li>
  *   <li>PostGIS table</li>
  *   <li>GeoTiff (zip or not) POST or external</li>
  *   <li>ECW external</li>
  * </ul>
- * 
+ *
  * Shapefile must be zipped.
- * 
+ *
  * In case of ZIP compression, ZIP file base name must be equal to Shapefile or GeoTiff base name.
- * 
+ *
  * One Datastore, FeatureType, Layer and Style are created for a vector dataset (one to one relation).
  * One CoverageStore, Coverage, Layer are created for a raster dataset (one to one relation).
- * 
+ *
  * TODO : Support multi file publication
- * 
+ *
  */
 public class Do implements Service {
 	private static final String DB = "DB";
@@ -119,7 +119,7 @@ public class Do implements Service {
 	/**
 	 * Load configuration file and register remote nodes. In order to register
 	 * new nodes, restart is needed.
-	 * 
+	 *
 	 */
 	public void init(Path appPath, ServiceConfig params) throws Exception {
 		Log.createLogger(MODULE);
@@ -128,7 +128,7 @@ public class Do implements Service {
     /**
      * Publish a dataset to a remote GeoServer node. Dataset could be a ZIP
      * composed of Shapefile(s) or GeoTiff.
-     * 
+     *
      * updataMetadataRecord, add or delete a online source link.
      */
     public Element exec(Element params, ServiceContext context)
@@ -137,8 +137,8 @@ public class Do implements Service {
         MapServerRepository repo = context.getBean(MapServerRepository.class);
         SettingManager settingsManager = gc.getBean(SettingManager.class);
     	String baseUrl = settingsManager.getSiteURL(context);
-    	
-    	
+
+
     	ACTION action = ACTION.valueOf(Util.getParam(params, "action"));
     	if (action.equals(ACTION.LIST)) {
             return loadDbConfiguration(context);
@@ -166,7 +166,7 @@ public class Do implements Service {
                         .setText("ok")
                         .setAttribute("id", String.valueOf(m.getId()));
         } else if (action.equals(ACTION.REMOVE_NODE)) {
-			Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+			Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
 			MapServer m = repo.findOneById(Util.getParam(params, "id"));
             if (m != null) {
@@ -208,7 +208,7 @@ public class Do implements Service {
     			|| action.equals(ACTION.DELETE) || action.equals(ACTION.GET)) {
 
     		if (action.equals(ACTION.DELETE)) {
-				Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+				Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 			} else if (action.equals(ACTION.CREATE) || action.equals(ACTION.UPDATE)) {
 				Utils.checkHttpMethod(Arrays.asList(HttpMethod.POST.name(), HttpMethod.PUT.name()));
 			}
@@ -228,28 +228,28 @@ public class Do implements Service {
             GeoServerRest gs = new GeoServerRest(requestFactory, g.getUrl(),
                     g.getUsername(), g.getUserpassword(),
                     g.getNamespacePrefix(), baseUrl, m.pushStyleInWorkspace());
-    
+
     		String file = Util.getParam(params, "file");
     		String access = Util.getParam(params, "access");
-    
+
     		//jdbc:postgresql://host:port/user:password@database#table
     		if (file.startsWith("jdbc:postgresql")) {
     			String[] values = file.split("/");
-    			
+
     			String[] serverInfo = values[2].split(":");
     			String host = serverInfo[0];
     			String port = serverInfo[1];
-    			
+
     			String[] dbUserInfo = values[3].split("@");
-    			
+
     			String[] userInfo = dbUserInfo[0].split(":");
     			String user = userInfo[0];
     			String password = userInfo[1];
-    			
+
     			String[] dbInfo = dbUserInfo[1].split("#");
-    			String db = dbInfo[0]; 
-    			String table = dbInfo[1]; 
-    			
+    			String db = dbInfo[0];
+    			String table = dbInfo[1];
+
     			return publishDbTable(action, gs, "postgis", host, port, user, password, db, table, "postgis", g.getNamespaceUrl(), metadataUuid, metadataTitle, metadataAbstract);
     		} else {
     		    if (file.startsWith("file://") || file.startsWith("http://")) {
@@ -313,7 +313,7 @@ public class Do implements Service {
 
 	/**
 	 * Register a database table in GeoServer
-	 * 
+	 *
 	 * @param action
 	 * @param g
 	 * @param string
@@ -361,7 +361,7 @@ public class Do implements Service {
 					return report(EXCEPTION, DB, getErrorCode());
 				}
 			}
-			
+
 			if (g.getLayer(table)) {
 				setReport(Xml.loadString(g.getResponse(), false));
 				return report(SUCCESS, DB, getReport());
@@ -379,7 +379,7 @@ public class Do implements Service {
 	/**
 	 * Analyze ZIP file content and if valid, push the data
 	 * to GeoServer.
-	 * 
+	 *
 	 * @param action
 	 * @param gs
 	 * @param f
@@ -443,7 +443,7 @@ public class Do implements Service {
             return report(EXCEPTION, VECTOR, getErrorCode());
         }
 	}
-	
+
 	private Element report(String name, String type, String msg) {
 		Element report = new Element(name);
 		if (type != null)
@@ -528,7 +528,7 @@ public class Do implements Service {
                 if (!g.deleteLayer(dsName))
                     report += "Layer: " + g.getStatus();
                 if (isRaster) {
-                    
+
                 } else {
                     if (!g.deleteFeatureType(dsName, dsName))
                         report += "Feature type: " + g.getStatus();

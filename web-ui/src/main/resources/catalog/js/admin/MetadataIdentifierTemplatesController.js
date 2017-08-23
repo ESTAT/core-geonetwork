@@ -57,7 +57,7 @@
       };
 
       $scope.deleteMetadataIdentifierTemplate = function(id) {
-        $http.delete($scope.url + 'metadataIdentifierTemplates?id=' + id)
+        $http.delete($scope.url + 'metadataIdentifierTemplates/' + id)
           .success(function(data) {
               $('.ng-dirty').removeClass('ng-dirty');
               loadMetadataUrnTemplates();

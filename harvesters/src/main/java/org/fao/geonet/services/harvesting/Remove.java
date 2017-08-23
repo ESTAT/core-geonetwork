@@ -55,7 +55,7 @@ public class Remove implements Service
 
 	public Element exec(Element params, ServiceContext context) throws Exception
 	{
-		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+		Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
 		return Util.exec(params, context, new Util.Job()
 		{

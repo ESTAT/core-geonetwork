@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller("admin.config.virtualcsw.remove")
 public class Delete {
 
-    @RequestMapping(value = "/{lang}/admin.config.virtualcsw.remove", method = {RequestMethod.DELETE},
+    @RequestMapping(value = "/{lang}/admin.config.virtualcsw.remove", method = {RequestMethod.DELETE, RequestMethod.POST},
             produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody
     OkResponse exec(@RequestParam String id)

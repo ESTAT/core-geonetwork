@@ -41,7 +41,7 @@ public class HistoryDelete implements Service {
     //--------------------------------------------------------------------------
 
     public Element exec(Element params, ServiceContext context) throws Exception {
-        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name()));
+        Utils.checkHttpMethod(Arrays.asList(HttpMethod.DELETE.name(), HttpMethod.POST.name()));
 
         long nrRecs = 0;
         final HarvestHistoryRepository historyRepository = context.getBean(HarvestHistoryRepository.class);

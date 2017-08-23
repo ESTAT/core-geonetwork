@@ -53,10 +53,10 @@ public class MetadataIdentifierTemplatesController {
         return new OkResponse();
     }
 
-    @RequestMapping(value = "/{lang}/metadataIdentifierTemplates",
-            method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{lang}/metadataIdentifierTemplates/{id}",
+            method = {RequestMethod.DELETE, RequestMethod.POST})
     @ResponseBody
-    public OkResponse deleteMetadataURNTemplate(@RequestParam final Integer id) {
+    public OkResponse deleteMetadataURNTemplate(@PathVariable("id") final Integer id) {
         ConfigurableApplicationContext appContext = ApplicationContextHolder.get();
         MetadataIdentifierTemplateRepository metadataIdentifierTemplateRepository =
                 appContext.getBean(MetadataIdentifierTemplateRepository.class);

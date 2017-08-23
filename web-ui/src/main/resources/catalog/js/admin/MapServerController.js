@@ -120,7 +120,7 @@
             action: "REMOVE_NODE"
         });
 
-        $http.delete('geoserver.publisher?' + data)
+        $http.post('geoserver.publisher?' + data)
           .success(function(data) {
               loadMapservers();
             })

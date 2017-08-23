@@ -37,7 +37,7 @@
             id: id
         });
 
-        $http.delete('admin.category.remove?' + data)
+        $http.post('admin.category.remove?' + data)
         .success(function(data) {
               $scope.unselectCategory();
               loadCategories();
