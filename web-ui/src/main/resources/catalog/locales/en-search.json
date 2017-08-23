@@ -324,6 +324,7 @@
   "mdnovalidation": "Metadata has no validation information",
   "setall": "Set all privileges",
   "ChangeProjection": "Change map projection",
+  "ChangeProjectionDes": "Changing the projection will remove all the layers loaded by the user in the map viewer.",
   "SelectProjection": "Select the projection:",
   "LayerESRI": "ESRI layer"
 }

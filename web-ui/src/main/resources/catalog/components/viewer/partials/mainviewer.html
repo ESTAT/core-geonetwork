@@ -6,9 +6,9 @@
        class="map"
        gn-vector-feature-tool-tip="map"></div>
   <div gn-gfi="" map="map"></div>
-	<!-- 
-	Localisation does not work for ESTAT   
-	<div gn-localisation-input map="map"></div> 
+	<!--
+	Localisation does not work for ESTAT
+	<div gn-localisation-input map="map"></div>
 	-->
 
   <!--Top right buttons - Tools-->
@@ -157,6 +157,8 @@
       </h3>
     </div>
     <div id="projection" class="panel-body">
+      <p>{{'ChangeProjectionDes' | translate}}</p>
+      <br/>
       <label>{{'SelectProjection' | translate}}</label>
       <select class="form-control" id="projectionSelector">
         <option value="EPSG:4326">EPGS:4326</option>
