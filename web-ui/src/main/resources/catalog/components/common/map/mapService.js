@@ -39,11 +39,10 @@
       'gnGlobalSettings',
       '$http',
       'gnAlertService',
-      '$translate',
       function(ngeoDecorateLayer, gnOwsCapabilities, gnConfig, $log,
           gnSearchLocation, $rootScope, gnUrlUtils, $q, $translate,
           gnWmsQueue, gnSearchManagerService, Metadata, gnWfsService,
-          gnGlobalSettings, $http, gnAlertService, $translate) {
+          gnGlobalSettings, $http, gnAlertService) {
 
         var defaultMapConfig = {
           'useOSM': 'false',
