@@ -322,7 +322,7 @@ public class AbstractHttpRequest {
         }
 
         final RequestConfig.Builder builder = RequestConfig.custom();
-        builder.setAuthenticationEnabled(credentials != null);
+        builder.setAuthenticationEnabled((credentials != null) || (proxyCredentials != null));
         builder.setRedirectsEnabled(true);
         builder.setRelativeRedirectsAllowed(true);
         builder.setCircularRedirectsAllowed(true);
