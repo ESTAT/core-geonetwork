@@ -27,21 +27,44 @@
 
 package org.fao.geonet.kernel;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
-import jeeves.server.UserSession;
-import jeeves.server.context.ServiceContext;
-import jeeves.transaction.TransactionManager;
-import jeeves.transaction.TransactionTask;
-import jeeves.xlink.Processor;
+import static org.fao.geonet.repository.specification.MetadataSpecs.hasMetadataUuid;
+import static org.springframework.data.jpa.domain.Specifications.where;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
+
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jetty.util.ConcurrentHashSet;
 import org.fao.geonet.ApplicationContextHolder;
@@ -77,6 +100,7 @@ import org.fao.geonet.domain.Metadata_;
 import org.fao.geonet.domain.OperationAllowed;
 import org.fao.geonet.domain.OperationAllowedId;
 import org.fao.geonet.domain.OperationAllowedId_;
+import org.fao.geonet.domain.OperationAllowed_;
 import org.fao.geonet.domain.Pair;
 import org.fao.geonet.domain.Profile;
 import org.fao.geonet.domain.ReservedGroup;
@@ -143,38 +167,22 @@ import org.springframework.transaction.NoTransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.Root;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 
-import static org.fao.geonet.repository.specification.MetadataSpecs.hasMetadataUuid;
-import static org.springframework.data.jpa.domain.Specifications.where;
+import jeeves.server.UserSession;
+import jeeves.server.context.ServiceContext;
+import jeeves.transaction.TransactionManager;
+import jeeves.transaction.TransactionTask;
+import jeeves.xlink.Processor;
 
 /**
  * Handles all operations on metadata (select,insert,update,delete etc...).
@@ -3452,9 +3460,15 @@ public class DataManager implements ApplicationEventPublisherAware {
             }
         }));
 
-        // Remove records from the database
+        // Remove records from the database        
+        OperationAllowedRepository opAllowedRepo = getApplicationContext().getBean(OperationAllowedRepository.class);
+        for(Integer id : getMetadataRepository().findAllIdsBy(specification)) {
+            opAllowedRepo.deleteAllByMetadataIdExceptGroupId(id, -4);
+        }
+        
         getMetadataRepository().deleteAll(specification);
-
+        
+        
         return idsOfMetadataToDelete.size();
     }
 
